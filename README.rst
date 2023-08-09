@@ -1,10 +1,8 @@
 Welcome to SIRAH FF documentation!
 ===================================
 
-**SIRAH** (/lu'make/) is a Python library for cooks and food lovers that
-creates recipes mixing random ingredients.  It pulls data from the `Open Food
-Facts database <https://world.openfoodfacts.org/>`_ and offers a *simple* and
-*intuitive* API.
+**SIRAH** is a ForceField <http://www.sirahff.com/>`_ and offers a *simple* and
+*intuitive* Coarsed Graines Force Field for molecular dynamics simulations.
 
 .. note::
 
