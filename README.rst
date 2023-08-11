@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SIRAH Force Field documentation
 ===================================
 
@@ -21,3 +22,29 @@ The current version, **SIRAH 2.0**, includes:
 .. note::
 
    The present project is undergoing continuous development.
+=======
+Welcome to SIRAH FF documentation!
+===================================
+
+**SIRAH** is a ForceField http://www.sirahff.com/ and offers a *simple* and
+*intuitive* Coarsed Grained Force Field for molecular dynamics simulations.
+
+Estamos probando para contribuir a la documentacion (ACB)
+
+.. note::
+
+   This project is under active development.
+=======
+Welcome to SIRAH FF documentation!
+===================================
+
+**SIRAH** is a ForceField http://www.sirahff.com/ and offers a *simple* and
+*intuitive* Coarsed Grained Force Field for molecular dynamics simulations.
+
+Estamos probando para contribuir a la documentacion (ACB)
+Modifications Lucianna.
+
+.. note::
+
+   This project is under active development.
+>>>>>>> de510c0d7dee8764a30d93af054e38fbffd86aa4
