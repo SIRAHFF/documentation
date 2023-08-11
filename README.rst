@@ -1,12 +1,23 @@
-Welcome to SIRAH FF documentation!
+SIRAH Force Field documentation
 ===================================
 
-**SIRAH** is a ForceField http://www.sirahff.com/ and offers a *simple* and
-*intuitive* Coarsed Grained Force Field for molecular dynamics simulations.
+[SIRAH](http://www.sirahff.com/) is a coarse-grained force field for molecular dynamics simulations that offers plug-and-play topologies and parameters for aqueous solvent, phospholipids, DNA, metal ions, and proteins. It was designed, implemented, and developed by the [Biomolecular Simulations Group](https://pasteur.uy/laboratorios/simulaciones-biomoleculares/) at the [Institut Pasteur de Montevideo](https://pasteur.uy/), Uruguay, which is also responsible for its regular maintenance.  
 
-Estamos probando para contribuir a la documentacion (ACB)
-Modifications Lucianna.
+The current version, **SIRAH 2.0**, includes:   
+
+* A series of modifications to both bonded and non-bonded parameters of amino acids while preserving their original topologies;  
+
+* A description of different protonation states and post-translational modifications for protein residues;  
+
+* An improvement in the compatibility for mapping different force fields atom types and experimental structures;  
+
+* The ability to leverage GPU acceleration in AMBER and GROMACS codes;  
+
+* A collection of scripts, known as **SIRAH Tools**, that facilitate the process of mapping all-atom files to CG representations, backmapping, visualizing, and analyzing SIRAH trajectories directly on the popular VMD program for molecular visualization.  
+
+### License  
+
 
 .. note::
 
-   This project is under active development.
+   The present project is undergoing continuous development.
