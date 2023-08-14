@@ -26,13 +26,17 @@ working directory. Notice: ``[version]`` should be replaced with the actual pack
 You will get a folder ``sirah_[version].amber/`` containing the force field definition, the SIRAH Tools in
 ``sirah_[version].amber/tools/``, molecular structures to build up systems in ``sirah_[version].amber/PDB/``,
 frequently asked questions in ``sirah_[version].amber/tutorial/SIRAH_FAQs.pdf`` and the required
-material to perform the tutorial in ``sirah_[version].amber/tutorial/1/``
+material to perform the tutorial in ``sirah_[version].amber/tutorial/X.X/``
+
+.. caution::
+
+  Remember to change **X.X** to the number that corresponds to the tutorial you are going to do.
 
 Make a new folder for this tutorial in your working directory:
 
 .. code-block:: bash
 
-    $ mkdir tutorial1; cd tutorial1
+    $ mkdir tutorialX.X; cd tutorialX.X
 
 Create the following symbolic link in the folder tutorial1:
 
