@@ -14,10 +14,4 @@ The current version, **SIRAH 2.0**, includes:
 License
 -------
 
-.. note::
-
-   The present project is undergoing continuous development.
-
-.. note::
-
-   The present project is undergoing continuous development.
+The present project is undergoing continuous development.
