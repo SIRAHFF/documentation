@@ -114,4 +114,4 @@ Contributors
 
 .. |google-frigini| raw:: html
 
-   <a href="https://scholar.google.com/citations?user=g2CMc00AAAAJ&hl" class="author-social" target="_blank"><i class="fa fa-google" style="font-size:20px;"></i></a> 
+   <a href="https://scholar.google.com/citations?user=g2CMc00AAAAJ&hl" class="author-social" target="_blank"><i class="fa fa-google" style="font-size:20px;"></i></a>
