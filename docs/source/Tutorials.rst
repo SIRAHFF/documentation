@@ -3,6 +3,13 @@ AMBER
 
 .. _AMBER:
 
+Download and pre-requisites
+----------------------------
+
+.. _Download amber:
+
+.. include:: /AMBER/installation.rst
+
 Simulation of a coarse grained DNA molecule in implicit solvent
 ----------------------------------------------------------------------------
 
