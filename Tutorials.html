@@ -67,7 +67,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#visualising-the-simulation">5. Visualising the simulation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#tutorial-2">Tutorial 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-of-a-coarse-grained-dna-molecule-in-explicit-solvent">Simulation of a coarse grained DNA molecule in explicit solvent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2. Prepare leap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3. Run LEAP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">5. Visualising the simulation</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorial-3">Tutorial 3</a></li>
 </ul>
 </li>
@@ -124,9 +131,13 @@ working directory. Notice: <code class="docutils literal notranslate"><span clas
 <p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/</span></code> containing the force field definition, the SIRAH Tools in
 <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/PDB/</span></code>,
 frequently asked questions in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/SIRAH_FAQs.pdf</span></code> and the required
-material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/1/</span></code></p>
+material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/X.X/</span></code></p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Remember to change <strong>X.X</strong> to the number that corresponds to the tutorial you are going to do.</p>
+</div>
 <p>Make a new folder for this tutorial in your working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>tutorial1<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorial1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>tutorialX.X<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorialX.X
 </pre></div>
 </div>
 <p>Create the following symbolic link in the folder tutorial1:</p>
@@ -141,24 +152,23 @@ material to perform the tutorial in <code class="docutils literal notranslate"><
 for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial</p>
+<p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<strong>This is tutorial 1</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/1/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h3>1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h3>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="se">\</span>
--i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="se">\</span>
--o<span class="w"> </span>dna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="w">  </span>-o<span class="w"> </span>dna_cg.pdb
 </pre></div>
 </div>
-<p>The input file dna.pdb contains all the heavy atoms composing the DNA molecule, while the output
-dna_cg.pdb preserves a few of them. Please check both PDB structures using VMD:</p>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> dna.pdb contains all the heavy atoms composing the DNA molecule, while the  output <code class="docutils literal notranslate"><span class="pre">-o</span></code> dna_cg.pdb preserves a few of them.
+Please check both PDB structures using VMD:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="w"> </span>dna_cg.pdb
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is the basic usage of the script cgconv.pl, you can learn other capabilities from its help:
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
 <code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
@@ -192,8 +202,8 @@ dna_cg.pdb preserves a few of them. Please check both PDB structures using VMD:<
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
 expected due to the CG topology.</p>
 </div>
-<p>This should create a topology file dna_cg.prmtop and a coordinate file dna_cg.ncrst.
-Use VMD to check how the CG model looks like:</p>
+<p>This should create a topology file dna_cg.prmtop and a coordinate file dna_cg.ncrst.</p>
+<p>Use VMD to check how the CG model looks like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>dna_cg.prmtop<span class="w"> </span>dna_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
@@ -218,19 +228,16 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
-The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/1/SANDER/</span></code> contains typical input files for energy minimization
+<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/1/SANDER/</span></code> contains typical input files for energy minimization
 (em_GB.in), equilibration (eq_GB.in) and production (md_GB.in) runs. Please check carefully the input
 flags therein.</p>
-</div>
-<p><strong>Energy Minimization:</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
+<div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -241,6 +248,12 @@ flags therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
 </div>
+<p><strong>Energy Minimization:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p><strong>Equilibration:</strong></p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst
@@ -264,34 +277,180 @@ flags therein.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.</p>
 </div>
 </section>
 </section>
-<section id="tutorial-2">
-<h2>Tutorial 2<a class="headerlink" href="#tutorial-2" title="Permalink to this heading"></a></h2>
-<blockquote id="id2">
-<div><p>Tutorial 1 - Basic Usage of AMBER</p>
+<section id="simulation-of-a-coarse-grained-dna-molecule-in-explicit-solvent">
+<h2>Simulation of a coarse grained DNA molecule in explicit solvent<a class="headerlink" href="#simulation-of-a-coarse-grained-dna-molecule-in-explicit-solvent" title="Permalink to this heading"></a></h2>
+<p id="tutorial-2">This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+double stranded DNA embedded in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are:<a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
+We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<strong>This is tutorial 2</strong>, remember to replace X.X, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
+</div>
+<section id="id5">
+<h3>1. Build CG representations<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/2/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> dna.pdb contains all the heavy atoms composing the DNA molecule, while the  output <code class="docutils literal notranslate"><span class="pre">-o</span></code> dna_cg.pdb preserves a few of them.
+Please check both PDB structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.amber/tutorial/2/dna.pdb<span class="w"> </span>dna_cg.pdb
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>From now on it is just normal AMBER stuff!</p>
+</section>
+<section id="id6">
+<h3>2. Prepare leap<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">addPath ./sirah.amber</span>
+<span class="go">source leaprc.sirah</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">dna = loadpdb dna_cg.pdb</span>
+
+<span class="gp"># </span>Info<span class="w"> </span>on<span class="w"> </span>system<span class="w"> </span>charge
+<span class="go">charge dna</span>
+
+<span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
+<span class="go">solvateoct dna WT4BOX 20 0.7</span>
+<span class="go">addionsrand dna NaW 88 ClW 50</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf dna dna_cg.prmtop dna_cg.ncrst</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Notice: The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
+ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see
+Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+</section>
+<section id="id7">
+<h3>3. Run LEAP<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>Run the LEAP application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
+expected due to the CG topology.</p>
+</div>
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">dna_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">dna_cg.ncrst</span></code>.</p>
+<p>Use VMD to check how the CG model looks like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>dna_cg.prmtop<span class="w"> </span>dna_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="id8">
+<h3>4. Run the simulation<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>In the course of long MD simulations the capping residues may eventually separate, this effect is
+called helix fraying. To avoid such behavior create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/2/SANDER/dna_cg.RST
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/2/SANDER/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_WT4.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_WT4.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_WT4.in</span></code>) runs. Please check carefully the
+input flags therein, in particular the definition of flag <em>chngmask=0</em> at <em>&amp;ewald</em> section is <strong>mandatory</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<blockquote>
+<div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
+</ul>
+</div>
+<p><strong>Energy Minimization:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/2/SANDER/em_WT4.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Equilibration (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/2/SANDER/eq_WT4.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span>-ref<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_cg_eq.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (100ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/2/SANDER/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You can find example input files for CPU and GPU versions of pmemd at folder PMEMD/ within sirah.amber/tutorial/2/</p>
+</div>
+</section>
+<section id="id9">
+<h3>5. Visualising the simulation<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<p>That’s it! Now you can analyze the trajectory.
+Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>dna_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>dna_cg_md_pbc.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Load the processed trajectory in VMD:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.</p>
+</div>
+</section>
 </section>
 <section id="tutorial-3">
 <h2>Tutorial 3<a class="headerlink" href="#tutorial-3" title="Permalink to this heading"></a></h2>
-<blockquote id="id3">
-<div><p>This is the <strong>third</strong> tutorial of SIRAH implementation on AMBER</p>
-</div></blockquote>
+<p id="id10">This is the <strong>third</strong> tutorial of SIRAH implementation on AMBER</p>
 </section>
 </section>
 <section id="gromacs">
 <h1>GROMACS<a class="headerlink" href="#gromacs" title="Permalink to this heading"></a></h1>
 </section>
 <section id="namd">
-<span id="id4"></span><h1>NAMD<a class="headerlink" href="#namd" title="Permalink to this heading"></a></h1>
+<span id="id11"></span><h1>NAMD<a class="headerlink" href="#namd" title="Permalink to this heading"></a></h1>
 </section>
 <section id="sirah-tools">
-<span id="id5"></span><h1>SIRAH tools<a class="headerlink" href="#sirah-tools" title="Permalink to this heading"></a></h1>
-<span class="target" id="id6"></span></section>
+<span id="id12"></span><h1>SIRAH tools<a class="headerlink" href="#sirah-tools" title="Permalink to this heading"></a></h1>
+<span class="target" id="id13"></span></section>
 
 
            </div>

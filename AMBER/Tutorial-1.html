@@ -85,24 +85,23 @@
 for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial</p>
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<strong>This is tutorial 1</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/1/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h1>1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="se">\</span>
--i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="se">\</span>
--o<span class="w"> </span>dna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="w">  </span>-o<span class="w"> </span>dna_cg.pdb
 </pre></div>
 </div>
-<p>The input file dna.pdb contains all the heavy atoms composing the DNA molecule, while the output
-dna_cg.pdb preserves a few of them. Please check both PDB structures using VMD:</p>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> dna.pdb contains all the heavy atoms composing the DNA molecule, while the  output <code class="docutils literal notranslate"><span class="pre">-o</span></code> dna_cg.pdb preserves a few of them.
+Please check both PDB structures using VMD:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="w"> </span>dna_cg.pdb
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This is the basic usage of the script cgconv.pl, you can learn other capabilities from its help:
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
 <code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
@@ -136,8 +135,8 @@ dna_cg.pdb preserves a few of them. Please check both PDB structures using VMD:<
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
 expected due to the CG topology.</p>
 </div>
-<p>This should create a topology file dna_cg.prmtop and a coordinate file dna_cg.ncrst.
-Use VMD to check how the CG model looks like:</p>
+<p>This should create a topology file dna_cg.prmtop and a coordinate file dna_cg.ncrst.</p>
+<p>Use VMD to check how the CG model looks like:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>dna_cg.prmtop<span class="w"> </span>dna_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
@@ -162,19 +161,16 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
-The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/1/SANDER/</span></code> contains typical input files for energy minimization
+<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/1/SANDER/</span></code> contains typical input files for energy minimization
 (em_GB.in), equilibration (eq_GB.in) and production (md_GB.in) runs. Please check carefully the input
 flags therein.</p>
-</div>
-<p><strong>Energy Minimization:</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
+<div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -185,6 +181,12 @@ flags therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
 </div>
+<p><strong>Energy Minimization:</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+</div></blockquote>
 <p><strong>Equilibration:</strong></p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst
@@ -208,8 +210,8 @@ flags therein.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.</p>
 </div>
 </section>

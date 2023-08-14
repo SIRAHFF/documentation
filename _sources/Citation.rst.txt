@@ -5,7 +5,7 @@ If **SIRAH** was beneficial to your work, please remember to cite us:
 
 -    Darré, L.; Machado, M. R.; Brandner, A. F.; González, H. C.; Ferreira, S.; Pantano, S. SIRAH: A Structurally Unbiased Coarse-Grained Force Field for Proteins with Aqueous Solvation and Long-Range Electrostatics. Journal of Chemical Theory and Computation 2015, 11, 723–739. |SIRAH1.0| 
  
--    Machado, M. R.; Barrera, E. E.; Klein, F.; Soñora, M.; Silva, S.; Pantano, S. The SIRAH 2.0 Force Field: Altius, Fortius, Citius. Journal of Chemical Theory and Computation 2019, 15, 2719–2733. |SIRAH2.0|  
+-    Machado, M. R.; Barrera, E. E.; Klein, F.; Sóñora, M.; Silva, S.; Pantano, S. The SIRAH 2.0 Force Field: Altius, Fortius, Citius. Journal of Chemical Theory and Computation 2019, 15, 2719–2733. |SIRAH2.0|  
 
 In addition, please include the following citations if the following parameters were used:  
 
@@ -34,7 +34,7 @@ If **SIRAH Tools** were used please cite:
 -    Machado, M. R.; Pantano, S. SIRAH tools: mapping, backmapping and visualization of coarse-grained models. Bioinformatics 2016, 32, 1568–1570. |Tools|   
 
 
-.. tip::
+.. seealso::
 
 	If you wish to view some SIRAH applications, please visit the :doc:`Further reading <Further reading>` page. 
 
