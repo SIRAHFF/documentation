@@ -19,8 +19,8 @@ Note
 
 This project is under active development.
 
-Check out the :doc:`Tutorials` section for further information, including how to
-:ref:`install <amber>` the project.
+Check out the :doc:`About SIRAH` section for further information, including how to
+:ref:`install <FAQ>` the project.
 
 .. note::
 
@@ -30,23 +30,19 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Manual
 
-  About SIRAH
-  Citation
-  Tutorials
-  Further reading
-  FAQ
-  Developers
+   About SIRAH
+   Citation
+   Further reading
+   FAQ
+   Developers
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :hidden:
+   :caption: Tutorials
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   Tutorials
