@@ -53,11 +53,14 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMBER</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent">Simulation of a coarse grained DNA molecule in implicit solvent</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-and-pre-requisites">Download and pre-requisites</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-software">Required Software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prior-knowledge">Prior knowledge</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#download-and-set-up-sirah-force-field">Download and set up SIRAH Force Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-gc-representations">1. Build GC representations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent">Simulation of a coarse grained DNA molecule in implicit solvent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-cg-representations">1. Build CG representations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prepare-leap">2. Prepare leap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-leap">3. Run LEAP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-the-simulation">4. Run the simulation</a></li>
@@ -99,12 +102,10 @@
              
   <section id="amber">
 <h1>AMBER<a class="headerlink" href="#amber" title="Permalink to this heading"></a></h1>
-<section id="simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent">
-<span id="id1"></span><h2>Simulation of a coarse grained DNA molecule in implicit solvent<a class="headerlink" href="#simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent" title="Permalink to this heading"></a></h2>
-<p id="tutorial-1">This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
-for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<section id="download-and-pre-requisites">
+<span id="id1"></span><h2>Download and pre-requisites<a class="headerlink" href="#download-and-pre-requisites" title="Permalink to this heading"></a></h2>
 <section id="required-software">
-<h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this heading"></a></h3>
+<span id="download-amber"></span><h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this heading"></a></h3>
 <p>AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (<a class="reference external" href="vmd">freely available download</a>).</p>
 </section>
 <section id="prior-knowledge">
@@ -133,8 +134,17 @@ material to perform the tutorial in <code class="docutils literal notranslate"><
 </pre></div>
 </div>
 </section>
-<section id="build-gc-representations">
-<h3>1. Build GC representations<a class="headerlink" href="#build-gc-representations" title="Permalink to this heading"></a></h3>
+</section>
+<section id="simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent">
+<h2>Simulation of a coarse grained DNA molecule in implicit solvent<a class="headerlink" href="#simulation-of-a-coarse-grained-dna-molecule-in-implicit-solvent" title="Permalink to this heading"></a></h2>
+<p id="tutorial-1">This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
+for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial</p>
+</div>
+<section id="build-cg-representations">
+<h3>1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h3>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="se">\</span>
 -i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="se">\</span>
@@ -218,6 +228,9 @@ flags therein.</p>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -225,11 +238,18 @@ flags therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
-</div></blockquote>
+</div>
 <p><strong>Equilibration:</strong></p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Production (100ns):</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst<span class="w">  </span>-x<span class="w"> </span>dna_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </div></blockquote>

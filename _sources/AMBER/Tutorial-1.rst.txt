@@ -1,50 +1,11 @@
 This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
 for this tutorial are: `Dans et al. SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `Darré et al. WAT4?) <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al. SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
-Required Software
-__________________
+.. important::
 
-.. _vmd: www.ks.uiuc.edu/Research/vmd
+    check :ref:`install <Download amber>` section for download and set up details before to start this tutorial
 
-AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (`freely available download <vmd>`_).
-
-
-Prior knowledge
-_______________
-
-How to perform a standard atomistic molecular dynamic simulation with AMBER and basic usage of
-VMD. If you are not familiar with DNA stuff we strongly recommend you to first perform the `AMBER
-tutorial on DNA <http://ambermd.org/tutorials/basic/tutorial1>`_.
-
-Download and set up SIRAH Force Field
-______________________________________
-
-Download the file ``sirah_[version].amber.tgz`` from www.sirahff.com and uncompress it into your
-working directory. Notice: ``[version]`` should be replaced with the actual package version e.g.: x2_18-09
-
-.. code-block:: bash
-
-    $ tar -xzvf sirah_[version].amber.tgz
-
-You will get a folder ``sirah_[version].amber/`` containing the force field definition, the SIRAH Tools in
-``sirah_[version].amber/tools/``, molecular structures to build up systems in ``sirah_[version].amber/PDB/``,
-frequently asked questions in ``sirah_[version].amber/tutorial/SIRAH_FAQs.pdf`` and the required
-material to perform the tutorial in ``sirah_[version].amber/tutorial/1/``
-
-Make a new folder for this tutorial in your working directory:
-
-.. code-block:: bash
-
-    $ mkdir tutorial1; cd tutorial1
-
-Create the following symbolic link in the folder tutorial1:
-
-.. code-block:: bash
-
-    ln -s ../sirah_[version].amber sirah.amber
-
-
-1. Build GC representations
+1. Build CG representations
 ________________________________________________________________________
 
 Map the atomistic structure of a 20-mer DNA to its CG representation:
@@ -149,12 +110,16 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 
       $ sander -O -i ../sirah.amber/tutorial/1/SANDER/em_GB.in -p ../dna_cg.prmtop -c ../dna_cg.ncrst -o dna_cg_em.out -r dna_cg_em.ncrst &
 
+
+.. note::
+
    - ``sander``: The AMBER program for molecular dynamics simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
    - ``-c``: Coordinate file.
    - ``-r``: Restart file.
+   - ``-x``: Trajectory file.
 
 **Equilibration:**
 
@@ -162,6 +127,11 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 
         $ sander -O -i ../sirah.amber/tutorial/1/SANDER/md_GB.in -p ../dna_cg.prmtop -c dna_cg_eq.ncrst -o dna_cg_md.out -r dna_cg_md.ncrst
 
+**Production (100ns):**
+
+    .. code-block:: bash
+
+        sander -O -i ../sirah.amber/tutorial/1/SANDER/md_GB.in -p ../dna_cg.prmtop -c dna_cg_eq.ncrst -o dna_cg_md.out -r dna_cg_md.ncrst  -x dna_cg_md.nc &
 
 .. note::
 

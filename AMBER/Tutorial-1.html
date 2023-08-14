@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Required Software &mdash; SIRAH FF 0.1 documentation</title>
+  <title>1. Build CG representations &mdash; SIRAH FF 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Required Software</li>
+      <li class="breadcrumb-item active">1. Build CG representations</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/AMBER/Tutorial-1.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,38 +83,12 @@
              
   <p>This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
 for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
-<section id="required-software">
-<h1>Required Software<a class="headerlink" href="#required-software" title="Permalink to this heading"></a></h1>
-<p>AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (<a class="reference external" href="vmd">freely available download</a>).</p>
-</section>
-<section id="prior-knowledge">
-<h1>Prior knowledge<a class="headerlink" href="#prior-knowledge" title="Permalink to this heading"></a></h1>
-<p>How to perform a standard atomistic molecular dynamic simulation with AMBER and basic usage of
-VMD. If you are not familiar with DNA stuff we strongly recommend you to first perform the <a class="reference external" href="http://ambermd.org/tutorials/basic/tutorial1">AMBER
-tutorial on DNA</a>.</p>
-</section>
-<section id="download-and-set-up-sirah-force-field">
-<h1>Download and set up SIRAH Force Field<a class="headerlink" href="#download-and-set-up-sirah-force-field" title="Permalink to this heading"></a></h1>
-<p>Download the file <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber.tgz</span></code> from www.sirahff.com and uncompress it into your
-working directory. Notice: <code class="docutils literal notranslate"><span class="pre">[version]</span></code> should be replaced with the actual package version e.g.: x2_18-09</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_<span class="o">[</span>version<span class="o">]</span>.amber.tgz
-</pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial</p>
 </div>
-<p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/</span></code> containing the force field definition, the SIRAH Tools in
-<code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/PDB/</span></code>,
-frequently asked questions in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/SIRAH_FAQs.pdf</span></code> and the required
-material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/1/</span></code></p>
-<p>Make a new folder for this tutorial in your working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>tutorial1<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorial1
-</pre></div>
-</div>
-<p>Create the following symbolic link in the folder tutorial1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_<span class="o">[</span>version<span class="o">]</span>.amber<span class="w"> </span>sirah.amber
-</pre></div>
-</div>
-</section>
-<section id="build-gc-representations">
-<h1>1. Build GC representations<a class="headerlink" href="#build-gc-representations" title="Permalink to this heading"></a></h1>
+<section id="build-cg-representations">
+<h1>1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="se">\</span>
 -i<span class="w"> </span>./sirah.amber/tutorial/1/dna.pdb<span class="se">\</span>
@@ -198,6 +172,9 @@ flags therein.</p>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -205,11 +182,18 @@ flags therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
-</div></blockquote>
+</div>
 <p><strong>Equilibration:</strong></p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Production (100ns):</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_md.ncrst<span class="w">  </span>-x<span class="w"> </span>dna_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </div></blockquote>
