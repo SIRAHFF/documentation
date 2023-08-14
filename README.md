@@ -3,8 +3,6 @@ SIRAH Force Field documentation
 
 [SIRAH](http://www.sirahff.com/) is a coarse-grained force field for molecular dynamics simulations that offers plug-and-play topologies and parameters for aqueous solvent, phospholipids, DNA, metal ions, and proteins. It was designed, implemented, and developed by the [Biomolecular Simulations Group](https://pasteur.uy/laboratorios/simulaciones-biomoleculares/) at the [Institut Pasteur de Montevideo](https://pasteur.uy/), Uruguay, which is also responsible for its regular maintenance.
 
-[readthedocs.org](https://autodock-vina.readthedocs.io/en/latest/).
-
 The current version, **SIRAH 2.0**, includes:
 
 - A series of modifications to both bonded and non-bonded parameters of amino acids while preserving their original topologies;
