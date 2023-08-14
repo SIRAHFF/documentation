@@ -56,19 +56,19 @@ SIRAH Applications
 
 	*    Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |VLP1|        
 	
-	*    Soñora, M.; Martínez, L.; Pantano, S.; Machado, M. R. Wrapping Up Viruses at Multiscale Resolution: Optimizing PACKMOL and SIRAH Execution for Simulating the Zika Virus. Journal of Chemical Information and Modeling 2021, 61, 408–422. |VLP2|     
+	*    Sóñora, M.; Martínez, L.; Pantano, S.; Machado, M. R. Wrapping Up Viruses at Multiscale Resolution: Optimizing PACKMOL and SIRAH Execution for Simulating the Zika Virus. Journal of Chemical Information and Modeling 2021, 61, 408–422. |VLP2|     
 	
 	*    Machado, M. R.; Pantano, S. Fighting viruses with computers, right now. Current Opinion in Virology 2021, 48, 91–99. |VLP3|   
 	
-	*    Soñora, M.; Barrera, E. E.; Pantano, S. The stressed life of a lipid in the Zika virus membrane. Biochimica et Biophysica Acta (BBA) - Biomembranes 2022, 1864, 183804. |VLP4|    
+	*    Sóñora, M.; Barrera, E. E.; Pantano, S. The stressed life of a lipid in the Zika virus membrane. Biochimica et Biophysica Acta (BBA) - Biomembranes 2022, 1864, 183804. |VLP4|    
 
 *    **SARS-CoV-2 simulations**:    
 
-	*    Garay, P. G.; Barrera, E. E.; Klein, F.; Machado, M. R.; Soñora, M.; Pantano, S. The SIRAH-CoV-2 Initiative: A Coarse-Grained Simulations’ Dataset of the SARS-CoV-2 Proteome. Frontiers in Medical Technology 3 2021, 644039. |Sars|   
+	*    Garay, P. G.; Barrera, E. E.; Klein, F.; Machado, M. R.; Sóñora, M.; Pantano, S. The SIRAH-CoV-2 Initiative: A Coarse-Grained Simulations’ Dataset of the SARS-CoV-2 Proteome. Frontiers in Medical Technology 3 2021, 644039. |Sars|   
 	
 *    **A review of the development of SIRAH**:    
 
-	*    Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review|   
+	*    Klein, F.; Sóñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review|   
 	
 	
 
