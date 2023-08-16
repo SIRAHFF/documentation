@@ -7,30 +7,42 @@ Development Lead
 
 *    Sergio Pantano  |mail-serg| |google-serg|
 
+Former contributors
+-------------------
+
+*    Pablo. D. Dans  
+
+*    Leonardo Darré  
+
+*    Matias Machado  
+
+*    Humberto Gonzalez  
+
+*    Astrid Brandner  
+
+*    Sebastián Ferreira  
+
+*    Ari Zeida  
+
+*    Exequiel E. Barrera  
+
+*    Florencia Klein  
+
+
 Contributors
-------------
+-------------------
 
-*    Pablo. D. Dans  |mail-dans| |google-dans|
+*    Martín Soñora  
 
-*    Leonardo Darré  |mail-darre|
+*    Ezequiel N. Frigini  
 
-*    Matias Machado  |mail-machado| |google-machado|
+*    Matias Machado  
 
-*    Humberto Gonzalez  |mail-gonzalez|
 
-*    Astrid Brandner  |mail-brandner| |google-brandner|
+Collaborators 
+-------------------
 
-*    Sebastián Ferreira  |mail-ferreira|
 
-*    Ari Zeida  |mail-zeida| |google-zeida|
-
-*    Exequiel E. Barrera  |mail-barrera| |google-barrera|
-
-*    Florencia Klein  |mail-klein| |google-klein|
-
-*    Martín Sóñora  |mail-sonora|
-
-*    Ezequiel N. Frigini  |mail-frigini| |google-frigini|
 
 
 
