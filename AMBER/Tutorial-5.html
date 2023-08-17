@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.1. Build CG representations &mdash; SIRAH FF 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SIRAH FF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Developers.html">Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#sirah-tools">SIRAH tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SIRAH FF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">5.1. Build CG representations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/AMBER/Tutorial-5.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+protein in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al. SIRAH 2.0</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
+We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 5</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/5/</span></code></p>
+</div>
+<section id="build-cg-representations">
+<h1>5.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+</div>
+<p>Map the protonated atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 1CRN.pqr contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> structure at pH 7.0, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 1CRN_cg.pdb is its SIRAH CG representation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (Ne) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default charged termini are used, but it is possible to set then neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (Ne) rename it from “sHe” to “aHe”.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>Please check both PDB and PQR structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>1CRN_cg.pdb
+</pre></div>
+</div>
+<p>From now on it is just normal AMBER stuff!</p>
+</section>
+<section id="prepare-leap">
+<h1>5.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Permalink to this heading"></a></h1>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">addPath ./sirah.amber</span>
+<span class="go">source leaprc.sirah</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">protein = loadpdb 1CRN_cg.pdb</span>
+
+<span class="gp"># </span>Info<span class="w"> </span>on<span class="w"> </span>system<span class="w"> </span>charge
+<span class="go">charge protein</span>
+
+<span class="gp"># </span>Set<span class="w"> </span>S-S<span class="w"> </span>bridges
+<span class="go">bond protein.3.BSG protein.40.BSG</span>
+<span class="go">bond protein.4.BSG protein.32.BSG</span>
+<span class="go">bond protein.16.BSG protein.26.BSG</span>
+
+<span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
+<span class="go">solvateOct protein WT4BOX 20 0.7</span>
+<span class="go">addIonsRand protein NaW 22 ClW 22</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf protein 1CRN_cg.prmtop 1CRN_cg.ncrst</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:
+<code class="docutils literal notranslate"><span class="pre">pdb4amber</span> <span class="pre">-i</span> <span class="pre">sirah.amber/tutorial/5/1CRN.pqr</span> <span class="pre">-o</span> <span class="pre">1CRN_aa.pdb</span> <span class="pre">&amp;&amp;</span> <span class="pre">cat</span> <span class="pre">1CRN_aa_sslink</span></code></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+</section>
+<section id="run-leap">
+<h1>5.3. Run LEaP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
+<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology.</p>
+</div>
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.ncrst</span></code>.</p>
+<p>Use VMD to check how the CG model looks like and particularly the presence of disulfide bonds:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>1CRN_cg.prmtop<span class="w"> </span>1CRN_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="run-the-simulation">
+<h1>5.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/5/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">em2_WT4.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_WT4.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_WT4.in</span></code>) runs. Please check carefully the
+input flags therein, in particular the definition of flag <em>chngmask=0</em> at <em>&amp;ewald</em> section is <strong>mandatory</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<blockquote>
+<div><p><strong>Some flags used in AMBER</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ref</span></code>: Reference file</p></li>
+</ul>
+</div>
+<p><strong>Energy Minimization of side chains and solvent by restraining the backbone:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Energy Minimization of whole system:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Solvent Equilibration (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Option <strong>restraintmask=:’1-46’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to embrace all protein’s residues.</p>
+</div>
+<p><strong>Soft equilibration to improve side chain solvation (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (1000ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The same input files can be used to run on CPU or GPU versions of <em>pmemd</em>.</p>
+</div>
+</section>
+<section id="visualizing-the-simulation">
+<h1>5.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h1>
+<p>That’s it! Now you can analyze the trajectory.
+Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md_pbc.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Load the processed trajectory in VMD:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="mi">1</span><span class="n">CRN_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BA, SL, SM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

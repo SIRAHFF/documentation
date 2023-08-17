@@ -17,6 +17,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -76,6 +77,23 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorial-3">Tutorial 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proteins-in-explicit-solvent">5. Proteins in explicit solvent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.2. Prepare LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">5.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-the-simulation">5.5. Visualizing the simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lipid-bilayers-in-explicit-solvent">6. Lipid bilayers in explicit solvent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id20">6.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">6.2. Prepare LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">6.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resize-the-box-with-cpptraj">6.4. Resize the box with CPPTRAJ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">6.5. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">6.6. Visualizing the simulation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#gromacs">GROMACS</a></li>
@@ -441,16 +459,535 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 <h2>Tutorial 3<a class="headerlink" href="#tutorial-3" title="Permalink to this heading"></a></h2>
 <p id="id10">This is the <strong>third</strong> tutorial of SIRAH implementation on AMBER</p>
 </section>
+<section id="proteins-in-explicit-solvent">
+<h2>5. Proteins in explicit solvent<a class="headerlink" href="#proteins-in-explicit-solvent" title="Permalink to this heading"></a></h2>
+<p id="tutorial-5">This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+protein in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al. SIRAH 2.0</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
+We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 5</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/5/</span></code></p>
+</div>
+<section id="id13">
+<h3>5.1. Build CG representations<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+</div>
+<p>Map the protonated atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 1CRN.pqr contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> structure at pH 7.0, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 1CRN_cg.pdb is its SIRAH CG representation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (Ne) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default charged termini are used, but it is possible to set then neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (Ne) rename it from “sHe” to “aHe”.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>Please check both PDB and PQR structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>1CRN_cg.pdb
+</pre></div>
+</div>
+<p>From now on it is just normal AMBER stuff!</p>
+</section>
+<section id="id15">
+<h3>5.2. Prepare LEaP<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">addPath ./sirah.amber</span>
+<span class="go">source leaprc.sirah</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">protein = loadpdb 1CRN_cg.pdb</span>
+
+<span class="gp"># </span>Info<span class="w"> </span>on<span class="w"> </span>system<span class="w"> </span>charge
+<span class="go">charge protein</span>
+
+<span class="gp"># </span>Set<span class="w"> </span>S-S<span class="w"> </span>bridges
+<span class="go">bond protein.3.BSG protein.40.BSG</span>
+<span class="go">bond protein.4.BSG protein.32.BSG</span>
+<span class="go">bond protein.16.BSG protein.26.BSG</span>
+
+<span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
+<span class="go">solvateOct protein WT4BOX 20 0.7</span>
+<span class="go">addIonsRand protein NaW 22 ClW 22</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf protein 1CRN_cg.prmtop 1CRN_cg.ncrst</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:
+<code class="docutils literal notranslate"><span class="pre">pdb4amber</span> <span class="pre">-i</span> <span class="pre">sirah.amber/tutorial/5/1CRN.pqr</span> <span class="pre">-o</span> <span class="pre">1CRN_aa.pdb</span> <span class="pre">&amp;&amp;</span> <span class="pre">cat</span> <span class="pre">1CRN_aa_sslink</span></code></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+</section>
+<section id="id17">
+<h3>5.3. Run LEaP<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology.</p>
+</div>
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.ncrst</span></code>.</p>
+<p>Use VMD to check how the CG model looks like and particularly the presence of disulfide bonds:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>1CRN_cg.prmtop<span class="w"> </span>1CRN_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="id18">
+<h3>5.4. Run the simulation<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/5/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">em2_WT4.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_WT4.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_WT4.in</span></code>) runs. Please check carefully the
+input flags therein, in particular the definition of flag <em>chngmask=0</em> at <em>&amp;ewald</em> section is <strong>mandatory</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<blockquote>
+<div><p><strong>Some flags used in AMBER</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ref</span></code>: Reference file</p></li>
+</ul>
+</div>
+<p><strong>Energy Minimization of side chains and solvent by restraining the backbone:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Energy Minimization of whole system:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Solvent Equilibration (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Option <strong>restraintmask=:’1-46’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to embrace all protein’s residues.</p>
+</div>
+<p><strong>Soft equilibration to improve side chain solvation (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (1000ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The same input files can be used to run on CPU or GPU versions of <em>pmemd</em>.</p>
+</div>
+</section>
+<section id="visualizing-the-simulation">
+<h3>5.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h3>
+<p>That’s it! Now you can analyze the trajectory.
+Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md_pbc.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Load the processed trajectory in VMD:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="mi">1</span><span class="n">CRN_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+</section>
+<section id="lipid-bilayers-in-explicit-solvent">
+<h2>6. Lipid bilayers in explicit solvent<a class="headerlink" href="#lipid-bilayers-in-explicit-solvent" title="Permalink to this heading"></a></h2>
+<p id="tutorial-6">This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435">Barrera et al. SIRAH Lipids</a>, and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
+We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are not familiar with membrane stuff we strongly recommend you to first perform the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">AMBER tutorial on lipids</a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 6</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/6/</span></code></p>
+</div>
+<section id="id20">
+<h3>6.1. Build CG representations<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h3>
+<p>Map the atomistic structure of the preassembled DMPC bilayer to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/6/DMPC64.pdb<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg.pdb<span class="w"> </span>-a<span class="w"> </span>sirah.amber/tools/CGCONV/maps/tieleman_lipid.map
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> DMPC64.pdb contains the atomistic representation of the DMPC bilayer, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> DMPC64_cg.pdb is its SIRAH CG representation. The flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> is a mapping scheme for lipids.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in <a class="reference internal" href="#table"><span class="std std-ref">Table 1</span></a>, by setting the flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> in <strong>cgconv.pl</strong>. We recommend using <a class="reference external" href="https://m3g.github.io/packmol/">PACKMOL</a> for building the system. Reference building-block structures are provided at folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/PDB/</span></code>, which agree with the mapping scheme in <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/tieleman_lipid.map</span></code>. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 * 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm<sup>2</sup> at 333 K  . The starting configuration was created with the input file <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/6/DMPC_bilayer.pkm</span></code>. See <a class="reference internal" href="FAQ.html"><span class="doc">FAQs</span></a> for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This an advanced usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">DMPC64.pdb</span></code> contains all the heavy atoms composing the lipids, while the output <code class="docutils literal notranslate"><span class="pre">DMPC64_cg.pdb</span></code> preserves a few of them. Please check both PDB and PQR structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>sirah.amber/tutorial/6/DMPC64.pdb<span class="w"> </span>DMPC64_cg.pdb
+</pre></div>
+</div>
+<p>From now on it is just normal AMBER stuff!</p>
+</section>
+<section id="id21">
+<h3>6.2. Prepare LEaP<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">addPath ./sirah.amber</span>
+<span class="go">source leaprc.sirah</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">Lipid = loadpdb DMPC64_cg.pdb</span>
+
+<span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
+<span class="go">solvateBox Lipid WT4BOX {0 0 40} 0.7</span>
+<span class="go">addIonsRand Lipid NaW 33 ClW 33</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf protein DMPC64_cg.prmtop DMPC64_cg.ncrst</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+</section>
+<section id="id23">
+<h3>6.3. Run LEaP<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h3>
+<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology.</p>
+</div>
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">DMPC64_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">DMPC64_cg.ncrst</span></code>.</p>
+<p>Use VMD to check how the CG model looks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>DMPC64_cg.prmtop<span class="w"> </span>DMPC64_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<p>By selecting +X, +Y and +Z periodic images from the Periodic tab in the Graphical Representations window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See <a class="reference internal" href="FAQ.html"><span class="doc">FAQs</span></a> for issues on membrane systems in AMBER.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="resize-the-box-with-cpptraj">
+<h3>6.4. Resize the box with CPPTRAJ<a class="headerlink" href="#resize-the-box-with-cpptraj" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As PACKMOL does not consider periodicity while building up the system, increasing the XY box sides a few Angstroms may be required to avoid bad contacts between images.</p>
+</div>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">resize_box.cpptraj</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>New<span class="w"> </span>box<span class="w"> </span>dimensions
+<span class="go">box x 66 y 66 z 132</span>
+
+<span class="gp"># </span>Amber<span class="w"> </span>NetCDF<span class="w"> </span>Restart<span class="w"> </span>generation
+<span class="go">trajout DMPC64_cg_nb.ncrst</span>
+
+<span class="gp"># </span>Do<span class="w"> </span>it!
+<span class="go">go</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<p>Run the CPPTRAJ application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpptraj<span class="w"> </span>-p<span class="w"> </span>DMPC64_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>DMPC64_cg.ncrst<span class="w"> </span>-i<span class="w"> </span>resize_box.cpptraj
+</pre></div>
+</div>
+<p>Once again, use VMD to check the PBC images in the new box of the system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>DMPC64_cg.prmtop<span class="w"> </span>DMPC64_cg_nb.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+</section>
+<section id="id24">
+<h3>6.5. Run the simulation<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h3>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/6/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_Lipid.in</span></code>), heating (<code class="docutils literal notranslate"><span class="pre">heat_Lipid.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_Lipid.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_Lipid.in</span></code>) runs. Please check carefully the
+input flags.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<blockquote>
+<div><p><strong>Some flags used in AMBER</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>: The GPU implementation of AMBER program’s Particle Mesh Ewald Molecular Dynamics for simulations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code>: Reference file</p></li>
+</ul>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>These input files are executed by the GPU implementation of <em>pmemd</em>.</p>
+</div>
+<p><strong>Energy Minimization:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/em_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../DMPC64_cg_nb.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_em.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Heating:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/heat_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_eq_0.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_eq_0.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_eq_0.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To avoid “skinnb errors” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large skinnb value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">AMBER tutorial on lipids</a>.</p>
+</div>
+<p><strong>Periodic box equilibration in GPU code (500 ps x 9):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">9</span><span class="k">)</span>
+<span class="k">do</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;running equilibration </span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="w">        </span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/eq_Lipid.in<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-c<span class="w"> </span>DMPC64_cg_eq_<span class="k">$((</span><span class="nv">$i</span><span class="w"> </span><span class="o">-</span><span class="m">1</span><span class="k">))</span>.ncrst<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-o<span class="w"> </span>DMPC64_cg_eq_<span class="nv">$i</span>.out<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-r<span class="w"> </span>DMPC64_cg_eq_<span class="nv">$i</span>.ncrst<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-x<span class="w"> </span>DMPC64_cg_eq_<span class="nv">$i</span>.nc
+<span class="k">done</span><span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (1000ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/md_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_eq_9.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_md.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+</section>
+<section id="id25">
+<h3>6.6. Visualizing the simulation<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h3>
+<p>That’s it! Now you can analyze the trajectory.</p>
+<p>Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md_pbc.nc<span class="w"> </span>--interactive
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now you can check the simulation using VMD:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">DMPC64_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="n">DMPC64_cg_md_pbc</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.</p>
+</div>
+<p>You can also use CPPTRAJ to calculate the area per lipid:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/area_lipid.cpptraj
+</pre></div>
+</div>
+<p>Use Grace to plot the results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>apl_DMPC64_310K.dat
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To calculate the area per lipid, divide the membrane’s area by the DMPC molecules per leaflet:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\frac{Area}{Lipid} = \frac{Box(x) * Box(y)}{64}\]</div>
+</div></blockquote>
+</div>
+<p>And density profiles and bilayer thickness:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/dens_profile.cpptraj
+</pre></div>
+</div>
+<p>Use Grace to plot the results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>-nxy<span class="w"> </span>dens_profile_DMPC64_310K.dat
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The thickness of the bilayer is the distance between the two peaks corresponding to the position of phosphate beads (BFO) along the z-axis.</p>
+</div>
+<p id="table">Table 1. Available mapping files (MAPs) at folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/</span></code> for converting atomistic lipid structures to SIRAH models. <strong>Important!</strong> MAPs can not inter-convert different name conventions, e.g. amber_lipid.map won’t generate fragment-based residues from residue-based force fields. Due to possible nomenclature conflicts, users are advised to check and modify the MAPs as required.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>Map</strong></p></td>
+<td><p><strong>Type</strong>*</p></td>
+<td><p><strong>Compatibility</strong></p></td>
+<td><p><strong>Source</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>amber_lipid.map</p></td>
+<td><p>F</p></td>
+<td><p>AMBER Lipid11-17 force fields</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="http://ambermd.org/">AMBER</a></div>
+<div class="line"><a class="reference external" href="https://software.acellera.com/htmd/index.html">HTMD</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>GAFF_lipid.map</p></td>
+<td><p>R</p></td>
+<td><p>AMBER GAFF force field</p></td>
+<td><p><a class="reference external" href="https://lipidbook.org/">LipidBook</a></p></td>
+</tr>
+<tr class="row-even"><td><p>charmm_lipid.map</p></td>
+<td><p>R</p></td>
+<td><div class="line-block">
+<div class="line">CHARMM 27/36 force field, and “CHARMM</div>
+<div class="line">compatible” GAFF nomenclature</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://charmm-gui.org/">CHARMM-GUI</a></div>
+<div class="line"><a class="reference external" href="https://www.gromacs.org/">GROMACS</a></div>
+<div class="line"><a class="reference external" href="https://lipidbook.org/">LipidBook</a></div>
+<div class="line"><a class="reference external" href="http://bioinf.modares.ac.ir/software/mb/">MemBuilder</a></div>
+<div class="line"><a class="reference external" href="https://software.acellera.com/htmd/index.html">HTMD</a></div>
+<div class="line"><a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>slipids.map</p></td>
+<td><p>R</p></td>
+<td><p>Stockholm lipids force field</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="http://www.fos.su.se/~sasha/SLipids/About.html">SLIPIDS</a></div>
+<div class="line"><a class="reference external" href="http://bioinf.modares.ac.ir/software/mb/">MemBuilder</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>OPLSA-AA_2014_lipid.map</p></td>
+<td><p>R</p></td>
+<td><p>All-atoms lipids for OPLS force field</p></td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://doi.org/10.1021/jp5016627">Maciejewski</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>OPLSA-UA_lipid.map</p></td>
+<td><p>R</p></td>
+<td><p>United-atom lipids for OPLS force field</p></td>
+<td><p><a class="reference external" href="https://lipidbook.org/">LipidBook</a></p></td>
+</tr>
+<tr class="row-even"><td><p>GROMOS43a1_lipid.map</p></td>
+<td><p>R</p></td>
+<td><div class="line-block">
+<div class="line">United-atom lipids for GROMOS 43a1 and</div>
+<div class="line">CKP force fields</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://lipidbook.org/">LipidBook</a></div>
+<div class="line"><a class="reference external" href="http://bioinf.modares.ac.ir/software/mb/">MemBuilder</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>GROMOS43a1-s3_lipid.map</p></td>
+<td><p>R</p></td>
+<td><div class="line-block">
+<div class="line">United-atom lipids for GROMOS 43a1-s3</div>
+<div class="line">force field</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://www.gromacs.org/">GROMACS</a></div>
+<div class="line"><a class="reference external" href="https://lipidbook.org/">LipidBook</a></div>
+<div class="line"><a class="reference external" href="http://bioinf.modares.ac.ir/software/mb/">MemBuilder</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>GROMOS53a6_lipid.map</p></td>
+<td><p>R</p></td>
+<td><div class="line-block">
+<div class="line">United-atom lipids for GROMOS 53a6</div>
+<div class="line">force field</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://www.gromacs.org/">GROMACS</a></div>
+<div class="line"><a class="reference external" href="https://lipidbook.org/">LipidBook</a></div>
+<div class="line"><a class="reference external" href="http://bioinf.modares.ac.ir/software/mb/">MemBuilder</a></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>tieleman_lipid.map</p></td>
+<td><p>R</p></td>
+<td><div class="line-block">
+<div class="line">Berger lipids as implemented by</div>
+<div class="line">Tieleman et al. for GROMOS</div>
+<div class="line">force fields.</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference external" href="https://doi.org/10.1021/ja0624321">Tieleman</a></div>
+<div class="line"><a class="reference external" href="https://lipidbook.org/">LipidBook</a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>* Fragment-based (F) or Residue-based (R) topology.</p>
+</section>
+</section>
 </section>
 <section id="gromacs">
 <h1>GROMACS<a class="headerlink" href="#gromacs" title="Permalink to this heading"></a></h1>
 </section>
 <section id="namd">
-<span id="id11"></span><h1>NAMD<a class="headerlink" href="#namd" title="Permalink to this heading"></a></h1>
+<span id="id27"></span><h1>NAMD<a class="headerlink" href="#namd" title="Permalink to this heading"></a></h1>
 </section>
 <section id="sirah-tools">
-<span id="id12"></span><h1>SIRAH tools<a class="headerlink" href="#sirah-tools" title="Permalink to this heading"></a></h1>
-<span class="target" id="id13"></span></section>
+<span id="id28"></span><h1>SIRAH tools<a class="headerlink" href="#sirah-tools" title="Permalink to this heading"></a></h1>
+<span class="target" id="id29"></span></section>
 
 
            </div>
