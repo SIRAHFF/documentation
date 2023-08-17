@@ -4,10 +4,10 @@ for this tutorial are: `Dans et al. SIRAH DNA <https://pubs.acs.org/doi/abs/10.1
 .. important::
 
     Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.
-    **This is tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/1/``
+    Since this is **tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/1/``
 
-1. Build CG representations
-____________________________
+1.1. Build CG representations
+______________________________
 
 Map the atomistic structure of a 20-mer DNA to its CG representation:
 
@@ -29,8 +29,8 @@ Please check both PDB structures using VMD:
 
 From now on it is just normal AMBER stuff!
 
-2. Prepare leap
-_______________
+1.2. Prepare LEaP
+__________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
@@ -50,8 +50,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     quit
 
 
-3. Run LEAP
-____________
+1.3. Run LEaP
+______________
 
 Run the LEAP application to generate the molecular topology and initial coordinate files:
 
@@ -80,8 +80,8 @@ Use VMD to check how the CG model looks like:
     Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
 
 
-4. Run the simulation
-_______________________
+1.4. Run the simulation
+________________________
 
 Make a new folder for the run:
 
@@ -97,7 +97,7 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 
     ln -s ../sirah.amber/tutorial/1/SANDER/dna_cg.RST
 
-.. important::
+.. note::
 
     The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
 
@@ -139,8 +139,8 @@ flags therein.
 
     You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/1/
 
-5. Visualising the simulation
-______________________________
+1.5. Visualizing the simulation
+________________________________
 
 Now you can load, visualize and analize the trajectory file in VMD:
 
@@ -148,6 +148,7 @@ Now you can load, visualize and analize the trajectory file in VMD:
 
     vmd ../dna_cg.prmtop ../dna_cg.ncrst dna_cg_md.nc -e ../sirah.amber/tools/sirah_vmdtk.tcl
 
-.. hint::
+.. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
+
