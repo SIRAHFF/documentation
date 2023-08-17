@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'SIRAH FF'
+project = 'SIRAH Force Field'
 copyright = '2023, BA, SL, SM'
 author = 'BA, SL, SM'
 

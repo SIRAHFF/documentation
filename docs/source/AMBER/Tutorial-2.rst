@@ -6,11 +6,11 @@ We strongly advise you to read these articles before starting the tutorial.
 .. important::
 
     Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.
-    **This is tutorial 2**, remember to replace X.X, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/2/``
+    Since this is **tutorial 2**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/2/``
 
 
-1. Build CG representations
-_____________________________
+2.1. Build CG representations
+______________________________
 
 Map the atomistic structure of a 20-mer DNA to its CG representation:
 
@@ -32,8 +32,8 @@ Please check both PDB structures using VMD:
 
 From now on it is just normal AMBER stuff!
 
-2. Prepare leap
-_______________
+2.2. Prepare LEaP
+__________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
@@ -62,23 +62,23 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-    Notice: The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
-    ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see
-    Appendix 1). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+    The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
+    ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
+    Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
-3. Run LEAP
-____________
+2.3. Run LEaP
+______________
 
-Run the LEAP application to generate the molecular topology and initial coordinate files:
+Run the LEaP application to generate the molecular topology and initial coordinate files:
 
 .. code-block:: bash
 
     tleap -f gensystem.leap
 
-.. caution::
+.. warning::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and
-    expected due to the CG topology.
+    expected due to the CG topology of some residues.
 
 This should create a topology file ``dna_cg.prmtop`` and a coordinate file ``dna_cg.ncrst``.
 
@@ -95,8 +95,8 @@ Use VMD to check how the CG model looks like:
     ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
     Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
 
-4. Run the simulation
-_______________________
+2.4. Run the simulation
+________________________
 
 Make a new folder for the run:
 
@@ -112,7 +112,7 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 
     ln -s ../sirah.amber/tutorial/2/SANDER/dna_cg.RST
 
-.. important::
+.. note::
 
     The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
 
@@ -155,8 +155,8 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
   You can find example input files for CPU and GPU versions of pmemd at folder PMEMD/ within sirah.amber/tutorial/2/
 
-5. Visualising the simulation
-______________________________
+2.5. Visualizing the simulation
+________________________________
 
 That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):
@@ -171,6 +171,6 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 
     vmd ../dna_cg.prmtop ../dna_cg.ncrst dna_cg_md.nc -e ../sirah.amber/tools/sirah_vmdtk.tcl
 
-.. hint::
+.. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
