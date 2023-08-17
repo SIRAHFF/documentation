@@ -3,7 +3,7 @@ __________________
 
 .. _vmd: www.ks.uiuc.edu/Research/vmd
 
-AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (`freely available download <vmd>`_).
+AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (`freely available download <vmd>`__).
 
 
 Prior knowledge

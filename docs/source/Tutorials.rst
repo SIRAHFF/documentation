@@ -29,7 +29,22 @@ Download and pre-requisites
 
 .. _Tutorial 3:
 
-.. include:: /AMBER/Tutorial-3.rst
+.. include:: /AMBER/Tutorial-3.rst   
+
+5. Proteins in explicit solvent
+----------------------------------------------------------------
+
+.. _Tutorial 5:
+
+.. include:: /AMBER/Tutorial-5.rst
+
+6. Lipid bilayers in explicit solvent
+----------------------------------------------------------------
+
+.. _Tutorial 6:
+
+.. include:: /AMBER/Tutorial-6.rst
+
 
 Appendix
 ---------

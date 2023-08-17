@@ -4,6 +4,10 @@ Further Reading
 SIRAH Applications
 ------------------
 
+*    **A current review of SIRAH**:    
+
+	*    Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review|
+	
 *    **Protein-DNA complexes** and **Membrane Proteins**:   
  
 	*   Calì, T.; Frizzarin, M.; Luoni, L.; Zonta, F.; Pantano, S.; Cruz, C.; Bonza, M. C.; Bertipaglia, I.; Ruzzene, M.; De Michelis, M. I.; Damiano, N.; Marin, O.; Zanni, G.; Zanotti, G.; Brini, M.; Lopreiato, R.; Carafoli, E. The ataxia related G1107D mutation of the plasma membrane Ca2+ ATPase isoform 3 affects its interplay with calmodulin and the autoinhibition process. Biochimica et Biophysica Acta (BBA)-Molecular Basis of Disease 2017, 1863(1), 165-173. |MemProt-0|      
@@ -12,7 +16,7 @@ SIRAH Applications
 	
 	*    Zonta, F.; Buratto, D.; Crispino, G.; Carrer, A.; Bruno, F.; Yang, G.; Mammano, F.; Pantano, S. Cues to Opening Mechanisms From in Silico Electric Field Excitation of Cx26 Hemichannel and in Vitro Mutagenesis Studies in HeLa Transfectans. Frontiers in Molecular Neuroscience 2018, 11, 170. |MemProt-1|     
 	
-	*    Barrera, E. E.; Pantano, S. Simulating Transmembrane Proteins with the Coarse-Grained SIRAH Force Field: Tips and Tricks for Setting Up and Running in AMBER. AIP Publishing, 2023. |TransM|   
+	*    Barrera, E. E.; Pantano, S. Simulating Transmembrane Proteins with the Coarse-Grained SIRAH Force Field: Tips and Tricks for Setting Up and Running in AMBER. AIP Publishing, 2023. |TransM|  |TransM_cit| 
    
 *    **DNA**:     
 
@@ -56,25 +60,29 @@ SIRAH Applications
 
 	*    Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |VLP1|        
 	
-	*    Sóñora, M.; Martínez, L.; Pantano, S.; Machado, M. R. Wrapping Up Viruses at Multiscale Resolution: Optimizing PACKMOL and SIRAH Execution for Simulating the Zika Virus. Journal of Chemical Information and Modeling 2021, 61, 408–422. |VLP2|     
+	*    Soñora, M.; Martínez, L.; Pantano, S.; Machado, M. R. Wrapping Up Viruses at Multiscale Resolution: Optimizing PACKMOL and SIRAH Execution for Simulating the Zika Virus. Journal of Chemical Information and Modeling 2021, 61, 408–422. |VLP2|     
 	
 	*    Machado, M. R.; Pantano, S. Fighting viruses with computers, right now. Current Opinion in Virology 2021, 48, 91–99. |VLP3|   
 	
-	*    Sóñora, M.; Barrera, E. E.; Pantano, S. The stressed life of a lipid in the Zika virus membrane. Biochimica et Biophysica Acta (BBA) - Biomembranes 2022, 1864, 183804. |VLP4|    
+	*    Soñora, M.; Barrera, E. E.; Pantano, S. The stressed life of a lipid in the Zika virus membrane. Biochimica et Biophysica Acta (BBA) - Biomembranes 2022, 1864, 183804. |VLP4|    
 
 *    **SARS-CoV-2 simulations**:    
 
-	*    Garay, P. G.; Barrera, E. E.; Klein, F.; Machado, M. R.; Sóñora, M.; Pantano, S. The SIRAH-CoV-2 Initiative: A Coarse-Grained Simulations’ Dataset of the SARS-CoV-2 Proteome. Frontiers in Medical Technology 3 2021, 644039. |Sars|   
+	*    Garay, P. G.; Barrera, E. E.; Klein, F.; Machado, M. R.; Soñora, M.; Pantano, S. The SIRAH-CoV-2 Initiative: A Coarse-Grained Simulations’ Dataset of the SARS-CoV-2 Proteome. Frontiers in Medical Technology 3 2021, 644039. |Sars|   
 	
-*    **A review of the development of SIRAH**:    
+.. seealso::
 
-	*    Klein, F.; Sóñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review|   
+	SIRAH has a `Google Scholar <https://scholar.google.com.uy/citations?hl=es&user=Rqr6Jw4AAAAJ>`__ page, please visit it to explore more publications.   
 	
 	
 
 .. |TransM| image:: https://img.shields.io/badge/DOI-10.1063%2F9780735425279_003-blue
    :alt: Access the paper
    :target:  https://doi.org/10.1063/9780735425279_003 
+
+.. |TransM_cit| image:: https://api.juleskreuer.eu/citation-badge.php?shield&doi=10.1063/9780735425279_003
+   :alt: Citation
+
    
 .. |ProtDNA| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbrc.2017.09.086-blue
    :alt: Access the paper
