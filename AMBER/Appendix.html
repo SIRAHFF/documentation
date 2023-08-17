@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Required Software &mdash; SIRAH Force Field 0.1 documentation</title>
+  <title>Calculating ionic concentrations &mdash; SIRAH Force Field 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -71,9 +72,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Required Software</li>
+      <li class="breadcrumb-item active">Calculating ionic concentrations</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/AMBER/installation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/AMBER/Appendix.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -81,39 +82,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="required-software">
-<h1>Required Software<a class="headerlink" href="#required-software" title="Permalink to this heading"></a></h1>
-<p>AMBER 16 and AMBER Tools 16 or later versions properly installed and running in your computer. The molecular visualization program VMD 1.9.3 or later version (<a class="reference external" href="vmd">freely available download</a>).</p>
-</section>
-<section id="prior-knowledge">
-<h1>Prior knowledge<a class="headerlink" href="#prior-knowledge" title="Permalink to this heading"></a></h1>
-<p>How to perform a standard atomistic molecular dynamic simulation with AMBER and basic usage of
-VMD. If you are not familiar with DNA stuff we strongly recommend you to first perform the <a class="reference external" href="http://ambermd.org/tutorials/basic/tutorial1">AMBER
-tutorial on DNA</a>.</p>
-</section>
-<section id="download-and-set-up-sirah-force-field">
-<h1>Download and set up SIRAH Force Field<a class="headerlink" href="#download-and-set-up-sirah-force-field" title="Permalink to this heading"></a></h1>
-<p>Download the file <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber.tgz</span></code> from www.sirahff.com and uncompress it into your
-working directory. Notice: <code class="docutils literal notranslate"><span class="pre">[version]</span></code> should be replaced with the actual package version e.g.: x2_18-09</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_<span class="o">[</span>version<span class="o">]</span>.amber.tgz
-</pre></div>
-</div>
-<p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/</span></code> containing the force field definition, the SIRAH Tools in
-<code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/PDB/</span></code>,
-frequently asked questions in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/SIRAH_FAQs.pdf</span></code> and the required
-material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/X.X/</span></code></p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Remember to change <strong>X.X</strong> to the number that corresponds to the tutorial you are going to do.</p>
-</div>
-<p>Make a new folder for this tutorial in your working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mkdir<span class="w"> </span>tutorialX.X<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorialX.X
-</pre></div>
-</div>
-<p>Create the following symbolic link in the folder tutorial1:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_<span class="o">[</span>version<span class="o">]</span>.amber<span class="w"> </span>sirah.amber
-</pre></div>
-</div>
+  <section id="calculating-ionic-concentrations">
+<h1>Calculating ionic concentrations<a class="headerlink" href="#calculating-ionic-concentrations" title="Permalink to this heading"></a></h1>
+<div class="math notranslate nohighlight">
+\[\]</div>
+<script type="text/javascript" src="http://localhost/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>\[\rho_{\text{WT4}} = \rho_{\text{H}_2\text{O}} = 1000 \, \text{g/L} \]
+
+        \[MW_{\text{H}_2\text{O}} = 18 \, \text{g/mol} \]
+
+        \[1 \text{WT4} \sim 11 \text{H}_2\text{O} \]
+
+        \[\text{M}=\frac{\text{mol}}{V} \quad ; \quad \text{n}={\text{N}_A} \quad ; \quad \rho = \frac{\text{m}}{V} \quad ; \quad \text{m} = \text{mol} \cdot \text{M} \cdot \text{W}\]
+
+        \[\text{V} = \frac{\text{m}}{\rho} = \frac{\text{mol} \cdot \text{MW}_{\text{H}_2\text{O}}}{\rho} = \frac{\text{n}_{\text{H}_2\text{O}} \cdot \text{MW}_{\text{H}_2\text{O}}}{{\text{N}_A} \cdot \rho}\]
+
+
+        \[\text{M}=\frac{\text{mol}}{V} = \frac{\text{n}_{\text{ion}}}{\text{N}_{\text{A}} \cdot \text{V}} = \frac{\text{n}_{\text{ion}}}{\text{N}_{\text{A}}} \frac{\text{N}_{\text{A}} \cdot \rho}{\text{n}_{\text{H}_2\text{O}} \cdot \text{MW}_{\text{H}_2\text{O}}} = \frac{\text{n}_{\text{ion}} \cdot 1000}{\text{n}_{\text{WT}_4} \cdot \text{(11)} \cdot \text{(18)}} \sim 5 \frac{\text{n}_{\text{ion}}}{\text{n}_{\text{WT}_4}}  \]<p>Number of <em>WT4</em> molecules per ion at 0.15M: <span class="raw-latex">\(\text{n}_{WT4} = 5 {{\text{n}_{\text{ion}}} \over \text{M}} = {5(1) \over 0.15} \sim 34 \)</span></p>
 </section>
 
 

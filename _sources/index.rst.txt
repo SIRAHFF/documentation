@@ -15,13 +15,12 @@ Welcome to SIRAH FF documentation
 
 **SIRAH** is a ForceField http://www.sirahff.com/ and offers a simple and intuitive Coarsed Grained Force Field for molecular dynamics simulations.
 
+<<<<<<< HEAD
 
-Check out the :doc:`About SIRAH` section for further information, including how to
-:ref:`install <FAQ>` the project.
+Check out the :doc:`About SIRAH` section for further information.
+=======
+>>>>>>> a3007f40cfa78afaa045fb95d0576b7fa47aac45
 
-.. note::
-
-   This project is under active development.
 
 Contents
 --------

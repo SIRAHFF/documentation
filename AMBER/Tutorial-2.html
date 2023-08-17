@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Build CG representations &mdash; SIRAH FF 0.1 documentation</title>
+  <title>2.1. Build CG representations &mdash; SIRAH Force Field 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -31,7 +31,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            SIRAH FF
+            SIRAH Force Field
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -54,7 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#sirah-tools">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id34">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -63,7 +63,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">SIRAH FF</a>
+          <a href="../index.html">SIRAH Force Field</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -71,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">1. Build CG representations</li>
+      <li class="breadcrumb-item active">2.1. Build CG representations</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/AMBER/Tutorial-2.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -88,10 +88,10 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
-<strong>This is tutorial 2</strong>, remember to replace X.X, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
+Since this is <strong>tutorial 2</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
 </div>
 <section id="build-cg-representations">
-<h1>1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
+<h1>2.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/2/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna_cg.pdb
 </pre></div>
@@ -109,7 +109,7 @@ Please check both PDB structures using VMD:</p>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
 <section id="prepare-leap">
-<h1>2. Prepare leap<a class="headerlink" href="#prepare-leap" title="Permalink to this heading"></a></h1>
+<h1>2.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Permalink to this heading"></a></h1>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -135,21 +135,21 @@ Please check both PDB structures using VMD:</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>Notice: The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
-ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see
-Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
+ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials.html#id32"><span class="std std-ref">Appendix</span></a> for details).
+Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
-<h1>3. Run LEAP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
-<p>Run the LEAP application to generate the molecular topology and initial coordinate files:</p>
+<h1>2.3. Run LEaP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
+<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
 </div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
-expected due to the CG topology.</p>
+expected due to the CG topology of some residues.</p>
 </div>
 <p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">dna_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">dna_cg.ncrst</span></code>.</p>
 <p>Use VMD to check how the CG model looks like:</p>
@@ -164,7 +164,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-the-simulation">
-<h1>4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
+<h1>2.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -175,8 +175,8 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/2/SANDER/dna_cg.RST
 </pre></div>
 </div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/2/SANDER/</span></code> contains typical input files for energy minimization
@@ -214,8 +214,8 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <p>You can find example input files for CPU and GPU versions of pmemd at folder PMEMD/ within sirah.amber/tutorial/2/</p>
 </div>
 </section>
-<section id="visualising-the-simulation">
-<h1>5. Visualising the simulation<a class="headerlink" href="#visualising-the-simulation" title="Permalink to this heading"></a></h1>
+<section id="visualizing-the-simulation">
+<h1>2.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
@@ -227,9 +227,9 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
 
