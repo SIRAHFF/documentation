@@ -55,7 +55,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id34">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id41">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -104,7 +104,7 @@ Since this is <strong>tutorial 6</strong>, remember to replace <code class="docu
 <p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> DMPC64.pdb contains the atomistic representation of the DMPC bilayer, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> DMPC64_cg.pdb is its SIRAH CG representation. The flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> is a mapping scheme for lipids.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in <a class="reference internal" href="../Tutorials.html#table"><span class="std std-ref">Table 1</span></a>, by setting the flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> in <strong>cgconv.pl</strong>. We recommend using <a class="reference external" href="https://m3g.github.io/packmol/">PACKMOL</a> for building the system. Reference building-block structures are provided at folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/PDB/</span></code>, which agree with the mapping scheme in <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/tieleman_lipid.map</span></code>. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 * 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm<sup>2</sup> at 333 K  . The starting configuration was created with the input file <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/6/DMPC_bilayer.pkm</span></code>. See <span class="xref std std-doc">FAQ</span> for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.</p>
+<p>By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in <a class="reference internal" href="../Tutorials.html#table"><span class="std std-ref">Table 1</span></a>, by setting the flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> in <strong>cgconv.pl</strong>. We recommend using <a class="reference external" href="https://m3g.github.io/packmol/">PACKMOL</a> for building the system. Reference building-block structures are provided at folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/PDB/</span></code>, which agree with the mapping scheme in <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/tieleman_lipid.map</span></code>. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 * 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm<sup>2</sup> at 333 K  . The starting configuration was created with the input file <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/6/DMPC_bilayer.pkm</span></code>. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -159,7 +159,7 @@ Since this is <strong>tutorial 6</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>DMPC64_cg.prmtop<span class="w"> </span>DMPC64_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
-<p>By selecting +X, +Y and +Z periodic images from the Periodic tab in the Graphical Representations window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See <span class="xref std std-doc">FAQ</span> for issues on membrane systems in AMBER.</p>
+<p>By selecting +X, +Y and +Z periodic images from the <em>Periodic</em> tab in the <em>Graphical Representations</em> window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for issues on membrane systems in AMBER.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
@@ -187,7 +187,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="go">quit</span>
 </pre></div>
 </div>
-<p>Run the CPPTRAJ application to generate the molecular topology and initial coordinate files:</p>
+<p>Run the CPPTRAJ application to adjust the size of the simulation box:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpptraj<span class="w"> </span>-p<span class="w"> </span>DMPC64_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>DMPC64_cg.ncrst<span class="w"> </span>-i<span class="w"> </span>resize_box.cpptraj
 </pre></div>
 </div>
@@ -227,16 +227,16 @@ input flags.</p>
 <p>These input files are executed by the GPU implementation of <em>pmemd</em>.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/em_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../DMPC64_cg_nb.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_em.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/em_Lipid.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../DMPC64_cg_nb.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_em.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Heating:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/heat_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_eq_0.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_eq_0.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_eq_0.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/heat_Lipid.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_eq_0.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_eq_0.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_eq_0.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To avoid “skinnb errors” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large skinnb value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">AMBER tutorial on lipids</a>.</p>
+<p>To avoid “<em>skinnb errors</em>” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large <em>skinnb</em> value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">AMBER tutorial on lipids</a>.</p>
 </div>
 <p><strong>Periodic box equilibration in GPU code (500 ps x 9):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">9</span><span class="k">)</span>
@@ -253,7 +253,7 @@ input flags.</p>
 </pre></div>
 </div>
 <p><strong>Production (1000ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/md_Lipid.in.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_eq_9.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_md.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/md_Lipid.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_eq_9.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_md.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </section>
