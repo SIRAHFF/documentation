@@ -6,18 +6,72 @@ SIRAH Applications
 
 *    **A current review of SIRAH**:    
 
-	*    Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review|
+	*    Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review| |Review-cit|
 	
-*    **Protein-DNA complexes** and **Membrane Proteins**:   
- 
-	*   Calì, T.; Frizzarin, M.; Luoni, L.; Zonta, F.; Pantano, S.; Cruz, C.; Bonza, M. C.; Bertipaglia, I.; Ruzzene, M.; De Michelis, M. I.; Damiano, N.; Marin, O.; Zanni, G.; Zanotti, G.; Brini, M.; Lopreiato, R.; Carafoli, E. The ataxia related G1107D mutation of the plasma membrane Ca2+ ATPase isoform 3 affects its interplay with calmodulin and the autoinhibition process. Biochimica et Biophysica Acta (BBA)-Molecular Basis of Disease 2017, 1863(1), 165-173. |MemProt-0|      
-
-	*    Brandner, A.; Schüller, A.; Melo, F.; Pantano, S. Exploring DNA dynamics within oligonucleosomes with coarse-grained simulations: SIRAH force field extension for protein-DNA complexes. Biochemical and biophysical research communications 2018, 489, 319–326. |ProtDNA|  
-	
-	*    Zonta, F.; Buratto, D.; Crispino, G.; Carrer, A.; Bruno, F.; Yang, G.; Mammano, F.; Pantano, S. Cues to Opening Mechanisms From in Silico Electric Field Excitation of Cx26 Hemichannel and in Vitro Mutagenesis Studies in HeLa Transfectans. Frontiers in Molecular Neuroscience 2018, 11, 170. |MemProt-1|     
-	
-	*    Barrera, E. E.; Pantano, S. Simulating Transmembrane Proteins with the Coarse-Grained SIRAH Force Field: Tips and Tricks for Setting Up and Running in AMBER. AIP Publishing, 2023. |TransM|  |TransM_cit| 
+.. |Review| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.jsb.2023.107985-blue
+   :alt: Access the paper
+   :target: https://doi.org/10.1016/j.jsb.2023.107985
    
+.. |Review-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.jsb.2023.107985
+   :alt: Citation
+
+
+
+
+*    **Protein-DNA complexes** and **Membrane Proteins**:   
+
+	.. |MemProt-0| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbadis.2016.09.007-blue
+		:alt: Access the paper
+		:target: https://doi.org/10.1016/j.bbadis.2016.09.007
+
+	.. |MemProt-0-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.bbadis.2016.09.007
+		:alt: Citation
+		:target: https://scholar.google.com/scholar?cites=7014340693274463946&as_sdt=2005&sciodt=0,5&hl=pt-BR
+
+   	*   Calì, T.; Frizzarin, M.; Luoni, L.; Zonta, F.; Pantano, S.; Cruz, C.; Bonza, M. C.; Bertipaglia, I.; Ruzzene, M.; De Michelis, M. I.; Damiano, N.; Marin, O.; Zanni, G.; Zanotti, G.; Brini, M.; Lopreiato, R.; Carafoli, E. The ataxia related G1107D mutation of the plasma membrane Ca2+ ATPase isoform 3 affects its interplay with calmodulin and the autoinhibition process. Biochimica et Biophysica Acta (BBA)-Molecular Basis of Disease 2017, 1863(1), 165-173. |MemProt-0| |MemProt-0-cit|
+	
+	
+	
+	
+	.. |ProtDNA| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbrc.2017.09.086-blue
+		:alt: Access the paper
+		:target: https://doi.org/10.1016/j.bbrc.2017.09.086
+	
+	.. |ProtDNA-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.bbrc.2017.09.086
+		:alt: Citation
+		:target: https://scholar.google.com/scholar?cites=8305620119799519645&as_sdt=2005&sciodt=0,5&hl=pt-BR
+   
+	*    Brandner, A.; Schüller, A.; Melo, F.; Pantano, S. Exploring DNA dynamics within oligonucleosomes with coarse-grained simulations: SIRAH force field extension for protein-DNA complexes. Biochemical and biophysical research communications 2018, 489, 319–326. |ProtDNA| |ProtDNA-cit| 
+
+
+
+
+	.. |MemProt-1| image:: https://img.shields.io/badge/DOI-10.3389%2Ffnmol.2018.00170-blue
+		:alt: Access the paper
+		:target: https://doi.org/10.3389/fnmol.2018.00170
+	
+	.. |MemProt-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.3389%2Ffnmol.2018.00170
+		:alt: Citation
+		:target: https://scholar.google.com/scholar?cites=7027056542531206464&as_sdt=2005&sciodt=0,5&hl=pt-BR
+   
+   
+	*    Zonta, F.; Buratto, D.; Crispino, G.; Carrer, A.; Bruno, F.; Yang, G.; Mammano, F.; Pantano, S. Cues to Opening Mechanisms From in Silico Electric Field Excitation of Cx26 Hemichannel and in Vitro Mutagenesis Studies in HeLa Transfectans. Frontiers in Molecular Neuroscience 2018, 11, 170. |MemProt-1| |MemProt-cit|     
+
+
+
+
+	.. |TransM| image:: https://img.shields.io/badge/DOI-10.1063%2F9780735425279_003-blue
+		:alt: Access the paper
+		:target: https://doi.org/10.1063/9780735425279_003
+   
+	.. |TransM-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1063%2F9780735425279_003
+		:alt: Citation
+   
+	*    Barrera, E. E.; Pantano, S. Simulating Transmembrane Proteins with the Coarse-Grained SIRAH Force Field: Tips and Tricks for Setting Up and Running in AMBER. AIP Publishing, 2023. |TransM|  |TransM-cit| 
+
+
+
+
 *    **DNA**:     
 
 	*    Zeida, A.; Machado, M. R.; Dans, P. D.; Pantano, S. Breathing, bubbling, and bending: DNA flexibility from multimicrosecond simulations. Physical Review E, 2012, 86. |DNA-2|      
@@ -27,6 +81,10 @@ SIRAH Applications
 *    **Lipid Membranes**:   
 
 	*    Barrera, E.E.; Frigini, E.N.; Porasso, R.D.; Pantano, S. Modeling DMPC lipid membranes with SIRAH force-field. Journal of Molecular Modeling 2017, 259. |Lipid|     
+
+
+
+
 
 *    **Intrinsically Disordered Proteins**:   
 
@@ -72,29 +130,17 @@ SIRAH Applications
 	
 .. seealso::
 
-	SIRAH has a `Google Scholar <https://scholar.google.com.uy/citations?hl=es&user=Rqr6Jw4AAAAJ>`__ page, please visit it to explore more publications.   
+	SIRAH has a `Google Scholar <https://scholar.google.com.uy/citations?hl=es&user=Rqr6Jw4AAAAJ>`__ page, feel free to visit it and discover additional publications.   
 	
 	
 
-.. |TransM| image:: https://img.shields.io/badge/DOI-10.1063%2F9780735425279_003-blue
-   :alt: Access the paper
-   :target:  https://doi.org/10.1063/9780735425279_003 
 
-.. |TransM_cit| image:: https://api.juleskreuer.eu/citation-badge.php?shield&doi=10.1063/9780735425279_003
-   :alt: Citation
 
    
-.. |ProtDNA| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbrc.2017.09.086-blue
-   :alt: Access the paper
-   :target: https://doi.org/10.1016/j.bbrc.2017.09.086
-   
-.. |MemProt-0| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbadis.2016.09.007-blue
-   :alt: Access the paper
-   :target: https://doi.org/10.1016/j.bbadis.2016.09.007
 
-.. |MemProt-1| image:: https://img.shields.io/badge/DOI-10.3389%2Ffnmol.2018.00170-blue
-   :alt: Access the paper
-   :target: https://doi.org/10.3389/fnmol.2018.00170
+   
+
+
 
 .. |IDP| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.0c00948-blue
    :alt: Access the paper
@@ -152,10 +198,7 @@ SIRAH Applications
    :alt: Access the paper
    :target: https://doi.org/10.3389/fmedt.2021.644039
 
-.. |Review| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.jsb.2023.107985-blue
-   :alt: Access the paper
-   :target: https://doi.org/10.1016/j.jsb.2023.107985
-   
+ 
 .. |Lipid| image:: https://img.shields.io/badge/DOI-10.1007%2Fs00894--017--3426--5-blue
    :alt: Access the paper
    :target: https://doi.org/10.1007/s00894-017-3426-5
