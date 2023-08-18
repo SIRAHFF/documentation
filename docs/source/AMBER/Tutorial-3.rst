@@ -8,15 +8,12 @@ Generalized Born model (GB).
 
 The main references for this tutorial are: `All-atoms/CG DNA <https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f>`_ and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
-
 .. figure:: ../../images/Tuto3.jpeg
    :align: center
    :width: 100%
-   
 
    **Figure 1.** Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.
-
-
+   
 .. important::
 
     Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.

@@ -47,7 +47,15 @@ In ``sirah_[version].amber/tutorial/7/`` you will find a pre-stabilized CG DMPC 
 
 	head -qn -1 2kyv_cg.pdb ./sirah.amber/tutorial/7/DMPC_cg.pdb > 2kyv_DMPC_cg_init.pdb
 
-Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to `Orientations of Proteins in Membranes (OPM) database <https://opm.phar.umich.edu/>`__ and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see Figure 1).
+Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to `Orientations of Proteins in Membranes (OPM) database <https://opm.phar.umich.edu/>`__ and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see **Figure 1**).
+
+.. figure:: ../../images/Tuto7.png
+   :align: center
+   :width: 100%
+
+   **Figure 1.** Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.
+   
+   
 
 7.1.2. Delete close contact lipid molecules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
