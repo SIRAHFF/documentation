@@ -58,7 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id51">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -87,7 +87,7 @@
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435">Barrera et al. SIRAH Lipids</a>, and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
+this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435">SIRAH Lipids</a>, and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>.
 We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -95,7 +95,7 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 6</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/6/</span></code></p>
 </div>
 <section id="build-cg-representations">
@@ -144,7 +144,8 @@ Since this is <strong>tutorial 6</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials.html#id48"><span class="std std-ref">Appendix</span></a> for details).
+Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
@@ -206,16 +207,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/6/</span></code> contains typical input files for energy minimization
-(<code class="docutils literal notranslate"><span class="pre">em_Lipid.in</span></code>), heating (<code class="docutils literal notranslate"><span class="pre">heat_Lipid.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_Lipid.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_Lipid.in</span></code>) runs. Please check carefully the
-input flags.</p>
+(<code class="docutils literal notranslate"><span class="pre">em_Lipid.in</span></code>), heating (<code class="docutils literal notranslate"><span class="pre">heat_Lipid.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_Lipid.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_Lipid.in</span></code>) runs. Please check carefully the input flags.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
 <div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>: The GPU implementation of AMBER program’s Particle Mesh Ewald Molecular Dynamics for simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
@@ -225,9 +223,13 @@ input flags.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code>: Reference file</p></li>
 </ul>
 </div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>These input files are executed by the GPU implementation of <em>pmemd</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <em>pmemd.cuda</em>, due to the system size we do not recommend the use of <strong>CPU</strong> implementations of AMBER.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/em_Lipid.in<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../DMPC64_cg_nb.ncrst<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_em.out<span class="w"> </span>-r<span class="w"> </span>DMPC64_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>

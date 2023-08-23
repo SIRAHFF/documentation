@@ -17,6 +17,7 @@
         <script src="../_static/documentation_options.js?v=3060a628"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -57,7 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id51">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -86,11 +87,10 @@
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al. SIRAH 2.0</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>.
-We strongly advise you to read these articles before starting the tutorial.</p>
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">SIRAH 2.0</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 5</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/5/</span></code></p>
 </div>
 <section id="build-cg-representations">
@@ -103,14 +103,14 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
 </pre></div>
 </div>
-<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 1CRN.pqr contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> structure at pH 7.0, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 1CRN_cg.pdb is its SIRAH CG representation.</p>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 1CRN.pqr contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> structure at pH <strong>7.0</strong>, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 1CRN_cg.pdb is its SIRAH CG representation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (Ne) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code>.</p>
+<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code>.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default charged termini are used, but it is possible to set then neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (Ne) rename it from “sHe” to “aHe”.</p>
+<p>By default charged termini are used, but it is possible to set then neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) rename it from “sHe” to “aHe”.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -155,12 +155,15 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:
-<code class="docutils literal notranslate"><span class="pre">pdb4amber</span> <span class="pre">-i</span> <span class="pre">sirah.amber/tutorial/5/1CRN.pqr</span> <span class="pre">-o</span> <span class="pre">1CRN_aa.pdb</span> <span class="pre">&amp;&amp;</span> <span class="pre">cat</span> <span class="pre">1CRN_aa_sslink</span></code></p>
+<p>Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb4amber<span class="w"> </span>-i<span class="w"> </span>sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_aa.pdb<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>1CRN_aa_sslink
+</pre></div>
+</div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials.html#id48"><span class="std std-ref">Appendix</span></a> for details).
+Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
@@ -200,7 +203,6 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
@@ -210,16 +212,20 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <li><p><code class="docutils literal notranslate"><span class="pre">-ref</span></code>: Reference file</p></li>
 </ul>
 </div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+</div>
 <p><strong>Energy Minimization of side chains and solvent by restraining the backbone:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Energy Minimization of whole system:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Solvent Equilibration (NPT):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition caution">
@@ -227,16 +233,16 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <p>Option <strong>restraintmask=:’1-46’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to embrace all protein’s residues.</p>
 </div>
 <p><strong>Soft equilibration to improve side chain solvation (NPT):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1CRN_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Production (1000ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>1CRN_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>The same input files can be used to run on CPU or GPU versions of <em>pmemd</em>.</p>
+<p>The same input files can be used to run on CPU <em>pmemd</em> or <em>sander</em>.</p>
 </div>
 </section>
 <section id="visualizing-the-simulation">

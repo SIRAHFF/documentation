@@ -1,12 +1,12 @@
 AMBER
-======
+========
 
 .. _AMBER:
 
-Download and pre-requisites
-----------------------------
+.. _download amber:
 
-.. _Download amber:
+Download 
+----------
 
 .. include:: /AMBER/installation.rst
 

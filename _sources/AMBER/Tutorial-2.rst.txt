@@ -1,11 +1,11 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 double stranded DNA embedded in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are:`Dans et al. SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `Darré et al. WAT4?) <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al. SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.
+    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
     Since this is **tutorial 2**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/2/``
 
 
@@ -104,27 +104,13 @@ Make a new folder for the run:
 
     mkdir -p run; cd run
 
-In the course of long MD simulations the capping residues may eventually separate, this effect is
-called helix fraying. To avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
-contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
-
-.. code-block:: bash
-
-    ln -s ../sirah.amber/tutorial/2/SANDER/dna_cg.RST
-
-.. note::
-
-    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
-
-The folder ``sirah.amber/tutorial/2/SANDER/`` contains typical input files for energy minimization
-(``em_WT4.in``), equilibration (``eq_WT4.in``) and production (``md_WT4.in``) runs. Please check carefully the
-input flags therein, in particular the definition of flag *chngmask=0* at *&ewald* section is **mandatory**.
+The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for energy minimization
+(``em_WT4.in``), equilibration (``eq_WT4.in``) and production (``md_WT4.in``) runs. Please check carefully the input flags therein, in particular the definition of flag *chngmask=0* at *&ewald* section is **mandatory**.
 
 .. tip::
 
     **Some flags used in AMBER**
 
-   - ``sander``: The AMBER program for molecular dynamics simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
@@ -132,28 +118,52 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
    - ``-r``: Restart file.
    - ``-x``: Trajectory file.
 
+.. caution::
+
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+
+.. note::
+
+    You can find example input files for sander at ``SANDER/`` and pmemd at ``PMEMD/``, within ``sirah.amber/tutorial/2/``
+
 **Energy Minimization:**
 
 .. code-block:: bash
 
-  $ sander -O -i ../sirah.amber/tutorial/2/SANDER/em_WT4.in -p ../dna_cg.prmtop -c ../dna_cg.ncrst -o dna_cg_em.out -r dna_cg_em.ncrst &
+  pmemd.cuda -O -i ../sirah.amber/tutorial/2/PMEMD/em_WT4.in -p ../dna_cg.prmtop -c ../dna_cg.ncrst -o dna_cg_em.out -r dna_cg_em.ncrst &
+
+.. important::
+
+    In the course of long MD simulations the capping residues may eventually separate, this effect is
+    called helix fraying. To avoid such behavior is necessary to set Watson-Crick restraints for the capping base pairs of this CG DNA at the end of ``eq_GB.in`` and ``md_GB.in`` files. Check the files lines that start with *&rst*.
+
+
+.. warning:: 
+
+    If you are using SANDER to avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
+    contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
+
+
+    .. code-block:: bash
+
+        ln -s ../sirah.amber/tutorial/1/SANDER/dna_cg.RST
+
+    
+    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
+
 
 **Equilibration (NPT):**
 
 .. code-block:: bash
 
-  $ sander -O -i ../sirah.amber/tutorial/2/SANDER/eq_WT4.in -p ../dna_cg.prmtop -c dna_cg_em.ncrst -ref dna_cg_em.ncrst -o dna_cg_eq.out -r dna_cg_eq.ncrst -x dna_cg_eq.nc &
+  pmemd.cuda -O -i ../sirah.amber/tutorial/2/PMEMD/eq_WT4.in -p ../dna_cg.prmtop -c dna_cg_em.ncrst -ref dna_cg_em.ncrst -o dna_cg_eq.out -r dna_cg_eq.ncrst -x dna_cg_eq.nc &
 
 **Production (100ns):**
 
 .. code-block:: bash
 
-  sander -O -i ../sirah.amber/tutorial/2/SANDER/md_WT4.in -p ../dna_cg.prmtop -c dna_cg_eq.ncrst -o dna_cg_md.out -r dna_cg_md.ncrst -x dna_cg_md.nc &
+  pmemd.cuda -O -i ../sirah.amber/tutorial/2/PMEMD/md_WT4.in -p ../dna_cg.prmtop -c dna_cg_eq.ncrst -o dna_cg_md.out -r dna_cg_md.ncrst -x dna_cg_md.nc &
 
-
-.. important::
-
-  You can find example input files for CPU and GPU versions of pmemd at folder PMEMD/ within sirah.amber/tutorial/2/
 
 2.5. Visualizing the simulation
 ________________________________

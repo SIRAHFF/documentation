@@ -1,11 +1,10 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Darré et al. WAT4? <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al. SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`_, `Machado et al. SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
-We strongly advise you to read these articles before starting the tutorial.
+this tutorial are: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`_ and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 5**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/5/``
 
 
@@ -22,17 +21,17 @@ Map the protonated atomistic structure of protein `1CRN <https://www.rcsb.org/st
 
   ./sirah.amber/tools/CGCONV/cgconv.pl -i ./sirah.amber/tutorial/5/1CRN.pqr -o 1CRN_cg.pdb  
   
-The input file ``-i`` 1CRN.pqr contains the atomistic representation of `1CRN <https://www.rcsb.org/structure/1CRN>`_ structure at pH 7.0, while the output ``-o`` 1CRN_cg.pdb is its SIRAH CG representation.
+The input file ``-i`` 1CRN.pqr contains the atomistic representation of `1CRN <https://www.rcsb.org/structure/1CRN>`_ structure at pH **7.0**, while the output ``-o`` 1CRN_cg.pdb is its SIRAH CG representation.
 
 
 .. note::
 
-	**Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.** Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (Ne) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: ``sirah.amber/tools/CGCONV/maps/sirah_prot.map``.    
+	**Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.** Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: ``sirah.amber/tools/CGCONV/maps/sirah_prot.map``.    
 
   
 .. important::
 
-	By default charged termini are used, but it is possible to set then neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (Ne) rename it from “sHe” to “aHe”.
+	By default charged termini are used, but it is possible to set then neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
 
 .. tip::
 
@@ -46,8 +45,8 @@ Please check both PDB and PQR structures using VMD:
   vmd -m sirah.amber/tutorial/5/1CRN.pqr 1CRN_cg.pdb
 
 
-
 From now on it is just normal AMBER stuff!
+
 
 5.2. Prepare LEaP
 _________________
@@ -84,13 +83,17 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. caution::
 
-	Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “*bond unit.ri.BSG unit.rj.BSG*”. Where *ri* and *rj* correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command *pdb4amber* to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:		
-	``pdb4amber -i sirah.amber/tutorial/5/1CRN.pqr -o 1CRN_aa.pdb && cat 1CRN_aa_sslink``    
+    Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “*bond unit.ri.BSG unit.rj.BSG*”. Where *ri* and *rj* correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command *pdb4amber* to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:	
+
+    .. code-block:: bash
+
+	   pdb4amber -i sirah.amber/tutorial/5/1CRN.pqr -o 1CRN_aa.pdb && cat 1CRN_aa_sslink
 
 	
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details).
+   Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 5.3. Run LEaP
 ______________
@@ -137,7 +140,6 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
     **Some flags used in AMBER**
 
-   - ``sander``: The AMBER program for molecular dynamics simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
@@ -146,23 +148,28 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
    - ``-x``: Trajectory file.
    - ``-ref``: Reference file
 
+.. caution::
+
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+
+
 **Energy Minimization of side chains and solvent by restraining the backbone:**
 
 .. code-block:: bash
 
-	sander -O -i ../sirah.amber/tutorial/5/em1_WT4.in -p ../1CRN_cg.prmtop -c ../1CRN_cg.ncrst -ref ../1CRN_cg.ncrst -o 1CRN_cg_em1.out -r 1CRN_cg_em1.ncrst &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/em1_WT4.in -p ../1CRN_cg.prmtop -c ../1CRN_cg.ncrst -ref ../1CRN_cg.ncrst -o 1CRN_cg_em1.out -r 1CRN_cg_em1.ncrst &
  
 **Energy Minimization of whole system:**
 
 .. code-block:: bash
 
-	sander -O -i ../sirah.amber/tutorial/5/em2_WT4.in -p ../1CRN_cg.prmtop -c ../1CRN_cg_em1.ncrst -o 1CRN_cg_em2.out -r 1CRN_cg_em2.ncrst &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/em2_WT4.in -p ../1CRN_cg.prmtop -c ../1CRN_cg_em1.ncrst -o 1CRN_cg_em2.out -r 1CRN_cg_em2.ncrst &
 
 **Solvent Equilibration (NPT):**
 
 .. code-block:: bash
 
-	sander -O -i ../sirah.amber/tutorial/5/eq1_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_em2.ncrst -ref 1CRN_cg_em2.ncrst -o 1CRN_cg_eq1.out -r 1CRN_cg_eq1.ncrst -x 1CRN_cg_eq1.nc &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/eq1_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_em2.ncrst -ref 1CRN_cg_em2.ncrst -o 1CRN_cg_eq1.out -r 1CRN_cg_eq1.ncrst -x 1CRN_cg_eq1.nc &
   
 .. caution::
 
@@ -172,19 +179,19 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 .. code-block:: bash
 
-	sander -O -i ../sirah.amber/tutorial/5/eq2_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq1.ncrst -ref 1CRN_cg_eq1.ncrst -o 1CRN_cg_eq2.out -r 1CRN_cg_eq2.ncrst -x 1CRN_cg_eq2.nc &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/eq2_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq1.ncrst -ref 1CRN_cg_eq1.ncrst -o 1CRN_cg_eq2.out -r 1CRN_cg_eq2.ncrst -x 1CRN_cg_eq2.nc &
   
 
 **Production (1000ns):**
 
 .. code-block:: bash
 
-	sander -O -i ../sirah.amber/tutorial/5/md_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq2.ncrst -o 1CRN_cg_md.out -r 1CRN_cg_md.ncrst -x 1CRN_cg_md.nc &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/md_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq2.ncrst -o 1CRN_cg_md.out -r 1CRN_cg_md.ncrst -x 1CRN_cg_md.nc &
 
 
 .. important::
 
-	The same input files can be used to run on CPU or GPU versions of *pmemd*.
+	The same input files can be used to run on CPU *pmemd* or *sander*.
 	
 
 5.5. Visualizing the simulation

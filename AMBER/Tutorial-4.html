@@ -57,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id51">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -86,10 +86,10 @@
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 closed circular DNA using the Generalized Born model (GB) for implicit solvent.</p>
-<p>The main references for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al. SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al. WAT4?)</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado et al. SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.  We strongly advise you to read these articles before starting the tutorial.</p>
+<p>The main references for this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>) and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 4</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/4/</span></code></p>
 </div>
 <section id="build-cg-representations">
@@ -100,14 +100,14 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Notice: 5’ and 3’ end residues mast be renamed to AW5, TW5, GW5 or CW5 and AW3, TW3, GW3 or CW3 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.</p>
+<p>5’ and 3’ end residues mast be renamed to AW5, TW5, GW5 or CW5 and AW3, TW3, GW3 or CW3 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
 <code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
 </div>
-<p>The input file <code class="docutils literal notranslate"><span class="pre">i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output <code class="docutils literal notranslate"><span class="pre">o</span></code> ccdna_cg.pdb preserves a few of them.</p>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> ccdna_cg.pdb preserves a few of them.</p>
 <p>Please check both PDB structures using VMD:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.amber/tutorial/4/ccdna.pdb<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
@@ -165,15 +165,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
-<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/4/CPU</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em_GB.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_GB.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_GB.in</span></code>) runs. Please check carefully the input flags
-therein.</p>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/4/GPU</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em_GBSA.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_GBSA.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_GBSA.in</span></code>) runs. Please check carefully the input flags therein.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
 <div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
@@ -182,21 +180,25 @@ therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
 </div>
-<p><strong>Energy Minimization:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/CPU/em_GB.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../ccdna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
-<p><strong>Equilibration:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/CPU/eq_GB.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_eq.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>ccdna_cg_eq.nc<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
-</div>
-<p><strong>Production (100ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/CPU/md_GB.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>ccdna_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
-</pre></div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/4/</p>
+<p>You can find example input files for CPU and GPU, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/4/</span></code></p>
+</div>
+<p><strong>Energy Minimization:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/GPU/em_GBSA.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../ccdna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Equilibration:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/GPU/eq_GBSA.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_eq.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>ccdna_cg_eq.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (100ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/4/GPU/md_GBSA.in<span class="w"> </span>-p<span class="w"> </span>../ccdna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md.out<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>ccdna_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
 </div>
 </section>
 <section id="visualizing-the-simulation">

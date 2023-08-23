@@ -57,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id51">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -87,10 +87,7 @@
   <p>This tutorial shows how to apply a multiscale representation of DNA, which is available in the SIRAH
 force field, to study protein-DNA interactions. In this approach, the protein and its binding region are
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
-level. The simulated system is composed of the human TATA binding protein (TBP, PDB: 1C9B)
-bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus
-type 1 (HIV-1, GenBank: K03455, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the
-Generalized Born model (GB).</p>
+level. The simulated system is composed of the human TATA binding protein (TBP PDB: <a class="reference external" href="https://www.rcsb.org/structure/1c9b">1C9B</a>) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/K03455.1">K03455</a>, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the Generalized Born model (GB).</p>
 <p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/Tuto3.png"><img alt="map to buried treasure" src="../_images/Tuto3.png" style="width: 100%;" /></a>
@@ -100,7 +97,7 @@ Generalized Born model (GB).</p>
 </figure>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">install</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
 </div>
 <section id="build-cg-representations">
@@ -178,26 +175,14 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
-<p>In the course of long MD simulations the capping residues may eventually separate, this effect is
-called helix fraying. To avoid such behavior create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_hyb.RST</span></code>, which
-contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_hyb.RST
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
-</div>
-<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/SANDER</span></code> contains typical input files for energy minimization
-(<code class="docutils literal notranslate"><span class="pre">em_HYB.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_HYB.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_HYB.in</span></code>) runs. Please check carefully the
-input flags therein.</p>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/PMEMD.GPU/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_HYB.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_HYB.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_HYB.in</span></code>) runs. Please check carefully the input flags therein.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
 <div><p><strong>Some flags used in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sander</span></code>: The AMBER program for molecular dynamics simulations.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
@@ -206,13 +191,32 @@ input flags therein.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
 </ul>
 </div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>This simulation is very time consuming owing to the system’s size, so try a parallel implementation of AMBER.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find example input files for CPU versions of sander and pmemd at folders <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and  <code class="docutils literal notranslate"><span class="pre">PMEMD.CPU/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/</span></code></p>
+<p>This simulation is very time consuming owing to the system’s size, so try a parallel or CUDA implementation of AMBER.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In the course of long MD simulations the capping residues may eventually separate, this effect is
+called helix fraying. To avoid such behavior is necessary to set Watson-Crick restraints for the capping base pairs of this CG DNA at the end of <code class="docutils literal notranslate"><span class="pre">eq_GB.in</span></code> and <code class="docutils literal notranslate"><span class="pre">md_GB.in</span></code> files. Check the files lines that start with <em>&amp;rst</em>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using SANDER to avoid such behavior create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_cg.RST
+</pre></div>
+</div>
+<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
 </div>
 <p><strong>Equilibration:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
