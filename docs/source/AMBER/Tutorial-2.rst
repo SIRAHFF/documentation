@@ -32,8 +32,8 @@ Please check both PDB structures using VMD:
 
 From now on it is just normal AMBER stuff!
 
-2.2. Prepare LEaP
-__________________
+2.2. Prepare LEaP input
+__________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
@@ -66,8 +66,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
     Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
-2.3. Run LEaP
-______________
+2.3. Run LEaP 
+________________
 
 Run the LEaP application to generate the molecular topology and initial coordinate files:
 

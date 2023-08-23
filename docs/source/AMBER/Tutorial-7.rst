@@ -1,5 +1,5 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a protein embedded in a lipid bilayer using explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Machado et al. SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`__, `Barrera et al. SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`__, and `Machado et al. SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`__.
+this tutorial are: `SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`__, `SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`__, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`__.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. note::
@@ -9,7 +9,7 @@ We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 7**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/7/``
 	
 7.1. Build CG representations
@@ -115,8 +115,8 @@ To save the refined protein-membrane system, in the VMD main window click on ``2
 	
 From now on it is just normal AMBER stuff!
 
-7.2. Prepare LEaP
-___________________
+7.2. Prepare LEaP input
+________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
@@ -142,7 +142,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 7.3. Run LEaP
 _______________
@@ -166,7 +166,7 @@ Use VMD to check how the CG model looks:
   vmd 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst -e ./sirah.amber/tools/sirah_vmdtk.tcl
 
 By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see unwanted water near the
-hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in AMBER.
+hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in AMBER. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.
 
 .. tip::
 
@@ -185,23 +185,23 @@ Use a text editor to create the file ``resize_box.cpptraj`` including the follow
 
 .. code-block:: console
 
-	# Set reference coordinate file
-	reference 2kyv_DMPC_cg.ncrst
- 
-	# Remove water using distance-based masks
-	strip :WT4&(@BCT1,BCT2,BC13,BC23<:12.0) parmout 2kyv_DMPC_cg.prmtop
+    # Set reference coordinate file
+    reference 2kyv_DMPC_cg.ncrst
+     
+    # Remove water using distance-based masks
+    strip :WT4&(@BCT1,BCT2,BC13,BC23<:12.0) parmout 2kyv_DMPC_cg.prmtop
 
-	# New box dimensions
-	box x 128 y 128 z 114
+    # New box dimensions
+    box x 128 y 128 z 114
 
-	# Amber NetCDF Restart generation
-	trajout 2kyv_DMPC_cg_nb.ncrst
+    # Amber NetCDF Restart generation
+    trajout 2kyv_DMPC_cg_nb.ncrst
 
     # Do it!
-    go
+     go
 
     # EXIT
-    quit
+     quit
 
 .. caution::
 	This is a critical step when preparing membrane systems to simulate with AMBER. In this case, the new box dimensions were set after some trial and error tests to allow for limited overlap between periodic box images. An excessive overlap may lead to important atom clashes an eventual system explosion during minimization/simulation, while insufficient overlap may impact the membrane cohesivity at PBC boundaries leading to pore formations or other issues.
@@ -235,8 +235,6 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
 
     **Some flags used in AMBER**
 
-   - ``sander``: The AMBER program for molecular dynamics simulations.
-   - ``pmemd.cuda``: The GPU implementation of AMBER program's Particle Mesh Ewald Molecular Dynamics for simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
@@ -246,9 +244,14 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
    - ``ref``: Reference file
 
 
-.. caution::
+.. warning::
 
-	These input files for this tutorial are executed by the GPU implementation of *pmemd*.
+    These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of AMBER.
+
+.. note::
+
+    Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER. 
+
 	
 **Energy Minimization of side chains by restraining the backbone:**
 
@@ -295,10 +298,6 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
 
    pmemd.cuda -O -i ../sirah.amber/tutorial/7/md_Prot-Lip.in -p ../2kyv_DMPC_cg.prmtop -c 2kyv_DMPC_cg_eq_9.ncrst -o 2kyv_DMPC_cg_md.out -r 2kyv_DMPC_cg_md.ncrst -x 2kyv_DMPC_cg_md.nc &
 
-.. note::
-
-	The same input files can be used to run on sander and the CPU version of pmemd
-
 
 7.6. Visualizing the simulation
 _______________________________
@@ -308,9 +307,9 @@ That’s it! Now you can analyze the trajectory.
 
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):
 
-  .. code-block:: bash
+.. code-block:: bash
 
-      echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../2kyv_DMPC_cg.prmtop -y 2kyv_DMPC_cg_md.nc -x 2kyv_DMPC_cg_md_pbc.nc --interactive
+    echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../2kyv_DMPC_cg.prmtop -y 2kyv_DMPC_cg_md.nc -x 2kyv_DMPC_cg_md_pbc.nc --interactive
 
 
 Now you can check the simulation using VMD:
