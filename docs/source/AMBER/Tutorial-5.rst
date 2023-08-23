@@ -48,8 +48,8 @@ Please check both PDB and PQR structures using VMD:
 From now on it is just normal AMBER stuff!
 
 
-5.2. Prepare LEaP
-_________________
+5.2. Prepare LEaP input
+_________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
@@ -95,8 +95,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
    The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details).
    Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
-5.3. Run LEaP
-______________
+5.3. Run LEaP 
+____________________
 
 Run the LEaP application to generate the molecular topology and initial coordinate files:
 

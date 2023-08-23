@@ -13,7 +13,7 @@ AMBER (version 16) and AMBER Tools (version 16) or later versions properly insta
 
 .. tip::
 
-    `Download <_ambertools>`_ lastest version of amber. *See How to obtain Amber23* section. 
+    `Download <_ambertools>`_ lastest version of amber. See *How to obtain Amber23* section. 
     `Install amber <_amber_install>`_. Select according to the operating system you are using 
     `Install amberTools <_amber>`_.  If you have amber installed, it is not necessary to install ambertools separately.
 
