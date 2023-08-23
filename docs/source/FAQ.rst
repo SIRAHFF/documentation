@@ -1,38 +1,39 @@
 FAQs
 ====
 
-:Authors:
-    Matias Machado    
-:Version: 
-	20/02/2020      
+..
+	:Authors:
+		Matias Machado    
+	:Version: 
+		20/02/2020      
 
 General questions
 -----------------
 
-* :ref:`What does SIRAH name stand for? <g1>`
-* :ref:`In which MD engines is it possible to run the SIRAH force field? <g2>`
-* :ref:`What does the package version stand for?  <g3>`     
-* :ref:`Do I need a PQR file for mapping to SIRAH? <g4>`
-* :ref:`Why do you suggest mapping from a PQR file? <g5>`
-* :ref:`Which are the disadvantages of the PDB2PQR server? <g6>`
-* :ref:`I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why? <g7>`
-* :ref:`Which are the main cautions for mapping protein structures directly from experimental or atomistic force fields? <g8>`
-* :ref:`Is it possible to account for different protonation states and pH effects in SIRAH? <g9>`
-* :ref:`Can SIRAH account for Post-Translational Modifications (PTMs)? <g10>`
-* :ref:`Can SIRAH account for disulfide bonds? <g11>`
-* :ref:`Which protein termini residues are available for SIRAH proteins? <g12>`
-* :ref:`Which are the main cautions for mapping lipids? <g13>`
-* :ref:`Can I use MAP files to inter-convert between different lipid names or topology conventions? <g14>`
-* :ref:`I’m getting the following warning message when running cgconv.pl: “Some residues were not found in MAP files: WAT”. Is it an error? <g15>`
-* :ref:`Why are DNA bead types very different from the original model? <g16>`
-* :ref:`Which integration time-step should I use in SIRAH simulations? <g17>`
-* :ref:`Why did my simulation crash using a 20 fs time-step? <g18>`
-* :ref:`Why do you recommend a two step minimization/equilibration protocol for proteins? <g19>`
-* :ref:`Why did my protein partially unfold during the simulation? <g20>`
-* :ref:`sirah_ss assign some residues as coil, does it means they are unfold or randomly moving? <g21>`
-* :ref:`Why did my membrane dramatically shrink in XY planes during the simulation? <g22>`
-* :ref:`Can I use advanced sampling strategies with SIRAH? <g23>`
-* :ref:`Is SIRAH sensitive to electric fields? <g24>`
+#. :ref:`What does SIRAH name stand for? <g1>`
+#. :ref:`In which MD engines is it possible to run the SIRAH force field? <g2>`
+#. :ref:`What does the package version stand for?  <g3>`     
+#. :ref:`Do I need a PQR file for mapping to SIRAH? <g4>`
+#. :ref:`Why do you suggest mapping from a PQR file? <g5>`
+#. :ref:`Which are the disadvantages of the PDB2PQR server? <g6>`
+#. :ref:`I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why? <g7>`
+#. :ref:`Which are the main cautions for mapping protein structures directly from experimental or atomistic force fields? <g8>`
+#. :ref:`Is it possible to account for different protonation states and pH effects in SIRAH? <g9>`
+#. :ref:`Can SIRAH account for Post-Translational Modifications (PTMs)? <g10>`
+#. :ref:`Can SIRAH account for disulfide bonds? <g11>`
+#. :ref:`Which protein termini residues are available for SIRAH proteins? <g12>`
+#. :ref:`Which are the main cautions for mapping lipids? <g13>`
+#. :ref:`Can I use MAP files to inter-convert between different lipid names or topology conventions? <g14>`
+#. :ref:`I’m getting the following warning message when running cgconv.pl: “Some residues were not found in MAP files: WAT”. Is it an error? <g15>`
+#. :ref:`Why are DNA bead types very different from the original model? <g16>`
+#. :ref:`Which integration time-step should I use in SIRAH simulations? <g17>`
+#. :ref:`Why did my simulation crash using a 20 fs time-step? <g18>`
+#. :ref:`Why do you recommend a two step minimization/equilibration protocol for proteins? <g19>`
+#. :ref:`Why did my protein partially unfold during the simulation? <g20>`
+#. :ref:`sirah_ss assign some residues as coil, does it means they are unfold or randomly moving? <g21>`
+#. :ref:`Why did my membrane dramatically shrink in XY planes during the simulation? <g22>`
+#. :ref:`Can I use advanced sampling strategies with SIRAH? <g23>`
+#. :ref:`Is SIRAH sensitive to electric fields? <g24>`
 
 
 
@@ -198,15 +199,15 @@ General questions
 AMBER questions
 ---------------
 
-* :ref:`Why can't I display files \*.ncrst with VMD? <amb1>`
-* :ref:`How do I set disulfide bonds in AMBER? <target3>`
-* :ref:`How do I set neutral protein termini in AMBER?  <target1>`     
-* :ref:`Is it possible to use the fragment-based framework of AMBER for SIRAH lipids in AMBER?  <target5>`  
-* :ref:`Why do I need to scale down the WT4 radii during the solvation of the computational box?  <amb5>`  
-* :ref:`Why do you recommend equilibrate the system in NPT ensemble?  <amb6>`  
-* :ref:`Why is it critical to correct the size of the simulation box in a membrane system before MD?  <amb7>` 
-* :ref:`How do I check the topology for Lennard-Jones interactions out-off the combination rules?  <amb8>` 
-* :ref:`Why is it important to set chngmask=0 keyword at &ewald section in the input files?  <amb9>` 
+#. :ref:`Why can't I display files \*.ncrst with VMD? <amb1>`
+#. :ref:`How do I set disulfide bonds in AMBER? <target3>`
+#. :ref:`How do I set neutral protein termini in AMBER?  <target1>`     
+#. :ref:`Is it possible to use the fragment-based framework of AMBER for SIRAH lipids in AMBER?  <target5>`  
+#. :ref:`Why do I need to scale down the WT4 radii during the solvation of the computational box?  <amb5>`  
+#. :ref:`Why do you recommend equilibrate the system in NPT ensemble?  <amb6>`  
+#. :ref:`Why is it critical to correct the size of the simulation box in a membrane system before MD?  <amb7>` 
+#. :ref:`How do I check the topology for Lennard-Jones interactions out-off the combination rules?  <amb8>` 
+#. :ref:`Why is it important to set chngmask=0 keyword at &ewald section in the input files?  <amb9>` 
 
 
 .. _amb1:    
@@ -273,15 +274,15 @@ AMBER questions
 GROMACS questions  
 -----------------
 
-* :ref:`How do I set disulfide bonds in GROMACS? <amb1>`
-* :ref:`How can I fix long distance disulfide bonds? <target4>`
-* :ref:`How do I set neutral protein termini in GROMACS?  <target2>`     
-* :ref:`Why do I need to remove WT4 molecules within 0.3 nm of the protein?  <gro4>`  
-* :ref:`Is it possible to use the fragment-based framework of AMBER for SIRAH lipids in GROMACS?  <target6>`  
-* :ref:`Why is GROMACS not able to correctly define Protein, DNA or other groups?  <gro6>`  
-* :ref:`Is it OK to get missing atom errors when running pdb2gmx or grompp commands on a SIRAH system?  <gro7>` 
-* :ref:`I can not minimize my system, what is the problem?  <gro8>` 
-* :ref:`Why do you recommend to equilibrate in NVT ensemble?  <gro9>` 
+#. :ref:`How do I set disulfide bonds in GROMACS? <amb1>`
+#. :ref:`How can I fix long distance disulfide bonds? <target4>`
+#. :ref:`How do I set neutral protein termini in GROMACS?  <target2>`     
+#. :ref:`Why do I need to remove WT4 molecules within 0.3 nm of the protein?  <gro4>`  
+#. :ref:`Is it possible to use the fragment-based framework of AMBER for SIRAH lipids in GROMACS?  <target6>`  
+#. :ref:`Why is GROMACS not able to correctly define Protein, DNA or other groups?  <gro6>`  
+#. :ref:`Is it OK to get missing atom errors when running pdb2gmx or grompp commands on a SIRAH system?  <gro7>` 
+#. :ref:`I can not minimize my system, what is the problem?  <gro8>` 
+#. :ref:`Why do you recommend to equilibrate in NVT ensemble?  <gro9>` 
 
 
 

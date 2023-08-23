@@ -26,7 +26,7 @@ The input file ``-i`` DMPC64.pdb contains the atomistic representation of the DM
 
 .. important::
 
-	By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQ` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.   
+	By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.   
 
 .. tip::
 
@@ -92,7 +92,7 @@ Use VMD to check how the CG model looks:
 
   vmd DMPC64_cg.prmtop DMPC64_cg.ncrst -e ./sirah.amber/tools/sirah_vmdtk.tcl
 
-By selecting +X, +Y and +Z periodic images from the Periodic tab in the Graphical Representations window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See :doc:`FAQ` for issues on membrane systems in AMBER.
+By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in AMBER.
 
 .. tip::
 
@@ -123,7 +123,7 @@ Use a text editor to create the file ``resize_box.cpptraj`` including the follow
     # EXIT
     quit
 
-Run the CPPTRAJ application to generate the molecular topology and initial coordinate files:
+Run the CPPTRAJ application to adjust the size of the simulation box:
 
 .. code-block:: bash
 
@@ -172,17 +172,17 @@ input flags.
 
 .. code-block:: bash
 
-	pmemd.cuda -O -i ../sirah.amber/tutorial/6/em_Lipid.in.in -p ../DMPC64_cg.prmtop -c ../DMPC64_cg_nb.ncrst -o DMPC64_cg_em.out -r DMPC64_cg_em.ncrst &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/6/em_Lipid.in -p ../DMPC64_cg.prmtop -c ../DMPC64_cg_nb.ncrst -o DMPC64_cg_em.out -r DMPC64_cg_em.ncrst &
  
 **Heating:**
 
 .. code-block:: bash
 
-	pmemd.cuda -O -i ../sirah.amber/tutorial/6/heat_Lipid.in.in -p ../DMPC64_cg.prmtop -c DMPC64_cg_em.ncrst -o DMPC64_cg_eq_0.out -r DMPC64_cg_eq_0.ncrst -x DMPC64_cg_eq_0.nc &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/6/heat_Lipid.in -p ../DMPC64_cg.prmtop -c DMPC64_cg_em.ncrst -o DMPC64_cg_eq_0.out -r DMPC64_cg_eq_0.ncrst -x DMPC64_cg_eq_0.nc &
 
 .. important::
 
-	To avoid “skinnb errors” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large skinnb value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `AMBER tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
+	To avoid “*skinnb errors*” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large *skinnb* value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `AMBER tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
 	
 **Periodic box equilibration in GPU code (500 ps x 9):**
 
@@ -204,7 +204,7 @@ input flags.
 
 .. code-block:: bash
 
-   pmemd.cuda -O -i ../sirah.amber/tutorial/6/md_Lipid.in.in -p ../DMPC64_cg.prmtop -c DMPC64_cg_eq_9.ncrst -o DMPC64_cg_md.out -r DMPC64_cg_md.ncrst -x DMPC64_cg_md.nc &
+   pmemd.cuda -O -i ../sirah.amber/tutorial/6/md_Lipid.in -p ../DMPC64_cg.prmtop -c DMPC64_cg_eq_9.ncrst -o DMPC64_cg_md.out -r DMPC64_cg_md.ncrst -x DMPC64_cg_md.nc &
 
 
 
@@ -268,46 +268,3 @@ Use Grace to plot the results:
     The thickness of the bilayer is the distance between the two peaks corresponding to the position of phosphate beads (BFO) along the z-axis.
 
 
-.. _table: 
-
-Table 1. Available mapping files (MAPs) at folder ``sirah.amber/tools/CGCONV/maps/`` for converting atomistic lipid structures to SIRAH models. **Important!** MAPs can not inter-convert different name conventions, e.g. amber_lipid.map won’t generate fragment-based residues from residue-based force fields. Due to possible nomenclature conflicts, users are advised to check and modify the MAPs as required.
-
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-|      **Map**            | **Type**\* | **Compatibility**                        | **Source**                                                     |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| amber_lipid.map         |   F        | AMBER Lipid11-17 force fields            | | `AMBER <http://ambermd.org/>`__                              |
-|                         |            |                                          | | `HTMD <https://software.acellera.com/htmd/index.html>`__     | 
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| GAFF_lipid.map          |   R        | AMBER GAFF force field                   | `LipidBook <https://lipidbook.org/>`__                         |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| charmm_lipid.map        |   R        | | CHARMM 27/36 force field, and “CHARMM  | | `CHARMM-GUI <https://charmm-gui.org/>`__                     |
-|                         |            | | compatible” GAFF nomenclature          | | `GROMACS <https://www.gromacs.org/>`__                       |  
-|                         |            |                                          | | `LipidBook <https://lipidbook.org/>`__                       | 
-|                         |            |                                          | | `MemBuilder <http://bioinf.modares.ac.ir/software/mb/>`__    |     
-|                         |            |                                          | | `HTMD <https://software.acellera.com/htmd/index.html>`__     |
-|                         |            |                                          | | `VMD <https://www.ks.uiuc.edu/Research/vmd/>`_               |   
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| slipids.map             |   R        | Stockholm lipids force field             | | `SLIPIDS <http://www.fos.su.se/~sasha/SLipids/About.html>`__ |
-|                         |            |                                          | | `MemBuilder <http://bioinf.modares.ac.ir/software/mb/>`__    |   
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| OPLSA-AA_2014_lipid.map |   R        | All-atoms lipids for OPLS force field    | | `Maciejewski <https://doi.org/10.1021/jp5016627>`__          |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| OPLSA-UA_lipid.map      |   R        | United-atom lipids for OPLS force field  | `LipidBook <https://lipidbook.org/>`__                         |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| GROMOS43a1_lipid.map    |   R        | | United-atom lipids for GROMOS 43a1 and | | `LipidBook <https://lipidbook.org/>`__                       |
-|                         |            | | CKP force fields                       | | `MemBuilder <http://bioinf.modares.ac.ir/software/mb/>`__    |      
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| GROMOS43a1-s3_lipid.map |   R        | | United-atom lipids for GROMOS 43a1-s3  | | `GROMACS <https://www.gromacs.org/>`__                       |
-|                         |            | | force field                            | | `LipidBook <https://lipidbook.org/>`__                       |
-|                         |            |                                          | | `MemBuilder <http://bioinf.modares.ac.ir/software/mb/>`__    |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| GROMOS53a6_lipid.map    |   R        | | United-atom lipids for GROMOS 53a6     | | `GROMACS <https://www.gromacs.org/>`__                       |
-|                         |            | | force field                            | | `LipidBook <https://lipidbook.org/>`__                       | 
-|                         |            |                                          | | `MemBuilder <http://bioinf.modares.ac.ir/software/mb/>`__    | 
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-| tieleman_lipid.map      |   R        | | Berger lipids as implemented by        | | `Tieleman <https://doi.org/10.1021/ja0624321>`__             |
-|                         |            | | Tieleman et al. for GROMOS             | | `LipidBook <https://lipidbook.org/>`__                       |  
-|                         |            | | force fields.                          |                                                                |
-+-------------------------+------------+------------------------------------------+----------------------------------------------------------------+
-
-\* Fragment-based (F) or Residue-based (R) topology.
