@@ -31,17 +31,22 @@ Download and pre-requisites
 
 .. include:: /AMBER/Tutorial-3.rst   
 
-.. _Tutorial 5:
+4. Closed circular DNA in implicit solvent
+-----------------------------------------------
+
+.. _Tutorial 4:
+
+.. include:: /AMBER/Tutorial-4.rst  
 
 5. Proteins in explicit solvent
-----------------------------------------------------------------
+-----------------------------------------------
 
 .. include:: /AMBER/Tutorial-5.rst
 
 .. _Tutorial 6:
 
 6. Lipid bilayers in explicit solvent
-----------------------------------------------------------------
+-----------------------------------------------
 
 .. include:: /AMBER/Tutorial-6.rst
 

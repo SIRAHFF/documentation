@@ -22,7 +22,9 @@ copyright = '2023, BA, SL, SM'
 author = 'BA, SL, SM'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+
+version = 'v_1.0'
+release = 'v_1.0'
 
 
 # -- General configuration ---------------------------------------------------
