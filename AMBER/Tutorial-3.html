@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3.1. Build CG representations &mdash; SIRAH Force Field 0.1 documentation</title>
+  <title>3.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -12,11 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3060a628"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -33,6 +33,9 @@
           <a href="../index.html" class="icon icon-home">
             SIRAH Force Field
           </a>
+              <div class="version">
+                v_1.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -54,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id41">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -90,9 +93,9 @@ type 1 (HIV-1, GenBank: K03455, <strong>Figure 1</strong>). Solvent effects are 
 Generalized Born model (GB).</p>
 <p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/Tuto3.jpeg"><img alt="../_images/Tuto3.jpeg" src="../_images/Tuto3.jpeg" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/Tuto3.png"><img alt="map to buried treasure" src="../_images/Tuto3.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition important">
@@ -101,7 +104,7 @@ Generalized Born model (GB).</p>
 Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
 </div>
 <section id="build-cg-representations">
-<h1>3.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
+<h1>3.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <p>Map only the atomistic structure of nucleotides outside the TATA box of the HIV-1 promoter to CG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/3/tbphiv.pdb<span class="w"> </span>-R<span class="w"> </span><span class="m">1</span>-32,45-110,123-154<span class="w"> </span>-o<span class="w"> </span>dna_hyb.pdb
 </pre></div>
@@ -122,7 +125,7 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
 <section id="prepare-leap">
-<h1>3.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Permalink to this heading"></a></h1>
+<h1>3.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Link to this heading"></a></h1>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>AMBER<span class="w"> </span>force<span class="w"> </span>field<span class="w"> </span><span class="o">(</span>parm14SB/parmbsc0<span class="o">)</span>
 <span class="go">source oldff/leaprc.ff14SB</span>
@@ -147,7 +150,7 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 </div>
 </section>
 <section id="run-leap">
-<h1>3.3. Run LEaP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
+<h1>3.3. Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h1>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -170,7 +173,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-the-simulation">
-<h1>3.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
+<h1>3.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -225,7 +228,7 @@ input flags therein.</p>
 </div>
 </section>
 <section id="visualizing-the-simulation">
-<h1>3.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h1>
+<h1>3.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can load, visualize and analize the trajectory file in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_hyb_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>

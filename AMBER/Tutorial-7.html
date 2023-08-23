@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7.1. Build CG representations &mdash; SIRAH Force Field 0.1 documentation</title>
+  <title>7.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -12,11 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3060a628"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -33,6 +33,9 @@
           <a href="../index.html" class="icon icon-home">
             SIRAH Force Field
           </a>
+              <div class="version">
+                v_1.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -54,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html">AMBER</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#gromacs">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id41">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials.html#id49">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -86,7 +89,7 @@ this tutorial are: <a class="reference external" href="https://doi.org/10.1021/a
 We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We strongly advise you to read and complete <a class="reference internal" href="../Tutorials.html#tutorial-5"><span class="std std-ref">Tutorial 5</span></a> and <a class="reference internal" href="../Tutorials.html#tutorial-6"><span class="std std-ref">Tutorial 6</span></a> before starting.</p>
+<p>We strongly advise you to read and complete <span class="xref std std-ref">Tutorial 5</span> and <a class="reference internal" href="../Tutorials.html#tutorial-6"><span class="std std-ref">Tutorial 6</span></a> before starting.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -94,10 +97,10 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 Since this is <strong>tutorial 7</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/7/</span></code></p>
 </div>
 <section id="build-cg-representations">
-<h1>7.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
+<h1>7.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>The mapping to CG requires the correct protonation state of each residue at a given pH. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> and <a class="reference internal" href="../Tutorials.html#tutorial-5"><span class="std std-ref">Tutorial 5</span></a> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
+<p>The mapping to CG requires the correct protonation state of each residue at a given pH. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> and <span class="xref std std-ref">Tutorial 5</span> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
 </div>
 <p>Map the atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/2KYV">2KYV</a> to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>-i<span class="w"> </span>sirah.amber/tutorial/7/2kyv.pqr<span class="w"> </span>-o<span class="w"> </span>2kyv_cg.pdb
@@ -114,7 +117,7 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 <code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
 </div>
 <section id="embed-the-protein-in-a-lipid-bilayer">
-<h2>7.1.1. Embed the protein in a lipid bilayer<a class="headerlink" href="#embed-the-protein-in-a-lipid-bilayer" title="Permalink to this heading"></a></h2>
+<h2>7.1.1. Embed the protein in a lipid bilayer<a class="headerlink" href="#embed-the-protein-in-a-lipid-bilayer" title="Link to this heading"></a></h2>
 <p>We will show one possible way to do it by starting from a pre-equilibrated CG membrane patch.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/7/</span></code> you will find a pre-stabilized CG DMPC bilayer patch, concatenate it with the previously generated CG representation of the phospholamban (PLN) pentamer (PDB code: <a class="reference external" href="https://www.rcsb.org/structure/2KYV">2KYV</a>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>head<span class="w"> </span>-qn<span class="w"> </span>-1<span class="w"> </span>2kyv_cg.pdb<span class="w"> </span>./sirah.amber/tutorial/7/DMPC_cg.pdb<span class="w"> </span>&gt;<span class="w"> </span>2kyv_DMPC_cg_init.pdb
@@ -124,12 +127,12 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 <figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/Tuto7.png"><img alt="../_images/Tuto7.png" src="../_images/Tuto7.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="delete-close-contact-lipid-molecules">
-<h2>7.1.2. Delete close contact lipid molecules<a class="headerlink" href="#delete-close-contact-lipid-molecules" title="Permalink to this heading"></a></h2>
+<h2>7.1.2. Delete close contact lipid molecules<a class="headerlink" href="#delete-close-contact-lipid-molecules" title="Link to this heading"></a></h2>
 <p>We need to use VMD to to delete lipid molecules in close contact with the protein. For a proper treatment and visualization of the system in VMD you must first generate the molecular topology and initial coordinate files.</p>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">geninit.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
@@ -177,7 +180,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 </section>
 <section id="prepare-leap">
-<h1>7.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Permalink to this heading"></a></h1>
+<h1>7.2. Prepare LEaP<a class="headerlink" href="#prepare-leap" title="Link to this heading"></a></h1>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -204,7 +207,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-leap">
-<h1>7.3. Run LEaP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
+<h1>7.3. Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h1>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -228,7 +231,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="resize-the-box-with-cpptraj">
-<h1>7.4. Resize the box with CPPTRAJ<a class="headerlink" href="#resize-the-box-with-cpptraj" title="Permalink to this heading"></a></h1>
+<h1>7.4. Resize the box with CPPTRAJ<a class="headerlink" href="#resize-the-box-with-cpptraj" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As PACKMOL does not consider periodicity while building up the system, increasing the XY box sides a few Angstroms may be required to avoid bad contacts between images.</p>
@@ -267,7 +270,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-the-simulation">
-<h1>7.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
+<h1>7.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -336,7 +339,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="visualizing-the-simulation">
-<h1>7.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h1>
+<h1>7.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
