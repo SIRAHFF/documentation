@@ -42,8 +42,8 @@ The input file ``DMPC64.pdb`` contains all the heavy atoms composing the lipids,
 
 From now on it is just normal AMBER stuff!
 
-6.2. Prepare LEaP
-___________________
+6.2. Prepare LEaP input
+________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 

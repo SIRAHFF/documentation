@@ -48,8 +48,8 @@ Please check both PDB structures in VMD:
 From now on it is just normal AMBER stuff!
 
 
-3.2. Prepare LEaP
-__________________
+3.2. Prepare LEaP input
+________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 

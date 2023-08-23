@@ -34,8 +34,8 @@ Please check both PDB structures using VMD:
 
 From now on it is just normal AMBER stuff!
 
-1.2. Prepare LEaP
-__________________
+1.2. Prepare LEaP input
+________________________
 
 Use a text editor to create the file ``gensystem.leap`` including the following lines:
 
