@@ -1,6 +1,6 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Barrera et al. SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `Machado et al. SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. note::
@@ -10,7 +10,7 @@ We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 6**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/6/``
 	
 6.1. Build CG representations
@@ -69,7 +69,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see Appendix 1). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
+   Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 6.3. Run LEaP
 _______________
@@ -146,15 +147,12 @@ Make a new folder for the run:
     mkdir -p run; cd run
 
 The folder ``sirah.amber/tutorial/6/`` contains typical input files for energy minimization
-(``em_Lipid.in``), heating (``heat_Lipid.in``), equilibration (``eq_Lipid.in``) and production (``md_Lipid.in``) runs. Please check carefully the
-input flags.
+(``em_Lipid.in``), heating (``heat_Lipid.in``), equilibration (``eq_Lipid.in``) and production (``md_Lipid.in``) runs. Please check carefully the input flags.
 
 .. tip::
 
     **Some flags used in AMBER**
 
-   - ``sander``: The AMBER program for molecular dynamics simulations.
-   - ``pmemd.cuda``: The GPU implementation of AMBER program's Particle Mesh Ewald Molecular Dynamics for simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
@@ -164,9 +162,14 @@ input flags.
    - ``ref``: Reference file
 
 
-.. caution::
+.. warning::
 
-	These input files are executed by the GPU implementation of *pmemd*.
+	These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of AMBER.
+
+.. note::
+
+    Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER. 
+
 	
 **Energy Minimization:**
 

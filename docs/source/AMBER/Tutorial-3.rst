@@ -1,10 +1,7 @@
 This tutorial shows how to apply a multiscale representation of DNA, which is available in the SIRAH
 force field, to study protein-DNA interactions. In this approach, the protein and its binding region are
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
-level. The simulated system is composed of the human TATA binding protein (TBP, PDB: 1C9B)
-bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus
-type 1 (HIV-1, GenBank: K03455, **Figure 1**). Solvent effects are considered implicitly using the
-Generalized Born model (GB).
+level. The simulated system is composed of the human TATA binding protein (TBP PDB: `1C9B <https://www.rcsb.org/structure/1c9b>`_) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: `K03455 <https://www.ncbi.nlm.nih.gov/nuccore/K03455.1>`_, **Figure 1**). Solvent effects are considered implicitly using the Generalized Born model (GB).
 
 The main references for this tutorial are: `All-atoms/CG DNA <https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f>`_ and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
@@ -17,7 +14,7 @@ The main references for this tutorial are: `All-atoms/CG DNA <https://pubs.rsc.o
 
 .. important::
 
-    Check :ref:`install <Download amber>` section for download and set up details before to start this tutorial.
+    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
     Since this is **tutorial 3**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/3/``
 
 
@@ -114,27 +111,13 @@ Make a new folder for the run:
 
     mkdir -p run; cd run
 
-In the course of long MD simulations the capping residues may eventually separate, this effect is
-called helix fraying. To avoid such behavior create a symbolic link to the file ``dna_hyb.RST``, which
-contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
-
-.. code-block:: bash
-
-   ln -s ../sirah.amber/tutorial/3/SANDER/dna_hyb.RST
-
-.. note::
-
-    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
-
-The folder ``sirah.amber/tutorial/3/SANDER`` contains typical input files for energy minimization
-(``em_HYB.in``), equilibration (``eq_HYB.in``) and production (``md_HYB.in``) runs. Please check carefully the
-input flags therein.
+The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files for energy minimization
+(``em_HYB.in``), equilibration (``eq_HYB.in``) and production (``md_HYB.in``) runs. Please check carefully the input flags therein.
 
 .. tip::
 
     **Some flags used in AMBER**
 
-   - ``sander``: The AMBER program for molecular dynamics simulations.
    - ``-i``: Input file.
    - ``-o``: Output file.
    - ``-p``: Parameter/topology file.
@@ -142,15 +125,41 @@ input flags therein.
    - ``-r``: Restart file.
    - ``-x``: Trajectory file.
 
-.. important::
+.. caution::
 
-   This simulation is very time consuming owing to the system's size, so try a parallel implementation of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+
+.. note::
+
+   You can find example input files for CPU versions of sander and pmemd at folders ``SANDER/`` and  ``PMEMD.CPU/``, within ``sirah.amber/tutorial/3/``
+
+   This simulation is very time consuming owing to the system's size, so try a parallel or CUDA implementation of AMBER.
 
 **Energy Minimization:**
 
 .. code-block:: bash
 
    sander -O -i ../sirah.amber/tutorial/3/SANDER/em_HYB.in -p ../dna_hyb.prmtop -c ../dna_hyb.ncrst -o dna_hyb_em.out -r dna_hyb_em.ncrst &
+
+.. important::
+
+    In the course of long MD simulations the capping residues may eventually separate, this effect is
+    called helix fraying. To avoid such behavior is necessary to set Watson-Crick restraints for the capping base pairs of this CG DNA at the end of ``eq_GB.in`` and ``md_GB.in`` files. Check the files lines that start with *&rst*.
+
+
+.. warning:: 
+
+    If you are using SANDER to avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
+    contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
+
+
+    .. code-block:: bash
+
+        ln -s ../sirah.amber/tutorial/3/SANDER/dna_cg.RST
+
+    
+    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
+
 
 **Equilibration:**
 
