@@ -78,6 +78,19 @@ GROMACS
 
 .. _GROMACS:
 
+.. _download gromacs:
+
+Download 
+----------
+
+.. include:: /GROMACS/installation-G.rst
+
+.. _Tutorial 1 G:
+
+1. DNA molecule in explicit solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-1.rst
 
 NAMD
 =====
