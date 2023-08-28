@@ -34,7 +34,7 @@ From now on it is just normal GROMACS stuff!
 
 .. caution::
 	
-	GROMACS’ commands in versions earlier than 5.x "gmx" should not be used.
+	In GROMACS versions prior to 5.x, the "gmx" command should not be used.
 
 1.2. PDB to GROMACS format
 __________________________
