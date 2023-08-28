@@ -19,7 +19,14 @@ Download
 
 .. _Tutorial 2 G:
 
-1. Hybrid solvation
+2. Hybrid solvation
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-2.rst
+
+.. _Tutorial 3 G:
+
+3. Proteins in explicit solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-3.rst
