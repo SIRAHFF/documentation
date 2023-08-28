@@ -132,9 +132,25 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#gromacs">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#gromacs">GROMACS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-gromacs">Download</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id52">Required Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id53">Prior knowledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-sirah">Set Up SIRAH</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-1-g">1. DNA molecule in explicit solvent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id58">1.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pdb-to-gromacs-format">1.2. PDB to GROMACS format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solvate-the-system">1.3. Solvate the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id60">1.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id61">1.5. Visualizing the simulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="#namd">NAMD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#id51">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id62">SIRAH tools</a></li>
 </ul>
 
         </div>
@@ -526,10 +542,10 @@ force field, to study protein-DNA interactions. In this approach, the protein an
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
 level. The simulated system is composed of the human TATA binding protein (TBP PDB: <a class="reference external" href="https://www.rcsb.org/structure/1c9b">1C9B</a>) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/K03455.1">K03455</a>, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the Generalized Born model (GB).</p>
 <p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
-<figure class="align-center" id="id54">
+<figure class="align-center" id="id65">
 <a class="reference internal image-reference" href="_images/Tuto3.png"><img alt="map to buried treasure" src="_images/Tuto3.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id54" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id65" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition important">
@@ -1260,10 +1276,10 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 </pre></div>
 </div>
 <p>Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to <a class="reference external" href="https://opm.phar.umich.edu/">Orientations of Proteins in Membranes (OPM) database</a> and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see <strong>Figure 1</strong>).</p>
-<figure class="align-center" id="id55">
+<figure class="align-center" id="id66">
 <a class="reference internal image-reference" href="_images/Tuto7.png"><img alt="_images/Tuto7.png" src="_images/Tuto7.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id55" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id66" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1634,13 +1650,288 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 <section id="gromacs">
 <h1>GROMACS<a class="headerlink" href="#gromacs" title="Link to this heading"></a></h1>
+<section id="download-gromacs">
+<span id="id50"></span><span id="id51"></span><h2>Download<a class="headerlink" href="#download-gromacs" title="Link to this heading"></a></h2>
+<section id="id52">
+<h3>Required Software<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>GROMACS 4.5.5 or later version properly installed in your computer.</p></li>
+<li><p>The molecular visualization program VMD (freely available at www.ks.uiuc.edu/Research/vmd).</p></li>
+</ul>
+</section>
+<section id="id53">
+<h3>Prior knowledge<a class="headerlink" href="#id53" title="Link to this heading"></a></h3>
+<p>How to perform a standard atomistic molecular dynamic simulation with GROMACS.</p>
+</section>
+<section id="set-up-sirah">
+<h3>Set Up SIRAH<a class="headerlink" href="#set-up-sirah" title="Link to this heading"></a></h3>
+<p>Download the file <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code> from &lt;www.sirahff.com&gt; and uncompress it into your
+working directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[version] should be replaced with the actual package version e.g.: x2_18-09
+tar -xzvf <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code></p>
+</div>
+<p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/</span></code> containing the force field definition, the SIRAH Tools in
+<code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/PDB</span></code>, the required material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tutorial/X.X/</span></code>.</p>
+<p>Make a new folder for this tutorial:</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Remember to change <strong>X.X</strong> to the number that corresponds to the tutorial you are going to do.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>tutorialX.X<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorialX.X
+</pre></div>
+</div>
+<p>Create the following symbolic links in the folder tutorialX.X:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_<span class="o">[</span>version<span class="o">]</span>.ff<span class="w"> </span>sirah.ff
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>sirah.ff/residuetypes.dat
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>sirah.ff/specbond.dat
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Files residuetypes.dat and specbond.dat are essential for the correct definition of molecular
+groups and auto-detection of disulfide bonds and cyclic DNA polymers.</p>
+</div>
+</section>
+</section>
+<section id="tutorial-1-g">
+<span id="id54"></span><h2>1. DNA molecule in explicit solvent<a class="headerlink" href="#tutorial-1-g" title="Link to this heading"></a></h2>
+<p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+double stranded DNA in explicit solvent (called WatFour, WT4) in four simple steps: 1 download; 2
+map; 3 solvate and; 4 run. The main references for this tutorial are:<a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="#download-gromacs"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 1</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/</span></code></p>
+</div>
+<section id="id58">
+<h3>1.1. Build CG representations<a class="headerlink" href="#id58" title="Link to this heading"></a></h3>
+<p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/1/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> dna.pdb contains all the heavy atoms composing the DNA molecule, while the  output <code class="docutils literal notranslate"><span class="pre">-o</span></code> dna_cg.pdb preserves a few of them.</p>
+<p>Please check both PDB structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.ff/tutorial/1/dna.pdb<span class="w"> </span>dna_cg.pdb
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>From now on it is just normal GROMACS stuff!</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>GROMACS’ commands in versions earlier than 5.x “gmx” should not be used.</p>
+</div>
+</section>
+<section id="pdb-to-gromacs-format">
+<h3>1.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h3>
+<p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>dna_cg.pdb<span class="w"> </span>-o<span class="w"> </span>dna_cg.gro<span class="w"> </span>-merge<span class="w"> </span>all
+</pre></div>
+</div>
+<p>When prompted, choose <em>SIRAH force field</em> and then <em>SIRAH solvent models</em>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Getting warning messages of long bonds is fine and expected due to the CG nature of the
+residue topologies. However missing atom messages are errors which probably trace back to the
+mapping step. In that case, check your atomistic and mapped structures and do not carry on the
+simulation until the problem is solved.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Merging both DNA chains is convenient when planning to apply restraints between them.</p>
+</div>
+<p>During long simulations of DNA, capping residues may eventually separate. If you want to avoid this
+effect, which is called helix fraying, add Watson-Crick (WC) restraints at terminal base pairs. To add
+these restraints edit <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the file <code class="docutils literal notranslate"><span class="pre">WC_RST.itp</span></code> at the end of the [ moleculetype ] section:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topology without WC restraints</p></th>
+<th class="head"><p>Topology with WC restraints</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="line-block">
+<div class="line">; Include Position restraint file</div>
+<div class="line">#ifdef POSRES</div>
+<div class="line">#include “posre.itp”</div>
+<div class="line">#endif</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">; Include Position restraint file</div>
+<div class="line">#ifdef POSRES</div>
+<div class="line">#include “posre.itp”</div>
+<div class="line">#endif</div>
+<div class="line">; Watson-Crick restraints</div>
+<div class="line">#include “./sirah.ff/tutorial/1/WC_RST.itp”</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="solvate-the-system">
+<h3>1.3. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h3>
+<p>Define the simulation box of the system</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>dna_cg.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span>-c
+</pre></div>
+</div>
+<p>Add WT4 molecules:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>dna_cg_box.gro<span class="w"> </span>-cs<span class="w"> </span>sirah.ff/wt416.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_sol.gro
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In GROMACS in versions earlier than 5.x the command  <em>gmx solvate</em> was named to <em>genbox</em>.</p>
+</div>
+<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the number of added WT4 molecules:</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">grep -c WP1 dna_cg_sol.gro</span>
+</pre></div>
+</div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
+<th class="head"><p>Topology after editing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="line-block">
+<div class="line">[ molecules ]</div>
+<div class="line">; Compound #mols</div>
+<div class="line">DNA_chain_A 1</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">[ molecules ]</div>
+<div class="line">; Compound #mols</div>
+<div class="line">DNA_chain_A 1</div>
+<div class="line">WT4 3179</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The number of added WT4 molecules <strong>3179</strong> may change according to the software version.</p>
+</div>
+<p>Add CG counterions and 0.15M NaCl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/1/CPU/em_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>dna_cg_sol.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_sol.tpr
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>dna_cg_sol.tpr<span class="w"> </span>-o<span class="w"> </span>dna_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">113</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">75</span><span class="w"> </span>-nname<span class="w"> </span>ClW
+</pre></div>
+</div>
+<p>When prompted, choose to substitute WT4 molecules by ions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
+ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="#appendix"><span class="std std-ref">Appendix</span></a> for details).
+Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the CG ions and the correct number of WT4.</p>
+<p>Before running the simulation it may be a good idea to visualize your molecular system. CG molecules
+are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
+generate a PSF file of the system using the script <em>g_top2psf.pl</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-i<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>dna_cg_ion.psf
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.ff/tools/g_top2psf.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>Use VMD to check how the CG system looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="n">dna_cg_ion</span><span class="o">.</span><span class="n">psf</span> <span class="n">dna_cg_ion</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">e</span> <span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>VMD assigns default radius to unknown atom types, the script sirah_vmdtk.tcl sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and a backmapping utility.
+Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="id60">
+<h3>1.4. Run the simulation<a class="headerlink" href="#id60" title="Link to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/CPU</span></code>.</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/GPU/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
+check carefully the input flags therein.</p>
+<p>Create an index file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_ion.ndx
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WT4 and CG ions (NaW and ClW) are automatically set to the group “SIRAH-Solvent”.</p>
+</div>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>Energy Minimization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/1/GPU/em_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em.mdp<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../dna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>dna_cg_em<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>Equilibration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>dna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_eq.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>dna_cg_eq<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>Production (100ns):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/1/GPU/md_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>dna_cg_eq.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_md.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>dna_cg_md<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>MD.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.</p>
+</div>
+</section>
+<section id="id61">
+<h3>1.5. Visualizing the simulation<a class="headerlink" href="#id61" title="Link to this heading"></a></h3>
+<p>That’s it! Now you can analyze the trajectory.</p>
+<p>Process the output trajectory at folder run/ to account for the Periodic Boundary Conditions (PBC):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>dna_cg_em.tpr<span class="w"> </span>-f<span class="w"> </span>dna_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>dna_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
+</pre></div>
+</div>
+<p>When prompted, choose <em>DNA</em> for centering and <em>System</em> for output.</p>
+<p>Now you can check the simulation using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../dna_cg_ion.psf<span class="w"> </span>../dna_cg_ion.gro<span class="w"> </span>dna_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 <section id="namd">
-<span id="id50"></span><h1>NAMD<a class="headerlink" href="#namd" title="Link to this heading"></a></h1>
+<h1>NAMD<a class="headerlink" href="#namd" title="Link to this heading"></a></h1>
 </section>
-<section id="id51">
-<span id="id52"></span><h1>SIRAH tools<a class="headerlink" href="#id51" title="Link to this heading"></a></h1>
-<span class="target" id="id53"></span></section>
+<section id="id62">
+<span id="id63"></span><h1>SIRAH tools<a class="headerlink" href="#id62" title="Link to this heading"></a></h1>
+<span class="target" id="id64"></span></section>
 
 
            </div>

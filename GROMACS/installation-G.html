@@ -76,7 +76,7 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Required Software</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/AMBER/installation.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/GROMACS/installation-G.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -86,52 +86,48 @@
              
   <section id="required-software">
 <h1>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h1>
-<p><strong>AMBER</strong></p>
-<p>AMBER (version 16) and AMBER Tools (version 16) or later versions properly installed and running in your computer.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><a class="reference external" href="_ambertools">Download</a> lastest version of amber. See <em>How to obtain Amber23</em> section.
-<a class="reference external" href="_amber_install">Install amber</a>. Select according to the operating system you are using
-<a class="reference external" href="_amber">Install amberTools</a>.  If you have amber installed, it is not necessary to install ambertools separately.</p>
-</div>
-<p><strong>VMD</strong></p>
-<p>The molecular visualization program <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a>, version 1.9.3 or later is (<a class="reference external" href="https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">freely available download</a>). Check the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">installation guide</a> for more instructions.</p>
+<ul class="simple">
+<li><p>GROMACS 4.5.5 or later version properly installed in your computer.</p></li>
+<li><p>The molecular visualization program VMD (freely available at www.ks.uiuc.edu/Research/vmd).</p></li>
+</ul>
 </section>
 <section id="prior-knowledge">
 <h1>Prior knowledge<a class="headerlink" href="#prior-knowledge" title="Link to this heading"></a></h1>
-<p>How to perform a standard atomistic molecular dynamics simulations with AMBER and basic usage of
-VMD.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><strong>AMBER</strong></p>
-<p>If you are not familiar with atomistic molecular dynamics simulations we strongly recommend you to perform the basic usage tutorials of Amber and AmberTools: <a class="reference external" href="https://ambermd.org/tutorials/BuildingSystems.php">1.Building Systems</a>, <a class="reference external" href="https://ambermd.org/tutorials/Relaxation.php">3.Creating Stable Systems and Running MD</a> and <a class="reference external" href="https://ambermd.org/tutorials/Introductory.php">5.Case Studies</a>. For more details and documentation, check <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">Amber23 Manual</a>.</p>
-<p><strong>VMD</strong></p>
-<p>If you are not familiar with VMD we strongly recommend you to perform the basic usage tutorial of VMD (<a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html">using VMD</a>). For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html">VMD User Guide</a> and the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials">official VMD documentation</a>.</p>
-</div>
+<p>How to perform a standard atomistic molecular dynamic simulation with GROMACS.</p>
 </section>
-<section id="set-up">
-<h1>Set up<a class="headerlink" href="#set-up" title="Link to this heading"></a></h1>
-<p>Download <a class="reference external" href="sirah_amber">SIRAH for amber</a> and uncompress it into your working directory.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_x2.2_20-08.amber.tgz
-</pre></div>
+<section id="set-up-sirah">
+<h1>Set Up SIRAH<a class="headerlink" href="#set-up-sirah" title="Link to this heading"></a></h1>
+<p>Download the file <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code> from &lt;www.sirahff.com&gt; and uncompress it into your
+working directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>[version] should be replaced with the actual package version e.g.: x2_18-09
+tar -xzvf <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code></p>
 </div>
-<p>In case of using another version of sirah:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_<span class="o">[</span>version<span class="o">]</span>.amber.tgz
-</pre></div>
-</div>
-<p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/</span></code> containing the force field definition, the SIRAH Tools in
-<code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/PDB/</span></code> and the required material to perform tutorials in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/X.X/</span></code></p>
+<p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/</span></code> containing the force field definition, the SIRAH Tools in
+<code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/PDB</span></code>, the required material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tutorial/X.X/</span></code>.</p>
+<p>Make a new folder for this tutorial:</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>Remember to change <strong>X.X</strong> to the number that corresponds to the tutorial you are going to do.</p>
 </div>
-<p>Make a new folder for this tutorial in your working directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>tutorialX.X<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorialX.X
 </pre></div>
 </div>
-<p>Create the following symbolic link in the folder tutorialX.X:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_x2.2_20-08.amber<span class="w"> </span>sirah.amber
+<p>Create the following symbolic links in the folder tutorialX.X:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_<span class="o">[</span>version<span class="o">]</span>.ff<span class="w"> </span>sirah.ff
 </pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>sirah.ff/residuetypes.dat
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>sirah.ff/specbond.dat
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Files residuetypes.dat and specbond.dat are essential for the correct definition of molecular
+groups and auto-detection of disulfide bonds and cyclic DNA polymers.</p>
 </div>
 </section>
 
