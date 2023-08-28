@@ -1,21 +1,15 @@
 Required Software
 __________________
 
-.. _amber_install: https://ambermd.org/Installation.php
-
-.. _ambertools: https://ambermd.org/GetAmber.php#ambertools
-
-.. _sirah_amber: https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz
-
 **AMBER**
 
 AMBER (version 16) and AMBER Tools (version 16) or later versions properly installed and running in your computer. 
 
 .. tip::
 
-    `Download <_ambertools>`_ lastest version of amber. See *How to obtain Amber23* section. 
-    `Install amber <_amber_install>`_. Select according to the operating system you are using 
-    `Install amberTools <_amber>`_.  If you have amber installed, it is not necessary to install ambertools separately.
+    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ lastest version of amber. See *How to obtain Amber23* section. 
+    `Install amber <https://ambermd.org/Installation.php>`_. Select according to the operating system you are using 
+    `Install amberTools <https://ambermd.org/GetAmber.php#ambertools>`_.  If you have amber installed, it is not necessary to install ambertools separately.
 
 
 **VMD**
@@ -44,7 +38,7 @@ VMD.
 Set up
 _________
 
-Download `SIRAH for amber <sirah_amber>`_ and uncompress it into your working directory.
+Download `SIRAH for amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz>`_ and uncompress it into your working directory.
 
 .. code-block:: bash
 
