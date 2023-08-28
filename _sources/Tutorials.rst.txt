@@ -92,6 +92,13 @@ Download
 
 .. include:: /GROMACS/Tutorial-1.rst
 
+.. _Tutorial 2 G:
+
+1. Hybrid solvation
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-2.rst
+
 NAMD
 =====
 

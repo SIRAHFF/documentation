@@ -36,4 +36,7 @@ Contents
    :hidden:
    :caption: Tutorials
 
-   Tutorials
+   Tutorials amber
+   Tutorials gromacs
+   Tutorials namd
+   Tutorials sirahtools

@@ -1,51 +1,29 @@
-This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
-double stranded DNA in explicit solvent (called WatFour, WT4) in four simple steps: 1 download; 2
-map; 3 solvate and; 4 run. The main references for this tutorial are:`SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+This tutorial shows how to apply the hybrid solvation approach of SIRAH force field to speed up the simulation of an atomistic solute. The example system contains a DNA fiber surrounded by a shell of atomistic waters, which are embedded in coarse-grained (CG) molecules, called WT4, to represent
+bulk water. The general procedure is extensible to any other solute. The hybrid solvation methodology is well tested for SPC, SPC/E, TIP3P atomistic water models. The main references for this tutorial are: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `All-atoms/CG solvation <https://pubs.acs.org/doi/abs/10.1021/ct3001816>`_, `Transferable All-atoms/CG solvation <https://pubs.acs.org/doi/abs/10.1021/jp4079579>`, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
     Check :ref:`download <download gromacs>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/1/``
+    Since this is **tutorial 2**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/2/``
 
 
-1.1. Build CG representations
-______________________________
+2.1. PDB to GROMACS format
+__________________________
 
-Map the atomistic structure of a 20-mer DNA to its CG representation:
-
-.. code-block:: bash
-
-	./sirah.ff/tools/CGCONV/cgconv.pl -i sirah.ff/tutorial/1/dna.pdb -o dna_cg.pdb
-
-The input file ``-i`` dna.pdb contains all the heavy atoms composing the DNA molecule, while the  output ``-o`` dna_cg.pdb preserves a few of them.
-
-Please check both PDB structures using VMD:
+Use pdb2gmx to convert the PDB file of the solute ``dna.pdb`` into GROMACS format: 
 
 .. code-block:: bash
 
-    vmd -m ./sirah.ff/tutorial/1/dna.pdb dna_cg.pdb
-
-.. tip::
-
-    This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-    ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
-
-From now on it is just normal GROMACS stuff!
+	gmx pdb2gmx -f sirah.ff/tutorial/2/dna.pdb -o dna.gro
 
 .. caution::
 	
 	In GROMACS versions prior to 5.x, the "gmx" command should not be used.
+	
+When prompted, choose *AMBER99SB* and then *TIP3P* as water model.
 
-1.2. PDB to GROMACS format
-__________________________
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
 
-.. code-block:: bash
-
-	gmx pdb2gmx -f dna_cg.pdb -o dna_cg.gro -merge all
-
-When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
 .. caution::
 
