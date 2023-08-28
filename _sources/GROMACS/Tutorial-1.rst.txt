@@ -74,6 +74,8 @@ these restraints edit ``topol.top`` to include the file ``WC_RST.itp`` at the en
        | #ifdef POSRES
        | #include "posre.itp"
        | #endif
+       | .
+       | .
        
      - | ; Include Position restraint file
        | #ifdef POSRES
@@ -105,15 +107,6 @@ Add WT4 molecules:
 
 Edit the [ molecules ] section in ``topol.top`` to include the number of added WT4 molecules:
 
-	
-.. hint::
-	
-	If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it 
-
-	.. code-block:: console
-
-		grep -c WP1 dna_cg_sol.gro
-
 .. list-table::
    :align: center
    :widths: 50 50
@@ -124,11 +117,20 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
    * - | [ molecules ]
        | ; Compound #mols
        | DNA_chain_A 1
+       | .
               
      - | [ molecules ]
        | ; Compound #mols
        | DNA_chain_A 1
        | WT4 3179
+
+.. hint::
+	
+	If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it 
+
+	.. code-block:: console
+
+		grep -c WP1 dna_cg_sol.gro
 
 .. caution::
 	
@@ -145,7 +147,7 @@ Add CG counterions and 0.15M NaCl:
 	gmx genion -s dna_cg_sol.tpr -o dna_cg_ion.gro -np 113 -pname NaW -nn 75 -nname ClW
 
 
-When prompted, choose to substitute WT4 molecules by ions.
+When prompted, choose to substitute **WT4** molecules by **ions**.
 
 .. note:: 
 
@@ -196,7 +198,7 @@ Create an index file:
 
 .. code-block:: bash
 
-	echo "q" | make_ndx -f dna_cg_ion.gro -o dna_cg_ion.ndx
+	echo "q" | gmx make_ndx -f dna_cg_ion.gro -o dna_cg_ion.ndx
 
 .. note::
 
@@ -218,7 +220,7 @@ Equilibration:
 
 .. code-block:: bash 
 
-	grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -o dna_cg_eq.tpr mdrun -deffnm dna_cg_eq &> EQ.log &
+	gmx grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -o dna_cg_eq.tpr mdrun -deffnm dna_cg_eq &> EQ.log &
 
 Production (100ns):
 
