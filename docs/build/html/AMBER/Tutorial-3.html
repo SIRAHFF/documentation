@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SIRAH Force Field
+          </a>
+              <div class="version">
+                v_1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Developers.html">Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20amber.html">AMBER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20gromacs.html">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20namd.html">NAMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahtools.html">SIRAH tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SIRAH Force Field</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">3.1. Build CG representations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/AMBER/Tutorial-3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>This tutorial shows how to apply a multiscale representation of DNA, which is available in the SIRAH
+force field, to study protein-DNA interactions. In this approach, the protein and its binding region are
+treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
+level. The simulated system is composed of the human TATA binding protein (TBP PDB: <a class="reference external" href="https://www.rcsb.org/structure/1c9b">1C9B</a>) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/K03455.1">K03455</a>, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the Generalized Born model (GB).</p>
+<p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/Tuto3.png"><img alt="map to buried treasure" src="../_images/Tuto3.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
+</div>
+<section id="build-cg-representations">
+<h1>3.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Permalink to this heading"></a></h1>
+<p>Map only the atomistic structure of nucleotides outside the TATA box of the HIV-1 promoter to CG:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/3/tbphiv.pdb<span class="w"> </span>-R<span class="w"> </span><span class="m">1</span>-32,45-110,123-154<span class="w"> </span>-o<span class="w"> </span>dna_hyb.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> tbphiv.pdb contains all the heavy atoms composing the protein-DNA system. Mapped
+residues are selected through option <code class="docutils literal notranslate"><span class="pre">-R</span></code>. The selection considers a buffer of two base pairs at each
+side of the TATA box (<strong>Figure 1</strong>). The atomistic/CG interface must always be a step of B form DNA. The
+resulting coordinates are saved in the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> dna_hyb.pdb.</p>
+<p>Please check both PDB structures in VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.amber/tutorial/3/tbphiv.pdb<span class="w"> </span>dna_hyb.pdb
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>From now on it is just normal AMBER stuff!</p>
+</section>
+<section id="prepare-leap-input">
+<h1>3.2. Prepare LEaP input<a class="headerlink" href="#prepare-leap-input" title="Permalink to this heading"></a></h1>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>AMBER<span class="w"> </span>force<span class="w"> </span>field<span class="w"> </span><span class="o">(</span>parm14SB/parmbsc0<span class="o">)</span>
+<span class="go">source oldff/leaprc.ff14SB</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">addPath ./sirah.amber</span>
+<span class="go">source leaprc.sirah</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">dna = loadpdb dna_hyb.pdb</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf dna dna_hyb.prmtop dna_hyb.ncrst</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice: According to AMBER version 10, 11 or 12 (14) the source file for parm99SB/bsc0 is leaprc.ff99bsc0, leaprc.ff10 or leaprc.ff12SB respectively.</p>
+</div>
+</section>
+<section id="run-leap">
+<h1>3.3. Run LEaP<a class="headerlink" href="#run-leap" title="Permalink to this heading"></a></h1>
+<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
+expected due to the CG topology of some residues.</p>
+</div>
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">dna_hyb.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">dna_hyb.ncrst</span></code>.</p>
+<p>Use VMD to check how the multiscale model looks like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>dna_hyb.prmtop<span class="w"> </span>dna_hyb.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="run-the-simulation">
+<h1>3.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Permalink to this heading"></a></h1>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/PMEMD.GPU/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_HYB.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_HYB.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_HYB.in</span></code>) runs. Please check carefully the input flags therein.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<blockquote>
+<div><p><strong>Some flags used in AMBER</strong></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>: Output file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code>: Parameter/topology file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
+</ul>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find example input files for CPU versions of sander and pmemd at folders <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and  <code class="docutils literal notranslate"><span class="pre">PMEMD.CPU/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/</span></code></p>
+<p>This simulation is very time consuming owing to the system’s size, so try a parallel or CUDA implementation of AMBER.</p>
+</div>
+<p><strong>Energy Minimization:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In the course of long MD simulations the capping residues may eventually separate, this effect is
+called helix fraying. To avoid such behavior is necessary to set Watson-Crick restraints for the capping base pairs of this CG DNA at the end of <code class="docutils literal notranslate"><span class="pre">eq_GB.in</span></code> and <code class="docutils literal notranslate"><span class="pre">md_GB.in</span></code> files. Check the files lines that start with <em>&amp;rst</em>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using SANDER to avoid such behavior create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_cg.RST
+</pre></div>
+</div>
+<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+</div>
+<p><strong>Equilibration:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Production (10ns):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/3/</p>
+</div>
+</section>
+<section id="visualizing-the-simulation">
+<h1>3.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Permalink to this heading"></a></h1>
+<p>That’s it! Now you can load, visualize and analize the trajectory file in VMD:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_hyb_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BA, SL, SM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
