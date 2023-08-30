@@ -35,8 +35,8 @@ VMD.
 
     If you are not familiar with VMD we strongly recommend you to perform the basic usage tutorial of VMD (`using VMD <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html>`_). For more details and documentation, check `VMD User Guide <https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html>`_ and the `official VMD documentation <https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials>`_.
 
-Set up
-_________
+Download and setting SIRAH
+___________________________
 
 Download `SIRAH for amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz>`_ and uncompress it into your working directory.
 
