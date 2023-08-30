@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=3060a628"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SIRAH Force Field
+          </a>
+              <div class="version">
+                v_1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Developers.html">Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20amber.html">AMBER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20gromacs.html">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20namd.html">NAMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahtools.html">SIRAH tools</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SIRAH Force Field</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">4.1. Build CG representations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/GROMACS/Tutorial-4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
+closed circular DNA in explicit solvent (called WatFour, WT4). The main references for this tutorial are:<a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check <a class="reference internal" href="../Tutorials%20gromacs.html#download-gromacs"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
+Since this is <strong>tutorial 4</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/</span></code></p>
+</div>
+<section id="build-cg-representations">
+<h1>4.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
+<p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A 1/CW5 A 1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B 1/CW5 B 1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the  output <code class="docutils literal notranslate"><span class="pre">-o</span></code> ccdna_cg.pdb preserves a few of them.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>5’ end residues mast be renamed to AW5, TW5, GW5 or CW5 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.</p>
+</div>
+<p>Please check both PDB structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>./sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span>ccdna_cg.pdb
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>From now on it is just normal GROMACS stuff!</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>In GROMACS versions prior to 5.x, the “gmx” command should not be used.</p>
+</div>
+</section>
+<section id="pdb-to-gromacs-format">
+<h1>4.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
+<p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg.pdb<span class="w"> </span>-o<span class="w"> </span>ccdna_cg.gro
+</pre></div>
+</div>
+<p>When prompted, choose <em>SIRAH force field</em> and then <em>SIRAH solvent models</em>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Getting warning messages of long bonds is fine and expected due to the CG nature of the
+residue topologies. However missing atom messages are errors which probably trace back to the
+mapping step. In that case, check your atomistic and mapped structures and do not carry on the
+simulation until the problem is solved.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The distance cut-off to close the DNA molecule is read from <code class="docutils literal notranslate"><span class="pre">specbond.dat</span></code>. This parameter may need to be modified according to your system’s topology.</p>
+</div>
+</section>
+<section id="solvate-the-system">
+<h1>4.3. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h1>
+<p>Define the simulation box of the system</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>ccdna_cg.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span>-c
+</pre></div>
+</div>
+<p>Add WT4 molecules:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>ccdna_cg_box.gro<span class="w"> </span>-cs<span class="w"> </span>sirah.ff/wt416.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_sol.gro
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>IBefore GROMACS version 5.x, the command <em>gmx solvate</em> was called <em>genbox</em>.</p>
+</div>
+<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the number of added WT4 molecules:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
+<th class="head"><p>Topology after editing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="line-block">
+<div class="line">[ molecules ]</div>
+<div class="line">; Compound #mols</div>
+<div class="line">DNA_chain_A 1</div>
+<div class="line">DNA_chain_B 1</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">[ molecules ]</div>
+<div class="line">; Compound #mols</div>
+<div class="line">DNA_chain_A 1</div>
+<div class="line">DNA_chain_B 1</div>
+<div class="line">WT4 10240</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">grep -c WP1 ccdna_cg_sol.gro</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The number of added WT4 molecules <strong>10240</strong> may change according to the software version.</p>
+</div>
+<p>Add CG counterions and 0.15M NaCl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/4/GPU/em_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_sol.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_sol.tpr
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>ccdna_cg_sol.tpr<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">401</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">201</span><span class="w"> </span>-nname<span class="w"> </span>ClW
+</pre></div>
+</div>
+<p>When prompted, choose to substitute <strong>WT4</strong> molecules by <strong>ions</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
+ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details).
+Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the CG ions and the correct number of WT4.</p>
+<p>Before running the simulation it may be a good idea to visualize your molecular system and check the
+DNA circle is closed. CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
+generate a PSF file of the system using the script <em>g_top2psf.pl</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-i<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.psf
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:
+<code class="docutils literal notranslate"><span class="pre">./sirah.ff/tools/g_top2psf.pl</span> <span class="pre">-h</span></code></p>
+</div>
+<p>Use VMD to check how the CG system looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="n">ccdna_cg_ion</span><span class="o">.</span><span class="n">psf</span> <span class="n">ccdna_cg_ion</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">e</span> <span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>VMD assigns default radius to unknown atom types, the script sirah_vmdtk.tcl sets the right
+ones. It also provides a kit of useful selection macros, coloring methods and a backmapping utility.
+Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pages.</p>
+</div>
+</section>
+<section id="run-the-simulation">
+<h1>4.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/CPU</span></code>.</p>
+</div>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/GPU/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
+check carefully the input flags therein.</p>
+<p>Create an index file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.ndx
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>WT4 and CG ions (NaW) are automatically set to the group “SIRAH-Solvent”.</p>
+</div>
+<p>Make a new folder for the run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>Energy Minimization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/em_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_em.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_em<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>Equilibration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_eq.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_eq<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>Production (100ns):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/md_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_eq.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md.tpr<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_md<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>MD.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.</p>
+</div>
+</section>
+<section id="visualizing-the-simulation">
+<h1>4.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
+<p>That’s it! Now you can analyze the trajectory.</p>
+<p>Process the output trajectory at folder <code class="docutils literal notranslate"><span class="pre">run/</span></code> to account for the Periodic Boundary Conditions (PBC):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>ccdna_cg_em.tpr<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
+</pre></div>
+</div>
+<p>When prompted, choose <em>DNA</em> for centering and <em>System</em> for output.</p>
+<p>Now you can check the simulation using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../ccdna_cg_ion.psf<span class="w"> </span>../ccdna_cg_ion.gro<span class="w"> </span>ccdna_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BA, SL, SM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
