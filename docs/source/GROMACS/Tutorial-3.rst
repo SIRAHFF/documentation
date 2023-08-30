@@ -7,7 +7,7 @@ and; 4 run. The main references for this tutorial are:  `WAT4 <https://pubs.acs.
     Check :ref:`download <download gromacs>` section for download and set up details before to start this tutorial.
     Since this is **tutorial 3**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/3/``
 
-1.1. Build CG representations
+3.1. Build CG representations
 ______________________________
 
 Map the protonated atomistic structure of protein 1CRN to its CG representation:
@@ -58,7 +58,7 @@ From now on it is just normal GROMACS stuff!
 	In GROMACS versions prior to 5.x, the "gmx" command should not be used.
 
 
-1.2. PDB to GROMACS format
+3.2. PDB to GROMACS format
 __________________________
 
 Use pdb2gmx to convert your PDB file into GROMACS format: 
@@ -80,7 +80,7 @@ When prompted, choose **SIRAH force field** and then **SIRAH solvent models**.
 	mapping step. In that case, check your atomistic and mapped structures and do not carry on the
 	simulation until the problem is solved.
 
-1.3. Solvate the system
+3.3. Solvate the system
 ________________________
 
 Define the simulation box of the system
@@ -264,7 +264,7 @@ Add restraints to topol.top
        | #include "bkbres_soft.itp"
        | #endif
 
-1.4. Run the simulation
+3.4. Run the simulation
 ________________________
 
 .. important:: 
@@ -337,7 +337,7 @@ Make a new folder for the run:
 
 	GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.
 
-1.5. Visualizing the simulation
+3.5. Visualizing the simulation
 ________________________________
 
 That’s it! Now you can analyze the trajectory.
@@ -357,7 +357,7 @@ Now you can check the simulation using VMD:
 	vmd ../1CRN_cg_ion.psf ../1CRN_cg_ion.gro 1CRN_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
 
 
-1.6. Calculate the solvent accessible surface (SAS)
+3.6. Calculate the solvent accessible surface (SAS)
 ____________________________________________________
 
 Create the following symbolic link in the folder run/:
@@ -390,7 +390,7 @@ You can use Grace to plot the results::
 	
 	xmgrace -nxy area.xvg
 
-1.7. Visualize the secondary structure
+3.7. Visualize the secondary structure
 ________________________________________
 
 
