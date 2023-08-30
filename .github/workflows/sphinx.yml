@@ -16,11 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_theme
-<<<<<<< HEAD
-	  pip install sphinx-copybutton
-=======
           pip install sphinx-copybutton
->>>>>>> 184076fae0e6d7555c20a47f35ad380baeddfe2e
       - name: Build docs
         run: |
           cd docs
