@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
+  <title>3.1. Build CG representations &mdash; SIRAH Force Field v_1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
@@ -78,7 +78,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">1.1. Build CG representations</li>
+      <li class="breadcrumb-item active">3.1. Build CG representations</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/GROMACS/Tutorial-3.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -97,7 +97,7 @@ and; 4 run. The main references for this tutorial are:  <a class="reference exte
 Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/</span></code></p>
 </div>
 <section id="build-cg-representations">
-<h1>1.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
+<h1>3.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <p>Map the protonated atomistic structure of protein 1CRN to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/3/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
 </pre></div>
@@ -142,7 +142,7 @@ at atomistic and SIRAH level. You can check the following mapping file to be sur
 </div>
 </section>
 <section id="pdb-to-gromacs-format">
-<h1>1.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
+<h1>3.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
 <p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.pdb<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.gro
 </pre></div>
@@ -161,7 +161,7 @@ simulation until the problem is solved.</p>
 </div>
 </section>
 <section id="solvate-the-system">
-<h1>1.3. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h1>
+<h1>3.3. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h1>
 <p>Define the simulation box of the system</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span>.0<span class="w"> </span>-c
 </pre></div>
@@ -339,7 +339,7 @@ Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pag
 </table>
 </section>
 <section id="run-the-simulation">
-<h1>1.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
+<h1>3.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/CPU</span></code>.</p>
@@ -392,7 +392,7 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 </div>
 </section>
 <section id="visualizing-the-simulation">
-<h1>1.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
+<h1>3.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory at folder run/ to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_em1.tpr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../1CRN_cg_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
@@ -405,7 +405,7 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 </div>
 </section>
 <section id="calculate-the-solvent-accessible-surface-sas">
-<h1>1.6. Calculate the solvent accessible surface (SAS)<a class="headerlink" href="#calculate-the-solvent-accessible-surface-sas" title="Link to this heading"></a></h1>
+<h1>3.6. Calculate the solvent accessible surface (SAS)<a class="headerlink" href="#calculate-the-solvent-accessible-surface-sas" title="Link to this heading"></a></h1>
 <p>Create the following symbolic link in the folder run/:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.ff/vdwradii.dat
 </pre></div>
@@ -433,7 +433,7 @@ hydrophobic bead. The file vdwradii.dat must be placed at the same folder where 
 </div>
 </section>
 <section id="visualize-the-secondary-structure">
-<h1>1.7. Visualize the secondary structure<a class="headerlink" href="#visualize-the-secondary-structure" title="Link to this heading"></a></h1>
+<h1>3.7. Visualize the secondary structure<a class="headerlink" href="#visualize-the-secondary-structure" title="Link to this heading"></a></h1>
 <p>Load the processed trajectory in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg_ion</span><span class="o">.</span><span class="n">psf</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg_ion</span><span class="o">.</span><span class="n">gro</span> <span class="mi">1</span><span class="n">CRN_cg_md_pbc</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>

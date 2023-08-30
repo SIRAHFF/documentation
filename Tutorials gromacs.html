@@ -62,10 +62,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Tutorials%20amber.html">AMBER</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">GROMACS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-sirah">Set up SIRAH</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-software">Required Software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prior-knowledge">Prior knowledge</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#set-up-sirah">Set Up SIRAH</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-and-setting-sirah">Download and setting SIRAH</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dna-molecule-in-explicit-solvent">1. DNA molecule in explicit solvent</a><ul>
@@ -77,28 +77,28 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#hybrid-solvation">2. Hybrid solvation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">2.1. PDB to GROMACS format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.2. Solvate the system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">2.3. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">2.4. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.1. PDB to GROMACS format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.2. Solvate the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.3. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.4. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#proteins-in-explicit-solvent">3. Proteins in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">1.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">1.2. PDB to GROMACS format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">1.3. Solvate the system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">1.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">1.5. Visualizing the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#calculate-the-solvent-accessible-surface-sas">1.6. Calculate the solvent accessible surface (SAS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#visualize-the-secondary-structure">1.7. Visualize the secondary structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">3.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">3.2. PDB to GROMACS format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">3.3. Solvate the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">3.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">3.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-the-solvent-accessible-surface-sas">3.6. Calculate the solvent accessible surface (SAS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualize-the-secondary-structure">3.7. Visualize the secondary structure</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#closed-circular-dna-in-explicit-solvent">4. Closed circular DNA in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id20">4.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">4.2. PDB to GROMACS format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">4.3. Solvate the system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">4.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id25">4.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">4.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">4.2. PDB to GROMACS format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">4.3. Solvate the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">4.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">4.5. Visualizing the simulation</a></li>
 </ul>
 </li>
 </ul>
@@ -133,27 +133,42 @@
              
   <section id="gromacs">
 <h1>GROMACS<a class="headerlink" href="#gromacs" title="Link to this heading"></a></h1>
-<section id="download">
-<span id="download-gromacs"></span><span id="id1"></span><h2>Download<a class="headerlink" href="#download" title="Link to this heading"></a></h2>
+<section id="set-up-sirah">
+<span id="download-gromacs"></span><span id="id1"></span><h2>Set up SIRAH<a class="headerlink" href="#set-up-sirah" title="Link to this heading"></a></h2>
 <section id="required-software">
 <h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h3>
+<p><strong>GROMACS</strong></p>
 <ul class="simple">
 <li><p>GROMACS 4.5.5 or later version properly installed in your computer.</p></li>
-<li><p>The molecular visualization program VMD (freely available at www.ks.uiuc.edu/Research/vmd).</p></li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><a class="reference external" href="https://www.gromacs.org/Downloads">Download</a> lastest version of GROMACS and check <a class="reference external" href="https://manual.gromacs.org/documentation/current/install-guide/index.html">installation guide</a>.</p>
+</div>
+<p><strong>VMD</strong></p>
+<p>The molecular visualization program <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a>, version 1.9.3 or later is (<a class="reference external" href="https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">freely available download</a>). Check the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">installation guide</a> for more instructions.</p>
 </section>
 <section id="prior-knowledge">
 <h3>Prior knowledge<a class="headerlink" href="#prior-knowledge" title="Link to this heading"></a></h3>
-<p>How to perform a standard atomistic molecular dynamic simulation with GROMACS.</p>
+<p>How to perform a standard atomistic molecular dynamics simulations with GROMACS and basic usage of
+VMD.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><strong>GROMACS</strong></p>
+<p>If you are not familiar with atomistic molecular dynamics simulations we strongly recommend you to perform the usage tutorials of GROMACS: <a class="reference external" href="https://tutorials.gromacs.org/md-intro-tutorial.html">Introduction to Molecular Dynamics</a>, <a class="reference external" href="https://tutorials.gromacs.org/membrane-protein.html">Introduction to Membrane-Protein Simulation</a> and <a class="reference external" href="http://www.mdtutorials.com/gmx/">others</a>. For more details and documentation, check <a class="reference external" href="https://manual.gromacs.org/">GROMACS Manual</a>.</p>
+<p><strong>VMD</strong></p>
+<p>If you are not familiar with VMD we strongly recommend you to perform the basic usage tutorial of VMD (<a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html">using VMD</a>). For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html">VMD User Guide</a> and the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials">official VMD documentation</a>.</p>
+</div>
 </section>
-<section id="set-up-sirah">
-<h3>Set Up SIRAH<a class="headerlink" href="#set-up-sirah" title="Link to this heading"></a></h3>
-<p>Download the file <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code> from &lt;www.sirahff.com&gt; and uncompress it into your
-working directory.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>[version] should be replaced with the actual package version e.g.: x2_18-09
-tar -xzvf <code class="docutils literal notranslate"><span class="pre">sirah_[version].gmx.tgz</span></code></p>
+<section id="download-and-setting-sirah">
+<h3>Download and setting SIRAH<a class="headerlink" href="#download-and-setting-sirah" title="Link to this heading"></a></h3>
+<p>Download <a class="reference external" href="https://github.com/SIRAHFF/documentation/releases/download/GROMACS/sirah_x2.2_20-07.tgz">SIRAH for GROMACS</a> and uncompress it into your working directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_x2.2_20-07.tgz
+</pre></div>
+</div>
+<p>In case of using another version of sirah:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span><span class="sb">``</span>sirah_<span class="o">[</span>version<span class="o">]</span>.tgz<span class="sb">``</span>
+</pre></div>
 </div>
 <p>You will get a folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/</span></code> containing the force field definition, the SIRAH Tools in
 <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tools/</span></code>, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/PDB</span></code>, the required material to perform the tutorial in <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tutorial/X.X/</span></code>.</p>
@@ -420,8 +435,8 @@ bulk water. The general procedure is extensible to any other solute. The hybrid 
 <p>Check <a class="reference internal" href="#download-gromacs"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 2</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/2/</span></code></p>
 </div>
-<section id="id4">
-<h3>2.1. PDB to GROMACS format<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>2.1. PDB to GROMACS format<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p>Use pdb2gmx to convert the PDB file of the solute <code class="docutils literal notranslate"><span class="pre">dna.pdb</span></code> into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/2/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna.gro
 </pre></div>
@@ -511,8 +526,8 @@ Since this is <strong>tutorial 2</strong>, remember to replace <code class="docu
 </tbody>
 </table>
 </section>
-<section id="id5">
-<h3>2.2. Solvate the system<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>2.2. Solvate the system<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <p>Define the simulation box of the system:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>dna.gro<span class="w"> </span>-o<span class="w"> </span>dna_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span>-c
 </pre></div>
@@ -608,8 +623,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and a 
 Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id6">
-<h3>2.3. Run the simulation<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>2.3. Run the simulation<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/2/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/2/CPU</span></code>.</p>
@@ -646,8 +661,8 @@ check carefully the input flags therein.</p>
 <p>GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.</p>
 </div>
 </section>
-<section id="id7">
-<h3>2.4. Visualizing the simulation<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>2.4. Visualizing the simulation<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory at folder <code class="docutils literal notranslate"><span class="pre">run/</span></code> to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>dna_em.tpr<span class="w"> </span>-f<span class="w"> </span>dna_md.xtc<span class="w"> </span>-o<span class="w"> </span>dna_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../dna_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
@@ -670,8 +685,8 @@ and; 4 run. The main references for this tutorial are:  <a class="reference exte
 <p>Check <a class="reference internal" href="#download-gromacs"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/</span></code></p>
 </div>
-<section id="id10">
-<h3>1.1. Build CG representations<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id11">
+<h3>3.1. Build CG representations<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <p>Map the protonated atomistic structure of protein 1CRN to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/3/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
 </pre></div>
@@ -715,8 +730,8 @@ at atomistic and SIRAH level. You can check the following mapping file to be sur
 <p>In GROMACS versions prior to 5.x, the “gmx” command should not be used.</p>
 </div>
 </section>
-<section id="id11">
-<h3>1.2. PDB to GROMACS format<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="id12">
+<h3>3.2. PDB to GROMACS format<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.pdb<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.gro
 </pre></div>
@@ -734,8 +749,8 @@ mapping step. In that case, check your atomistic and mapped structures and do no
 simulation until the problem is solved.</p>
 </div>
 </section>
-<section id="id12">
-<h3>1.3. Solvate the system<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id13">
+<h3>3.3. Solvate the system<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
 <p>Define the simulation box of the system</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span>.0<span class="w"> </span>-c
 </pre></div>
@@ -862,8 +877,8 @@ Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pag
 </div>
 <p>When prompted, choose the group <strong>GN_GO</strong></p>
 <p>Add restraints to topol.top</p>
-<table class="docutils align-center" id="id26">
-<caption><span class="caption-text">restraints to topol.top</span><a class="headerlink" href="#id26" title="Link to this table"></a></caption>
+<table class="docutils align-center" id="id27">
+<caption><span class="caption-text">restraints to topol.top</span><a class="headerlink" href="#id27" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -912,8 +927,8 @@ Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pag
 </tbody>
 </table>
 </section>
-<section id="id14">
-<h3>1.4. Run the simulation<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>3.4. Run the simulation<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/3/CPU</span></code>.</p>
@@ -965,8 +980,8 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 <p>GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.</p>
 </div>
 </section>
-<section id="id15">
-<h3>1.5. Visualizing the simulation<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<section id="id16">
+<h3>3.5. Visualizing the simulation<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory at folder run/ to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_em1.tpr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../1CRN_cg_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
@@ -979,7 +994,7 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 </div>
 </section>
 <section id="calculate-the-solvent-accessible-surface-sas">
-<h3>1.6. Calculate the solvent accessible surface (SAS)<a class="headerlink" href="#calculate-the-solvent-accessible-surface-sas" title="Link to this heading"></a></h3>
+<h3>3.6. Calculate the solvent accessible surface (SAS)<a class="headerlink" href="#calculate-the-solvent-accessible-surface-sas" title="Link to this heading"></a></h3>
 <p>Create the following symbolic link in the folder run/:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.ff/vdwradii.dat
 </pre></div>
@@ -1007,7 +1022,7 @@ hydrophobic bead. The file vdwradii.dat must be placed at the same folder where 
 </div>
 </section>
 <section id="visualize-the-secondary-structure">
-<h3>1.7. Visualize the secondary structure<a class="headerlink" href="#visualize-the-secondary-structure" title="Link to this heading"></a></h3>
+<h3>3.7. Visualize the secondary structure<a class="headerlink" href="#visualize-the-secondary-structure" title="Link to this heading"></a></h3>
 <p>Load the processed trajectory in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg_ion</span><span class="o">.</span><span class="n">psf</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg_ion</span><span class="o">.</span><span class="n">gro</span> <span class="mi">1</span><span class="n">CRN_cg_md_pbc</span><span class="o">.</span><span class="n">xtc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
@@ -1054,8 +1069,8 @@ closed circular DNA in explicit solvent (called WatFour, WT4). The main referenc
 <p>Check <a class="reference internal" href="#download-gromacs"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 4</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/</span></code></p>
 </div>
-<section id="id20">
-<h3>4.1. Build CG representations<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<section id="id21">
+<h3>4.1. Build CG representations<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A 1/CW5 A 1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B 1/CW5 B 1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
@@ -1080,8 +1095,8 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 <p>In GROMACS versions prior to 5.x, the “gmx” command should not be used.</p>
 </div>
 </section>
-<section id="id21">
-<h3>4.2. PDB to GROMACS format<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<section id="id22">
+<h3>4.2. PDB to GROMACS format<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg.pdb<span class="w"> </span>-o<span class="w"> </span>ccdna_cg.gro
 </pre></div>
@@ -1099,8 +1114,8 @@ simulation until the problem is solved.</p>
 <p>The distance cut-off to close the DNA molecule is read from <code class="docutils literal notranslate"><span class="pre">specbond.dat</span></code>. This parameter may need to be modified according to your system’s topology.</p>
 </div>
 </section>
-<section id="id22">
-<h3>4.3. Solvate the system<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id23">
+<h3>4.3. Solvate the system<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
 <p>Define the simulation box of the system</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>ccdna_cg.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_box.gro<span class="w"> </span>-bt<span class="w"> </span>octahedron<span class="w"> </span>-d<span class="w"> </span><span class="m">2</span><span class="w"> </span>-c
 </pre></div>
@@ -1191,8 +1206,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and a 
 Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id24">
-<h3>4.4. Run the simulation<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<section id="id25">
+<h3>4.4. Run the simulation<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/4/CPU</span></code>.</p>
@@ -1229,8 +1244,8 @@ check carefully the input flags therein.</p>
 <p>GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.</p>
 </div>
 </section>
-<section id="id25">
-<h3>4.5. Visualizing the simulation<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<section id="id26">
+<h3>4.5. Visualizing the simulation<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory at folder <code class="docutils literal notranslate"><span class="pre">run/</span></code> to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>ccdna_cg_em.tpr<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-ur<span class="w"> </span>compact<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol

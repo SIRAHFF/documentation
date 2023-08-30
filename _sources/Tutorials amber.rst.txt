@@ -5,8 +5,8 @@ AMBER
 
 .. _download amber:
 
-Download 
-----------
+Set up SIRAH
+--------------
 
 .. include:: /AMBER/installation.rst
 

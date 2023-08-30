@@ -61,10 +61,10 @@
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">AMBER</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-sirah">Set up SIRAH</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#required-software">Required Software</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prior-knowledge">Prior knowledge</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#set-up">Set up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-and-setting-sirah">Download and setting SIRAH</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dna-molecule-in-implicit-solvent">1. DNA molecule in implicit solvent</a><ul>
@@ -76,57 +76,57 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dna-molecule-in-explicit-solvent">2. DNA molecule in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id6">2.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">2.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">2.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">2.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">2.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">2.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">2.5. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#multiscale-simulation-in-implicit-solvent">3. Multiscale simulation in implicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">3.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">3.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">3.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">3.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">3.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">3.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">3.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">3.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">3.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">3.5. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#closed-circular-dna-in-implicit-solvent">4. Closed circular DNA in implicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id20">4.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">4.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">4.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">4.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">4.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">4.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">4.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">4.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">4.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">4.5. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#proteins-in-explicit-solvent">5. Proteins in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id27">5.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id29">5.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id31">5.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id32">5.4. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id33">5.5. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">5.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">5.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">5.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">5.4. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">5.5. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#lipid-bilayers-in-explicit-solvent">6. Lipid bilayers in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id35">6.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id36">6.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id38">6.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">6.1. Build CG representations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">6.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id37">6.3. Run LEaP</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#resize-the-box-with-cpptraj">6.4. Resize the box with CPPTRAJ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id39">6.5. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id40">6.6. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id38">6.5. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">6.6. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#membrane-proteins-in-explicit-solvent">7. Membrane proteins in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id41">7.1. Build CG representations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id40">7.1. Build CG representations</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#embed-the-protein-in-a-lipid-bilayer">7.1.1. Embed the protein in a lipid bilayer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#delete-close-contact-lipid-molecules">7.1.2. Delete close contact lipid molecules</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id42">7.2. Prepare LEaP input</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id44">7.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id45">7.4. Resize the box with CPPTRAJ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id46">7.5. Run the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id47">7.6. Visualizing the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id41">7.2. Prepare LEaP input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id43">7.3. Run LEaP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id44">7.4. Resize the box with CPPTRAJ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">7.5. Run the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id46">7.6. Visualizing the simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#appendix">Appendix</a><ul>
@@ -167,8 +167,8 @@
              
   <section id="amber">
 <h1>AMBER<a class="headerlink" href="#amber" title="Link to this heading"></a></h1>
-<section id="download">
-<span id="download-amber"></span><span id="id1"></span><h2>Download<a class="headerlink" href="#download" title="Link to this heading"></a></h2>
+<section id="set-up-sirah">
+<span id="download-amber"></span><span id="id1"></span><h2>Set up SIRAH<a class="headerlink" href="#set-up-sirah" title="Link to this heading"></a></h2>
 <section id="required-software">
 <h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h3>
 <p><strong>AMBER</strong></p>
@@ -194,8 +194,8 @@ VMD.</p>
 <p>If you are not familiar with VMD we strongly recommend you to perform the basic usage tutorial of VMD (<a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html">using VMD</a>). For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html">VMD User Guide</a> and the <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials">official VMD documentation</a>.</p>
 </div>
 </section>
-<section id="set-up">
-<h3>Set up<a class="headerlink" href="#set-up" title="Link to this heading"></a></h3>
+<section id="download-and-setting-sirah">
+<h3>Download and setting SIRAH<a class="headerlink" href="#download-and-setting-sirah" title="Link to this heading"></a></h3>
 <p>Download <a class="reference external" href="https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz">SIRAH for amber</a> and uncompress it into your working directory.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_x2.2_20-08.amber.tgz
 </pre></div>
@@ -374,8 +374,8 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 2</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
 </div>
-<section id="id6">
-<h3>2.1. Build CG representations<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id5">
+<h3>2.1. Build CG representations<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of a 20-mer DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/2/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna_cg.pdb
 </pre></div>
@@ -392,8 +392,8 @@ Please check both PDB structures using VMD:</p>
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
-<section id="id7">
-<h3>2.2. Prepare LEaP input<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>2.2. Prepare LEaP input<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -424,8 +424,8 @@ ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0
 Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
-<section id="id8">
-<h3>2.3. Run LEaP<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id7">
+<h3>2.3. Run LEaP<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -447,8 +447,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and ba
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id9">
-<h3>2.4. Run the simulation<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>2.4. Run the simulation<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -504,8 +504,8 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 </pre></div>
 </div>
 </section>
-<section id="id10">
-<h3>2.5. Visualizing the simulation<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>2.5. Visualizing the simulation<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
@@ -530,10 +530,10 @@ force field, to study protein-DNA interactions. In this approach, the protein an
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
 level. The simulated system is composed of the human TATA binding protein (TBP PDB: <a class="reference external" href="https://www.rcsb.org/structure/1c9b">1C9B</a>) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/K03455.1">K03455</a>, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the Generalized Born model (GB).</p>
 <p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
-<figure class="align-center" id="id50">
+<figure class="align-center" id="id49">
 <a class="reference internal image-reference" href="_images/Tuto3.png"><img alt="map to buried treasure" src="_images/Tuto3.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id50" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Promoter region of HIV-1. The TATA box is highlighted in orange, while base pairs at 0.7nm of TBP are colored in yellow.</span><a class="headerlink" href="#id49" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition important">
@@ -541,8 +541,8 @@ level. The simulated system is composed of the human TATA binding protein (TBP P
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
 </div>
-<section id="id12">
-<h3>3.1. Build CG representations<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id11">
+<h3>3.1. Build CG representations<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <p>Map only the atomistic structure of nucleotides outside the TATA box of the HIV-1 promoter to CG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/3/tbphiv.pdb<span class="w"> </span>-R<span class="w"> </span><span class="m">1</span>-32,45-110,123-154<span class="w"> </span>-o<span class="w"> </span>dna_hyb.pdb
 </pre></div>
@@ -562,8 +562,8 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
-<section id="id13">
-<h3>3.2. Prepare LEaP input<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id12">
+<h3>3.2. Prepare LEaP input<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>AMBER<span class="w"> </span>force<span class="w"> </span>field<span class="w"> </span><span class="o">(</span>parm14SB/parmbsc0<span class="o">)</span>
 <span class="go">source oldff/leaprc.ff14SB</span>
@@ -587,8 +587,8 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 <p>Notice: According to AMBER version 10, 11 or 12 (14) the source file for parm99SB/bsc0 is leaprc.ff99bsc0, leaprc.ff10 or leaprc.ff12SB respectively.</p>
 </div>
 </section>
-<section id="id14">
-<h3>3.3. Run LEaP<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id13">
+<h3>3.3. Run LEaP<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -610,8 +610,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and ba
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id15">
-<h3>3.4. Run the simulation<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<section id="id14">
+<h3>3.4. Run the simulation<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -672,8 +672,8 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 <p>You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/3/</p>
 </div>
 </section>
-<section id="id16">
-<h3>3.5. Visualizing the simulation<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>3.5. Visualizing the simulation<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can load, visualize and analize the trajectory file in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_hyb</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_hyb_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
@@ -694,8 +694,8 @@ closed circular DNA using the Generalized Born model (GB) for implicit solvent.<
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 4</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/4/</span></code></p>
 </div>
-<section id="id20">
-<h3>4.1. Build CG representations<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<section id="id19">
+<h3>4.1. Build CG representations<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A 1/CW5 A 1/&#39;</span><span class="w">  </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B 1/CW5 B 1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX A 100/GW3 A 100/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX B 100/GW3 B 100/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
@@ -716,8 +716,8 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
-<section id="id21">
-<h3>4.2. Prepare LEaP input<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<section id="id20">
+<h3>4.2. Prepare LEaP input<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -738,8 +738,8 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 </pre></div>
 </div>
 </section>
-<section id="id22">
-<h3>4.3. Run LEaP<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id21">
+<h3>4.3. Run LEaP<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <p>Run the LEAP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -761,8 +761,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and ba
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id23">
-<h3>4.4. Run the simulation<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id22">
+<h3>4.4. Run the simulation<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -803,8 +803,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 </section>
-<section id="id24">
-<h3>4.5. Visualizing the simulation<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<section id="id23">
+<h3>4.5. Visualizing the simulation<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can load, visualize and analize the trajectory file in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">ccdna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">ccdna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">ccdna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
@@ -825,8 +825,8 @@ this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 5</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/5/</span></code></p>
 </div>
-<section id="id27">
-<h3>5.1. Build CG representations<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<section id="id26">
+<h3>5.1. Build CG representations<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
@@ -855,8 +855,8 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
-<section id="id29">
-<h3>5.2. Prepare LEaP input<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<section id="id28">
+<h3>5.2. Prepare LEaP input<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -898,8 +898,8 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
-<section id="id31">
-<h3>5.3. Run LEaP<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<section id="id30">
+<h3>5.3. Run LEaP<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -920,8 +920,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and ba
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id32">
-<h3>5.4. Run the simulation<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<section id="id31">
+<h3>5.4. Run the simulation<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -977,8 +977,8 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <p>The same input files can be used to run on CPU <em>pmemd</em> or <em>sander</em>.</p>
 </div>
 </section>
-<section id="id33">
-<h3>5.5. Visualizing the simulation<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<section id="id32">
+<h3>5.5. Visualizing the simulation<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
@@ -1011,8 +1011,8 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 6</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/6/</span></code></p>
 </div>
-<section id="id35">
-<h3>6.1. Build CG representations<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<section id="id34">
+<h3>6.1. Build CG representations<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the preassembled DMPC bilayer to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/6/DMPC64.pdb<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg.pdb<span class="w"> </span>-a<span class="w"> </span>sirah.amber/tools/CGCONV/maps/tieleman_lipid.map
 </pre></div>
@@ -1033,8 +1033,8 @@ Since this is <strong>tutorial 6</strong>, remember to replace <code class="docu
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
-<section id="id36">
-<h3>6.2. Prepare LEaP input<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<section id="id35">
+<h3>6.2. Prepare LEaP input<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -1061,8 +1061,8 @@ Since this is <strong>tutorial 6</strong>, remember to replace <code class="docu
 Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
-<section id="id38">
-<h3>6.3. Run LEaP<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<section id="id37">
+<h3>6.3. Run LEaP<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -1113,8 +1113,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 </section>
-<section id="id39">
-<h3>6.5. Run the simulation<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<section id="id38">
+<h3>6.5. Run the simulation<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -1175,8 +1175,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 </section>
-<section id="id40">
-<h3>6.6. Visualizing the simulation<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<section id="id39">
+<h3>6.6. Visualizing the simulation<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
@@ -1236,8 +1236,8 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 <p>Check <a class="reference internal" href="#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 7</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/7/</span></code></p>
 </div>
-<section id="id41">
-<h3>7.1. Build CG representations<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<section id="id40">
+<h3>7.1. Build CG representations<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The mapping to CG requires the correct protonation state of each residue at a given pH. See <a class="reference internal" href="FAQ.html"><span class="doc">FAQs</span></a> and <a class="reference internal" href="#tutorial-5"><span class="std std-ref">Tutorial 5</span></a> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
@@ -1264,10 +1264,10 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 </pre></div>
 </div>
 <p>Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to <a class="reference external" href="https://opm.phar.umich.edu/">Orientations of Proteins in Membranes (OPM) database</a> and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see <strong>Figure 1</strong>).</p>
-<figure class="align-center" id="id51">
+<figure class="align-center" id="id50">
 <a class="reference internal image-reference" href="_images/Tuto7.png"><img alt="_images/Tuto7.png" src="_images/Tuto7.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id51" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id50" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1319,8 +1319,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
 </section>
-<section id="id42">
-<h3>7.2. Prepare LEaP input<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<section id="id41">
+<h3>7.2. Prepare LEaP input<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -1346,8 +1346,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
-<section id="id44">
-<h3>7.3. Run LEaP<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<section id="id43">
+<h3>7.3. Run LEaP<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
 <p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -1370,8 +1370,8 @@ ones. It also provides a kit of useful selection macros, coloring methods and ba
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
 </div>
 </section>
-<section id="id45">
-<h3>7.4. Resize the box with CPPTRAJ<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<section id="id44">
+<h3>7.4. Resize the box with CPPTRAJ<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As PACKMOL does not consider periodicity while building up the system, increasing the XY box sides a few Angstroms may be required to avoid bad contacts between images.</p>
@@ -1409,8 +1409,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 </section>
-<section id="id46">
-<h3>7.5. Run the simulation<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
+<section id="id45">
+<h3>7.5. Run the simulation<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -1476,8 +1476,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 </section>
-<section id="id47">
-<h3>7.6. Visualizing the simulation<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<section id="id46">
+<h3>7.6. Visualizing the simulation<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../2kyv_DMPC_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>2kyv_DMPC_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>2kyv_DMPC_cg_md_pbc.nc<span class="w"> </span>--interactive
@@ -1494,7 +1494,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 </section>
 <section id="appendix">
-<span id="id48"></span><h2>Appendix<a class="headerlink" href="#appendix" title="Link to this heading"></a></h2>
+<span id="id47"></span><h2>Appendix<a class="headerlink" href="#appendix" title="Link to this heading"></a></h2>
 <section id="calculating-ionic-concentrations">
 <h3>Calculating ionic concentrations<a class="headerlink" href="#calculating-ionic-concentrations" title="Link to this heading"></a></h3>
 <div class="math notranslate nohighlight">

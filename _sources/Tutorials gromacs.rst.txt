@@ -5,8 +5,8 @@ GROMACS
 
 .. _download gromacs:
 
-Download 
-----------
+Set up SIRAH
+--------------
 
 .. include:: /GROMACS/installation-G.rst
 
