@@ -30,3 +30,10 @@ Set up SIRAH
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-3.rst
+
+.. _Tutorial 4 G:
+
+4. Closed circular DNA in explicit solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-4.rst
