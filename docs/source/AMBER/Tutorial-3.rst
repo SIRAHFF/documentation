@@ -30,7 +30,7 @@ Map only the atomistic structure of nucleotides outside the TATA box of the HIV-
 
 	
 The input file ``-i`` tbphiv.pdb contains all the heavy atoms composing the protein-DNA system. Mapped
-residues are selected through option ``-R``. The selection considers a buffer of two base pairs at each
+residues are selected through option ``-R``. The selection considers a "buffer region" of two base pairs at each
 side of the TATA box (**Figure 1**). The atomistic/CG interface must always be a step of B form DNA. The
 resulting coordinates are saved in the output ``-o`` dna_hyb.pdb.
 
@@ -73,7 +73,9 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. note::
 
-   Notice: According to AMBER version 10, 11 or 12 (14) the source file for parm99SB/bsc0 is leaprc.ff99bsc0, leaprc.ff10 or leaprc.ff12SB respectively.
+   * According to AMBER version 10, 11 or 12 (14) the source file for parm99SB/bsc0 is leaprc.ff99bsc0, leaprc.ff10 or leaprc.ff12SB respectively.
+
+   * The newest force field version for DNA, `bsc1 <https://www.nature.com/articles/nmeth.3658>`_, works equally well with SIRAH. 
 
 3.3. Run LEaP
 ______________
@@ -134,7 +136,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
    You can find example input files for CPU versions of sander and pmemd at folders ``SANDER/`` and  ``PMEMD.CPU/``, within ``sirah.amber/tutorial/3/``
 
-   This simulation is very time consuming owing to the system's size, so try a parallel or CUDA implementation of AMBER.
+   This simulation is time consuming owing to the system's size. A parallel or CUDA implementation of AMBER is advised.
 
 **Energy Minimization:**
 
@@ -150,8 +152,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. warning:: 
 
-    If you are using SANDER to avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
-    contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
+        If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file ``dna_cg.RST``, which contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
 
 
     .. code-block:: bash

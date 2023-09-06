@@ -1,7 +1,7 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
 this tutorial are: `SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
-We strongly advise you to read these articles before starting the tutorial.
+We strongly advise you to read these articles before starting the tutorial. You may also find interesting `this book chapter <https://pubs.aip.org/books/monograph/137/chapter-abstract/58880922/Simulating-Transmembrane-Proteins-with-the-Coarse?redirectedFrom=fulltext>`_.
 
 .. note::
 
@@ -26,12 +26,15 @@ The input file ``-i`` DMPC64.pdb contains the atomistic representation of the DM
 
 .. important::
 
-	By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.   
+	By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.   
 
 .. tip::
 
-  This an advanced usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-  ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+  This an advanced usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+  .. code-block:: bash
+
+    ./sirah.amber/tools/CGCONV/cgconv.pl -h
 
 The input file ``DMPC64.pdb`` contains all the heavy atoms composing the lipids, while the output ``DMPC64_cg.pdb`` preserves a few of them. Please check both PDB and PQR structures using VMD:	
 
