@@ -1,9 +1,9 @@
 This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
-for this tutorial are: `SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+for this tutorial are: `Dans et al <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `Machado and Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
+    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.
     Since this is **tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/1/``
 
 .. note::
@@ -81,7 +81,7 @@ Use VMD to check how the CG model looks like:
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
     Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
 
 
@@ -101,7 +101,7 @@ flags therein.
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in AMBER**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -113,7 +113,7 @@ flags therein.
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of AMBER.
 
 .. note::
 
@@ -133,7 +133,7 @@ flags therein.
 
 .. warning:: 
 
-    If you are using SANDER to avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
+    If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file ``dna_cg.RST``, which
     contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
 
 
@@ -161,7 +161,7 @@ flags therein.
 1.5. Visualizing the simulation
 ________________________________
 
-Now you can load, visualize and analize the trajectory file in VMD:
+Now you can load, visualize and analize the trajectory in VMD:
 
 .. code-block::
 

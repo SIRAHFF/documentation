@@ -1,11 +1,24 @@
 Developers
 ==========
 
-Development Lead
-----------------
-
+Developers
+-------------------
 
 *    Sergio Pantano  |mail-serg| |google-serg|
+
+*    Martín Soñora  
+
+*    Lucianna Silva dos Santos
+
+*    Andres Ballesteros
+
+*    Ezequiel N. Frigini  
+
+*    Matias Machado  
+
+*    Pablo Garay
+
+
 
 Former contributors
 -------------------
@@ -13,8 +26,6 @@ Former contributors
 *    Pablo. D. Dans  
 
 *    Leonardo Darré  
-
-*    Matias Machado  
 
 *    Humberto Gonzalez  
 
@@ -28,23 +39,13 @@ Former contributors
 
 *    Florencia Klein  
 
+*    Steffano Silva
 
-Contributors
--------------------
+*    Fernando Herrera
 
-*    Martín Soñora  
+*    Carlos Cruz
 
-*    Ezequiel N. Frigini  
-
-*    Matias Machado  
-
-
-Collaborators 
--------------------
-
-
-
-
+*    Daniela Cáceres
 
 
 

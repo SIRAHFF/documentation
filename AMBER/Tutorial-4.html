@@ -127,7 +127,7 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 <span class="gp"># </span>Load<span class="w"> </span>model
 <span class="go">dna = loadpdb ccdna_cg.pdb</span>
 
-<span class="gp"># </span>Make<span class="w"> </span>a<span class="w"> </span>covalent<span class="w"> </span>closed<span class="w"> </span>circular<span class="w"> </span>DNA
+<span class="gp"># </span>Make<span class="w"> </span>a<span class="w"> </span>covalently<span class="w"> </span>closed<span class="w"> </span>circular<span class="w"> </span>DNA
 <span class="go">bond dna.1.PX dna.100.C1X</span>
 <span class="go">bond dna.101.PX dna.200.C1X</span>
 
@@ -145,8 +145,8 @@ Since this is <strong>tutorial 4</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
 </div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
 expected due to the CG topology.</p>
 </div>

@@ -51,7 +51,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 	# Load model
 	dna = loadpdb ccdna_cg.pdb
 
-	# Make a covalent closed circular DNA
+	# Make a covalently closed circular DNA
 	bond dna.1.PX dna.100.C1X
 	bond dna.101.PX dna.200.C1X
 
@@ -70,7 +70,7 @@ Run the LEAP application to generate the molecular topology and initial coordina
 
     tleap -f gensystem.leap
 
-.. caution::
+.. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and
     expected due to the CG topology.

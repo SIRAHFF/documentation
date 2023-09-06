@@ -141,9 +141,7 @@ Please check both PDB structures using VMD:</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
-ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details).
-Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
@@ -152,8 +150,8 @@ Counterions were added according to <a class="reference external" href="https://
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
 expected due to the CG topology of some residues.</p>
 </div>
@@ -180,7 +178,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
-<div><p><strong>Some flags used in AMBER</strong></p>
+<div><p><strong>Some commonly used flags in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -193,7 +191,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of AMBER.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -210,7 +208,7 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you are using SANDER to avoid such behavior create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+<p>If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
 contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/dna_cg.RST
 </pre></div>

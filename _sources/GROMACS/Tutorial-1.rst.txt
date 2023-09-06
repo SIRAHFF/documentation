@@ -250,3 +250,8 @@ Now you can check the simulation using VMD:
 .. code-block:: bash
 
 	vmd ../dna_cg_ion.psf ../dna_cg_ion.gro dna_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
+
+
+.. note::
+
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.

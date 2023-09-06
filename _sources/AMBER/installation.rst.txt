@@ -3,7 +3,7 @@ __________________
 
 **AMBER**
 
-AMBER (version 16) and AMBER Tools (version 16) or later versions properly installed and running in your computer. 
+Amber and Amber Tools (version 16 or later) versions properly installed and running in your computer. 
 
 .. tip::
 
