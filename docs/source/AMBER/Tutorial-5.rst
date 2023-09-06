@@ -26,17 +26,20 @@ The input file ``-i`` 1CRN.pqr contains the atomistic representation of `1CRN <h
 
 .. note::
 
-	**Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.** Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there always may be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH level. You can check the following mapping file to be sure of the compatibility: ``sirah.amber/tools/CGCONV/maps/sirah_prot.map``.    
+	**Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.** Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there might always be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at the epsilon nitrogen (:math:`N_{\epsilon}`) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH levels. You can check the following mapping file to be sure of the compatibility: ``sirah.amber/tools/CGCONV/maps/sirah_prot.map``.    
 
   
 .. important::
 
-	By default charged termini are used, but it is possible to set then neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
+	By default charged termini are used, but it is possible to set them neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
 
 .. tip::
 
-  This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-  ``./sirah.amber/tools/CGCONV/cgconv.pl -h``	
+  This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+  .. code-block:: bash
+
+    ./sirah.amber/tools/CGCONV/cgconv.pl -h	
 
 Please check both PDB and PQR structures using VMD:	
 
@@ -189,9 +192,9 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 	pmemd.cuda -O -i ../sirah.amber/tutorial/5/md_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq2.ncrst -o 1CRN_cg_md.out -r 1CRN_cg_md.ncrst -x 1CRN_cg_md.nc &
 
 
-.. important::
+.. note::
 
-	The same input files can be used to run on CPU *pmemd* or *sander*.
+	The same input files can be used to run on CPU with the modules *pmemd* or *sander*.
 	
 
 5.5. Visualizing the simulation

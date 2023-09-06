@@ -62,9 +62,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-    The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
-    ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
-    Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+    The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 2.3. Run LEaP 
 ________________
@@ -75,7 +73,7 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     tleap -f gensystem.leap
 
-.. warning::
+.. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and
     expected due to the CG topology of some residues.
@@ -109,7 +107,7 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in AMBER**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -120,7 +118,7 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of AMBER.
 
 .. note::
 
@@ -140,7 +138,7 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 
 .. warning:: 
 
-    If you are using SANDER to avoid such behavior create a symbolic link to the file ``dna_cg.RST``, which
+    If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file ``dna_cg.RST``, which
     contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
 
 
