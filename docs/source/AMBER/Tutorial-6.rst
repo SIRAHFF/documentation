@@ -1,16 +1,16 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `Barrera et al <https://doi.org/10.1021/acs.jctc.9b00435>`_ and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial. You may also find interesting `this book chapter <https://pubs.aip.org/books/monograph/137/chapter-abstract/58880922/Simulating-Transmembrane-Proteins-with-the-Coarse?redirectedFrom=fulltext>`_.
 
 .. note::
 
-	If you are not familiar with membrane stuff we strongly recommend you to first perform the `AMBER tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
+	If you are not familiar with membrane stuff we strongly recommend you to first perform the `Amber tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
 	
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 6**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/6/``
 	
 6.1. Build CG representations
@@ -43,7 +43,7 @@ The input file ``DMPC64.pdb`` contains all the heavy atoms composing the lipids,
   vmd -m sirah.amber/tutorial/6/DMPC64.pdb DMPC64_cg.pdb
 
 
-From now on it is just normal AMBER stuff!
+From now on it is just normal Amber stuff!
 
 6.2. Prepare LEaP input
 ________________________
@@ -72,8 +72,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
-   Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 6.3. Run LEaP
 _______________
@@ -84,7 +83,7 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     tleap -f gensystem.leap
 
-.. caution::
+.. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and expected due to the CG topology.
 
@@ -96,7 +95,7 @@ Use VMD to check how the CG model looks:
 
   vmd DMPC64_cg.prmtop DMPC64_cg.ncrst -e ./sirah.amber/tools/sirah_vmdtk.tcl
 
-By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in AMBER.
+By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see small vacuum slices at box boundaries. In the following step we will fix this issue by reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in Amber.
 
 .. tip::
 
@@ -154,7 +153,7 @@ The folder ``sirah.amber/tutorial/6/`` contains typical input files for energy m
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in AMBER**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -162,16 +161,16 @@ The folder ``sirah.amber/tutorial/6/`` contains typical input files for energy m
    - ``-c``: Coordinate file.
    - ``-r``: Restart file.
    - ``-x``: Trajectory file.
-   - ``ref``: Reference file
+   - ``-ref``: Reference file
 
 
 .. warning::
 
-	These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of AMBER.
+	These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of Amber.
 
 .. note::
 
-    Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER. 
+    Other available implementations that could be used ``sander`` or ``pmemd``, both **CPU** implementations of Amber. 
 
 	
 **Energy Minimization:**
@@ -188,7 +187,7 @@ The folder ``sirah.amber/tutorial/6/`` contains typical input files for energy m
 
 .. important::
 
-	To avoid “*skinnb errors*” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large *skinnb* value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `AMBER tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
+	To avoid “*skinnb errors*” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large *skinnb* value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `Amber tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
 	
 **Periodic box equilibration in GPU code (500 ps x 9):**
 

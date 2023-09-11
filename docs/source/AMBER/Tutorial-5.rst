@@ -1,10 +1,10 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`_ and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+this tutorial are: `Darré et al <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al <https://doi.org/10.1021/acs.jctc.9b00006>`_ and `Machado & Pantano  <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 5**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/5/``
 
 
@@ -13,7 +13,7 @@ _____________________________
 
 .. caution::
 
-	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of AMBER for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.    
+	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of Amber for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.    
 
 Map the protonated atomistic structure of protein `1CRN <https://www.rcsb.org/structure/1CRN>`_ to its CG representation:   
 
@@ -48,7 +48,7 @@ Please check both PDB and PQR structures using VMD:
   vmd -m sirah.amber/tutorial/5/1CRN.pqr 1CRN_cg.pdb
 
 
-From now on it is just normal AMBER stuff!
+From now on it is just normal Amber stuff!
 
 
 5.2. Prepare LEaP input
@@ -95,8 +95,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 	
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details).
-   Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 5.3. Run LEaP 
 ____________________
@@ -107,9 +106,9 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     tleap -f gensystem.leap
 
-.. warning::
+.. note::
 
-    Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and expected due to the CG topology.
+    Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and expected due to the CG topology of some residues.
 
 This should create a topology file ``1CRN_cg.prmtop`` and a coordinate file ``1CRN_cg.ncrst``.
 
@@ -141,7 +140,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in Amber**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -153,7 +152,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+	These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander`` or ``pmemd``, which are both **CPU** implementations of Amber.
 
 
 **Energy Minimization of side chains and solvent by restraining the backbone:**
