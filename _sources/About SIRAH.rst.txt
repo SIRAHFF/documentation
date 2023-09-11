@@ -28,4 +28,20 @@ Acknowledgments
 The SIRAH force field is developed by the `Biomolecular Simulations Group <https://pasteur.uy/laboratorios/simulaciones-biomoleculares/)>`_ and supported partially by the Institut Pasteur de Montevideo and FOCEM (MERCOSUR Structural Convergence Fund - COF 03/11).   
 
 
+Follow us  
+---------------
 
+Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-sirah| 
+ 
+
+.. |google-sirah| raw:: html
+
+   <a href="https://scholar.google.com.uy/citations?hl=es&user=Rqr6Jw4AAAAJ" class="author-social" target="_blank"><i class="fa fa-google" style="font-size:30px;"></i></a>
+   
+.. |youtube-sirah| raw:: html
+
+   <a href="https://www.youtube.com/channel/UCLK25yNsJPlej_fEKdLc1qw" class="author-social" target="_blank"><i class="fa fa-youtube-play" style="font-size:30px;"></i></a>
+   
+.. |twitter-sirah| raw:: html
+
+   <a href="https://twitter.com/SIRAHForcefield" class="author-social" target="_blank"><i class="fa fa-twitter" style="font-size:30px;"></i></a>

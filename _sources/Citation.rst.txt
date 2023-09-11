@@ -58,8 +58,6 @@ In addition, please include the following citations if the following parameters 
 	*    Garay, P. G.; Barrera, E. E.; Pantano, S. Post-Translational Modifications at the Coarse-Grained Level with the SIRAH Force Field. Journal of Chemical Information and Modeling 2020, 60, 964–973. |PostTrans| |PostTrans-cit|
 
 
-
-
 .. |Metal| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jcim.0c00160-blue
    :alt: Access the paper
    :target: https://doi.org/10.1021/acs.jcim.0c00160
@@ -115,7 +113,20 @@ In addition, please include the following citations if the following parameters 
 
 	*    Darré, L.; Machado, M. R.; Dans, P. D.; Herrera, F. E.; Pantano, S. Another Coarse Grain Model for Aqueous Solvation: WAT FOUR? Journal of Chemical Theory and Computation 2010, 6, 3793–3807. |Solvent| |Solvent-cit|
 
+.. |MC1| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.7b00659-blue
+   :alt: Access the paper
+   :target: https://doi.org/10.1021/acs.jctc.7b00659
+   
 
+.. |MC2| image:: https://img.shields.io/badge/DOI-10.1098%2Frsfs.2018.0085-blue?label=DOI
+   :alt: Access the paper
+   :target: https://doi.org/10.1098/rsfs.2018.0085
+   
+*    **Multiscale Simulations**:
+
+	*    Machado, M. R.; Zeida, A.; Darré, L.; Pantano, S. From quantum to subcellular scales: multi-scale simulation approaches and the SIRAH force field. Interface Focus 2019, 9, 20180085. |MC2|     
+	
+	*    Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |MC1|   
 
 
 If **SIRAH Tools** were used please cite:  

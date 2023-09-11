@@ -63,8 +63,15 @@
 <li class="toctree-l1"><a class="reference internal" href="Tutorials%20namd.html">NAMD</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SIRAH tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#vmd-plugin">VMD Plugin</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#visualization-of-cg-systems">Visualization of CG systems</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#structural-analysis-of-cg-systems">Structural analysis of CG systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization-of-cg-systems">Visualization of CG systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sirah-macros">SIRAH macros</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#structural-analysis-of-cg-systems">Structural analysis of CG systems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#secondary-structural-analysis">Secondary structural analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#backmapping-analysis">Backmapping analysis</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -100,10 +107,10 @@
 <section id="vmd-plugin">
 <span id="id1"></span><span id="id2"></span><h2>VMD Plugin<a class="headerlink" href="#vmd-plugin" title="Link to this heading"></a></h2>
 <p>This tutorial shows how to visualize and analize trajectory files using the <strong>SIRAH Tools Plugin</strong> for VMD. The main reference
-for this tutorial is <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: <a class="reference external" href="https://www.rcsb.org/structure/5YWS">5YWS</a>) and its simulation was previously dicussed by <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c00160">Klein et al. 2020</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+for this tutorial is <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: <a class="reference external" href="https://www.rcsb.org/structure/5YWS">5YWS</a>) and its simulation was previously dicussed by <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c00160">Klein et al. 2020</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This tutorial requires the use of <strong>VMD</strong>, <strong>AmberTools</strong>, and <strong>R</strong>. Please install these applications if you do not already have them. If you need to install any of these applications, please visit the following websites for installation instructions and additional information: <a class="reference external" href="https://ambermd.org/GetAmber.php#ambertools">Install AmberTools</a>, <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">Installation VMD guide</a> and the <a class="reference external" href="https://www.r-project.org/">The R Project for Statistical Computing</a> page.</p>
+<p>This tutorial requires the use of <strong>VMD</strong> and <strong>AmberTools</strong>. Please install these applications if you do not already have them. If you need to install any of these applications, please visit the following websites for installation instructions and additional information: <a class="reference external" href="https://ambermd.org/GetAmber.php#ambertools">Install AmberTools</a> and <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">Installation VMD guide</a>.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -111,8 +118,8 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </div>
 <section id="visualization-of-cg-systems">
 <h3>Visualization of CG systems<a class="headerlink" href="#visualization-of-cg-systems" title="Link to this heading"></a></h3>
-<p>One of the features of the SIRAH Tools plugin for VMD, <strong>sirah_vmdtk.tcl</strong>, is that it improves the visualization and analysis of CG trajectories. This plugin sets correct van der Waals radii, coloring code by atom and residue types and macros for selecting molecular components on SIRAH trajectories.</p>
-<p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <a class="reference internal" href="Tutorials%20amber.html#id1"><span class="std std-ref">AMBER</span></a>, <a class="reference internal" href="Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
+<p>One of the features of the SIRAH Tools plugin for VMD, <strong>sirah_vmdtk.tcl</strong>, is that it improves the visualization and analysis of CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.</p>
+<p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <a class="reference internal" href="Tutorials%20amber.html#id1"><span class="std std-ref">Amber</span></a>, <a class="reference internal" href="Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>../5YWS_cg.gro<span class="w"> </span>5YWS_cg_md_pbc.nc<span class="w"> </span>-e<span class="w"> </span>../sirah.amber/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
@@ -124,15 +131,66 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is not loaded in VMD, the trajectory will still be loaded, but the correct molecular connectivity, bead size, charges, etc. will not be generated (see Figure 1).</p>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/sirah_tools_1.png"><img alt="_images/sirah_tools_1.png" src="_images/sirah_tools_1.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> SIRAH CG simulation loaded in VMD. A) The trajectory was imported without the <strong>sirah_vmdtk.tcl</strong> plugin. B) Trajectory imported using the <strong>sirah_vmdtk.tcl</strong> plugin.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> SIRAH CG simulation loaded in VMD. A) The trajectory imported without the <strong>sirah_vmdtk.tcl</strong> plugin. B) Trajectory imported using the <strong>sirah_vmdtk.tcl</strong> plugin.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<section id="sirah-macros">
+<h4>SIRAH macros<a class="headerlink" href="#sirah-macros" title="Link to this heading"></a></h4>
+<p>In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, <strong>sirah_vmdtk.tcl</strong>, 10 macros are available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_membrane</span></code> - select only lipid residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> - select only acid nucleic residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> - select only protein residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_basic</span></code> - select only basic amino acid residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_acidic</span></code> - select only acidic amino acid residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_polar</span></code> - select only polar amino acid residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_neutral</span></code> - select only neutral amino acid residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code> - select the backbone beads of protein (GN, GC, and GO) or acid nucleic (PX, C5X, and O3’);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> - select all solvent available in the force field (WT4 and WLS);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> - select all ions available in the force field (KW, NaW, ClW, MgX, CaX, and Znx).</p></li>
+</ul>
+<p>To use any SIRAH macro, go to <strong>Graphics</strong> &gt; <strong>Representations</strong> (See Figure 2) and click on the <strong>Create Rep</strong> button. In the <strong>Selected Atoms</strong> window, erase the text that appears there and type any of the available <em>Singlewords</em> above.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/sirah_tools_2.png"><img alt="_images/sirah_tools_2.png" src="_images/sirah_tools_2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 2.</strong> Our trajectory loaded in VMD with the default representation and without any selection.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see all available VMD’s <em>Singlewords</em>, click on the <strong>Selections</strong> tab in the <strong>Graphics</strong> &gt; <strong>Representations</strong> window and look through the <em>Singlewords</em> panel. You can also double-click on a singleword, and then, click on the <strong>Apply</strong> button to use a VMD Macro.</p>
+</div>
+<p>Since our system is a protein−DNA complex with coordinating magnesium ions, we can use four macros: <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> (see Figure 3A), <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> (see Figure 3B), <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> (see Figure 3C), and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> (see Figure 3D).</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/sirah_tools_3.png"><img alt="_images/sirah_tools_3.png" src="_images/sirah_tools_3.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 3.</strong> Each of the macros of our systems shown as a single image. A) The <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> macro using the <strong>Licorice</strong> as <strong>Drawing Method</strong>. The backbone beads of the protein are pink, and the sidechains ones are blue when using the <strong>Coloring Method</strong> Name. B) The <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> macro using the <em>Licorice</em> as <strong>Drawing Method</strong>. For the DNA, the backbone beads PX, C5X, and O3’ are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the <strong>Coloring Method</strong> Name. C) The <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> macro using the <em>CPK</em> as <strong>Drawing Method</strong>. In this system, only WT4 was used and is colored green by the <strong>Coloring Method</strong> Name. D) The <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> macro using the <em>VDW</em> as <strong>Drawing Method</strong>. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the <strong>Coloring Method</strong> Name.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>To use all representations together, just create different representations for each one (clicking on the <strong>Create Rep</strong> button in the <strong>Graphics</strong> &gt; <strong>Representations</strong> window). Your protein-DNA complex should now look similar to the one in Figure 4.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/sirah_tools_4.png"><img alt="_images/sirah_tools_4.png" src="_images/sirah_tools_4.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 4.</strong> Our protein-DNA complex after using the SIRAH macros <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. To improve visualization, we changed the <strong>Material</strong> of the water beads to Ghost and we hid some elements of the system.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As you can see, macros can be very useful and when saving your work in a saved state (<strong>File</strong> &gt; <strong>Save Visualization State</strong>), macros are included in the saved state file to be used later (<strong>File</strong> &gt; <strong>Load Visualization State</strong>).</p>
+</div>
+</section>
 </section>
 <section id="structural-analysis-of-cg-systems">
 <h3>Structural analysis of CG systems<a class="headerlink" href="#structural-analysis-of-cg-systems" title="Link to this heading"></a></h3>
+<section id="secondary-structural-analysis">
+<h4>Secondary structural analysis<a class="headerlink" href="#secondary-structural-analysis" title="Link to this heading"></a></h4>
+</section>
+<section id="backmapping-analysis">
+<h4>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h4>
+</section>
 </section>
 </section>
 </section>

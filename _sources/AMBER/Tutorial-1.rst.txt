@@ -1,5 +1,5 @@
 This tutorial shows how to perform a coarse grained (CG) simulation of a double stranded DNA using the Generalized Born model for implicit solvent (GB) and the SIRAH force field. The main references
-for this tutorial are: `Dans et al <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `Machado and Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+for this tutorial are: `Dans et al <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 

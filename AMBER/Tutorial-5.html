@@ -90,17 +90,17 @@
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">SIRAH 2.0</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">setting up SIRAH</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 5</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/5/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h1>5.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of Amber for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
 </div>
 <p>Map the protonated atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
@@ -126,7 +126,7 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>1CRN_cg.pdb
 </pre></div>
 </div>
-<p>From now on it is just normal AMBER stuff!</p>
+<p>From now on it is just normal Amber stuff!</p>
 </section>
 <section id="prepare-leap-input">
 <h1>5.2. Prepare LEaP input<a class="headerlink" href="#prepare-leap-input" title="Link to this heading"></a></h1>
@@ -167,8 +167,7 @@ Since this is <strong>tutorial 5</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details).
-Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
@@ -177,9 +176,9 @@ Counterions were added according to <a class="reference external" href="https://
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology of some residues.</p>
 </div>
 <p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">1CRN_cg.ncrst</span></code>.</p>
 <p>Use VMD to check how the CG model looks like and particularly the presence of disulfide bonds:</p>
@@ -205,7 +204,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
-<div><p><strong>Some flags used in AMBER</strong></p>
+<div><p><strong>Some commonly used flags in Amber</strong></p>
 </div></blockquote>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -219,7 +218,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code> or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of Amber.</p>
 </div>
 <p><strong>Energy Minimization of side chains and solvent by restraining the backbone:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1CRN_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>

@@ -88,7 +88,7 @@
            <div itemprop="articleBody">
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a protein embedded in a lipid bilayer using explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">SIRAH 2.0</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435">SIRAH Lipids</a>, and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>.
+this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435">Barrera et al</a>, and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>.
 We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -96,7 +96,7 @@ We strongly advise you to read these articles before starting the tutorial.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
+<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">setting up SIRAH</span></a> section for download and set up details before to start this tutorial.
 Since this is <strong>tutorial 7</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> in your folder directory. The files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/7/</span></code></p>
 </div>
 <section id="build-cg-representations">
@@ -116,8 +116,10 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This an advanced usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
-<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+<p>This an advanced usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-h
+</pre></div>
+</div>
 </div>
 <section id="embed-the-protein-in-a-lipid-bilayer">
 <h2>7.1.1. Embed the protein in a lipid bilayer<a class="headerlink" href="#embed-the-protein-in-a-lipid-bilayer" title="Link to this heading"></a></h2>
@@ -127,10 +129,10 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 </pre></div>
 </div>
 <p>Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to <a class="reference external" href="https://opm.phar.umich.edu/">Orientations of Proteins in Membranes (OPM) database</a> and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see <strong>Figure 1</strong>).</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <a class="reference internal image-reference" href="../_images/Tuto7.png"><img alt="../_images/Tuto7.png" src="../_images/Tuto7.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -156,8 +158,8 @@ Since this is <strong>tutorial 7</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>geninit.leap
 </pre></div>
 </div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology.</p>
 </div>
 <p>Now, open the files on VMD:</p>
@@ -206,7 +208,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
@@ -225,7 +227,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 <p>By selecting +X, +Y and +Z periodic images from the <em>Periodic</em> tab in the <em>Graphical Representations</em> window you will see unwanted water near the
-hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for issues on membrane systems in AMBER. If you do not find your issue please start a discussion in our <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">github discussion page F&amp;Q</a>.</p>
+hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for issues on membrane systems in Amber. If you do not find your issue please start a discussion in our <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">github discussion page F&amp;Q</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
@@ -261,7 +263,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>This is a critical step when preparing membrane systems to simulate with AMBER. In this case, the new box dimensions were set after some trial and error tests to allow for limited overlap between periodic box images. An excessive overlap may lead to important atom clashes an eventual system explosion during minimization/simulation, while insufficient overlap may impact the membrane cohesivity at PBC boundaries leading to pore formations or other issues.</p>
+<p>This is a critical step when preparing membrane systems to simulate with Amber. In this case, the new box dimensions were set after some trial and error tests to allow for limited overlap between periodic box images. An excessive overlap may lead to important atom clashes an eventual system explosion during minimization/simulation, while insufficient overlap may impact the membrane cohesivity at PBC boundaries leading to pore formations or other issues.</p>
 </div>
 <p>Run the CPPTRAJ application application to adjust the size of the simulation box:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpptraj<span class="w"> </span>-p<span class="w"> </span>2kyv_DMPC_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>2kyv_DMPC_cg.ncrst<span class="w"> </span>-i<span class="w"> </span>resize_box.cpptraj
@@ -283,7 +285,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
-<div><p><strong>Some flags used in AMBER</strong></p>
+<div><p><strong>Some commonly used flags in Amber</strong></p>
 </div></blockquote>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -292,16 +294,16 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>: Coordinate file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>: Restart file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: Trajectory file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code>: Reference file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ref</span></code>: Reference file</p></li>
 </ul>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>These input files are executed by the <strong>GPU</strong> implementation of <em>pmemd.cuda</em>, due to the system size we do not recommend the use of <strong>CPU</strong> implementations of AMBER.</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <em>pmemd.cuda</em>, due to the system size we do not recommend the use of <strong>CPU</strong> implementations of Amber.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+<p>Other available implementations that could be used <code class="docutils literal notranslate"><span class="pre">sander</span></code> or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of Amber.</p>
 </div>
 <p><strong>Energy Minimization of side chains by restraining the backbone:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/7/em1_Prot-Lip.in<span class="w"> </span>-p<span class="w"> </span>../2kyv_DMPC_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../2kyv_DMPC_cg_nb.ncrst<span class="w"> </span>-ref<span class="w"> </span>../2kyv_DMPC_cg_nb.ncrst<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_em_1.out<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_em_1.ncrst<span class="w"> </span><span class="p">&amp;</span>
@@ -317,7 +319,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To avoid “<em>skinnb errors</em>” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large <em>skinnb</em> value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">AMBER tutorial on lipids</a>.</p>
+<p>To avoid “<em>skinnb errors</em>” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large <em>skinnb</em> value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the <a class="reference external" href="http://ambermd.org/tutorials/advanced/tutorial16/">Amber tutorial on lipids</a>.</p>
 </div>
 <p><strong>Periodic box equilibration in GPU code (500 ps x 9):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">9</span><span class="k">)</span>
