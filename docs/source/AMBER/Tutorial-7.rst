@@ -1,5 +1,5 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a protein embedded in a lipid bilayer using explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `SIRAH 2.0 <https://doi.org/10.1021/acs.jctc.9b00006>`__, `SIRAH Lipids <https://doi.org/10.1021/acs.jctc.9b00435>`__, and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`__.
+this tutorial are: `Machado et al <https://doi.org/10.1021/acs.jctc.9b00006>`_, `Barrera et al <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. note::
@@ -9,7 +9,7 @@ We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.     
+    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
     Since this is **tutorial 7**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/7/``
 	
 7.1. Build CG representations
@@ -33,8 +33,11 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
 
 .. tip::
 
-  This an advanced usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-  ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+  This an advanced usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+  .. code-block:: bash
+
+    ./sirah.amber/tools/CGCONV/cgconv.pl -h
 
 7.1.1. Embed the protein in a lipid bilayer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,7 +88,7 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     tleap -f geninit.leap
 
-.. caution::
+.. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and expected due to the CG topology.
 
@@ -142,7 +145,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-   The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 7.3. Run LEaP
 _______________
@@ -166,7 +169,7 @@ Use VMD to check how the CG model looks:
   vmd 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst -e ./sirah.amber/tools/sirah_vmdtk.tcl
 
 By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see unwanted water near the
-hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in AMBER. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.
+hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in Amber. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.
 
 .. tip::
 
@@ -204,7 +207,8 @@ Use a text editor to create the file ``resize_box.cpptraj`` including the follow
      quit
 
 .. caution::
-	This is a critical step when preparing membrane systems to simulate with AMBER. In this case, the new box dimensions were set after some trial and error tests to allow for limited overlap between periodic box images. An excessive overlap may lead to important atom clashes an eventual system explosion during minimization/simulation, while insufficient overlap may impact the membrane cohesivity at PBC boundaries leading to pore formations or other issues.
+
+	This is a critical step when preparing membrane systems to simulate with Amber. In this case, the new box dimensions were set after some trial and error tests to allow for limited overlap between periodic box images. An excessive overlap may lead to important atom clashes an eventual system explosion during minimization/simulation, while insufficient overlap may impact the membrane cohesivity at PBC boundaries leading to pore formations or other issues.
 	
 Run the CPPTRAJ application application to adjust the size of the simulation box:
 
@@ -233,7 +237,7 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in Amber**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -241,16 +245,16 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
    - ``-c``: Coordinate file.
    - ``-r``: Restart file.
    - ``-x``: Trajectory file.
-   - ``ref``: Reference file
+   - ``-ref``: Reference file
 
 
 .. warning::
 
-    These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of Amber.
 
 .. note::
 
-    Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER. 
+    Other available implementations that could be used ``sander`` or ``pmemd``, both **CPU** implementations of Amber. 
 
 	
 **Energy Minimization of side chains by restraining the backbone:**
@@ -273,7 +277,7 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
 
 .. important::
 
-	To avoid “*skinnb errors*” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large *skinnb* value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `AMBER tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
+	To avoid “*skinnb errors*” on GPU due to large box size fluctuations, the system must be equilibrated by several “short” runs using a large *skinnb* value. The number and length of the runs may vary according to the characteristic stabilization times of the system. For more information visit the `Amber tutorial on lipids <http://ambermd.org/tutorials/advanced/tutorial16/>`__.
 	
 **Periodic box equilibration in GPU code (500 ps x 9):**
 

@@ -13,10 +13,6 @@ General questions
 #. :ref:`What does SIRAH name stand for? <g1>`
 #. :ref:`In which MD engines is it possible to run the SIRAH force field? <g2>`
 #. :ref:`What does the package version stand for?  <g3>`     
-#. :ref:`Do I need a PQR file for mapping to SIRAH? <g4>`
-#. :ref:`Why do you suggest mapping from a PQR file? <g5>`
-#. :ref:`Which are the disadvantages of the PDB2PQR server? <g6>`
-#. :ref:`I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why? <g7>`
 #. :ref:`Which are the main cautions for mapping protein structures directly from experimental or atomistic force fields? <g8>`
 #. :ref:`Is it possible to account for different protonation states and pH effects in SIRAH? <g9>`
 #. :ref:`Can SIRAH account for Post-Translational Modifications (PTMs)? <g10>`
@@ -37,13 +33,13 @@ General questions
 
 
 
-.. _g1:   
+.. _g1: 
 
 - **What does SIRAH name stand for?**  
 
 	SIRAH is an acronym for “South-American Initiative for a Rapid and Accurate Hamiltonian”, but it is also the name of an historically old grape very popular in Argentina and Uruguay.  
 
-.. _g2:   
+.. _g2: 
 
 - **In which MD engines is it possible to run the SIRAH force field?** 
 
@@ -58,36 +54,6 @@ General questions
 - **What does the package version stand for?** 
 
 	The SIRAH packages are distributed as TAR files including a code to easily identify the version number, year and month of release (e.g. x2_19-03 stands for SIRAH 2.0 released on March 2019).  
-
-.. _g4:   
-
-- **Do I need a PQR file for mapping to SIRAH?** 
-
-	No, you just need a structure containing the heavy atoms and the mapped polar hydrogens, charge and vdW records are not used at all. Indeed, the frequently absent protons can be added using any software you like (e.g. pdb4amber, H++) or you can even use structures which already have them from an atomistic MD, NMR or a high resolution X-ray.  
-
-.. _g5:   
-
-- **Why do you suggest mapping from a PQR file?**   
-
-	Because processing a PDB structure through the PDB2PQR server has several advantages:  
-
-	1. The server is able to build missing residue atoms provided there is enough information (i.e. more than just the CA atom);  
-
-	2. The server not only add protons but it can predict and assign the protonation state of HIS, GLU, ASP and LYS according to the hydrogen network and the defined pH;  
-
-	3. The server can use the best compatible naming scheme (AMBER) for mapping to SIRAH. That means not only protonation states but also CYS forming disulfide bonds are detected and renamed accordingly (CYX).  
-
-.. _g6:   
-
-- **Which are the disadvantages of the PDB2PQR server?**  
-
-	The server can only handle and print residues or molecules for which it has parameters. Other residues will be removed and won't be used in pKa calculations and protonation state assignation. Examples of modified residues lacking parameters are: MSE (seleno MET), TPO (phosphorylated THY) and SEP (phosphorylated SER). A workaround for that issue is mutating the residues to their unmodified form before submitting the structure to the server. Be aware that blank lines in the input PDB file may be interpreted as an EOF (end-of-file), causing the server to stop reading the file. In that case, the output will depend on the parsed information up to that point. The server may also have problems to deal with big systems like entire viral particles, due to memory restrictions.  
-
-.. _g7:   
-
-- **I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why?**  
-
-	This is just a visualization problem of VMD when interpreting the HETATM keyword within the PQR file format. To solve the problem rename the field HETATM to ATOM or force VMD to read the PQR file as a PDB by adding the flag *-pdb* before the PQR file on the command line, which is the same as choosing explicitly PDB format in the *Molecule File Browser* at the GUI interface.  
 
 .. _g8:  
 
@@ -348,5 +314,39 @@ GROMACS questions
 
 
 
+..
+	#. :ref:`Do I need a PQR file for mapping to SIRAH? <g4>`
+	#. :ref:`Why do you suggest mapping from a PQR file? <g5>`
+	#. :ref:`Which are the disadvantages of the PDB2PQR server? <g6>`
+	#. :ref:`I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why? <g7>`
 
+..
+	.. _g4:   
 
+	- **Do I need a PQR file for mapping to SIRAH?** 
+	
+		No, you just need a structure containing the heavy atoms and the mapped polar hydrogens, charge and vdW records are not used at all. Indeed, the frequently absent protons can be added using any software you like (e.g. pdb4amber, H++) or you can even use structures which already have them from an atomistic MD, NMR or a high resolution X-ray.  
+
+	.. _g5:   
+
+	- **Why do you suggest mapping from a PQR file?**   
+
+		Because processing a PDB structure through the PDB2PQR server has several advantages:  
+
+			1. The server is able to build missing residue atoms provided there is enough information (i.e. more than just the CA atom);  
+
+			2. The server not only add protons but it can predict and assign the protonation state of HIS, GLU, ASP and LYS according to the hydrogen network and the defined pH;  
+
+			3. The server can use the best compatible naming scheme (AMBER) for mapping to SIRAH. That means not only protonation states but also CYS forming disulfide bonds are detected and renamed accordingly (CYX).  
+
+	.. _g6:   
+
+	- **Which are the disadvantages of the PDB2PQR server?**  
+
+		The server can only handle and print residues or molecules for which it has parameters. Other residues will be removed and won't be used in pKa calculations and protonation state assignation. Examples of modified residues lacking parameters are: MSE (seleno MET), TPO (phosphorylated THY) and SEP (phosphorylated SER). A workaround for that issue is mutating the residues to their unmodified form before submitting the structure to the server. Be aware that blank lines in the input PDB file may be interpreted as an EOF (end-of-file), causing the server to stop reading the file. In that case, the output will depend on the parsed information up to that point. The server may also have problems to deal with big systems like entire viral particles, due to memory restrictions.  
+
+	.. _g7:   
+	
+	- **I appended the PDB coordinates of a ligand to the PQR file and VMD makes a mess with the connectivity, why?**  
+
+		This is just a visualization problem of VMD when interpreting the HETATM keyword within the PQR file format. To solve the problem rename the field HETATM to ATOM or force VMD to read the PQR file as a PDB by adding the flag *-pdb* before the PQR file on the command line, which is the same as choosing explicitly PDB format in the *Molecule File Browser* at the GUI interface.  
