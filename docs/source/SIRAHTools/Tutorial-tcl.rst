@@ -82,34 +82,37 @@ To use all representations together, just create different representations for e
    :align: center
    :width: 100%
 
-   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we changed the **Material** of the water beads to Ghost and we hid some elements of the system.
+   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we used Licorice as **Drawing Method** for ``sirah_backbone`` and CPK for ``sirah_water`` and ``sirah_ions``. In addition, the **Material** of the water beads was changed to Ghost and we hid some elements of the system.
    
 .. tip:: 
+
 	As you can see, macros can be very useful and when saving your work in a saved state (**File** > **Save Visualization State**), macros are included in the saved state file to be used later (**File** > **Load Visualization State**).
 
 
 Structural analysis of CG systems
 __________________________________
 
+Besides the features that enhance the visualization of SIRAH CG simulations, two additional SIRAH Tools features can be used to analyze the trajectory: ``sirah_ss`` and ``sirah_backmap``. They will be discussed below.
+
 
 Secondary structural analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH classifying aminoacids in *a-helix (H)*, *extended b-sheet (E)* or, otherwise, *coil (C)* conformations,based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (`Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_). Function sirah_ss produces ASCII files of average and by-frame results, which can be visualized as a color matrix using the python script ``plot_ss.py``.
+The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
 
-To use the ``sirah_ss`` tool it is necessary to load the ``sirah_vmdtk.tcl`` script. In the vmd Tk console we could see the options that the script gives us: 
+With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to **Extensions** > **Tk Console** and entering 
 
 .. code-block:: console
 
    sirah_help 
 
-or instead view the help for the sirah_ss functionality
+to see the all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_ss`` feature by typing
 
 .. code-block:: console
 
    sirah_ss help
 
-we will get the following output:
+The output will be the following:
 
 .. code-block:: console
 
@@ -179,27 +182,28 @@ we will get the following output:
         2.        Set custom output file names
                   sirah_ss outname {mtx myss.mtx byframe myss_by_frame.xvg}
 
-In the help you can see the available flags for sirah_ss. By default the outputs of sirah_ss are the by frame file ``s_by_frame.xvg``, by residue ``ss_by_res.xvg``, average file ``ss_global.xvg`` and a matrix of secondary structure vs time ``ss.mtx``. 
 
-We can also select on which mol within VMD to perform the analysis and on which frames, e.g., in the standard case if we would like to calculate it for the whole structure (loaded on top) on all frames: 
+All the available options for ``sirah_ss`` are documented in this help. By default, four outputs are created by ``sirah_ss``: ``ss_by_frame.xvg``, ``ss_by_res.xvg``, ``ss_global.xvg`` and ``ss.mtx``. The ``ss_by_frame.xvg`` file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The ``ss_by_res.xvg`` file gives the secondary structure percentages of H, E, and C by each residue. The ``ss_global.xvg`` file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the ``ss.mtx`` file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.
 
-1. Make a selection, by defalut sirah_ss selection is *all*, but in the case that need change selection, for instance select only the protein in the Tk console we can typing: 
+We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on *top*) on all frames, we can:
 
-.. code-block:: console
+1. Make a VMD selection. By defalut sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the **Tk Console**:
 
-   set protein [atomselect top sirah_protein]
+	.. code-block:: console
 
-Here we select only the protein beads.
+		set protein [atomselect top sirah_protein]
 
-2. Calculate the secondary structure in the selection
+	Here we selected only the protein beads.
 
-.. code-block:: console
+2. Calculate the secondary structure information of the selection by typing:
 
-   sirah_ss
+	.. code-block:: console
 
-This will by default calculate the secondary structure for all frames of the trajectory of the top molecule in our selection and by default generate four files (byres, byframe, global and mtx matrix).
+		sirah_ss
 
-We have prepared a python script ``plot_ss.py`` that can be used to plot any of the output files (byres, by frame and mtx matrix). 
+This will, by default, calculate the secondary structure for all frames of the trajectory of our selection and generate the four files.
+
+Furthermore, we have prepared a python script ``plot_ss.py`` that can be used to plot three of the four files (``ss_by_frame.xvg``, ``ss_by_res.xvg`` and ``ss.mtx``). 
 
 .. important:: 
 
@@ -221,13 +225,13 @@ We have prepared a python script ``plot_ss.py`` that can be used to plot any of 
 
       python --version
 
-Once we are sure we are working on a correct python version, we can use the ``plot_ss.py`` script.
+Once we know we are using the right version of Python, we can use the ``plot_ss.py`` script by typing:
 
 .. code-block:: python
 
    python plot_ss.py -h
 
-This will show us the options we have within the script, most of the flags are to change the appearance of the graph (colors, font size, label size). 
+This will show us the options we have within the script, most of the flags are for changing the appearance of the graph (colors, font size, label size, etc). 
 
 .. code-block:: console
 
@@ -255,19 +259,19 @@ This will show us the options we have within the script, most of the flags are t
      -ttsize [title_size]  Size of the plot title (default: 16)
      --version             Print version and exit
 
-the basic use of the script is: 
+The basic use of the script is: 
 
 .. code-block:: console
 
    python plot_ss.py -i filename 
 
-``filename`` is any of the files ``ss_by_res.xvg``, ``ss_by_frame.xvg`` or ``ss.mtx``.
+where ``filename`` is one of the files ``ss_by_res.xvg``, ``ss_by_frame.xvg`` or ``ss.mtx``.
 
 In the case of the ``ss.mtx`` matrix it may take some time (no more than a couple of minutes), so be patient. 
 
 .. tip::
 
-   To use the flags that modify the colors any of the following entries is valid for example if we would like to use red as the color for the a-helix:
+   To use the flags that modify the colors, any of the following entries is valid. For example, if we would like to use red as the color for the α-helix, we can type:
 
    ``-H red``
    ``-H r````
@@ -275,11 +279,19 @@ In the case of the ``ss.mtx`` matrix it may take some time (no more than a coupl
    ``-H "r"``
    ``-H "#FF0000"``
 
-   In the case of HEX code in mandatory use quotes.
+   In the case of HEX code usage, quotation marks are required.
 
-The script generates the graphs shown in figure 5, remember that you must plot one by one, selecting the filename according to your interest.
+The script generates the plots shown in Figure 5, remember that you must plot one by one, selecting the filename according to your interest.
 
+.. figure:: /../images/sirah_tools_5.png
+   :align: center
+   :width: 100%
 
+   **Figure 5.** Outcomes of ``plot_ss.py`` where the secondary structural elements α-helix (H), extended β-sheet (E), and coil (C) are colored purple, yellow, and blue, respectively. A) The ``ss.mtx`` matrix plot shows the protein's secondary structure transitions during the 3.0 μs MD simulation. B)  The ``ss_by_frame.xvg`` plot shows the three secondary structure elements (H, E, and C) percentages by each frame of the 3.0 μs MD simulation. C) The ``ss_by_res.xvg`` plot shows the three secondary structure elements (H, E, and C) percentages by each residue during the 3.0 μs MD simulation. Here, we put the three plots together and edited the figure to use only one legend. However, the script makes three separate plots, each with its own legend.
+
+.. note::
+	
+	The files ``ss_by_res.xvg``, ``ss_by_frame.xvg``, and ``ss.mtx`` can also be plotted using other plotting programs such as `Grace <https://plasma-gate.weizmann.ac.il/Grace/>`_ or `R <https://www.r-project.org/>`_. In addition, the ``plot_ss.py`` script can also be modified or improved according to the necessity of the user.
 
 
 
