@@ -174,7 +174,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="_images/sirah_tools_4.png"><img alt="_images/sirah_tools_4.png" src="_images/sirah_tools_4.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 4.</strong> Our protein-DNA complex after using the SIRAH macros <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. To improve visualization, we changed the <strong>Material</strong> of the water beads to Ghost and we hid some elements of the system.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 4.</strong> Our protein-DNA complex after using the SIRAH macros <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. To improve visualization, we used Licorice as <strong>Drawing Method</strong> for <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code> and CPK for <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. In addition, the <strong>Material</strong> of the water beads was changed to Ghost and we hid some elements of the system.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition tip">
@@ -185,18 +185,19 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </section>
 <section id="structural-analysis-of-cg-systems">
 <h3>Structural analysis of CG systems<a class="headerlink" href="#structural-analysis-of-cg-systems" title="Link to this heading"></a></h3>
+<p>Besides the features that enhance the visualization of SIRAH CG simulations, two additional SIRAH Tools features can be used to analyze the trajectory: <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>. They will be discussed below.</p>
 <section id="secondary-structural-analysis">
 <h4>Secondary structural analysis<a class="headerlink" href="#secondary-structural-analysis" title="Link to this heading"></a></h4>
-<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> assigns secondary structures to CG proteins in SIRAH classifying aminoacids in <em>a-helix (H)</em>, <em>extended b-sheet (E)</em> or, otherwise, <em>coil (C)</em> conformations,based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (<a class="reference external" href="https://pubs.acs.org/doi/10.1021/ct5007746">Darre et al</a>). Function sirah_ss produces ASCII files of average and by-frame results, which can be visualized as a color matrix using the python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code>.</p>
-<p>To use the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> tool it is necessary to load the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> script. In the vmd Tk console we could see the options that the script gives us:</p>
+<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> assigns secondary structures to CG proteins in SIRAH, classifying residues into <em>α-helix (H)</em>, <em>extended β-sheet (E)</em> or, otherwise, <em>coil (C)</em> conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see <a class="reference external" href="https://pubs.acs.org/doi/10.1021/ct5007746">Darre et al</a> for more information). The <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code>.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, we can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <strong>Extensions</strong> &gt; <strong>Tk Console</strong> and entering</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
 </pre></div>
 </div>
-<p>or instead view the help for the sirah_ss functionality</p>
+<p>to see the all the SIRAH tools available options. Or, we can go straight to the help for the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> feature by typing</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss help</span>
 </pre></div>
 </div>
-<p>we will get the following output:</p>
+<p>The output will be the following:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_ss &lt;&lt;&lt;&lt;</span>
 
 <span class="go">version: 1.1 [Dec 2015]</span>
@@ -264,23 +265,27 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <span class="go">            sirah_ss outname {mtx myss.mtx byframe myss_by_frame.xvg}</span>
 </pre></div>
 </div>
-<p>In the help you can see the available flags for sirah_ss. By default the outputs of sirah_ss are the by frame file <code class="docutils literal notranslate"><span class="pre">s_by_frame.xvg</span></code>, by residue <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, average file <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and a matrix of secondary structure vs time <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>.</p>
-<p>We can also select on which mol within VMD to perform the analysis and on which frames, e.g., in the standard case if we would like to calculate it for the whole structure (loaded on top) on all frames:</p>
-<ol class="arabic simple">
-<li><p>Make a selection, by defalut sirah_ss selection is <em>all</em>, but in the case that need change selection, for instance select only the protein in the Tk console we can typing:</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set protein [atomselect top sirah_protein]</span>
+<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> are documented in this help. By default, four outputs are created by <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code>: <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> file gives the secondary structure percentages of H, E, and C by each residue. The <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.</p>
+<p>We can also choose on which <em>mol</em> and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on <em>top</em>) on all frames, we can:</p>
+<ol class="arabic">
+<li><p>Make a VMD selection. By defalut sirah_ss selection is <em>all</em>, but if we need to change the selection, for example to choose only the protein, we can type in the <strong>Tk Console</strong>:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set protein [atomselect top sirah_protein]</span>
 </pre></div>
 </div>
-<p>Here we select only the protein beads.</p>
-<ol class="arabic simple" start="2">
-<li><p>Calculate the secondary structure in the selection</p></li>
-</ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss</span>
+<p>Here we selected only the protein beads.</p>
+</div></blockquote>
+</li>
+<li><p>Calculate the secondary structure information of the selection by typing:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss</span>
 </pre></div>
 </div>
-<p>This will by default calculate the secondary structure for all frames of the trajectory of the top molecule in our selection and by default generate four files (byres, byframe, global and mtx matrix).</p>
-<p>We have prepared a python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> that can be used to plot any of the output files (byres, by frame and mtx matrix).</p>
+</div></blockquote>
+</li>
+</ol>
+<p>This will, by default, calculate the secondary structure for all frames of the trajectory of our selection and generate the four files.</p>
+<p>Furthermore, we have prepared a python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> that can be used to plot three of the four files (<code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>).</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script works properly with <strong>python 3.9</strong>. You can for example create a conda environment using:</p>
@@ -296,11 +301,11 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </pre></div>
 </div>
 </div>
-<p>Once we are sure we are working on a correct python version, we can use the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script.</p>
+<p>Once we know we are using the right version of Python, we can use the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script by typing:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">plot_ss</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
-<p>This will show us the options we have within the script, most of the flags are to change the appearance of the graph (colors, font size, label size).</p>
+<p>This will show us the options we have within the script, most of the flags are for changing the appearance of the graph (colors, font size, label size, etc).</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Create a PNG image from an input file (ss.mtx, ss_by_frame.xvg, or ss_by_res.xvg) generated by SIRAH.</span>
 
 <span class="go">optional arguments:</span>
@@ -326,23 +331,33 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <span class="go">  --version             Print version and exit</span>
 </pre></div>
 </div>
-<p>the basic use of the script is:</p>
+<p>The basic use of the script is:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python plot_ss.py -i filename</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">filename</span></code> is any of the files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> or <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>.</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">filename</span></code> is one of the files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> or <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>.</p>
 <p>In the case of the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> matrix it may take some time (no more than a couple of minutes), so be patient.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>To use the flags that modify the colors any of the following entries is valid for example if we would like to use red as the color for the a-helix:</p>
+<p>To use the flags that modify the colors, any of the following entries is valid. For example, if we would like to use red as the color for the α-helix, we can type:</p>
 <p><code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">red</span></code>
 <code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">r``</span></code>
 <code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;red</span></code>
 <code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;r&quot;</span></code>
 <code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;#FF0000&quot;</span></code></p>
-<p>In the case of HEX code in mandatory use quotes.</p>
+<p>In the case of HEX code usage, quotation marks are required.</p>
 </div>
-<p>The script generates the graphs shown in figure 5, remember that you must plot one by one, selecting the filename according to your interest.</p>
+<p>The script generates the plots shown in Figure 5, remember that you must plot one by one, selecting the filename according to your interest.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/sirah_tools_5.png"><img alt="_images/sirah_tools_5.png" src="_images/sirah_tools_5.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 5.</strong> Outcomes of <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> where the secondary structural elements α-helix (H), extended β-sheet (E), and coil (C) are colored purple, yellow, and blue, respectively. A) The <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> matrix plot shows the protein’s secondary structure transitions during the 3.0 μs MD simulation. B)  The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each frame of the 3.0 μs MD simulation. C) The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each residue during the 3.0 μs MD simulation. Here, we put the three plots together and edited the figure to use only one legend. However, the script makes three separate plots, each with its own legend.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> can also be plotted using other plotting programs such as <a class="reference external" href="https://plasma-gate.weizmann.ac.il/Grace/">Grace</a> or <a class="reference external" href="https://www.r-project.org/">R</a>. In addition, the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script can also be modified or improved according to the necessity of the user.</p>
+</div>
 </section>
 <section id="backmapping-analysis">
 <h4>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h4>
