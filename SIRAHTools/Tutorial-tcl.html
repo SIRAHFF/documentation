@@ -168,6 +168,162 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <h1>Structural analysis of CG systems<a class="headerlink" href="#structural-analysis-of-cg-systems" title="Link to this heading"></a></h1>
 <section id="secondary-structural-analysis">
 <h2>Secondary structural analysis<a class="headerlink" href="#secondary-structural-analysis" title="Link to this heading"></a></h2>
+<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> assigns secondary structures to CG proteins in SIRAH classifying aminoacids in <em>a-helix (H)</em>, <em>extended b-sheet (E)</em> or, otherwise, <em>coil (C)</em> conformations,based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (<a class="reference external" href="https://pubs.acs.org/doi/10.1021/ct5007746">Darre et al</a>). Function sirah_ss produces ASCII files of average and by-frame results, which can be visualized as a color matrix using the python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code>.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> tool it is necessary to load the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> script. In the vmd Tk console we could see the options that the script gives us:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
+</pre></div>
+</div>
+<p>or instead view the help for the sirah_ss functionality</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss help</span>
+</pre></div>
+</div>
+<p>we will get the following output:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_ss &lt;&lt;&lt;&lt;</span>
+
+<span class="go">version: 1.1 [Dec 2015]</span>
+
+<span class="go">Description:</span>
+
+<span class="go">  Command to calculate the secondary structure of SIRAH proteins.</span>
+
+<span class="go">  If mol is omitted then all options are applied to top molecule.</span>
+<span class="go">  By default the secondary structure data is stored in memory</span>
+<span class="go">  as the array sscache_data(mol,frame) and the coloring method</span>
+<span class="go">  &#39;Secondary Structure&#39; will display correctly. By default the</span>
+<span class="go">  script reads the sscache_data if available in memory and does</span>
+<span class="go">  not recalculate the conformation, unless flag ramach is set or</span>
+<span class="go">  the sscache_data is cleaned. The outname and noprint keywords</span>
+<span class="go">  control the generated output files.</span>
+
+<span class="go">  The current command version does not support PBC options.</span>
+
+<span class="go">Usage: sirah_ss [options]</span>
+
+<span class="go">Options: These are the optional arguments</span>
+
+<span class="go">  mol       Set the molecule ID, default top</span>
+
+<span class="go">  first     First frame to analyze</span>
+
+<span class="go">  last      Last frame to analyze</span>
+
+<span class="go">  sel       &quot;VMD selection&quot;, default &quot;all&quot;</span>
+
+<span class="go">  outname   List {} of keywords and names for output files.</span>
+<span class="go">            Keywords and default names:</span>
+
+<span class="go">              byframe   ss_by_frame.xvg</span>
+<span class="go">              byres     ss_by_res.xvg</span>
+<span class="go">              global    ss_global.xvg</span>
+<span class="go">              mtx       ss.mtx</span>
+<span class="go">              phi       phi.mtx</span>
+<span class="go">              psi       psi.mtx</span>
+
+<span class="go">  load      Load secondary structure data from file (e.g ss.mtx) into molecule (mol)</span>
+
+<span class="go">  noprint   Flag to avoid printing standard results to out files</span>
+
+<span class="go">  ramach    Flag to write phi and psi angles of residue selection (sel) to out files</span>
+
+<span class="go">  nocahe    Flag to avoid saving data to sscache_data</span>
+
+<span class="go">  now       Flag to calculate the secondary structure at current frame.</span>
+<span class="go">            No sscache_data or output file is saved.</span>
+
+<span class="go">  clean     Flag to clean the sscache_data of the selected molecule (mol) and exit</span>
+
+<span class="go">  help      Display help and exit</span>
+
+
+<span class="go">Examples:</span>
+
+<span class="go">  1.        Load secondary structure data into molecules 2 and extend the calculation</span>
+<span class="go">            sirah_ss mol 2 load ss.mtx</span>
+<span class="go">            sirah_ss mol 2</span>
+
+<span class="go">  2.        Set custom output file names</span>
+<span class="go">            sirah_ss outname {mtx myss.mtx byframe myss_by_frame.xvg}</span>
+</pre></div>
+</div>
+<p>In the help you can see the available flags for sirah_ss. By default the outputs of sirah_ss are the by frame file <code class="docutils literal notranslate"><span class="pre">s_by_frame.xvg</span></code>, by residue <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, average file <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and a matrix of secondary structure vs time <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>.</p>
+<p>We can also select on which mol within VMD to perform the analysis and on which frames, e.g., in the standard case if we would like to calculate it for the whole structure (loaded on top) on all frames:</p>
+<ol class="arabic simple">
+<li><p>Make a selection, by defalut sirah_ss selection is <em>all</em>, but in the case that need change selection, for instance select only the protein in the Tk console we can typing:</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set protein [atomselect top sirah_protein]</span>
+</pre></div>
+</div>
+<p>Here we select only the protein beads.</p>
+<ol class="arabic simple" start="2">
+<li><p>Calculate the secondary structure in the selection</p></li>
+</ol>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss</span>
+</pre></div>
+</div>
+<p>This will by default calculate the secondary structure for all frames of the trajectory of the top molecule in our selection and by default generate four files (byres, byframe, global and mtx matrix).</p>
+<p>We have prepared a python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> that can be used to plot any of the output files (byres, by frame and mtx matrix).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script works properly with <strong>python 3.9</strong>. You can for example create a conda environment using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda create --name plot_ss python=3.9</span>
+</pre></div>
+</div>
+<p>and activate it using:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">conda activate plot_ss</span>
+</pre></div>
+</div>
+<p>Finally check de python version:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python --version</span>
+</pre></div>
+</div>
+</div>
+<p>Once we are sure we are working on a correct python version, we can use the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">plot_ss</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>This will show us the options we have within the script, most of the flags are to change the appearance of the graph (colors, font size, label size).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Create a PNG image from an input file (ss.mtx, ss_by_frame.xvg, or ss_by_res.xvg) generated by SIRAH.</span>
+
+<span class="go">optional arguments:</span>
+<span class="go">  -h, --help            Show this help message and exit</span>
+<span class="go">  -i [input]            Input file name (ss.mtx, ss_by_frame.xvg, ss_by_res.xvg)</span>
+<span class="go">  -d [dpi]              DPI (dots per inch) for saving the figure (default: 300)</span>
+<span class="go">  -tu [tu]              Time unit (us or ns) (default: us)</span>
+<span class="go">  -dt [dt]              Time between consecutive frames (default: 1e-04)</span>
+<span class="go">  -H [helix-color]      Alpha-helix color (default: darkviolet)</span>
+<span class="go">  -E [beta-sheet color] Beta-sheet color (default: yellow)</span>
+<span class="go">  -C [coil color]       Coil color (default: aqua)</span>
+<span class="go">  -o [out name]         Image output name (default: input name)</span>
+<span class="go">  -wt [width]           Image width (inches) (default: 10)</span>
+<span class="go">  -ht [height]          Image height (inches) (default: 8)</span>
+<span class="go">  -xfs [xlab fontsize]  Fontsize for x-axis labels (default: 14)</span>
+<span class="go">  -yfs [ylab fontsize]  Fontsize for y-axis labels (default: 14)</span>
+<span class="go">  -yticks [y # ticks]   Number of major tick locators on the y-axis (default: 10)</span>
+<span class="go">  -xticks [x # ticks]   Number of major tick locators on the x-axis (default: 10)</span>
+<span class="go">  -xtsize [xtsize]      Size of ticks on the x-axis (default: 12)</span>
+<span class="go">  -ytsize [ytsize]      Size of ticks on the y-axis (default: 12)</span>
+<span class="go">  -title [title]        Title of the plot (default: None)</span>
+<span class="go">  -ttsize [title_size]  Size of the plot title (default: 16)</span>
+<span class="go">  --version             Print version and exit</span>
+</pre></div>
+</div>
+<p>the basic use of the script is:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python plot_ss.py -i filename</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">filename</span></code> is any of the files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> or <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>.</p>
+<p>In the case of the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> matrix it may take some time (no more than a couple of minutes), so be patient.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To use the flags that modify the colors any of the following entries is valid for example if we would like to use red as the color for the a-helix:</p>
+<p><code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">red</span></code>
+<code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">r``</span></code>
+<code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;red</span></code>
+<code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;r&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">&quot;#FF0000&quot;</span></code></p>
+<p>In the case of HEX code in mandatory use quotes.</p>
+</div>
+<p>The script generates the graphs shown in figure 5, remember that you must plot one by one, selecting the filename according to your interest.</p>
 </section>
 <section id="backmapping-analysis">
 <h2>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h2>

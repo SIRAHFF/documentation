@@ -95,5 +95,193 @@ __________________________________
 Secondary structural analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH classifying aminoacids in *a-helix (H)*, *extended b-sheet (E)* or, otherwise, *coil (C)* conformations,based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (`Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_). Function sirah_ss produces ASCII files of average and by-frame results, which can be visualized as a color matrix using the python script ``plot_ss.py``.
+
+To use the ``sirah_ss`` tool it is necessary to load the ``sirah_vmdtk.tcl`` script. In the vmd Tk console we could see the options that the script gives us: 
+
+.. code-block:: console
+
+   sirah_help 
+
+or instead view the help for the sirah_ss functionality
+
+.. code-block:: console
+
+   sirah_ss help
+
+we will get the following output:
+
+.. code-block:: console
+
+      >>>> sirah_ss <<<<
+
+      version: 1.1 [Dec 2015]
+
+      Description:
+
+        Command to calculate the secondary structure of SIRAH proteins.
+        
+        If mol is omitted then all options are applied to top molecule.
+        By default the secondary structure data is stored in memory
+        as the array sscache_data(mol,frame) and the coloring method
+        'Secondary Structure' will display correctly. By default the
+        script reads the sscache_data if available in memory and does
+        not recalculate the conformation, unless flag ramach is set or
+        the sscache_data is cleaned. The outname and noprint keywords
+        control the generated output files.
+
+        The current command version does not support PBC options.
+
+      Usage: sirah_ss [options]
+
+      Options: These are the optional arguments
+
+        mol       Set the molecule ID, default top
+        
+        first     First frame to analyze
+        
+        last      Last frame to analyze
+        
+        sel       "VMD selection", default "all"
+        
+        outname   List {} of keywords and names for output files.
+                  Keywords and default names:
+                  
+                    byframe   ss_by_frame.xvg
+                    byres     ss_by_res.xvg
+                    global    ss_global.xvg
+                    mtx       ss.mtx
+                    phi       phi.mtx
+                    psi       psi.mtx
+        
+        load      Load secondary structure data from file (e.g ss.mtx) into molecule (mol)
+        
+        noprint   Flag to avoid printing standard results to out files
+        
+        ramach    Flag to write phi and psi angles of residue selection (sel) to out files
+        
+        nocahe    Flag to avoid saving data to sscache_data
+        
+        now       Flag to calculate the secondary structure at current frame.
+                  No sscache_data or output file is saved.
+        
+        clean     Flag to clean the sscache_data of the selected molecule (mol) and exit
+        
+        help      Display help and exit
+
+
+      Examples:
+
+        1.        Load secondary structure data into molecules 2 and extend the calculation
+                  sirah_ss mol 2 load ss.mtx
+                  sirah_ss mol 2
+
+        2.        Set custom output file names
+                  sirah_ss outname {mtx myss.mtx byframe myss_by_frame.xvg}
+
+In the help you can see the available flags for sirah_ss. By default the outputs of sirah_ss are the by frame file ``s_by_frame.xvg``, by residue ``ss_by_res.xvg``, average file ``ss_global.xvg`` and a matrix of secondary structure vs time ``ss.mtx``. 
+
+We can also select on which mol within VMD to perform the analysis and on which frames, e.g., in the standard case if we would like to calculate it for the whole structure (loaded on top) on all frames: 
+
+1. Make a selection, by defalut sirah_ss selection is *all*, but in the case that need change selection, for instance select only the protein in the Tk console we can typing: 
+
+.. code-block:: console
+
+   set protein [atomselect top sirah_protein]
+
+Here we select only the protein beads.
+
+2. Calculate the secondary structure in the selection
+
+.. code-block:: console
+
+   sirah_ss
+
+This will by default calculate the secondary structure for all frames of the trajectory of the top molecule in our selection and by default generate four files (byres, byframe, global and mtx matrix).
+
+We have prepared a python script ``plot_ss.py`` that can be used to plot any of the output files (byres, by frame and mtx matrix). 
+
+.. important:: 
+
+   The ``plot_ss.py`` script works properly with **python 3.9**. You can for example create a conda environment using: 
+
+   .. code-block:: console
+
+      conda create --name plot_ss python=3.9
+
+   and activate it using:
+
+   .. code-block:: console
+
+      conda activate plot_ss
+
+   Finally check de python version:
+
+   .. code-block:: console
+
+      python --version
+
+Once we are sure we are working on a correct python version, we can use the ``plot_ss.py`` script.
+
+.. code-block:: python
+
+   python plot_ss.py -h
+
+This will show us the options we have within the script, most of the flags are to change the appearance of the graph (colors, font size, label size). 
+
+.. code-block:: console
+
+   Create a PNG image from an input file (ss.mtx, ss_by_frame.xvg, or ss_by_res.xvg) generated by SIRAH.
+
+   optional arguments:
+     -h, --help            Show this help message and exit
+     -i [input]            Input file name (ss.mtx, ss_by_frame.xvg, ss_by_res.xvg)
+     -d [dpi]              DPI (dots per inch) for saving the figure (default: 300)
+     -tu [tu]              Time unit (us or ns) (default: us)
+     -dt [dt]              Time between consecutive frames (default: 1e-04)
+     -H [helix-color]      Alpha-helix color (default: darkviolet)
+     -E [beta-sheet color] Beta-sheet color (default: yellow)
+     -C [coil color]       Coil color (default: aqua)
+     -o [out name]         Image output name (default: input name)
+     -wt [width]           Image width (inches) (default: 10)
+     -ht [height]          Image height (inches) (default: 8)
+     -xfs [xlab fontsize]  Fontsize for x-axis labels (default: 14)
+     -yfs [ylab fontsize]  Fontsize for y-axis labels (default: 14)
+     -yticks [y # ticks]   Number of major tick locators on the y-axis (default: 10)
+     -xticks [x # ticks]   Number of major tick locators on the x-axis (default: 10)
+     -xtsize [xtsize]      Size of ticks on the x-axis (default: 12)
+     -ytsize [ytsize]      Size of ticks on the y-axis (default: 12)
+     -title [title]        Title of the plot (default: None)
+     -ttsize [title_size]  Size of the plot title (default: 16)
+     --version             Print version and exit
+
+the basic use of the script is: 
+
+.. code-block:: console
+
+   python plot_ss.py -i filename 
+
+``filename`` is any of the files ``ss_by_res.xvg``, ``ss_by_frame.xvg`` or ``ss.mtx``.
+
+In the case of the ``ss.mtx`` matrix it may take some time (no more than a couple of minutes), so be patient. 
+
+.. tip::
+
+   To use the flags that modify the colors any of the following entries is valid for example if we would like to use red as the color for the a-helix:
+
+   ``-H red``
+   ``-H r````
+   ``-H "red``
+   ``-H "r"``
+   ``-H "#FF0000"``
+
+   In the case of HEX code in mandatory use quotes.
+
+The script generates the graphs shown in figure 5, remember that you must plot one by one, selecting the filename according to your interest.
+
+
+
+
+
 Backmapping analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
