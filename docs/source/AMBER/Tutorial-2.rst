@@ -1,12 +1,12 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 double stranded DNA embedded in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `Dans et al. <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 2**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/2/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 2**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/2/``
 
 
 2.1. Build CG representations
@@ -27,8 +27,11 @@ Please check both PDB structures using VMD:
 
 .. tip::
 
-  This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-  ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+	This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+	.. code-block:: bash
+
+		./sirah.amber/tools/CGCONV/cgconv.pl -h	
 
 From now on it is just normal AMBER stuff!
 
@@ -90,8 +93,8 @@ Use VMD to check how the CG model looks like:
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 2.4. Run the simulation
 ________________________
@@ -118,11 +121,12 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of Amber.
 
 .. note::
 
-    You can find example input files for sander at ``SANDER/`` and pmemd at ``PMEMD/``, within ``sirah.amber/tutorial/2/``
+    You can find example input files for CPU versions of ``sander`` and ``pmemd`` at folders ``SANDER/`` and  ``PMEMD/``, within ``sirah.amber/tutorial/2/``
+
 
 **Energy Minimization:**
 
@@ -138,7 +142,7 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 
 .. warning:: 
 
-    If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file ``dna_cg.RST``, which
+    If you are using ``sander``, to avoid the helix fraying, you must create a symbolic link to the file ``dna_cg.RST``, which
     contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
 
 
@@ -147,7 +151,7 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
         ln -s ../sirah.amber/tutorial/1/SANDER/dna_cg.RST
 
     
-    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
+    The file ``dna_cg.RST`` can only be read by ``sander``, ``pmemd`` reads a different restrain format.
 
 
 **Equilibration (NPT):**
@@ -167,13 +171,13 @@ The folder ``sirah.amber/tutorial/2/PMEMD/`` contains typical input files for en
 ________________________________
 
 That’s it! Now you can analyze the trajectory.
-Process the output trajectory to account for the Periodic Boundary Conditions (PBC):
+First, process the output trajectory to account for the Periodic Boundary Conditions (PBC):
 
-  .. code-block:: bash
+.. code-block:: bash
 
-      echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../dna_cg.prmtop -y dna_cg_md.nc -x dna_cg_md_pbc.nc --interactive
+	echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../dna_cg.prmtop -y dna_cg_md.nc -x dna_cg_md_pbc.nc --interactive
 
-**Load the processed trajectory in VMD:**
+Then, load the processed trajectory in VMD:
 
 .. code-block::
 
@@ -181,4 +185,4 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.

@@ -3,7 +3,7 @@ force field, to study protein-DNA interactions. In this approach, the protein an
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
 level. The simulated system is composed of the human TATA binding protein (TBP PDB: `1C9B <https://www.rcsb.org/structure/1c9b>`_) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: `K03455 <https://www.ncbi.nlm.nih.gov/nuccore/K03455.1>`_, **Figure 1**). Solvent effects are considered implicitly using the Generalized Born model (GB).
 
-The main references for this tutorial are: `All-atoms/CG DNA <https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f>`_ and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+The main references for this tutorial are: `Machado et al. <https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f>`__ and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`__. We strongly advise you to read these articles before starting the tutorial.
 
 .. figure:: /../images/Tuto3.png
    :alt: map to buried treasure
@@ -15,8 +15,8 @@ The main references for this tutorial are: `All-atoms/CG DNA <https://pubs.rsc.o
    
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 3**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/3/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 3**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/3/``
 
 
 3.1. Build CG representations
@@ -42,8 +42,11 @@ Please check both PDB structures in VMD:
 
 .. tip::
 
-  This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-  ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+	This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+	.. code-block:: bash
+
+		./sirah.amber/tools/CGCONV/cgconv.pl -h	
 
 From now on it is just normal AMBER stuff!
 
@@ -76,6 +79,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
    * According to AMBER version 10, 11 or 12 (14) the source file for parm99SB/bsc0 is leaprc.ff99bsc0, leaprc.ff10 or leaprc.ff12SB respectively.
 
    * The newest force field version for DNA, `bsc1 <https://www.nature.com/articles/nmeth.3658>`_, works equally well with SIRAH. 
+   
 
 3.3. Run LEaP
 ______________
@@ -86,10 +90,11 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     tleap -f gensystem.leap
 
-.. warning::
+.. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and
     expected due to the CG topology of some residues.
+
 
 This should create a topology file ``dna_hyb.prmtop`` and a coordinate file ``dna_hyb.ncrst``.
 
@@ -102,8 +107,8 @@ Use VMD to check how the multiscale model looks like:
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 3.4. Run the simulation
 ________________________
@@ -119,7 +124,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in AMBER**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -130,13 +135,14 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of Amber.
 
 .. note::
 
-   You can find example input files for CPU versions of sander and pmemd at folders ``SANDER/`` and  ``PMEMD.CPU/``, within ``sirah.amber/tutorial/3/``
-
-   This simulation is time consuming owing to the system's size. A parallel or CUDA implementation of AMBER is advised.
+	You can find example input files for CPU versions of ``sander`` and ``pmemd`` at folders ``SANDER/`` and  ``PMEMD.CPU/``, within ``sirah.amber/tutorial/3/``
+	
+	However, this simulation is time consuming owing to the system's size. A parallel or CUDA implementation of Amber is advised.
+   
 
 **Energy Minimization:**
 
@@ -152,15 +158,15 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. warning:: 
 
-        If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file ``dna_cg.RST``, which contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
-
+    If you are using ``sander``, to avoid the helix fraying, you must create a symbolic link to the file ``dna_cg.RST``, which
+    contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:
 
     .. code-block:: bash
 
-        ln -s ../sirah.amber/tutorial/3/SANDER/dna_cg.RST
-
+        ln -s ../sirah.amber/tutorial/1/SANDER/dna_cg.RST
     
-    The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.
+    The file ``dna_cg.RST`` can only be read by ``sander``, ``pmemd`` reads a different restrain format.
+
 
 
 **Equilibration:**
@@ -175,9 +181,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
    sander -O -i ../sirah.amber/tutorial/3/SANDER/md_HYB.in -p ../dna_hyb.prmtop -c dna_hyb_eq.ncrst -o dna_hyb_md.out -r dna_hyb_md.ncrst -x dna_hyb_md.nc &
 
-.. note::
 
-    You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/3/
 
 3.5. Visualizing the simulation
 ________________________________
@@ -190,4 +194,4 @@ That’s it! Now you can load, visualize and analize the trajectory file in VMD:
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.

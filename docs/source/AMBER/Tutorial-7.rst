@@ -1,5 +1,5 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a protein embedded in a lipid bilayer using explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Machado et al <https://doi.org/10.1021/acs.jctc.9b00006>`_, `Barrera et al <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `Machado et al. <https://doi.org/10.1021/acs.jctc.9b00006>`__, `Barrera et al. <https://doi.org/10.1021/acs.jctc.9b00435>`_, and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial.
 
 .. note::
@@ -9,27 +9,29 @@ We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
-    Since this is **tutorial 7**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/7/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 7**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/7/``
 	
 7.1. Build CG representations
 ______________________________
 
 .. caution::
 
-	The mapping to CG requires the correct protonation state of each residue at a given pH. See :doc:`FAQs <../FAQ>` and :ref:`Tutorial 5 <Tutorial 5>` for cautions while preparing and mapping atomistic proteins to SIRAH.
+	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and use the **PDB Reader & Manipulator** to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
+	
+	See :ref:`Tutorial 5 <Tutorial 5>` for cautions while preparing and mapping atomistic proteins to SIRAH.
 	
 Map the atomistic structure of protein `2KYV <https://www.rcsb.org/structure/2KYV>`__ to its CG representation:  
 
 .. code-block:: bash
 
-  ./sirah.amber/tools/CGCONV/cgconv.pl -i -i sirah.amber/tutorial/7/2kyv.pqr -o 2kyv_cg.pdb 
+  ./sirah.amber/tools/CGCONV/cgconv.pl -i sirah.amber/tutorial/7/2kyv.pqr -o 2kyv_cg.pdb 
   
-The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <https://www.rcsb.org/structure/2KYV>`__ structure at pH 7.0, while the output ``-o`` 2kyv_cg.pdb is its SIRAH CG representation. 
+The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <https://www.rcsb.org/structure/2KYV>`__ structure at pH **7.0**, while the output ``-o`` 2kyv_cg.pdb is its SIRAH CG representation. 
 
 .. important::
 
-	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step 2, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder sirah.amber/PDB/, which agree with the mapping scheme ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
+	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step 2, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder sirah.amber/PDB/, which agree with the mapping scheme ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
 
 .. tip::
 
@@ -38,6 +40,7 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
   .. code-block:: bash
 
     ./sirah.amber/tools/CGCONV/cgconv.pl -h
+	
 
 7.1.1. Embed the protein in a lipid bilayer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,10 +104,10 @@ Now, open the files on VMD:
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
-In the VMD main window, select *Graphics* > *Representations*. In the *Selected Atoms* text entry type:
+In the VMD main window, select *Graphics* > *Representations*. In the *Selected Atoms* box, type:
 
 .. code-block:: text
 
@@ -145,7 +148,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 
 .. seealso::
 
-   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`__.
 
 7.3. Run LEaP
 _______________
@@ -171,11 +174,6 @@ Use VMD to check how the CG model looks:
 By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graphical Representations* window you will see unwanted water near the
 hydrophobic region of the membrane and small vacuum slices at box boundaries. In the following step we will fix these issues by deleting those water molecules and reducing the box dimensions a few angstroms. See :doc:`FAQs <../FAQ>` for issues on membrane systems in Amber. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.
 
-.. tip::
-
-    VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
 
 7.4. Resize the box with CPPTRAJ
 _________________________________
@@ -250,11 +248,9 @@ The folder ``sirah.amber/tutorial/7/`` contains typical input files for energy m
 
 .. warning::
 
-    These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of Amber.
-
-.. note::
-
-    Other available implementations that could be used ``sander`` or ``pmemd``, both **CPU** implementations of Amber. 
+	These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander`` or ``pmemd``, which are both **CPU** implementations of Amber.
+	
+	However, this simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of Amber is advised.
 
 	
 **Energy Minimization of side chains by restraining the backbone:**
@@ -324,5 +320,5 @@ Now you can check the simulation using VMD:
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 	
