@@ -1,11 +1,11 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Darré et al <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al <https://doi.org/10.1021/acs.jctc.9b00006>`_ and `Machado & Pantano  <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+this tutorial are: `Darré et al. <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al. <https://doi.org/10.1021/acs.jctc.9b00006>`__ and `Machado & Pantano  <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
-    Since this is **tutorial 5**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/5/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 5**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/5/``
 
 
 5.1. Build CG representations
@@ -13,7 +13,7 @@ _____________________________
 
 .. caution::
 
-	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of Amber for best compatibility. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.    
+	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and use the **PDB Reader & Manipulator** to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.
 
 Map the protonated atomistic structure of protein `1CRN <https://www.rcsb.org/structure/1CRN>`_ to its CG representation:   
 
@@ -23,7 +23,14 @@ Map the protonated atomistic structure of protein `1CRN <https://www.rcsb.org/st
   
 The input file ``-i`` 1CRN.pqr contains the atomistic representation of `1CRN <https://www.rcsb.org/structure/1CRN>`_ structure at pH **7.0**, while the output ``-o`` 1CRN_cg.pdb is its SIRAH CG representation.
 
+.. tip::
 
+	This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+	.. code-block:: bash
+
+		./sirah.amber/tools/CGCONV/cgconv.pl -h	
+		
 .. note::
 
 	**Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.** Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there might always be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at the epsilon nitrogen (:math:`N_{\epsilon}`) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH levels. You can check the following mapping file to be sure of the compatibility: ``sirah.amber/tools/CGCONV/maps/sirah_prot.map``.    
@@ -33,13 +40,6 @@ The input file ``-i`` 1CRN.pqr contains the atomistic representation of `1CRN <h
 
 	By default charged termini are used, but it is possible to set them neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
 
-.. tip::
-
-  This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
-
-  .. code-block:: bash
-
-    ./sirah.amber/tools/CGCONV/cgconv.pl -h	
 
 Please check both PDB and PQR structures using VMD:	
 
@@ -95,7 +95,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 	
 .. seealso::
 
-   The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+       The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`__.
+	   
 
 5.3. Run LEaP 
 ____________________
@@ -110,6 +111,7 @@ Run the LEaP application to generate the molecular topology and initial coordina
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and expected due to the CG topology of some residues.
 
+
 This should create a topology file ``1CRN_cg.prmtop`` and a coordinate file ``1CRN_cg.ncrst``.
 
 Use VMD to check how the CG model looks like and particularly the presence of disulfide bonds:
@@ -122,8 +124,8 @@ Use VMD to check how the CG model looks like and particularly the presence of di
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 5.4. Run the simulation
 _______________________
@@ -154,7 +156,11 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 	These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander`` or ``pmemd``, which are both **CPU** implementations of Amber.
 
+.. note::
 
+	The same input files can be used to run on CPU with the modules ``pmemd`` or ``sander``.
+	
+	
 **Energy Minimization of side chains and solvent by restraining the backbone:**
 
 .. code-block:: bash
@@ -191,10 +197,6 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 	pmemd.cuda -O -i ../sirah.amber/tutorial/5/md_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_eq2.ncrst -o 1CRN_cg_md.out -r 1CRN_cg_md.ncrst -x 1CRN_cg_md.nc &
 
 
-.. note::
-
-	The same input files can be used to run on CPU with the modules *pmemd* or *sander*.
-	
 
 5.5. Visualizing the simulation
 ________________________________
@@ -206,7 +208,7 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 
       echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../1CRN_cg.prmtop -y 1CRN_cg_md.nc -x 1CRN_cg_md_pbc.nc --interactive
 
-**Load the processed trajectory in VMD:**
+Load the processed trajectory in VMD:
 
 .. code-block::
 
@@ -214,4 +216,4 @@ Process the output trajectory to account for the Periodic Boundary Conditions (P
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+     The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.

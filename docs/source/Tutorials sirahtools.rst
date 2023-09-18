@@ -1,7 +1,8 @@
+.. _SIRAH tools:
+
 SIRAH tools
 ===========
 
-.. _SIRAH tools:
 
 .. _vmd plugin:
 

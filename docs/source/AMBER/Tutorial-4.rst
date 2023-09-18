@@ -1,12 +1,12 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 closed circular DNA using the Generalized Born model (GB) for implicit solvent.
 
-The main references for this tutorial are: `SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+The main references for this tutorial are: `Dans et al. <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_) and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download amber>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 4**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/4/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 4**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/4/``
 
 
 4.1. Build CG representations
@@ -20,15 +20,18 @@ Map the atomistic structure of the closed circular DNA to its CG representation:
 
 .. note::
 
-	5' and 3' end residues mast be renamed to AW5, TW5, GW5 or CW5 and AW3, TW3, GW3 or CW3 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.
-
-.. tip::
-
-    This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-    ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+	The 5' and 3' end residues must be renamed to AW5, TW5, GW5 or CW5 and AW3, TW3, GW3 or CW3 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.
 
 The input file ``-i`` ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output ``-o`` ccdna_cg.pdb preserves a few of them.
 
+.. tip::
+
+	This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+	.. code-block:: bash
+
+		./sirah.amber/tools/CGCONV/cgconv.pl -h	
+		
 Please check both PDB structures using VMD:
 
 .. code-block:: bash
@@ -64,7 +67,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
 4.3. Run LEaP
 ______________
 
-Run the LEAP application to generate the molecular topology and initial coordinate files:
+Run the LEaP application to generate the molecular topology and initial coordinate files:
 
 .. code-block:: bash
 
@@ -73,7 +76,7 @@ Run the LEAP application to generate the molecular topology and initial coordina
 .. note::
 
     Warning messages about long, triangular or square bonds in ``leap.log`` file are fine and
-    expected due to the CG topology.
+    expected due to the CG topology of some residues.
 
 This should create a topology file ``ccdna_cg.prmtop`` and a coordinate file ``ccdna_cg.ncrst``.
 
@@ -87,8 +90,8 @@ Use VMD to check how the CG model looks like:
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 4.4. Run the simulation
 ________________________
@@ -103,7 +106,7 @@ The folder ``sirah.amber/tutorial/4/GPU`` contains typical input files for energ
 
 .. tip::
 
-    **Some flags used in AMBER**
+    **Some commonly used flags in AMBER**
 
    - ``-i``: Input file.
    - ``-o``: Output file.
@@ -114,11 +117,11 @@ The folder ``sirah.amber/tutorial/4/GPU`` contains typical input files for energ
 
 .. caution::
 
-    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available implementations that could be used: ``sander``  or ``pmemd``, both **CPU** implementations of AMBER.
+    These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander``  or ``pmemd``, which are both **CPU** implementations of Amber.
 
 .. note::
 
-   You can find example input files for CPU and GPU, within ``sirah.amber/tutorial/4/``
+       You can find example input files for CPU versions of ``sander`` and ``pmemd`` at folder ``CPU/``, within ``sirah.amber/tutorial/4/``
 
 
 **Energy Minimization:**
@@ -151,4 +154,4 @@ That’s it! Now you can load, visualize and analize the trajectory file in VMD:
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.

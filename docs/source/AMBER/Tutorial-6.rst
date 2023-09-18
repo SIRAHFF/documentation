@@ -1,6 +1,6 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 DMPC bilayer in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: `Barrera et al <https://doi.org/10.1021/acs.jctc.9b00435>`_ and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+this tutorial are: `Barrera et al. <https://doi.org/10.1021/acs.jctc.9b00435>`_ and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
 We strongly advise you to read these articles before starting the tutorial. You may also find interesting `this book chapter <https://pubs.aip.org/books/monograph/137/chapter-abstract/58880922/Simulating-Transmembrane-Proteins-with-the-Coarse?redirectedFrom=fulltext>`_.
 
 .. note::
@@ -10,8 +10,8 @@ We strongly advise you to read these articles before starting the tutorial. You 
 
 .. important::
 
-    Check :ref:`setting up SIRAH <download amber>` section for download and set up details before to start this tutorial.     
-    Since this is **tutorial 6**, remember to replace ``X.X`` in your folder directory. The files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/6/``
+    Check the :ref:`Setting up SIRAH <download amber>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 6**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah_[version].amber/tutorial/6/``
 	
 6.1. Build CG representations
 ______________________________
@@ -26,7 +26,7 @@ The input file ``-i`` DMPC64.pdb contains the atomistic representation of the DM
 
 .. important::
 
-	By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in **cgconv.pl**. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.   
+	By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme in ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K  . The starting configuration was created with the input file ``sirah.amber/tutorial/6/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.   
 
 .. tip::
 
@@ -36,7 +36,7 @@ The input file ``-i`` DMPC64.pdb contains the atomistic representation of the DM
 
     ./sirah.amber/tools/CGCONV/cgconv.pl -h
 
-The input file ``DMPC64.pdb`` contains all the heavy atoms composing the lipids, while the output ``DMPC64_cg.pdb`` preserves a few of them. Please check both PDB and PQR structures using VMD:	
+The input file ``DMPC64.pdb`` contains all the heavy atoms composing the lipids, while the output ``DMPC64_cg.pdb`` preserves a few of them. Please check both PDB structures using VMD:	
 
 .. code-block:: bash
 
@@ -100,8 +100,8 @@ By selecting +X, +Y and +Z periodic images from the *Periodic* tab in the *Graph
 .. tip::
 
     VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages.
+    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 6.4. Resize the box with CPPTRAJ
 _________________________________
@@ -166,11 +166,9 @@ The folder ``sirah.amber/tutorial/6/`` contains typical input files for energy m
 
 .. warning::
 
-	These input files are executed by the **GPU** implementation of *pmemd.cuda*, due to the system size we do not recommend the use of **CPU** implementations of Amber.
-
-.. note::
-
-    Other available implementations that could be used ``sander`` or ``pmemd``, both **CPU** implementations of Amber. 
+	These input files are executed by the **GPU** implementation of ``pmemd.cuda``. Other available modules are ``sander`` or ``pmemd``, which are both **CPU** implementations of Amber.
+	
+	However, this simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of Amber is advised.
 
 	
 **Energy Minimization:**
@@ -221,9 +219,9 @@ That’s it! Now you can analyze the trajectory.
 
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):
 
-  .. code-block:: bash
+.. code-block:: bash
 
-      echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../DMPC64_cg.prmtop -y DMPC64_cg_md.nc -x DMPC64_cg_md_pbc.nc --interactive
+	echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../DMPC64_cg.prmtop -y DMPC64_cg_md.nc -x DMPC64_cg_md_pbc.nc --interactive
 
 
 Now you can check the simulation using VMD:
@@ -234,7 +232,7 @@ Now you can check the simulation using VMD:
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 	
 You can also use CPPTRAJ to calculate the area per lipid:
 
