@@ -89,12 +89,12 @@
              
   <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 double stranded DNA embedded in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">SIRAH DNA</a> (latest parameters are those reported in: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">WAT4</a>, <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>.
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct900653p">Dans et al.</a> (latest parameters are those reported <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">here</a>) and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>.
 We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
-Since this is <strong>tutorial 2</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
+<p>Check the <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
+Since this is <strong>Tutorial 2</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/2/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h1>2.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
@@ -109,8 +109,10 @@ Please check both PDB structures using VMD:</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
-<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-h
+</pre></div>
+</div>
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
@@ -163,8 +165,8 @@ expected due to the CG topology of some residues.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
-ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 <section id="run-the-simulation">
@@ -191,11 +193,11 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of AMBER.</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of Amber.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can find example input files for sander at <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and pmemd at <code class="docutils literal notranslate"><span class="pre">PMEMD/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/2/</span></code></p>
+<p>You can find example input files for CPU versions of <code class="docutils literal notranslate"><span class="pre">sander</span></code> and <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> at folders <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and  <code class="docutils literal notranslate"><span class="pre">PMEMD/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/2/</span></code></p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/2/PMEMD/em_WT4.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_em.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
@@ -208,12 +210,12 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">sander</span></code>, to avoid the helix fraying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
 contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/dna_cg.RST
 </pre></div>
 </div>
-<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code> can only be read by <code class="docutils literal notranslate"><span class="pre">sander</span></code>, <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> reads a different restrain format.</p>
 </div>
 <p><strong>Equilibration (NPT):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/2/PMEMD/eq_WT4.in<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span>-ref<span class="w"> </span>dna_cg_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_cg_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_cg_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_cg_eq.nc<span class="w"> </span><span class="p">&amp;</span>
@@ -227,19 +229,17 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 <section id="visualizing-the-simulation">
 <h1>2.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.
-Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>dna_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>dna_cg_md_pbc.nc<span class="w"> </span>--interactive
+First, process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>dna_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>dna_cg_md_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
-</div></blockquote>
-<p><strong>Load the processed trajectory in VMD:</strong></p>
+<p>Then, load the processed trajectory in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="n">dna_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">dna_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 

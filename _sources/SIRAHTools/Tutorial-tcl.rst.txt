@@ -1,5 +1,5 @@
 This tutorial shows how to visualize and analize trajectory files using the **SIRAH Tools Plugin** for VMD. The main reference
-for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: `5YWS <https://www.rcsb.org/structure/5YWS>`_) and its simulation was previously dicussed by `Klein et al. 2020 <https://doi.org/10.1021/acs.jcim.0c00160>`_. We strongly advise you to read these articles before starting the tutorial.
+for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: `5YWS <https://www.rcsb.org/structure/5YWS>`_) and its simulation was previously dicussed by `Klein et al. <https://doi.org/10.1021/acs.jcim.0c00160>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. warning::
 
@@ -25,13 +25,13 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 .. tip::
 	
-	You can also load ``sirah_vmdtk.tcl`` inside VMD. Go to **Extensions** > **Tk Console** and enter:
+	You can also load ``sirah_vmdtk.tcl`` inside VMD. Go to *Extensions* > *Tk Console* and enter:
 	
 	.. code-block:: bash
 
 		source ../sirah.amber/tools/sirah_vmdtk.tcl
 	
-If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct molecular connectivity, bead size, charges, etc. will not be generated (see Figure 1). 
+If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct molecular connectivity, bead size, charges, etc. will not be generated (see **Figure 1**). 
 
 .. figure:: /../images/sirah_tools_1.png
    :align: center
@@ -56,7 +56,7 @@ In VMD, a macro is a text that represents a selection. Macros are a useful featu
 * ``sirah_water`` - select all solvent available in the force field (WT4 and WLS);
 * ``sirah_ions`` - select all ions available in the force field (KW, NaW, ClW, MgX, CaX, and Znx). 
 
-To use any SIRAH macro, go to **Graphics** > **Representations** (See Figure 2) and click on the **Create Rep** button. In the **Selected Atoms** window, erase the text that appears there and type any of the available *Singlewords* above.
+To use any SIRAH macro, go to *Graphics* > *Representations* (See **Figure 2**) and click on the *Create Rep* button. In the *Selected Atoms* box, erase the text that appears there and type any of the available *Singlewords* above.
 
 .. figure:: /../images/sirah_tools_2.png
    :align: center
@@ -65,28 +65,28 @@ To use any SIRAH macro, go to **Graphics** > **Representations** (See Figure 2) 
    **Figure 2.** Our trajectory loaded in VMD with the default representation and without any selection.
    
 .. tip::
-	 To see all available VMD's *Singlewords*, click on the **Selections** tab in the **Graphics** > **Representations** window and look through the *Singlewords* panel. You can also double-click on a singleword, and then, click on the **Apply** button to use a VMD Macro.
+	 To see all available VMD's *Singlewords*, click on the *Selections* tab in the *Graphics* > *Representations* window and look through the *Singlewords* panel. You can also double-click on a singleword, and then, click on the *Apply* button to use a VMD Macro.
 	
-Since our system is a protein−DNA complex with coordinating magnesium ions, we can use four macros: ``sirah_protein`` (see Figure 3A), ``sirah_nucleic`` (see Figure 3B), ``sirah_water`` (see Figure 3C), and ``sirah_ions`` (see Figure 3D).
+Since our system is a protein−DNA complex with coordinating magnesium ions, we can use four macros: ``sirah_protein`` (see **Figure 3A**), ``sirah_nucleic`` (see **Figure 3B**), ``sirah_water`` (see **Figure 3C**), and ``sirah_ions`` (see **Figure 3D**).
 
 .. figure:: /../images/sirah_tools_3.png
    :align: center
    :width: 100%
 
-   **Figure 3.** Each of the macros of our systems shown as a single image. A) The ``sirah_protein`` macro using the **Licorice** as **Drawing Method**. The backbone beads of the protein are pink, and the sidechains ones are blue when using the **Coloring Method** Name. B) The ``sirah_nucleic`` macro using the *Licorice* as **Drawing Method**. For the DNA, the backbone beads PX, C5X, and O3' are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the **Coloring Method** Name. C) The ``sirah_water`` macro using the *CPK* as **Drawing Method**. In this system, only WT4 was used and is colored green by the **Coloring Method** Name. D) The ``sirah_ions`` macro using the *VDW* as **Drawing Method**. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the **Coloring Method** Name.
+   **Figure 3.** Each of the macros of our systems shown as a single image. A) The ``sirah_protein`` macro using the **Licorice** as *Drawing Method*. The backbone beads of the protein are pink, and the sidechains ones are blue when using the *Coloring Method* Name. B) The ``sirah_nucleic`` macro using the *Licorice* as *Drawing Method*. For the DNA, the backbone beads PX, C5X, and O3' are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the **Coloring Method** Name. C) The ``sirah_water`` macro using the *CPK* as *Drawing Method*. In this system, only WT4 was used and is colored green by the *Coloring Method* Name. D) The ``sirah_ions`` macro using the *VDW* as *Drawing Method*. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the *Coloring Method* Name.
 
 
-To use all representations together, just create different representations for each one (clicking on the **Create Rep** button in the **Graphics** > **Representations** window). Your protein-DNA complex should now look similar to the one in Figure 4.
+To use all representations together, just create different representations for each one (clicking on the *Create Rep* button in the *Graphics* > *Representations* window). Your protein-DNA complex should now look similar to the one in **Figure 4**.
 
 .. figure:: /../images/sirah_tools_4.png
    :align: center
    :width: 100%
 
-   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we used Licorice as **Drawing Method** for ``sirah_backbone`` and CPK for ``sirah_water`` and ``sirah_ions``. In addition, the **Material** of the water beads was changed to Ghost and we hid some elements of the system.
+   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we used Licorice as *Drawing Method* for ``sirah_backbone`` and CPK for ``sirah_water`` and ``sirah_ions``. In addition, the **Material** of the water beads was changed to Ghost and we hid some elements of the system.
    
 .. tip:: 
 
-	As you can see, macros can be very useful and when saving your work in a saved state (**File** > **Save Visualization State**), macros are included in the saved state file to be used later (**File** > **Load Visualization State**).
+	As you can see, macros can be very useful and when saving your work in a saved state (*File* > *Save Visualization State*), macros are included in the saved state file to be used later (*File* > *Load Visualization State*).
 
 
 Structural analysis of CG systems
@@ -100,7 +100,7 @@ Secondary structural analysis
 
 The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
 
-With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to **Extensions** > **Tk Console** and entering 
+With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
 .. code-block:: console
 
@@ -187,7 +187,7 @@ All the available options for ``sirah_ss`` are documented in this help. By defau
 
 We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on *top*) on all frames, we can:
 
-1. Make a VMD selection. By defalut sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the **Tk Console**:
+1. Make a VMD selection. By defalut sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the *Tk Console*:
 
 	.. code-block:: console
 
@@ -281,7 +281,7 @@ In the case of the ``ss.mtx`` matrix it may take some time (no more than a coupl
 
    In the case of HEX code usage, quotation marks are required.
 
-The script generates the plots shown in Figure 5, remember that you must plot one by one, selecting the filename according to your interest.
+The script generates the plots shown in **Figure 5**, remember that you must plot one by one, selecting the filename according to your interest.
 
 .. figure:: /../images/sirah_tools_5.png
    :align: center

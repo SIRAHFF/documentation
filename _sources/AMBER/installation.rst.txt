@@ -3,18 +3,16 @@ __________________
 
 **AMBER**
 
-Amber and Amber Tools (version 16 or later) versions properly installed and running in your computer. 
+Amber and AmberTools (version 16 or later) versions properly installed and running in your computer. 
 
 .. tip::
 
-    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ lastest version of amber. See *How to obtain Amber23* section. 
-    `Install amber <https://ambermd.org/Installation.php>`_. Select according to the operating system you are using 
-    `Install amberTools <https://ambermd.org/GetAmber.php#ambertools>`_.  If you have amber installed, it is not necessary to install ambertools separately.
+    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ the lastest version of Amber and AmberTools and refer to the *How to obtain Amber23* section for more details on getting Amber23. In addition, go to the `Install Amber <https://ambermd.org/Installation.php>`_ page for specific instructions based on your operating system. If you have Amber already installed, it is unnecessary to install AmberTools separately.
 
 
 **VMD**
 
-The molecular visualization program `VMD <https://www.ks.uiuc.edu/Research/vmd/>`_, version 1.9.3 or later is (`freely available download <https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD>`_). Check the `installation guide <https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html>`_ for more instructions.
+The molecular visualization program `VMD <https://www.ks.uiuc.edu/Research/vmd/>`_, version 1.9.3 or later (`freely available download <https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD>`_). Check VMD's `Installation guide <https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html>`_ for more instructions.
 
 
 Prior knowledge
@@ -28,31 +26,31 @@ VMD.
 
     **AMBER** 
 
-    If you are not familiar with atomistic molecular dynamics simulations we strongly recommend you to perform the basic usage tutorials of Amber and AmberTools: `1.Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3.Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5.Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber23 Manual <https://ambermd.org/doc12/Amber23.pdf>`_. 
+    If you are not familiar with atomistic molecular dynamics simulations, we strongly recommend you to perform the basic usage tutorials of Amber and AmberTools: `1. Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3. Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5. Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber23 Manual <https://ambermd.org/doc12/Amber23.pdf>`_. 
 
 
     **VMD**
 
-    If you are not familiar with VMD we strongly recommend you to perform the basic usage tutorial of VMD (`using VMD <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html>`_). For more details and documentation, check `VMD User Guide <https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html>`_ and the `official VMD documentation <https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials>`_.
+    If you are not familiar with VMD, we strongly recommend you to perform the basic usage tutorial of VMD (`Using VMD <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html>`_). For more details and documentation, check `VMD User Guide <https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html>`_ and the official `VMD documentation <https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials>`_.
 
-Download and setting SIRAH
-___________________________
+Download and Setting up SIRAH
+_______________________________
 
-Download `SIRAH for amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz>`_ and uncompress it into your working directory.
+Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz>`_ and uncompress it into your working directory.
 
 .. code-block:: bash
 
     tar -xzvf sirah_x2.2_20-08.amber.tgz
 
-In case of using another version of sirah:
+If you are using a different version of SIRAH, type:
 
 .. code-block:: bash
 
     tar -xzvf sirah_[version].amber.tgz
 
 
-You will get a folder ``sirah_[version].amber/`` containing the force field definition, the SIRAH Tools in
-``sirah_[version].amber/tools/``, molecular structures to build up systems in ``sirah_[version].amber/PDB/`` and the required material to perform tutorials in ``sirah_[version].amber/tutorial/X.X/``
+You will get the folder ``sirah_[version].amber/`` containing the force field definition, SIRAH Tools in the 
+``sirah_[version].amber/tools/`` folder, molecular structures to build up systems in ``sirah_[version].amber/PDB/`` and the required material to perform the tutorials in ``sirah_[version].amber/tutorial/X.X/``
 
 .. caution::
 

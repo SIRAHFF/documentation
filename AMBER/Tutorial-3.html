@@ -91,7 +91,7 @@
 force field, to study protein-DNA interactions. In this approach, the protein and its binding region are
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
 level. The simulated system is composed of the human TATA binding protein (TBP PDB: <a class="reference external" href="https://www.rcsb.org/structure/1c9b">1C9B</a>) bounded to the TATA box at the promoter region (-64 to +13) of the Human Immunodeficiency Virus type 1 (HIV-1, GenBank: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/K03455.1">K03455</a>, <strong>Figure 1</strong>). Solvent effects are considered implicitly using the Generalized Born model (GB).</p>
-<p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">All-atoms/CG DNA</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+<p>The main references for this tutorial are: <a class="reference external" href="https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f">Machado et al.</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="../_images/Tuto3.png"><img alt="map to buried treasure" src="../_images/Tuto3.png" style="width: 100%;" /></a>
 <figcaption>
@@ -100,8 +100,8 @@ level. The simulated system is composed of the human TATA binding protein (TBP P
 </figure>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">download</span></a> section for download and set up details before to start this tutorial.
-Since this is <strong>tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
+<p>Check the <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
+Since this is <strong>Tutorial 3</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/3/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h1>3.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
@@ -119,8 +119,10 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help:
-<code class="docutils literal notranslate"><span class="pre">./sirah.amber/tools/CGCONV/cgconv.pl</span> <span class="pre">-h</span></code></p>
+<p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-h
+</pre></div>
+</div>
 </div>
 <p>From now on it is just normal AMBER stuff!</p>
 </section>
@@ -158,8 +160,8 @@ resulting coordinates are saved in the output <code class="docutils literal notr
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and
 expected due to the CG topology of some residues.</p>
 </div>
@@ -171,8 +173,8 @@ expected due to the CG topology of some residues.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
-ones. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 <section id="run-the-simulation">
@@ -186,7 +188,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <blockquote>
-<div><p><strong>Some flags used in AMBER</strong></p>
+<div><p><strong>Some commonly used flags in AMBER</strong></p>
 </div></blockquote>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-i</span></code>: Input file.</p></li>
@@ -199,12 +201,12 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available implementations that could be used: <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, both <strong>CPU</strong> implementations of AMBER.</p>
+<p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code>  or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of Amber.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can find example input files for CPU versions of sander and pmemd at folders <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and  <code class="docutils literal notranslate"><span class="pre">PMEMD.CPU/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/</span></code></p>
-<p>This simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of AMBER is advised.</p>
+<p>You can find example input files for CPU versions of <code class="docutils literal notranslate"><span class="pre">sander</span></code> and <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> at folders <code class="docutils literal notranslate"><span class="pre">SANDER/</span></code> and  <code class="docutils literal notranslate"><span class="pre">PMEMD.CPU/</span></code>, within <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/3/</span></code></p>
+<p>However, this simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of Amber is advised.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
@@ -217,13 +219,12 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<blockquote>
-<div><p>If you are using SANDER, to avoid the helix frying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
-</div></blockquote>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_cg.RST
+<p>If you are using <code class="docutils literal notranslate"><span class="pre">sander</span></code>, to avoid the helix fraying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
+contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/dna_cg.RST
 </pre></div>
 </div>
-<p>The file dna_cg.RST can only be read by SANDER, PMEMD reads a different restrain format.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code> can only be read by <code class="docutils literal notranslate"><span class="pre">sander</span></code>, <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> reads a different restrain format.</p>
 </div>
 <p><strong>Equilibration:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
@@ -232,10 +233,6 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 <p><strong>Production (10ns):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sander<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can find example input files for CPU and GPU versions of pmemd at folders PMEMD.CPU/ and PMEMD.GPU/ within sirah.amber/tutorial/3/</p>
 </div>
 </section>
 <section id="visualizing-the-simulation">
@@ -246,7 +243,7 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 
