@@ -813,10 +813,10 @@ simulation until the problem is solved.</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>The number of added WT4 molecules <strong>756</strong> may change according to the software version.</p>
+<p>The number of added WT4 molecules, <strong>756</strong>, may change according to the software version.</p>
 </div>
 <p>Remove WT4 molecules within 0.3 nm of protein:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol1.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/CPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete1.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol1.tpr
@@ -830,7 +830,7 @@ simulation until the problem is solved.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In GROMACS in versions earlier than 5.x the command  <em>gmx select</em> was named to <em>g_select</em>.</p>
+<p>In GROMACS in versions earlier than 5.x the command <em>gmx select</em> was named <em>g_select</em>.</p>
 </div>
 <p>Edit the [ molecules ] section in topol.top to include the correct number of WT4 molecules:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-c<span class="w"> </span>WP1<span class="w"> </span>1CRN_cg_sol2.gro
@@ -840,7 +840,7 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/CPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete2.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol2.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol2.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>genion<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol2.tpr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">22</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">22</span><span class="w"> </span>-nname<span class="w"> </span>ClW
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol2.tpr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">22</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">22</span><span class="w"> </span>-nname<span class="w"> </span>ClW
 </pre></div>
 </div>
 <p>When prompted, choose to substitute <strong>WT4</strong> molecules by <strong>ions</strong>.</p>
@@ -881,10 +881,10 @@ Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pag
 <p>WT4 and CG ions (NaW, ClW) are automatically set to the group <strong>SIRAH-Solvent</strong>.</p>
 </div>
 <p>Generate restraint files for the backbone GN and GO beads:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>genrestr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres.itp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres.itp
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>genrestr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres_soft.itp<span class="w"> </span>-fc<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.gro<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres_soft.itp<span class="w"> </span>-fc<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span>
 </pre></div>
 </div>
 <p>When prompted, choose the group <strong>GN_GO</strong></p>

@@ -249,7 +249,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> are documented in this help. By default, four outputs are created by <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code>: <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> file gives the secondary structure percentages of H, E, and C by each residue. The <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.</p>
 <p>We can also choose on which <em>mol</em> and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on <em>top</em>) on all frames, we can:</p>
 <ol class="arabic">
-<li><p>Make a VMD selection. By defalut sirah_ss selection is <em>all</em>, but if we need to change the selection, for example to choose only the protein, we can type in the <em>Tk Console</em>:</p>
+<li><p>Make a VMD selection. By default sirah_ss selection is <em>all</em>, but if we need to change the selection, for example to choose only the protein, we can type in the <em>Tk Console</em>:</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set protein [atomselect top sirah_protein]</span>
 </pre></div>
@@ -344,9 +344,9 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <h2>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p><a class="reference external" href="http://ambermd.org/AmberTools.php">AmberTools</a> is used to minimize the structures after the backmapping process. If you do not already have it, please install this application.</p>
+<p>After the backmapping procedure, <a class="reference external" href="http://ambermd.org/AmberTools.php">AmberTools</a> is used to minimize the structures. Please install this application if you do not already have it.</p>
 <p>If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD.</p>
-<p><code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> for default minimize the structures, however, the <code class="docutils literal notranslate"><span class="pre">nomin</span></code> option is available to override the minimization step. Thus, you can minimize the backmapping outputs using other software/force field outside VMD.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> minimizes the structures; however, the <code class="docutils literal notranslate"><span class="pre">nomin</span></code> option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing software/force fields outside of VMD.</p>
 </div>
 <p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.</p>
 <p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, we can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <em>Extensions</em> &gt; <em>Tk Console</em> and entering</p>
@@ -423,9 +423,45 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, backmapping libraries contain instructions for proteins, DNA, and ions, but user-defined procedures can be included for other models.</p>
+<p>Currently, backmapping libraries contain instructions for proteins, DNA, and ions; however, user-defined procedures for other models can be included.</p>
 </div>
-<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Since we have a 3.0 μs MD simulation with 30,000 frames,</p>
+<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the <code class="docutils literal notranslate"><span class="pre">each</span></code> option. To do that we type:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap each 1000</span>
+</pre></div>
+</div>
+<p>The output is a 300-frame file named <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code>. This file is displayed as an animated GIF in <strong>Figure 6</strong>.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/backmapping_bad.gif"><img alt="../_images/backmapping_bad.gif" src="../_images/backmapping_bad.gif" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 6.</strong> The 300-frame backmapped output from the 3.0 μs MD simulation using the default minimization arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>From the backmapped file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in <strong>Figure 7</strong>.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/CG.gif"><img alt="../_images/CG.gif" src="../_images/CG.gif" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 7.</strong> The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unusual behavior at the DNA extremities.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>This behavior is the result of excessive minimization by the default routine of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>. To bypass it, we changed the total minimization steps for <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> to 50 and for <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> to 25 with:</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Return the original CG trajectory’s <strong>top</strong> status in VMD prior to typing the command.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap each 1000 maxcyc 50 ncyc 25</span>
+</pre></div>
+</div>
+<p>The output is a new 300-frame file named <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code>, displayed as an animated GIF in <strong>Figure 8</strong>.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../_images/backmapping_ok.gif"><img alt="../_images/backmapping_ok.gif" src="../_images/backmapping_ok.gif" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 8.</strong> The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> and <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.</p>
+</div>
 </section>
 </section>
 
