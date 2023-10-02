@@ -37,3 +37,10 @@ Setting up SIRAH
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-4.rst
+
+.. _Tutorial 5 G:
+
+5. Lipid bilayers in explicit solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-5.rst
