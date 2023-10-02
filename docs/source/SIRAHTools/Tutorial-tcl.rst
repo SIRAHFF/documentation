@@ -187,7 +187,7 @@ All the available options for ``sirah_ss`` are documented in this help. By defau
 
 We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on *top*) on all frames, we can:
 
-1. Make a VMD selection. By defalut sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the *Tk Console*:
+1. Make a VMD selection. By default sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the *Tk Console*:
 
 	.. code-block:: console
 
@@ -299,12 +299,12 @@ Backmapping analysis
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. important::
-   
-   `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to minimize the structures after the backmapping process. If you do not already have it, please install this application. 
+	
+	After the backmapping procedure, `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to minimize the structures. Please install this application if you do not already have it. 
+	
+	If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD. 
 
-   If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD. 
-
-   ``sirah_backmap`` for default minimize the structures, however, the ``nomin`` option is available to override the minimization step. Thus, you can minimize the backmapping outputs using other software/force field outside VMD.
+	By default, ``sirah_backmap`` minimizes the structures; however, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing software/force fields outside of VMD.
 
 
 The utility ``sirah_backmap`` retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.
@@ -389,6 +389,50 @@ The output will be the following:
 
 .. note::
    
-   Currently, backmapping libraries contain instructions for proteins, DNA, and ions, but user-defined procedures can be included for other models.
+	Currently, backmapping libraries contain instructions for proteins, DNA, and ions; however, user-defined procedures for other models can be included.
 
-All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Since we have a 3.0 μs MD simulation with 30,000 frames, 
+
+All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the ``each`` option. To do that we type:
+
+.. code-block:: console
+
+		sirah_backmap each 1000
+
+The output is a 300-frame file named ``backmap.pdb``. This file is displayed as an animated GIF in **Figure 6**.
+
+.. figure:: /../images/backmapping_bad.gif
+   :align: center
+   :width: 100%
+    
+   **Figure 6.** The 300-frame backmapped output from the 3.0 μs MD simulation using the default minimization arguments of ``sirah_backmap``. 
+
+From the backmapped file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
+
+.. figure:: /../images/CG.gif
+   :align: center
+   :width: 100%
+   
+   **Figure 7.** The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unusual behavior at the DNA extremities.
+
+This behavior is the result of excessive minimization by the default routine of ``sirah_backmap``. To bypass it, we changed the total minimization steps for ``maxcyc`` to 50 and for ``ncyc`` to 25 with:
+
+.. caution::
+	
+	Return the original CG trajectory's **top** status in VMD prior to typing the command.
+
+.. code-block:: console
+
+		sirah_backmap each 1000 maxcyc 50 ncyc 25
+
+
+The output is a new 300-frame file named ``backmap.pdb``, displayed as an animated GIF in **Figure 8**.
+
+.. figure:: /../images/backmapping_ok.gif
+   :align: center
+   :width: 100%
+   
+   **Figure 8.** The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the ``maxcyc`` and ``ncyc`` arguments of ``sirah_backmap``.
+   
+.. warning::
+	
+	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
