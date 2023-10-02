@@ -128,13 +128,13 @@ Edit the [ molecules ] section in topol.top to include the number of added WT4 m
 
 .. caution::
 	
-	The number of added WT4 molecules **756** may change according to the software version.
+	The number of added WT4 molecules, **756**, may change according to the software version.
 
 Remove WT4 molecules within 0.3 nm of protein:
 
 .. code-block:: bash
 
-	echo q | make_ndx -f 1CRN_cg_sol1.gro -o 1CRN_cg_sol1.ndx
+	echo q | gmx make_ndx -f 1CRN_cg_sol1.gro -o 1CRN_cg_sol1.ndx
 
 .. code-block:: bash 
 
@@ -150,7 +150,7 @@ Remove WT4 molecules within 0.3 nm of protein:
 
 .. note:: 
 	
-	In GROMACS in versions earlier than 5.x the command  *gmx select* was named to *g_select*.
+	In GROMACS in versions earlier than 5.x the command *gmx select* was named *g_select*.
 
 Edit the [ molecules ] section in topol.top to include the correct number of WT4 molecules:
 
@@ -166,7 +166,7 @@ Add CG counterions and 0.15M NaCl:
 
 .. code-block:: bash
 
-	genion -s 1CRN_cg_sol2.tpr -o 1CRN_cg_ion.gro -np 22 -pname NaW -nn 22 -nname ClW
+	gmx genion -s 1CRN_cg_sol2.tpr -o 1CRN_cg_ion.gro -np 22 -pname NaW -nn 22 -nname ClW
 
 When prompted, choose to substitute **WT4** molecules by **ions**.
 
@@ -218,11 +218,11 @@ Generate restraint files for the backbone GN and GO beads:
 
 .. code-block:: bash
 
-	genrestr -f 1CRN_cg.gro -n 1CRN_cg_ion.ndx -o bkbres.itp
+	gmx genrestr -f 1CRN_cg.gro -n 1CRN_cg_ion.ndx -o bkbres.itp
 
 .. code-block:: bash
 
-	genrestr -f 1CRN_cg.gro -n 1CRN_cg_ion.ndx -o bkbres_soft.itp -fc 100 100 100
+	gmx genrestr -f 1CRN_cg.gro -n 1CRN_cg_ion.ndx -o bkbres_soft.itp -fc 100 100 100
 
 When prompted, choose the group **GN_GO**
 
@@ -290,7 +290,6 @@ Make a new folder for the run:
 .. code-block:: bash 
 	
 	gmx mdrun -deffnm 1CRN_cg_em1 &> EM1.log &
-
 
 
 **Energy Minimization of whole system:**
