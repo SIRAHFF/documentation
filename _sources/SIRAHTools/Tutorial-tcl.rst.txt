@@ -95,7 +95,7 @@ __________________________________
 Besides the features that enhance the visualization of SIRAH CG simulations, two additional SIRAH Tools features can be used to analyze the trajectory: ``sirah_ss`` and ``sirah_backmap``. They will be discussed below.
 
 
-Secondary structural analysis
+Secondary structure analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
@@ -106,7 +106,7 @@ With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` featu
 
    sirah_help 
 
-to see the all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_ss`` feature by typing
+to see all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_ss`` feature by typing
 
 .. code-block:: console
 
@@ -291,9 +291,104 @@ The script generates the plots shown in **Figure 5**, remember that you must plo
 
 .. note::
 	
-	The files ``ss_by_res.xvg``, ``ss_by_frame.xvg``, and ``ss.mtx`` can also be plotted using other plotting programs such as `Grace <https://plasma-gate.weizmann.ac.il/Grace/>`_ or `R <https://www.r-project.org/>`_. In addition, the ``plot_ss.py`` script can also be modified or improved according to the necessity of the user.
+	The files ``ss_by_res.xvg``, ``ss_by_frame.xvg``, and ``ss.mtx`` can also be plotted using other plotting programs such as `Grace <https://plasma-gate.weizmann.ac.il/Grace/>`_ or `R <https://www.r-project.org/>`_. In addition, the ``plot_ss.py`` script can be modified or improved according to the necessity of the user.
 
 
 
 Backmapping analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+
+.. important::
+   
+   `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to minimize the structures after the backmapping process. If you do not already have it, please install this application. 
+
+   If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD. 
+
+   ``sirah_backmap`` for default minimize the structures, however, the ``nomin`` option is available to override the minimization step. Thus, you can minimize the backmapping outputs using other software/force field outside VMD.
+
+
+The utility ``sirah_backmap`` retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.
+
+With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
+
+.. code-block:: console
+
+   sirah_help 
+
+to see all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_backmap`` feature by typing
+
+.. code-block:: console
+
+   sirah_backmap help
+
+The output will be the following:
+
+.. code-block:: console
+
+      >>>> sirah_backmap <<<<
+
+      version: 1.0 [Nov 2015]
+
+      Description:
+
+        Command to recover atomistic information from coarse-grained or multiscale
+        systems.
+        
+        Geometric operations are applied to reconstruct the atomic coordinates then
+        a minimization is performed to refine the structure of the system.
+        The minimization requires AMBERTOOLS 14 (free at http://ambermd.org/)
+        or later properly installed. MPI option requires mpirun and parallel
+        compilation of AMBER code. Be aware that small systems may fail to run or
+        converge in parallel execution due to decomposition problems. Notice, the
+        cuda version requires installing the AMBER licensed suite.
+        
+        By default the force field ff14SB is used for the atomistic refinement,
+        any residue or unit not defined within it will generate an execution error.
+        The minimization protocol consists on 100+50 steps of steepest descent and
+        conjugate gradient in vacuum conditions with a 0.12 nm cut-off for
+        electrostatic.
+
+        The current command version does not support PBC options, so make sure the
+        molecules are whole before running the backmap.
+        
+      Usage: sirah_backmap [options]
+
+      Options: These are the optional arguments
+
+        mol       Set the molecule ID, default top.
+
+        now       Backmap the current frame.
+        
+        first     First frame to process.
+        
+        last      Last frame to process.
+        
+        each      Process frames each number of steps, default 1.
+
+        frames    List of frames to process, e.g. {1 2 10 21 22 23 30}.
+        
+        outname   Root names for output PDB file.
+        
+        noload    Flag to avoid loading the atomistic trajectory to the VMD session.
+        
+        nomin     Flag to avoid minimizing the system.
+        
+        mpi       MPI processes to use during minimization, default 1.
+
+        cuda      Flag to use pmemd.cuda, sets gbsa on, cutoff to 999 and no MPI.
+
+        gbsa      Flag to use implicit solvation GBSA (igb=1), default off (igb=0).
+
+        cutoff    Set cut-off value (in angstroms) for non-bonded interactions, default 12.
+
+        maxcyc    Set total number of minimization steps, default 150.
+
+        ncyc      Set the initial number of steepest descent steps, default 100.
+        
+        help      Display help and exit.
+
+.. note::
+   
+   Currently, backmapping libraries contain instructions for proteins, DNA, and ions, but user-defined procedures can be included for other models.
+
+All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Since we have a 3.0 μs MD simulation with 30,000 frames, 

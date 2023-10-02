@@ -167,14 +167,14 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <section id="structural-analysis-of-cg-systems">
 <h1>Structural analysis of CG systems<a class="headerlink" href="#structural-analysis-of-cg-systems" title="Link to this heading"></a></h1>
 <p>Besides the features that enhance the visualization of SIRAH CG simulations, two additional SIRAH Tools features can be used to analyze the trajectory: <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>. They will be discussed below.</p>
-<section id="secondary-structural-analysis">
-<h2>Secondary structural analysis<a class="headerlink" href="#secondary-structural-analysis" title="Link to this heading"></a></h2>
+<section id="secondary-structure-analysis">
+<h2>Secondary structure analysis<a class="headerlink" href="#secondary-structure-analysis" title="Link to this heading"></a></h2>
 <p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> assigns secondary structures to CG proteins in SIRAH, classifying residues into <em>α-helix (H)</em>, <em>extended β-sheet (E)</em> or, otherwise, <em>coil (C)</em> conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see <a class="reference external" href="https://pubs.acs.org/doi/10.1021/ct5007746">Darre et al</a> for more information). The <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code>.</p>
 <p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, we can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <em>Extensions</em> &gt; <em>Tk Console</em> and entering</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
 </pre></div>
 </div>
-<p>to see the all the SIRAH tools available options. Or, we can go straight to the help for the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> feature by typing</p>
+<p>to see all the SIRAH tools available options. Or, we can go straight to the help for the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> feature by typing</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss help</span>
 </pre></div>
 </div>
@@ -337,11 +337,95 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> can also be plotted using other plotting programs such as <a class="reference external" href="https://plasma-gate.weizmann.ac.il/Grace/">Grace</a> or <a class="reference external" href="https://www.r-project.org/">R</a>. In addition, the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script can also be modified or improved according to the necessity of the user.</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> can also be plotted using other plotting programs such as <a class="reference external" href="https://plasma-gate.weizmann.ac.il/Grace/">Grace</a> or <a class="reference external" href="https://www.r-project.org/">R</a>. In addition, the <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> script can be modified or improved according to the necessity of the user.</p>
 </div>
 </section>
 <section id="backmapping-analysis">
 <h2>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><a class="reference external" href="http://ambermd.org/AmberTools.php">AmberTools</a> is used to minimize the structures after the backmapping process. If you do not already have it, please install this application.</p>
+<p>If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> for default minimize the structures, however, the <code class="docutils literal notranslate"><span class="pre">nomin</span></code> option is available to override the minimization step. Thus, you can minimize the backmapping outputs using other software/force field outside VMD.</p>
+</div>
+<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, we can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <em>Extensions</em> &gt; <em>Tk Console</em> and entering</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
+</pre></div>
+</div>
+<p>to see all the SIRAH tools available options. Or, we can go straight to the help for the <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> feature by typing</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap help</span>
+</pre></div>
+</div>
+<p>The output will be the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_backmap &lt;&lt;&lt;&lt;</span>
+
+<span class="go">version: 1.0 [Nov 2015]</span>
+
+<span class="go">Description:</span>
+
+<span class="go">  Command to recover atomistic information from coarse-grained or multiscale</span>
+<span class="go">  systems.</span>
+
+<span class="go">  Geometric operations are applied to reconstruct the atomic coordinates then</span>
+<span class="go">  a minimization is performed to refine the structure of the system.</span>
+<span class="go">  The minimization requires AMBERTOOLS 14 (free at http://ambermd.org/)</span>
+<span class="go">  or later properly installed. MPI option requires mpirun and parallel</span>
+<span class="go">  compilation of AMBER code. Be aware that small systems may fail to run or</span>
+<span class="go">  converge in parallel execution due to decomposition problems. Notice, the</span>
+<span class="go">  cuda version requires installing the AMBER licensed suite.</span>
+
+<span class="go">  By default the force field ff14SB is used for the atomistic refinement,</span>
+<span class="go">  any residue or unit not defined within it will generate an execution error.</span>
+<span class="go">  The minimization protocol consists on 100+50 steps of steepest descent and</span>
+<span class="go">  conjugate gradient in vacuum conditions with a 0.12 nm cut-off for</span>
+<span class="go">  electrostatic.</span>
+
+<span class="go">  The current command version does not support PBC options, so make sure the</span>
+<span class="go">  molecules are whole before running the backmap.</span>
+
+<span class="go">Usage: sirah_backmap [options]</span>
+
+<span class="go">Options: These are the optional arguments</span>
+
+<span class="go">  mol       Set the molecule ID, default top.</span>
+
+<span class="go">  now       Backmap the current frame.</span>
+
+<span class="go">  first     First frame to process.</span>
+
+<span class="go">  last      Last frame to process.</span>
+
+<span class="go">  each      Process frames each number of steps, default 1.</span>
+
+<span class="go">  frames    List of frames to process, e.g. {1 2 10 21 22 23 30}.</span>
+
+<span class="go">  outname   Root names for output PDB file.</span>
+
+<span class="go">  noload    Flag to avoid loading the atomistic trajectory to the VMD session.</span>
+
+<span class="go">  nomin     Flag to avoid minimizing the system.</span>
+
+<span class="go">  mpi       MPI processes to use during minimization, default 1.</span>
+
+<span class="go">  cuda      Flag to use pmemd.cuda, sets gbsa on, cutoff to 999 and no MPI.</span>
+
+<span class="go">  gbsa      Flag to use implicit solvation GBSA (igb=1), default off (igb=0).</span>
+
+<span class="go">  cutoff    Set cut-off value (in angstroms) for non-bonded interactions, default 12.</span>
+
+<span class="go">  maxcyc    Set total number of minimization steps, default 150.</span>
+
+<span class="go">  ncyc      Set the initial number of steepest descent steps, default 100.</span>
+
+<span class="go">  help      Display help and exit.</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, backmapping libraries contain instructions for proteins, DNA, and ions, but user-defined procedures can be included for other models.</p>
+</div>
+<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Since we have a 3.0 μs MD simulation with 30,000 frames,</p>
 </section>
 </section>
 
