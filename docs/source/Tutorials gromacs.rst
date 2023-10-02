@@ -40,7 +40,7 @@ Setting up SIRAH
 
 .. _Tutorial 5 G:
 
-5. Closed circular DNA in explicit solvent "NOMBRE"
+5. Lipid bilayers in explicit solvent
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-5.rst
