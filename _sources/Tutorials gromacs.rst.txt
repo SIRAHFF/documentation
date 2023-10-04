@@ -44,3 +44,10 @@ Setting up SIRAH
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-5.rst
+
+.. _Tutorial 6 G:
+
+5. Membrane proteins in explicit solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-6.rst
