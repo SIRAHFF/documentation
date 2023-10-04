@@ -384,7 +384,6 @@ Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and defi
        | #include "posre_Pz.itp" 
        | #endif
 
-
 6.6. Run the simulation
 ________________________
 
