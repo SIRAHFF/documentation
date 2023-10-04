@@ -15,7 +15,7 @@ for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics
 Visualization of CG systems
 ____________________________
 
-One of the features of the SIRAH Tools plugin for VMD, **sirah_vmdtk.tcl**, is that it improves the visualization and analysis of CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.
+One of the features of the SIRAH Tools plugin for VMD, ``sirah_vmdtk.tcl``, is that it improves the visualization and analysis of SIRAH's CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.
 
 After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see :ref:`Amber <AMBER>`, :ref:`GROMACS <GROMACS>` or :ref:`NAMD <NAMD>` tutorials for examples of how you can do this), load the processed trajectory and the ``sirah_vmdtk.tcl`` file in VMD:
 
@@ -31,19 +31,25 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 		source ../sirah.amber/tools/sirah_vmdtk.tcl
 	
+	or
+	
+	.. code-block:: bash
+
+		source ../sirah.ff/tools/sirah_vmdtk.tcl
+		
 If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct molecular connectivity, bead size, charges, etc. will not be generated (see **Figure 1**). 
 
 .. figure:: /../images/sirah_tools_1.png
    :align: center
    :width: 100%
 
-   **Figure 1.** SIRAH CG simulation loaded in VMD. A) The trajectory imported without the **sirah_vmdtk.tcl** plugin. B) Trajectory imported using the **sirah_vmdtk.tcl** plugin. 
+   **Figure 1.** SIRAH CG simulation loaded in VMD. A) The trajectory imported without the ``sirah_vmdtk.tcl`` plugin. B) Trajectory imported using the ``sirah_vmdtk.tcl`` plugin. 
 	
 
 SIRAH macros
 ~~~~~~~~~~~~~~~~
 
-In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, **sirah_vmdtk.tcl**, 10 macros are available:
+In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, ``sirah_vmdtk.tcl``, 10 macros are available:
 
 * ``sirah_membrane`` - select only lipid residues;
 * ``sirah_nucleic`` - select only acid nucleic residues;
@@ -98,7 +104,7 @@ Besides the features that enhance the visualization of SIRAH CG simulations, two
 Secondary structure analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
+The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al. <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
 
 With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
@@ -185,9 +191,9 @@ The output will be the following:
 
 All the available options for ``sirah_ss`` are documented in this help. By default, four outputs are created by ``sirah_ss``: ``ss_by_frame.xvg``, ``ss_by_res.xvg``, ``ss_global.xvg`` and ``ss.mtx``. The ``ss_by_frame.xvg`` file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The ``ss_by_res.xvg`` file gives the secondary structure percentages of H, E, and C by each residue. The ``ss_global.xvg`` file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the ``ss.mtx`` file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.
 
-We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the whole structure (loaded on *top*) on all frames, we can:
+We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the protein (loaded on *top*) on all frames, we can:
 
-1. Make a VMD selection. By default sirah_ss selection is *all*, but if we need to change the selection, for example to choose only the protein, we can type in the *Tk Console*:
+1. Make a VMD selection. By default ``sirah_ss`` selection is *all*, but if we need to change the selection to choose only the protein, we can type in the *Tk Console*:
 
 	.. code-block:: console
 
@@ -207,7 +213,7 @@ Furthermore, we have prepared a python script ``plot_ss.py`` that can be used to
 
 .. important:: 
 
-   The ``plot_ss.py`` script works properly with **python 3.9**. You can for example create a conda environment using: 
+   The ``plot_ss.py`` script works properly with **Python 3.9**. You can for example create a conda environment using: 
 
    .. code-block:: console
 
@@ -300,12 +306,10 @@ Backmapping analysis
 
 .. important::
 	
-	After the backmapping procedure, `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to minimize the structures. Please install this application if you do not already have it. 
+	By default, ``sirah_backmap`` minimizes the structures after the backmapping procedure. `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to accomplish the minimization task. Please install this application if you do not already have it. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD. 
 	
-	If you are using AmberTools by conda, AmberTools environment should be activated before opening VMD. 
-
-	By default, ``sirah_backmap`` minimizes the structures; however, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing software/force fields outside of VMD.
-
+	However, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD.	
+	
 
 The utility ``sirah_backmap`` retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.
 
@@ -406,7 +410,7 @@ The output is a 300-frame file named ``backmap.pdb``. This file is displayed as 
     
    **Figure 6.** The 300-frame backmapped output from the 3.0 μs MD simulation using the default minimization arguments of ``sirah_backmap``. 
 
-From the backmapped file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
+The original atomistic PDB file reveals that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
 
 .. figure:: /../images/CG.gif
    :align: center
@@ -414,7 +418,7 @@ From the backmapped file, we can observe that the DNA extremities undergo unusua
    
    **Figure 7.** The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unusual behavior at the DNA extremities.
 
-This behavior is the result of excessive minimization by the default routine of ``sirah_backmap``. To bypass it, we changed the total minimization steps for ``maxcyc`` to 50 and for ``ncyc`` to 25 with:
+We believe that this unusual backmapping outcome could be the product of excessive minimization in this particular system. In most cases, the default parameters of 100 steps of steepest descent (``ncyc``) and 50 steps of conjugate gradient (total of 150 ``maxcyc`` steps) in vacuum conditions are sufficient to produce a suitable result, but in this instance, they produced artifacts that were absent from the CG simulation. To overcome this, we modified the total minimization steps to 50 for ``maxcyc`` and to 25 for ``ncyc`` as follows:
 
 .. caution::
 	
@@ -425,14 +429,23 @@ This behavior is the result of excessive minimization by the default routine of 
 		sirah_backmap each 1000 maxcyc 50 ncyc 25
 
 
-The output is a new 300-frame file named ``backmap.pdb``, displayed as an animated GIF in **Figure 8**.
+The output is a new 300-frame file named ``backmap.pdb``, displayed as an animated GIF in **Figure 8**, exhibiting a similar behavior to the CG representation simulation.
 
 .. figure:: /../images/backmapping_ok.gif
    :align: center
    :width: 100%
    
    **Figure 8.** The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the ``maxcyc`` and ``ncyc`` arguments of ``sirah_backmap``.
-   
+
 .. warning::
 	
 	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
+	
+It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files you already have, you can always change the name of the result with the ``outname`` option:
+
+.. code-block:: console
+
+		sirah_backmap each 1000 maxcyc 50 ncyc 25 outname backmap_less_min.pdb 
+
+
+
