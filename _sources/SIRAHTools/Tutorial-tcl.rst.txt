@@ -21,7 +21,7 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 .. code-block:: bash
 
-    vmd ../5YWS_cg.psf ../5YWS_cg.gro 5YWS_cg_md_pbc.nc -e ../sirah.amber/tools/sirah_vmdtk.tcl
+    vmd ../5YWS_cg.psf ../5YWS_cg.gro 5YWS_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
 
 .. tip::
 	
@@ -36,8 +36,11 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 	.. code-block:: bash
 
 		source ../sirah.ff/tools/sirah_vmdtk.tcl
+	
+	depend on the program being used.
+
 		
-If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct molecular connectivity, bead size, charges, etc. will not be generated (see **Figure 1**). 
+If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct bead sizes, residue types, charges, etc. will not be generated (see **Figure 1**). 
 
 .. figure:: /../images/sirah_tools_1.png
    :align: center
@@ -58,11 +61,11 @@ In VMD, a macro is a text that represents a selection. Macros are a useful featu
 * ``sirah_acidic`` - select only acidic amino acid residues;
 * ``sirah_polar`` - select only polar amino acid residues;
 * ``sirah_neutral`` - select only neutral amino acid residues;
-* ``sirah_backbone`` - select the backbone beads of protein (GN, GC, and GO) or acid nucleic (PX, C5X, and O3');
+* ``sirah_backbone`` - select the backbone beads of protein (GN, GC, and GO) and acid nucleic (PX, C5X, and O3');
 * ``sirah_water`` - select all solvent available in the force field (WT4 and WLS);
-* ``sirah_ions`` - select all ions available in the force field (KW, NaW, ClW, MgX, CaX, and Znx). 
+* ``sirah_ions`` - select all ions available in the force field (KW, NaW, ClW, MgX, CaX, and ZnX). 
 
-To use any SIRAH macro, go to *Graphics* > *Representations* (See **Figure 2**) and click on the *Create Rep* button. In the *Selected Atoms* box, erase the text that appears there and type any of the available *Singlewords* above.
+To use any SIRAH macro, go to *Graphics* > *Representations* (See **Figure 2**) and click on the *Create Rep* button. In the *Selected Atoms* box, erase the text that appears there and type any of the available macros above.
 
 .. figure:: /../images/sirah_tools_2.png
    :align: center
@@ -79,7 +82,7 @@ Since our system is a protein−DNA complex with coordinating magnesium ions, we
    :align: center
    :width: 100%
 
-   **Figure 3.** Each of the macros of our systems shown as a single image. A) The ``sirah_protein`` macro using the **Licorice** as *Drawing Method*. The backbone beads of the protein are pink, and the sidechains ones are blue when using the *Coloring Method* Name. B) The ``sirah_nucleic`` macro using the *Licorice* as *Drawing Method*. For the DNA, the backbone beads PX, C5X, and O3' are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the **Coloring Method** Name. C) The ``sirah_water`` macro using the *CPK* as *Drawing Method*. In this system, only WT4 was used and is colored green by the *Coloring Method* Name. D) The ``sirah_ions`` macro using the *VDW* as *Drawing Method*. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the *Coloring Method* Name.
+   **Figure 3.** Each of the macros of our systems shown as a single image. A) The ``sirah_protein`` macro using *Licorice* as *Drawing Method*. The backbone beads of the protein are pink, and the sidechains ones are blue when using the *Coloring Method* Name. B) The ``sirah_nucleic`` macro using the *Licorice* as *Drawing Method*. For the DNA, the backbone beads PX, C5X, and O3' are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the *Coloring Method* Name. C) The ``sirah_water`` macro using the *CPK* as *Drawing Method*. In this system, only WT4 was used and is colored green by the *Coloring Method* Name. D) The ``sirah_ions`` macro using the *VDW* as *Drawing Method*. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the *Coloring Method* Name.
 
 
 To use all representations together, just create different representations for each one (clicking on the *Create Rep* button in the *Graphics* > *Representations* window). Your protein-DNA complex should now look similar to the one in **Figure 4**.
@@ -88,7 +91,7 @@ To use all representations together, just create different representations for e
    :align: center
    :width: 100%
 
-   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we used Licorice as *Drawing Method* for ``sirah_backbone`` and CPK for ``sirah_water`` and ``sirah_ions``. In addition, the **Material** of the water beads was changed to Ghost and we hid some elements of the system.
+   **Figure 4.** Our protein-DNA complex after using the SIRAH macros ``sirah_backbone``, ``sirah_water``, and ``sirah_ions``. To improve visualization, we used Licorice as *Drawing Method* for ``sirah_backbone`` and CPK for ``sirah_water`` and ``sirah_ions``. In addition, the *Material* of the water beads was changed to Ghost and we hid some elements of the system.
    
 .. tip:: 
 
@@ -104,7 +107,7 @@ Besides the features that enhance the visualization of SIRAH CG simulations, two
 Secondary structure analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Darre et al. <https://pubs.acs.org/doi/10.1021/ct5007746>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
+The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
 
 With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
@@ -235,7 +238,13 @@ Once we know we are using the right version of Python, we can use the ``plot_ss.
 
 .. code-block:: python
 
-   python plot_ss.py -h
+   python ../sirah.ff/tools/plot_ss.py -h
+   
+or
+
+.. code-block:: python
+
+   python ../sirah.amber/tools/plot_ss.py -h
 
 This will show us the options we have within the script, most of the flags are for changing the appearance of the graph (colors, font size, label size, etc). 
 
@@ -269,7 +278,13 @@ The basic use of the script is:
 
 .. code-block:: console
 
-   python plot_ss.py -i filename 
+   python ../sirah.ff/tools/plot_ss.py -i filename 
+   
+or
+
+.. code-block:: console
+
+   python ../sirah.amber/tools/plot_ss.py -i filename 
 
 where ``filename`` is one of the files ``ss_by_res.xvg``, ``ss_by_frame.xvg`` or ``ss.mtx``.
 
@@ -280,8 +295,8 @@ In the case of the ``ss.mtx`` matrix it may take some time (no more than a coupl
    To use the flags that modify the colors, any of the following entries is valid. For example, if we would like to use red as the color for the α-helix, we can type:
 
    ``-H red``
-   ``-H r````
-   ``-H "red``
+   ``-H r``
+   ``-H "red"``
    ``-H "r"``
    ``-H "#FF0000"``
 
@@ -306,7 +321,7 @@ Backmapping analysis
 
 .. important::
 	
-	By default, ``sirah_backmap`` minimizes the structures after the backmapping procedure. `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to accomplish the minimization task. Please install this application if you do not already have it. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD. 
+	By default, ``sirah_backmap`` minimizes the structures after the backmapping procedure. `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to accomplish the minimization task. Make sure AmberTools and the $AMBERHOME environment are set up properly. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD. 
 	
 	However, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD.	
 	
@@ -393,8 +408,8 @@ The output will be the following:
 
 .. note::
    
-	Currently, backmapping libraries contain instructions for proteins, DNA, and ions; however, user-defined procedures for other models can be included.
-
+	Currently, backmapping libraries contain instructions for solute (proteins, DNA, and metal ions).
+	
 
 All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the ``each`` option. To do that we type:
 
@@ -408,17 +423,22 @@ The output is a 300-frame file named ``backmap.pdb``. This file is displayed as 
    :align: center
    :width: 100%
     
-   **Figure 6.** The 300-frame backmapped output from the 3.0 μs MD simulation using the default minimization arguments of ``sirah_backmap``. 
+   **Figure 6.** The 300-frame backmapped all-atom output from the 3.0 μs MD simulation using the default minimization arguments of ``sirah_backmap``. 
 
+.. warning::
+	
+	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
+	
+	
 The original atomistic PDB file reveals that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
 
 .. figure:: /../images/CG.gif
    :align: center
    :width: 100%
    
-   **Figure 7.** The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unusual behavior at the DNA extremities.
+   **Figure 7.** The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unreal behavior at the DNA extremities.
 
-We believe that this unusual backmapping outcome could be the product of excessive minimization in this particular system. In most cases, the default parameters of 100 steps of steepest descent (``ncyc``) and 50 steps of conjugate gradient (total of 150 ``maxcyc`` steps) in vacuum conditions are sufficient to produce a suitable result, but in this instance, they produced artifacts that were absent from the CG simulation. To overcome this, we modified the total minimization steps to 50 for ``maxcyc`` and to 25 for ``ncyc`` as follows:
+In most cases, the default parameters of 100 steps of steepest descent (``ncyc``) and 50 steps of conjugate gradient (total of 150 ``maxcyc`` steps) in vacuum conditions are sufficient to produce a correct result. However, in this instance, they produced artifactual conformations that were absent in the CG simulation. To solve this, we modified the total minimization steps to 50 for ``maxcyc`` and to 25 for ``ncyc`` as follows:
 
 .. caution::
 	
@@ -437,10 +457,7 @@ The output is a new 300-frame file named ``backmap.pdb``, displayed as an animat
    
    **Figure 8.** The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the ``maxcyc`` and ``ncyc`` arguments of ``sirah_backmap``.
 
-.. warning::
-	
-	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
-	
+
 It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files you already have, you can always change the name of the result with the ``outname`` option:
 
 .. code-block:: console
@@ -448,4 +465,6 @@ It is important to try different combinations of settings to find the one that w
 		sirah_backmap each 1000 maxcyc 50 ncyc 25 outname backmap_less_min.pdb 
 
 
+VMD Command-Line options
+____________________________
 
