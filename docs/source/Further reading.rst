@@ -15,9 +15,17 @@ SIRAH Applications
 .. |Review-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.jsb.2023.107985
    :alt: Citation
 
+*    **A current review of coarse-graining models and applications for proteins (including SIRAH)**:
+	
+	*     Borges-Araújo, L.; Patmanidis, I.; Singh, A. P.; Santos, L. H. S.; Sieradzan, A. K.; Vanni, S.; Czaplewski, C.; Pantano, S.; Wataru Shinoda, W.; Monticelli, L.; Liwo, A.; Marrink, S. J.; Souza, P. C. T. Pragmatic Coarse-Graining of Proteins: Models and Applications. Journal of Chemical Theory and Computation. 2023. |Review-2| |Review2-cit| 
 
-
-
+.. |Review-2| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.3c00733-blue?color=blue
+   :alt: Access the paper
+   :target: https://doi.org/10.1021/acs.jctc.3c00733
+   
+.. |Review2-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.3c00733
+   :alt: Citation
+   
 *    **Protein-DNA complexes** and **Membrane Proteins**:   
 
 	.. |MemProt-0| image:: https://img.shields.io/badge/DOI-10.1016%2Fj.bbadis.2016.09.007-blue
