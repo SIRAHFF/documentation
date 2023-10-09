@@ -21,7 +21,7 @@ If **SIRAH** was beneficial to your work, please cite one or more of these SIRAH
    
 .. |SIRAH1.0-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Fct5007746
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=6310976936290764166
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=6310976936290764166
    
 -    Darré, L.; Machado, M. R.; Brandner, A. F.; González, H. C.; Ferreira, S.; Pantano, S. SIRAH: A Structurally Unbiased Coarse-Grained Force Field for Proteins with Aqueous Solvation and Long-Range Electrostatics. Journal of Chemical Theory and Computation 2015, 11, 723–739. |SIRAH1.0| |SIRAH1.0-cit|  
 
@@ -34,7 +34,7 @@ If **SIRAH** was beneficial to your work, please cite one or more of these SIRAH
 
 .. |SIRAH2.0-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.9b00006
 	:alt: Citation
-	:target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=5136612330374064800
+	:target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=5136612330374064800
 	
 -    Machado, M. R.; Barrera, E. E.; Klein, F.; Soñora, M.; Silva, S.; Pantano, S. The SIRAH 2.0 Force Field: Altius, Fortius, Citius. Journal of Chemical Theory and Computation 2019, 15, 2719–2733. |SIRAH2.0|  |SIRAH2.0-cit|
 
@@ -51,7 +51,7 @@ In addition, please include the following citations if the following parameters 
 
 .. |PostTrans-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jcim.9b00900
    :alt: Citation  
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=4741245244387638059
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=4741245244387638059
    
 *    **Post-translational modifications**:
 
@@ -64,7 +64,7 @@ In addition, please include the following citations if the following parameters 
    
 .. |Metal-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jcim.0c00160
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=2583810250614166915
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=2583810250614166915
    
 *    **Metal ions**:
 
@@ -78,7 +78,7 @@ In addition, please include the following citations if the following parameters 
 
 .. |DNA-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Fct900653p
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=12499613729973955498
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=12499613729973955498
 	
 *    **DNA**:
 
@@ -93,7 +93,7 @@ In addition, please include the following citations if the following parameters 
    
 .. |FatSirah-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.9b00435
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=13191972720970339574
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=13191972720970339574
    
 *    **Lipids**:
 
@@ -107,7 +107,7 @@ In addition, please include the following citations if the following parameters 
 
 .. |Solvent-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Fct100379f
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=11533073503238221292
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=11533073503238221292
 
 *    **Solvent with simple electrolytes**:
 
@@ -116,17 +116,24 @@ In addition, please include the following citations if the following parameters 
 .. |MC1| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.7b00659-blue
    :alt: Access the paper
    :target: https://doi.org/10.1021/acs.jctc.7b00659
-   
+
+.. |MC1-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.7b00659
+   :alt: Citation
+   :target: https://scholar.google.com/scholar?cites=16637391138490147245
 
 .. |MC2| image:: https://img.shields.io/badge/DOI-10.1098%2Frsfs.2018.0085-blue?label=DOI
    :alt: Access the paper
    :target: https://doi.org/10.1098/rsfs.2018.0085
+
+.. |MC2-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1098%2Frsfs.2018.0085
+   :alt: Citation
+   :target: https://scholar.google.com/scholar?cites=5473055142318037579
    
 *    **Multiscale Simulations**:
 
-	*    Machado, M. R.; Zeida, A.; Darré, L.; Pantano, S. From quantum to subcellular scales: multi-scale simulation approaches and the SIRAH force field. Interface Focus 2019, 9, 20180085. |MC2|     
+	*    Machado, M. R.; Zeida, A.; Darré, L.; Pantano, S. From quantum to subcellular scales: multi-scale simulation approaches and the SIRAH force field. Interface Focus 2019, 9, 20180085. |MC2|  |MC2-cit|   
 	
-	*    Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |MC1|   
+	*    Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |MC1| |MC1-cit|  
 
 
 If **SIRAH Tools** were used please cite:  
@@ -138,7 +145,7 @@ If **SIRAH Tools** were used please cite:
 
 .. |Tools-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1093%2Fbioinformatics%2Fbtw020
    :alt: Citation
-   :target: https://scholar.google.com.uy/scholar?oi=bibs&hl=es&cites=8075862653806269057
+   :target: https://scholar.google.com/scholar?oi=bibs&hl=es&cites=8075862653806269057
    
 -    Machado, M. R.; Pantano, S. SIRAH tools: mapping, backmapping and visualization of coarse-grained models. Bioinformatics 2016, 32, 1568–1570. |Tools| |Tools-cit|  
 

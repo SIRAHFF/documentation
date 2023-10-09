@@ -21,7 +21,7 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 .. code-block:: bash
 
-    vmd ../5YWS_cg.psf ../5YWS_cg.gro 5YWS_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
+    vmd ../5YWS_cg.psf 5YWS_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
 
 .. tip::
 	
@@ -37,7 +37,37 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 		source ../sirah.ff/tools/sirah_vmdtk.tcl
 	
-	depend on the program being used.
+	depending on the program being used.
+
+With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
+
+.. code-block:: console
+
+   sirah_help 
+
+The output will be the following:
+
+.. code-block:: console
+	
+	>>>> sirah_help <<<<
+
+	Manual version: 1.1 \[Mar 2019\]
+
+	Description:
+
+		Command to access the User Manual pages of SIRAH Tools
+
+	Usage: sirah_help CommandName
+
+	CommandName       Function
+	-----------------------------------------------------------------
+		sirah_ss        Calculate secondary structure in SIRAH proteins
+		sirah_backmap   Backmap coarse-grained to atomistic systems
+		sirah_restype   Set SIRAH residue types
+		sirah_radii     Set SIRAH vdW radii
+		sirah_macros    Set useful selection macros
+		sirah_help      Access User Manual pages
+	-----------------------------------------------------------------
 
 		
 If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded, but the correct bead sizes, residue types, charges, etc. will not be generated (see **Figure 1**). 
@@ -194,21 +224,11 @@ The output will be the following:
 
 All the available options for ``sirah_ss`` are documented in this help. By default, four outputs are created by ``sirah_ss``: ``ss_by_frame.xvg``, ``ss_by_res.xvg``, ``ss_global.xvg`` and ``ss.mtx``. The ``ss_by_frame.xvg`` file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The ``ss_by_res.xvg`` file gives the secondary structure percentages of H, E, and C by each residue. The ``ss_global.xvg`` file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the ``ss.mtx`` file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.
 
-We can also choose on which *mol* and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the protein (loaded on *top*) on all frames, we can:
+We can also choose which molecule and which frames to analyze. To calculate the secondary structure for the protein (loaded on *top*) on all frames, for instance, we must modify the default ``sirah_ss`` selection from *all* to *sirah_protein*. To achieve this, we can enter: 
 
-1. Make a VMD selection. By default ``sirah_ss`` selection is *all*, but if we need to change the selection to choose only the protein, we can type in the *Tk Console*:
+.. code-block:: console
 
-	.. code-block:: console
-
-		set protein [atomselect top sirah_protein]
-
-	Here we selected only the protein beads.
-
-2. Calculate the secondary structure information of the selection by typing:
-
-	.. code-block:: console
-
-		sirah_ss
+		sirah_ss sel "sirah_protein"
 
 This will, by default, calculate the secondary structure for all frames of the trajectory of our selection and generate the four files.
 
@@ -468,3 +488,82 @@ It is important to try different combinations of settings to find the one that w
 VMD Command-Line options
 ____________________________
 
+If you need to perform non-interactive analysis on large trajectories or if a graphical user interface is not available, you can also execute the SIRAH Tools plugin using VMD text mode. When in text mode, VMD does not provide a window for graphical output, but many of its features are available. To launch VMD in text mode, the ``-dispdev text`` and ``-f`` flags are appended to the command line used before to load the trajectory, as shown below: 
+
+.. code-block:: bash
+
+    vmd -dispdev text -f ../5YWS_cg.psf 5YWS_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
+
+The output will be similar to the following:
+	
+.. code-block:: console
+
+	Info) VMD for LINUXAMD64, version 1.9.3 (November 30, 2016)
+	Info) http://www.ks.uiuc.edu/Research/vmd/                        
+	Info) Email questions and bug reports to vmd@ks.uiuc.edu          
+	Info) Please include this reference in published work using VMD:  
+	Info)    Humphrey, W., Dalke, A. and Schulten, K., `VMD - Visual  
+	Info)    Molecular Dynamics', J. Molec. Graphics 1996, 14.1, 33-38.
+	Info) -------------------------------------------------------------
+	Info) Multithreading available, 12 CPUs detected.
+	Info)   CPU features: SSE2 AVX AVX2 FMA
+	Info) Free system memory: 58GB (93%)
+	Info) File loading in progress, please wait.
+	Info) Using plugin psf for structure file 5YWS_cg.psf
+	psfplugin) WARNING: no impropers defined in PSF file.
+	psfplugin) no cross-terms defined in PSF file.
+	Info) Analyzing structure ...
+	Info)    Atoms: 7270
+	Info)    Bonds: 10237
+	Info)    Angles: 4791  Dihedrals: 3727  Impropers: 0  Cross-terms: 0
+	Info)    Bondtypes: 0  Angletypes: 0  Dihedraltypes: 0  Impropertypes: 0
+	Info)    Residues: 1843
+	Info)    Waters: 0
+	Info)    Segments: 4
+	Info)    Fragments: 1592   Protein: 0   Nucleic: 0
+	Info) Using plugin xtc for coordinates from file 5YWS_cg_md_pbc.xtc
+	Info) Coordinate I/O rate 1564.4 frames/sec, 129 MB/sec, 19.2 sec
+	Info) Finished with coordinate file 5YWS_cg_md1_pbc.xtc.
+	SIRAH radii were set
+	SIRAH selection macros were set
+	SIRAH coloring mothods were set
+	SIRAH Tool kit for VMD was loaded. Use sirah_help to access the User Manual pages
+	vmd >
+
+The final lines indicate that SIRAH Tools were loaded correctly. Thus, in the `vmd >` prompt, for instance, we can type ``sirah_help``:
+
+.. code-block:: console
+	
+	vmd > sirah_help
+	
+In this mode, the ``sirah_ss`` and ``sirah_backmap`` features can also be utilized. For example, if we want to calculate the secondary structure for the protein (loaded on *top*) on all frames, we type:
+
+.. code-block:: console
+	
+	vmd > sirah_ss sel "sirah_protein"
+         0    25   50   75   100 %
+	Progress |||||||||||||||||||||
+	Starting sscache... Done!
+	SUMMARY: <H> 36.8% <E> 16.2% <C> 47.1%
+
+Additionally, you can construct customized scripts, that contain vmd commands, to load and process your trajectories with SIRAH Tools in VMD text mode. For example, we created a ``sirah_dispdev.tcl`` file:
+
+.. code-block:: console
+	
+	# vmd_commands.tcl
+	mol new 5YWS_cg.psf
+	mol addfile 5YWS_cg_md_pbc.xtc waitfor all
+	source sirah.ff/tools/sirah_vmdtk.tcl
+	sirah_ss
+	sirah_backmap now nomin outname last_frame_backmap
+	quit
+	
+This script will load the topology ``5YWS_cg.psf``, the trajectory ``5YWS_cg_md_pbc.xtc``, and ``sirah_vmdtk.tcl`` files. Then, process secondary structure with ``sirah_ss`` and create a backmapped pdb of the last frame with ``sirah_backmap`` with the name ``last_frame_backmap.pdb``. With the ``quit`` command, VMD is closed. To read the script, we type:
+
+.. code-block:: bash
+
+    vmd -dispdev text -e sirah_dispdev.tcl	
+	
+.. tip::
+
+	You can find additional information on VMD command-line options `here <https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html>`__ and available text mode features `here <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html>`__.

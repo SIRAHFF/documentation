@@ -101,7 +101,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <h1>Visualization of CG systems<a class="headerlink" href="#visualization-of-cg-systems" title="Link to this heading"></a></h1>
 <p>One of the features of the SIRAH Tools plugin for VMD, <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code>, is that it improves the visualization and analysis of SIRAH’s CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.</p>
 <p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <a class="reference internal" href="../Tutorials%20amber.html#id1"><span class="std std-ref">Amber</span></a>, <a class="reference internal" href="../Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="../Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>../5YWS_cg.gro<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -114,7 +114,33 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
-<p>depend on the program being used.</p>
+<p>depending on the program being used.</p>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, we can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <em>Extensions</em> &gt; <em>Tk Console</em> and entering</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
+</pre></div>
+</div>
+<p>The output will be the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_help &lt;&lt;&lt;&lt;</span>
+
+<span class="go">Manual version: 1.1 \[Mar 2019\]</span>
+
+<span class="go">Description:</span>
+
+<span class="go">        Command to access the User Manual pages of SIRAH Tools</span>
+
+<span class="go">Usage: sirah_help CommandName</span>
+
+<span class="go">CommandName       Function</span>
+<span class="go">-----------------------------------------------------------------</span>
+<span class="go">        sirah_ss        Calculate secondary structure in SIRAH proteins</span>
+<span class="go">        sirah_backmap   Backmap coarse-grained to atomistic systems</span>
+<span class="go">        sirah_restype   Set SIRAH residue types</span>
+<span class="go">        sirah_radii     Set SIRAH vdW radii</span>
+<span class="go">        sirah_macros    Set useful selection macros</span>
+<span class="go">        sirah_help      Access User Manual pages</span>
+<span class="go">-----------------------------------------------------------------</span>
+</pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is not loaded in VMD, the trajectory will still be loaded, but the correct bead sizes, residue types, charges, etc. will not be generated (see <strong>Figure 1</strong>).</p>
 <figure class="align-center" id="id2">
@@ -252,24 +278,10 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </pre></div>
 </div>
 <p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> are documented in this help. By default, four outputs are created by <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code>: <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> file gives the secondary structure percentages of H, E, and C by each residue. The <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.</p>
-<p>We can also choose on which <em>mol</em> and on which frames to do the analysis within VMD. For example, if we want to calculate the secondary structure for the protein (loaded on <em>top</em>) on all frames, we can:</p>
-<ol class="arabic">
-<li><p>Make a VMD selection. By default <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> selection is <em>all</em>, but if we need to change the selection to choose only the protein, we can type in the <em>Tk Console</em>:</p>
-<blockquote>
-<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">set protein [atomselect top sirah_protein]</span>
+<p>We can also choose which molecule and which frames to analyze. To calculate the secondary structure for the protein (loaded on <em>top</em>) on all frames, for instance, we must modify the default <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> selection from <em>all</em> to <em>sirah_protein</em>. To achieve this, we can enter:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss sel &quot;sirah_protein&quot;</span>
 </pre></div>
 </div>
-<p>Here we selected only the protein beads.</p>
-</div></blockquote>
-</li>
-<li><p>Calculate the secondary structure information of the selection by typing:</p>
-<blockquote>
-<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-</ol>
 <p>This will, by default, calculate the secondary structure for all frames of the trajectory of our selection and generate the four files.</p>
 <p>Furthermore, we have prepared a python script <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> that can be used to plot three of the four files (<code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>).</p>
 <div class="admonition important">
@@ -482,6 +494,74 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </section>
 <section id="vmd-command-line-options">
 <h1>VMD Command-Line options<a class="headerlink" href="#vmd-command-line-options" title="Link to this heading"></a></h1>
+<p>If you need to perform non-interactive analysis on large trajectories or if a graphical user interface is not available, you can also execute the SIRAH Tools plugin using VMD text mode. When in text mode, VMD does not provide a window for graphical output, but many of its features are available. To launch VMD in text mode, the <code class="docutils literal notranslate"><span class="pre">-dispdev</span> <span class="pre">text</span></code> and <code class="docutils literal notranslate"><span class="pre">-f</span></code> flags are appended to the command line used before to load the trajectory, as shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-f<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<p>The output will be similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Info) VMD for LINUXAMD64, version 1.9.3 (November 30, 2016)</span>
+<span class="go">Info) http://www.ks.uiuc.edu/Research/vmd/</span>
+<span class="go">Info) Email questions and bug reports to vmd@ks.uiuc.edu</span>
+<span class="go">Info) Please include this reference in published work using VMD:</span>
+<span class="go">Info)    Humphrey, W., Dalke, A. and Schulten, K., `VMD - Visual</span>
+<span class="go">Info)    Molecular Dynamics&#39;, J. Molec. Graphics 1996, 14.1, 33-38.</span>
+<span class="go">Info) -------------------------------------------------------------</span>
+<span class="go">Info) Multithreading available, 12 CPUs detected.</span>
+<span class="go">Info)   CPU features: SSE2 AVX AVX2 FMA</span>
+<span class="go">Info) Free system memory: 58GB (93%)</span>
+<span class="go">Info) File loading in progress, please wait.</span>
+<span class="go">Info) Using plugin psf for structure file 5YWS_cg.psf</span>
+<span class="go">psfplugin) WARNING: no impropers defined in PSF file.</span>
+<span class="go">psfplugin) no cross-terms defined in PSF file.</span>
+<span class="go">Info) Analyzing structure ...</span>
+<span class="go">Info)    Atoms: 7270</span>
+<span class="go">Info)    Bonds: 10237</span>
+<span class="go">Info)    Angles: 4791  Dihedrals: 3727  Impropers: 0  Cross-terms: 0</span>
+<span class="go">Info)    Bondtypes: 0  Angletypes: 0  Dihedraltypes: 0  Impropertypes: 0</span>
+<span class="go">Info)    Residues: 1843</span>
+<span class="go">Info)    Waters: 0</span>
+<span class="go">Info)    Segments: 4</span>
+<span class="go">Info)    Fragments: 1592   Protein: 0   Nucleic: 0</span>
+<span class="go">Info) Using plugin xtc for coordinates from file 5YWS_cg_md_pbc.xtc</span>
+<span class="go">Info) Coordinate I/O rate 1564.4 frames/sec, 129 MB/sec, 19.2 sec</span>
+<span class="go">Info) Finished with coordinate file 5YWS_cg_md1_pbc.xtc.</span>
+<span class="go">SIRAH radii were set</span>
+<span class="go">SIRAH selection macros were set</span>
+<span class="go">SIRAH coloring mothods were set</span>
+<span class="go">SIRAH Tool kit for VMD was loaded. Use sirah_help to access the User Manual pages</span>
+<span class="go">vmd &gt;</span>
+</pre></div>
+</div>
+<p>The final lines indicate that SIRAH Tools were loaded correctly. Thus, in the <cite>vmd &gt;</cite> prompt, for instance, we can type <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; sirah_help</span>
+</pre></div>
+</div>
+<p>In this mode, the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> features can also be utilized. For example, if we want to calculate the secondary structure for the protein (loaded on <em>top</em>) on all frames, we type:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; sirah_ss sel &quot;sirah_protein&quot;</span>
+<span class="go"> 0    25   50   75   100 %</span>
+<span class="go">Progress |||||||||||||||||||||</span>
+<span class="go">Starting sscache... Done!</span>
+<span class="go">SUMMARY: &lt;H&gt; 36.8% &lt;E&gt; 16.2% &lt;C&gt; 47.1%</span>
+</pre></div>
+</div>
+<p>Additionally, you can construct customized scripts, that contain vmd commands, to load and process your trajectories with SIRAH Tools in VMD text mode. For example, we created a <code class="docutils literal notranslate"><span class="pre">sirah_dispdev.tcl</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>vmd_commands.tcl
+<span class="go">mol new 5YWS_cg.psf</span>
+<span class="go">mol addfile 5YWS_cg_md_pbc.xtc waitfor all</span>
+<span class="go">source sirah.ff/tools/sirah_vmdtk.tcl</span>
+<span class="go">sirah_ss</span>
+<span class="go">sirah_backmap now nomin outname last_frame_backmap</span>
+<span class="go">quit</span>
+</pre></div>
+</div>
+<p>This script will load the topology <code class="docutils literal notranslate"><span class="pre">5YWS_cg.psf</span></code>, the trajectory <code class="docutils literal notranslate"><span class="pre">5YWS_cg_md_pbc.xtc</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> files. Then, process secondary structure with <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> and create a backmapped pdb of the last frame with <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> with the name <code class="docutils literal notranslate"><span class="pre">last_frame_backmap.pdb</span></code>. With the <code class="docutils literal notranslate"><span class="pre">quit</span></code> command, VMD is closed. To read the script, we type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-e<span class="w"> </span>sirah_dispdev.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can find additional information on VMD command-line options <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html">here</a> and available text mode features <a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html">here</a>.</p>
+</div>
 </section>
 
 
