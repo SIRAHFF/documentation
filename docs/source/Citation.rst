@@ -9,6 +9,7 @@ If **SIRAH** was beneficial to your work, please cite one or more of these SIRAH
    
 .. |Review-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.jsb.2023.107985
    :alt: Citation
+   :target: https://scholar.google.com/scholar?cites=11014340861876399425
    
 -    Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. |Review| |Review-cit|
 
