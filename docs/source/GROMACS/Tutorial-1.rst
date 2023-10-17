@@ -1,11 +1,12 @@
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
-double stranded DNA in explicit solvent (called WatFour, WT4) in four simple steps: 1 download; 2
-map; 3 solvate and; 4 run. The main references for this tutorial are:`SIRAH DNA <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported in: `WAT4 <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
+double stranded DNA in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are: `Dans et al. <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_), `Darré et al. <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.
+We strongly advise you to read these articles before starting the tutorial.
 
 .. important::
 
-    Check :ref:`download <download gromacs>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/1/``
+    Check the :ref:`Setting up SIRAH <download gromacs>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 1**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/1/``
 
 
 1.1. Build CG representations
@@ -27,8 +28,11 @@ Please check both PDB structures using VMD:
 
 .. tip::
 
-    This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help:
-    ``./sirah.amber/tools/CGCONV/cgconv.pl -h``
+    This is the basic usage of the script **cgconv.pl**, you can learn other capabilities from its help by typing:
+
+    .. code-block:: bash
+
+    	./sirah.ff/tools/CGCONV/cgconv.pl -h	
 
 From now on it is just normal GROMACS stuff!
 
@@ -47,10 +51,13 @@ Use pdb2gmx to convert your PDB file into GROMACS format:
 
 When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
+.. note::
+
+	Warning messages about long, triangular or square bonds are fine and expected due to the CG topology of some residues.
+
 .. caution::
 
-	Getting warning messages of long bonds is fine and expected due to the CG nature of the
-	residue topologies. However missing atom messages are errors which probably trace back to the
+	However, missing atom messages are errors which probably trace back to the
 	mapping step. In that case, check your atomistic and mapped structures and do not carry on the
 	simulation until the problem is solved.
 
@@ -74,13 +81,15 @@ these restraints edit ``topol.top`` to include the file ``WC_RST.itp`` at the en
        | #ifdef POSRES
        | #include "posre.itp"
        | #endif
-       | .
-       | .
+       | 
+       | 
+       |
        
      - | ; Include Position restraint file
        | #ifdef POSRES
        | #include "posre.itp"
        | #endif
+       |
        | ; Watson-Crick restraints
        | #include "./sirah.ff/tutorial/1/WC_RST.itp"
 
@@ -103,7 +112,7 @@ Add WT4 molecules:
 
 .. note:: 
 
-	In GROMACS in versions earlier than 5.x the command  *gmx solvate* was named to *genbox*.
+	In GROMACS versions prior to 5.x, the command *gmx solvate* was called *genbox*.
 
 Edit the [ molecules ] section in ``topol.top`` to include the number of added WT4 molecules:
 
@@ -115,14 +124,14 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
    * - Topology before editing
      - Topology after editing
    * - | [ molecules ]
-       | ; Compound #mols
-       | DNA_chain_A 1
-       | .
+       | ; Compound        #mols
+       | DNA_chain_A         1
+       | 
               
      - | [ molecules ]
-       | ; Compound #mols
-       | DNA_chain_A 1
-       | WT4 3179
+       | ; Compound        #mols
+       | DNA_chain_A         1
+       | WT4              3179
 
 .. hint::
 	
@@ -134,32 +143,30 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
 
 .. caution::
 	
-	The number of added WT4 molecules **3179** may change according to the software version.
+	The number of added WT4 molecules, **3179**, may change according to the software version.
 
 Add CG counterions and 0.15M NaCl:
 
 .. code-block:: bash
 
-	gmx grompp -f sirah.ff/tutorial/1/CPU/em_CGDNA.mdp -p topol.top -c dna_cg_sol.gro -o dna_cg_sol.tpr
+	gmx grompp -f sirah.ff/tutorial/1/GPU/em_CGDNA.mdp -p topol.top -c dna_cg_sol.gro -o dna_cg_sol.tpr
 
 .. code-block:: bash
 
 	gmx genion -s dna_cg_sol.tpr -o dna_cg_ion.gro -np 113 -pname NaW -nn 75 -nname ClW
 
 
-When prompted, choose to substitute **WT4** molecules by **ions**.
+When prompted, choose to substitute *WT4* molecules by *ions*.
 
 .. note:: 
 
-	The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
-	ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
-	Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+	The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 Edit the [ molecules ] section in ``topol.top`` to include the CG ions and the correct number of WT4.
 
 Before running the simulation it may be a good idea to visualize your molecular system. CG molecules
 are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script *g_top2psf.pl*:
+generate a PSF file of the system using the script ``g_top2psf.pl``:
 
 .. code-block:: bash
 
@@ -168,7 +175,10 @@ generate a PSF file of the system using the script *g_top2psf.pl*:
 .. note::
 
 	This is the basic usage of the script ``g_top2psf.pl``, you can learn other capabilities from its help:
-	``./sirah.ff/tools/g_top2psf.pl -h``
+
+	.. code-block:: bash
+
+		./sirah.ff/tools/g_top2psf.pl -h
 
 
 Use VMD to check how the CG system looks like:
@@ -177,11 +187,10 @@ Use VMD to check how the CG system looks like:
 
 	vmd dna_cg_ion.psf dna_cg_ion.gro -e sirah.ff/tools/sirah_vmdtk.tcl
 
-.. note::
+.. tip::
 
-	VMD assigns default radius to unknown atom types, the script sirah_vmdtk.tcl sets the right
-	ones. It also provides a kit of useful selection macros, coloring methods and a backmapping utility.
-	Use the command sirah_help in the Tcl/Tk console of VMD to access the manual pages.
+	VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+	Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 1.4. Run the simulation
 ________________________
@@ -202,7 +211,7 @@ Create an index file:
 
 .. note::
 
-	WT4 and CG ions (NaW and ClW) are automatically set to the group “SIRAH-Solvent”.
+	WT4 and CG ions (NaW and ClW) are automatically set to the group *SIRAH-Solvent*.
 
 Make a new folder for the run:
 
@@ -210,34 +219,47 @@ Make a new folder for the run:
 
 	mkdir run; cd run
 
-Energy Minimization:
+**Energy Minimization**:
 
 .. code-block:: bash
 
-	gmx grompp -f ../sirah.ff/tutorial/1/GPU/em_CGDNA.mdp -p ../topol.top -po em.mdp -n ../dna_cg_ion.ndx -c ../dna_cg_ion.gro -o dna_cg_em.tpr mdrun -deffnm dna_cg_em &> EM.log &
+	gmx grompp -f ../sirah.ff/tutorial/1/GPU/em_CGDNA.mdp -p ../topol.top -po em.mdp -n ../dna_cg_ion.ndx -c ../dna_cg_ion.gro -o dna_cg_em.tpr 
 
-Equilibration:
+.. code-block:: bash
+
+	mdrun -deffnm dna_cg_em &> EM.log &
+
+**Equilibration**:
 
 .. code-block:: bash 
 
-	gmx grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -o dna_cg_eq.tpr mdrun -deffnm dna_cg_eq &> EQ.log &
+	gmx grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -o dna_cg_eq.tpr 
 
-Production (100ns):
+.. code-block:: bash 
+
+	mdrun -deffnm dna_cg_eq &> EQ.log &
+
+**Production (100ns)**:
 
 .. code-block:: bash
 
-	gmx grompp -f ../sirah.ff/tutorial/1/GPU/md_CGDNA.mdp -p ../topol.top -po md.mdp -n ../dna_cg_ion.ndx -c dna_cg_eq.gro -o dna_cg_md.tpr mdrun -deffnm dna_cg_md &> MD.log &
+	gmx grompp -f ../sirah.ff/tutorial/1/GPU/md_CGDNA.mdp -p ../topol.top -po md.mdp -n ../dna_cg_ion.ndx -c dna_cg_eq.gro -o dna_cg_md.tpr 
+
+.. code-block:: bash
+
+	mdrun -deffnm dna_cg_md &> MD.log &
 
 .. note::
 
-	GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.
+	GPU flags have been set for GROMACS 4.6.7; however, different versions may object to certain specifications.
+
 
 1.5. Visualizing the simulation
 ________________________________
 
 That’s it! Now you can analyze the trajectory.
 
-Process the output trajectory at folder run/ to account for the Periodic Boundary Conditions (PBC):
+Process the output trajectory at folder ``run/`` to account for the Periodic Boundary Conditions (PBC):
 
 .. code-block:: bash
 
@@ -254,4 +276,4 @@ Now you can check the simulation using VMD:
 
 .. note::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages.
+    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
