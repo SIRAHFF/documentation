@@ -96,7 +96,7 @@ Since this is <strong>Tutorial 2</strong>, remember to replace <code class="docu
 </div>
 <section id="pdb-to-gromacs-format">
 <h1>2.1. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
-<p>Use pdb2gmx to convert the PDB file of the solute <code class="docutils literal notranslate"><span class="pre">dna.pdb</span></code> into GROMACS format:</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert the PDB file of the solute <code class="docutils literal notranslate"><span class="pre">dna.pdb</span></code> into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/2/dna.pdb<span class="w"> </span>-o<span class="w"> </span>dna.gro
 </pre></div>
 </div>
@@ -197,7 +197,7 @@ Since this is <strong>Tutorial 2</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before GROMACS version 5.x, the command <em>gmx solvate</em> was called <em>genbox</em>.</p>
+<p>In GROMACS versions prior to 5.x, the command <em>gmx solvate</em> was called <em>genbox</em>.</p>
 </div>
 <p>Finally add the CG solvent:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>dna_shell.gro<span class="w"> </span>-cs<span class="w"> </span>./sirah.ff/wt4tip3p.gro<span class="w"> </span>-o<span class="w"> </span>dna_sol.gro
@@ -254,7 +254,7 @@ Since this is <strong>Tutorial 2</strong>, remember to replace <code class="docu
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>dna_sol.tpr<span class="w"> </span>-o<span class="w"> </span>dna_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">38</span><span class="w"> </span>-pname<span class="w"> </span>NaW
 </pre></div>
 </div>
-<p>When prompted, choose to substitute <em>WT4</em> molecules by <em>NaW ions</em>.</p>
+<p>When prompted, choose to substitute <em>WT4</em> molecules by <em>NaW</em> ions.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details).
@@ -328,7 +328,7 @@ check carefully the input flags therein.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>GPU flags were set for GROMACS 4.6.7, different versions may object to certain specifications.</p>
+<p>GPU flags have been set for GROMACS 4.6.7; however, different versions may object to certain specifications.</p>
 </div>
 </section>
 <section id="visualizing-the-simulation">

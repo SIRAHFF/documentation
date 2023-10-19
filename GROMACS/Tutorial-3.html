@@ -130,7 +130,7 @@ Since this is <strong>Tutorial 3</strong>, remember to replace <code class="docu
 </section>
 <section id="pdb-to-gromacs-format">
 <h1>3.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
-<p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg.pdb<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.gro
 </pre></div>
 </div>
@@ -226,7 +226,7 @@ simulation until the problem is solved.</p>
 </pre></div>
 </div>
 <p>Add CG counterions and 0.15M NaCl:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/CPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete2.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol2.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol2.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete2.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol2.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol2.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol2.tpr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">22</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">22</span><span class="w"> </span>-nname<span class="w"> </span>ClW

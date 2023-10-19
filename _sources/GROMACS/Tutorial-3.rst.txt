@@ -51,7 +51,7 @@ From now on it is just normal GROMACS stuff!
 3.2. PDB to GROMACS format
 __________________________
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
+Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
 
 .. code-block:: bash
 
@@ -155,7 +155,7 @@ Add CG counterions and 0.15M NaCl:
 
 .. code-block:: bash
 
-	gmx grompp -f sirah.ff/tutorial/3/CPU/em1_CGPROT.mdp -p topol.top -po delete2.mdp -c 1CRN_cg_sol2.gro -o 1CRN_cg_sol2.tpr
+	gmx grompp -f sirah.ff/tutorial/3/GPU/em1_CGPROT.mdp -p topol.top -po delete2.mdp -c 1CRN_cg_sol2.gro -o 1CRN_cg_sol2.tpr
 
 .. code-block:: bash
 

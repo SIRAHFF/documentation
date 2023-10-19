@@ -92,19 +92,20 @@ this tutorial are: <a class="reference external" href="https://doi.org/10.1021/a
 We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We strongly advise you to read and complete <a class="reference internal" href="../Tutorials%20amber.html#tutorial-3"><span class="std std-ref">Tutorial 3</span></a> and <a class="reference internal" href="../Tutorials%20amber.html#tutorial-5"><span class="std std-ref">Tutorial 5</span></a> before starting.</p>
+<p>We strongly advise you to read and complete <a class="reference internal" href="../Tutorials%20gromacs.html#tutorial-3-g"><span class="std std-ref">Tutorial 3</span></a> and <a class="reference internal" href="../Tutorials%20gromacs.html#tutorial-5-g"><span class="std std-ref">Tutorial 5</span></a> before starting.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Check the <a class="reference internal" href="../Tutorials%20gromacs.html#download-gromacs"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
-Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/6/</span></code></p>
+Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/6/</span></code></p>
 </div>
 <section id="build-cg-representations">
 <h1>6.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> and use the <strong>PDB Reader &amp; Manipulator</strong> to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.</p>
-<p>See <a class="reference internal" href="../Tutorials%20amber.html#tutorial-3"><span class="std std-ref">Tutorial 3</span></a> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
+<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+<p>See <a class="reference internal" href="../Tutorials%20gromacs.html#tutorial-3-g"><span class="std std-ref">Tutorial 3</span></a> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
 </div>
 <p>Map the atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/2KYV">2KYV</a> to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/6/2kyv.pqr<span class="w"> </span>-o<span class="w"> </span>2kyv_cg.pdb
@@ -113,7 +114,7 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 <p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 2kyv.pqr contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/2KYV">2KYV</a> structure at pH <strong>7.0</strong>, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 2kyv_cg.pdb is its SIRAH CG representation.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in <a class="reference internal" href="../Tutorials%20amber.html#table"><span class="std std-ref">Table 1</span></a>, by setting the flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> in <code class="docutils literal notranslate"><span class="pre">cgconv.pl</span></code>. We recommend using <a class="reference external" href="https://m3g.github.io/packmol/">PACKMOL</a> for building the system. Reference building-block structures are provided at folder sirah.ff/PDB/, which agree with the mapping scheme <code class="docutils literal notranslate"><span class="pre">sirah.ff/tools/CGCONV/maps/tieleman_lipid.map</span></code>. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.</p>
+<p>If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in <a class="reference internal" href="../Tutorials%20amber.html#table"><span class="std std-ref">Table 1</span></a>, by setting the flag <code class="docutils literal notranslate"><span class="pre">-a</span></code> in <code class="docutils literal notranslate"><span class="pre">cgconv.pl</span></code>. We recommend using <a class="reference external" href="https://m3g.github.io/packmol/">PACKMOL</a> for building the system. Reference building-block structures are provided at folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/PDB/</span></code>, which agree with the mapping scheme <code class="docutils literal notranslate"><span class="pre">sirah.ff/tools/CGCONV/maps/tieleman_lipid.map</span></code>. See <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -140,7 +141,7 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 <section id="delete-close-contact-lipid-molecules">
 <h2>6.2.1. Delete close contact lipid molecules<a class="headerlink" href="#delete-close-contact-lipid-molecules" title="Link to this heading"></a></h2>
 <p>We need to use VMD to to delete lipid molecules in close contact with the protein. For a proper treatment and visualization of the system in VMD you must first generate the molecular topology and initial coordinate files.</p>
-<p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_init.pdb<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_init.gro<span class="w"> </span>-p<span class="w"> </span>init_topol<span class="w"> </span>-i<span class="w"> </span>init_posre
 </pre></div>
 </div>
@@ -150,14 +151,16 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 <p>In GROMACS versions prior to 5.x, the “gmx” command should not be used.</p>
 </div>
 <p>CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script <em>g_top2psf.pl</em>:</p>
+generate a PSF file of the system using the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-i<span class="w"> </span>init_topol.top<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_init.psf
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:
-<code class="docutils literal notranslate"><span class="pre">./sirah.ff/tools/g_top2psf.pl</span> <span class="pre">-h</span></code></p>
+<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-h
+</pre></div>
+</div>
 </div>
 <p>Use VMD to check how the CG system looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="mi">2</span><span class="n">kyv_DMPC_cg_init</span><span class="o">.</span><span class="n">psf</span> <span class="mi">2</span><span class="n">kyv_DMPC_cg_init</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">e</span> <span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
@@ -179,7 +182,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 <section id="pdb-to-gromacs-format">
 <h1>6.3. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
-<p>Use pdb2gmx to convert your PDB file into GROMACS format:</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg.pdb<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg.gro
 </pre></div>
 </div>
@@ -188,10 +191,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p class="admonition-title">Note</p>
 <p>By default charged terminal are used but it is possible to set them neutral with option <code class="docutils literal notranslate"><span class="pre">-ter</span></code></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Warning messages about long, triangular or square bonds are fine and expected due to the CG topology of some residues.</p>
+</div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Getting warning messages of long bonds is fine and expected due to the CG nature of the
-residue topologies. However missing atom messages are errors which probably trace back to the
+<p>However, missing atom messages are errors which probably trace back to the
 mapping step. In that case, check your atomistic and mapped structures and do not carry on the
 simulation until the problem is solved.</p>
 </div>
@@ -231,6 +237,7 @@ simulation until the problem is solved.</p>
 <div class="line">Protein_chain_D    1</div>
 <div class="line">Protein_chain_E    1</div>
 <div class="line">Lipid_chain_F      1</div>
+<div class="line"><br /></div>
 </div>
 </td>
 <td><div class="line-block">
@@ -257,10 +264,9 @@ simulation until the problem is solved.</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>The number of added WT4 molecules <strong>3875</strong> may change according to the software version.</p>
+<p>The number of added WT4 molecules, <strong>3875</strong>, may change according to the software version.</p>
 </div>
-<p>Remove misplaced WT4 molecules inside the bilayer (read sirah.ff/0ISSUES and <cite>FAQs &lt;../FAQ&gt;</cite> for
-comments on known solvation problems):</p>
+<p>Remove misplaced WT4 molecules inside the bilayer:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/6/GPU/em1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.tpr
 </pre></div>
 </div>
@@ -275,7 +281,11 @@ comments on known solvation problems):</p>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow a warning message by adding the following keyword to the grompp command line: -maxwarn 1</p>
+<p>New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow a warning message by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">1</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Consult <code class="docutils literal notranslate"><span class="pre">sirah.ff/0ISSUES</span></code> and <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for information on known solvation issues.</p>
 </div>
 <p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to correct the number of WT4 molecules:</p>
 <div class="admonition hint">
@@ -292,23 +302,23 @@ comments on known solvation problems):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>2kyv_DMPC_cg_solv2.tpr<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">95</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">110</span><span class="w"> </span>-nname<span class="w"> </span>ClW
 </pre></div>
 </div>
-<p>When prompted, choose to substitute <strong>WT4</strong> molecules by <strong>ions</strong>.</p>
+<p>When prompted, choose to substitute <em>WT4</em> molecules by <em>ions</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The available ionic species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW). One
-ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details).
-Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 <p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the CG ions and the correct number of WT4.</p>
 <p>Before running the simulation it may be a good idea to visualize your molecular system. CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script <em>g_top2psf.pl</em>:</p>
+generate a PSF file of the system using the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-i<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.psf
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:
-<code class="docutils literal notranslate"><span class="pre">./sirah.ff/tools/g_top2psf.pl</span> <span class="pre">-h</span></code></p>
+<p>This is the basic usage of the script <code class="docutils literal notranslate"><span class="pre">g_top2psf.pl</span></code>, you can learn other capabilities from its help:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/g_top2psf.pl<span class="w"> </span>-h
+</pre></div>
+</div>
 </div>
 <p>Use VMD to check how the CG system looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="mi">2</span><span class="n">kyv_DMPC_cg_ion</span><span class="o">.</span><span class="n">psf</span> <span class="mi">2</span><span class="n">kyv_DMPC_cg_ion</span><span class="o">.</span><span class="n">gro</span> <span class="o">-</span><span class="n">e</span> <span class="n">sirah</span><span class="o">.</span><span class="n">ff</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
@@ -316,8 +326,7 @@ generate a PSF file of the system using the script <em>g_top2psf.pl</em>:</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
-ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+<p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
@@ -331,7 +340,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>Crate an index file of the system with a group for PLN monomer, then generate the .gro file of it.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>WT4 and CG ions (NaW, ClW) are automatically set to the group “SIRAH-Solvent” while DMPC (named CMM at CG level) is assigned to group “Lipid”.</p>
+<p>WT4 and CG ions (NaW, ClW) are automatically set to the group <em>SIRAH-Solvent</em> while DMPC (named CMM at CG level) is assigned to group <em>Lipid</em>.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ri 1-52\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.ndx
 </pre></div>
@@ -339,8 +348,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.gro
 </pre></div>
 </div>
-<p>When prompted, choose “r_1-52”.</p>
-<p>Create an index file for the monomer and add a group for the backbone “GO” and “GN” beads.</p>
+<p>When prompted, choose <em>r_1-52</em>.</p>
+<p>Create an index file for the monomer and add a group for the backbone <em>GO</em> and <em>GN</em> beads.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GO GN \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx
 </pre></div>
 </div>
@@ -348,7 +357,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx<span class="w"> </span>-fc<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span><span class="w"> </span>-o<span class="w"> </span>posre_BB.itp
 </pre></div>
 </div>
-<p>When prompted, choose “GO_GN”.</p>
+<p>When prompted, choose <em>GO_GN</em>.</p>
 <p>Edit each <code class="docutils literal notranslate"><span class="pre">topol_Protein_chain_*.itp</span></code> (A to E) to include the new position restraints:</p>
 <table class="docutils align-center">
 <colgroup>
@@ -366,6 +375,10 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="line">#ifdef POSRES</div>
 <div class="line">#include “posre_Protein.itp”</div>
 <div class="line">#endif</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
 </div>
 </td>
 <td><div class="line-block">
@@ -386,7 +399,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.gro
 </pre></div>
 </div>
-<p>When prompted, choose “Lipid”.</p>
+<p>When prompted, choose <em>Lipid</em>.</p>
 <p>Create an index file of the membrane and add a group for phosphates (BFO beads).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BFO \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.ndx
 </pre></div>
@@ -395,8 +408,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-n<span class="w"> </span>DMPC_cg.ndx<span class="w"> </span>-fc<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">100</span><span class="w"> </span>-o<span class="w"> </span>posre_Pz.itp
 </pre></div>
 </div>
-<p>When prompted, choose “BFO”.</p>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">topol_Lipid_chain_F.itp</span></code> to include the new position restraints and define the flags POSREZ to switch on these restraints in the input file (.mdp).</p>
+<p>When prompted, choose <em>BFO</em>.</p>
+<p>Edit <code class="docutils literal notranslate"><span class="pre">topol_Lipid_chain_F.itp</span></code> to include the new position restraints and define the flags <em>POSREZ</em> to switch on these restraints in the input file (.mdp).</p>
 <table class="docutils align-center">
 <colgroup>
 <col style="width: 50%" />
@@ -413,6 +426,10 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="line">#ifdef POSRES</div>
 <div class="line">#include “posre_Lipid_chain_F.itp”</div>
 <div class="line">#endif</div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
 </div>
 </td>
 <td><div class="line-block">
@@ -443,36 +460,36 @@ check carefully the input flags therein.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
-<p>Energy Minimization of side chains by restraining the backbone:</p>
+<p><strong>Energy Minimization of side chains by restraining the backbone</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/em1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../2kyv_DMPC_cg_ion.gro<span class="w"> </span>-r<span class="w"> </span>../2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_em1.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>2kyv_DMPC_cg_em1<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM1.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Energy Minimization of the whole system:</p>
+<p><strong>Energy Minimization of the whole system</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/em2_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_em1.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_em1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_em2.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>2kyv_DMPC_cg_em2<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM2.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Equilibration 1:
-Position restraints are defined in “eq_CGLIPROT.mdp” file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords -DPOSREBB and -DPOSREZ, respectively.</p>
+<p><strong>Equilibration 1</strong>:</p>
+<p>Position restraints are defined in <code class="docutils literal notranslate"><span class="pre">eq_CGLIPROT.mdp</span></code> file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords <code class="docutils literal notranslate"><span class="pre">-DPOSREBB</span></code> and <code class="docutils literal notranslate"><span class="pre">-DPOSREZ</span></code>, respectively.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/eq1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_eq1.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>2kyv_DMPC_cg_eq1<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ1.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Equilibration 2:</p>
+<p><strong>Equilibration 2</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/eq2_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_eq1.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_eq1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_eq2.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>2kyv_DMPC_cg_eq2<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ2.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<p>Production (1us):</p>
+<p><strong>Production (1000ns)</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/md_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_eq2.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_md.tpr
 </pre></div>
 </div>
