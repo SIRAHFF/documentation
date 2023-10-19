@@ -5,8 +5,8 @@ We strongly advise you to read these articles before starting the tutorial. You 
 
 .. important::
 
-    Check :ref:`download <download gromacs>` section for download and set up details before to start this tutorial.
-    Since this is **tutorial 5**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/5/``
+    Check the :ref:`Setting up SIRAH <download gromacs>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 5**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/5/``
 
 
 5.1. Build CG representations
@@ -21,9 +21,6 @@ Map the atomistic structure of the preassembled DMPC bilayer to its CG represent
 The input file ``-i`` DMPC64.pdb contains the atomistic representation of the DMPC bilayer, while the output ``-o`` DMPC64_cg.pdb is its SIRAH CG representation. The flag ``-a`` is a mapping scheme for lipids.
 
 .. important::
-	
-	5' end residues mast be renamed to AW5, TW5, GW5 or CW5 to represent the corresponding Adenine, Thymine, Guanine or Cytosine extremes in a closed circular DNA.
-
 	By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`_ for building the system. Reference building-block structures are provided at folder ``sirah.ff/PDB/``, which agree with the mapping scheme in ``sirah.ff/tools/CGCONV/maps/tieleman_lipid.map``. The provided DMPC bilayer contains 64 lipid molecules per leaflet distributed in a 6.4 \* 6.4 nm surface, taking into account an approximate area per lipid of 0.64 nm\ :sup:`2` \ at 333 K. The starting configuration was created with the input file ``sirah.ff/tutorial/5/DMPC_bilayer.pkm``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies. If you do not find your issue please start a discussion in our `github discussion page F&Q <https://github.com/SIRAHFF/documentation/discussions>`_.
 
 .. tip::
@@ -50,7 +47,7 @@ From now on it is just normal GROMACS stuff!
 5.2. PDB to GROMACS format
 __________________________
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
+Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
 
 .. code-block:: bash
 
@@ -58,10 +55,13 @@ Use pdb2gmx to convert your PDB file into GROMACS format:
 
 When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
+.. note::
+
+	Warning messages about long, triangular or square bonds are fine and expected due to the CG topology of some residues.
+
 .. caution::
 
-	Getting warning messages of long bonds is fine and expected due to the CG nature of the
-	residue topologies. However missing atom messages are errors which probably trace back to the
+	However, missing atom messages are errors which probably trace back to the
 	mapping step. In that case, check your atomistic and mapped structures and do not carry on the
 	simulation until the problem is solved.
 
@@ -88,7 +88,7 @@ Add WT4 molecules:
 
 .. note:: 
 
-	Before GROMACS version 5.x, the command *gmx solvate* was called *genbox*.
+	In GROMACS versions prior to 5.x, the command *gmx solvate* was called *genbox*.
 
 Edit the [ molecules ] section in ``topol.top`` to include the number of added WT4 molecules:
 
@@ -100,15 +100,16 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
    * - Topology before editing
      - Topology after editing
    * - | [ molecules ] 
-       | ; Compound		#mols 
-       | Lipid_chain_A		1    
-       | Lipid_chain_B		1    
+       | ; Compound        #mols 
+       | Lipid_chain_A		 1    
+       | Lipid_chain_B		 1 
+       |    
               
      - | [ molecules ] 
-       | ; Compound		#mols 
-       | Lipid_chain_A		1
-       | Lipid_chain_B		1
-       | WT4 			  850
+       | ; Compound        #mols 
+       | Lipid_chain_A		 1
+       | Lipid_chain_B		 1
+       | WT4 			   850
 
 .. hint::
 	
@@ -120,10 +121,9 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
 
 .. caution::
 	
-	The number of added WT4 molecules **850** may change according to the software version.
+	The number of added WT4 molecules, **850**, may change according to the software version.
 
-Remove misplaced WT4 molecules inside the bilayer (read sirah.ff/0ISSUES and `FAQs <../FAQ>` for
-comments on known solvation problems):
+Remove misplaced WT4 molecules inside the bilayer:
 
 .. code-block:: bash
 	
@@ -140,6 +140,10 @@ comments on known solvation problems):
 .. code-block:: bash
 	
 	gmx editconf -f DMPC64_cg_sol1.gro -o DMPC64_cg_sol2.gro -n rm_close_wt4.ndx
+
+.. note::
+	
+	Consult ``sirah.ff/0ISSUES`` and :doc:`FAQs <../FAQ>` for information on known solvation issues.
 
 Edit the [ molecules ] section in ``topol.top`` to correct the number of WT4 molecules:
 
@@ -162,18 +166,16 @@ Add CG counterions and 0.15M NaCl:
 	gmx genion -s DMPC64_cg_sol2.tpr -o DMPC64_cg_ion.gro -np 21 -pname NaW -nn 21 -nname ClW
 
 
-When prompted, choose to substitute **WT4** molecules by **ions**.
+When prompted, choose to substitute *WT4* molecules by *ions*.
 
 .. note:: 
 
-	The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
-	ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
-	Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+	The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 Edit the [ molecules ] section in ``topol.top`` to include the CG ions and the correct number of WT4.
 
 Before running the simulation it may be a good idea to visualize your molecular system. CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script *g_top2psf.pl*:
+generate a PSF file of the system using the script ``g_top2psf.pl``:
 
 .. code-block:: bash
 
@@ -182,7 +184,10 @@ generate a PSF file of the system using the script *g_top2psf.pl*:
 .. note::
 
 	This is the basic usage of the script ``g_top2psf.pl``, you can learn other capabilities from its help:
-	``./sirah.ff/tools/g_top2psf.pl -h``
+	
+	.. code-block:: bash
+
+		./sirah.ff/tools/g_top2psf.pl -h
 
 
 Use VMD to check how the CG system looks like:
@@ -193,9 +198,8 @@ Use VMD to check how the CG system looks like:
 
 .. tip::
 
-    VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
+	VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+	Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 5.4. Run the simulation
 ________________________
@@ -216,7 +220,7 @@ Create an index file:
 
 .. note::
 
-	WT4 and CG ions (NaW, ClW) are automatically set to the group “SIRAH-Solvent” while DMPC (named CMM at CG level) is assigned to group “Lipid”.
+	WT4 and CG ions (NaW, ClW) are automatically set to the group *SIRAH-Solvent* while DMPC (named CMM at CG level) is assigned to group *Lipid*.
 
 Make a new folder for the run:
 
@@ -224,7 +228,7 @@ Make a new folder for the run:
 
 	mkdir run; cd run
 
-Energy Minimization:
+**Energy Minimization**:
 
 .. code-block:: bash
 
@@ -234,7 +238,7 @@ Energy Minimization:
 
 	gmx mdrun -deffnm DMPC64_cg_em &> EM.log &
 
-Equilibration:
+**Equilibration**:
 
 .. code-block:: bash 
 
@@ -244,7 +248,7 @@ Equilibration:
 
 	gmx mdrun -deffnm DMPC_cg_eq &> EQ.log &
 
-Production (100ns):
+**Production (100ns)**:
 
 .. code-block:: bash
 
@@ -256,7 +260,7 @@ Production (100ns):
 
 .. note::
 
-	GPU flags were set for GROMACS 4.6.7, different versions may complain about some specifications.
+	GPU flags have been set for GROMACS 4.6.7; however, different versions may object to certain specifications.
 
 5.5. Visualizing the simulation
 ________________________________
@@ -281,13 +285,13 @@ Now you can check the simulation using VMD:
 
     The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
-Calculate the area per lipid
+Outside VMD, calculate the area per lipid:
 
 .. code-block:: bash
 
 	gmx energy -f DMPC64_cg_md.edr -o box_XY.xvg
 
-When prompted, choose "Box-X" and "Box-Y" for output. End your selection with zero.
+When prompted, choose *Box-X* and *Box-Y* for output. End your selection with zero.
 
 .. note::
 
@@ -296,8 +300,7 @@ When prompted, choose "Box-X" and "Box-Y" for output. End your selection with ze
 	.. math::
 		\frac{Area}{Lipid} = \frac{Box(x) * Box(y)}{64} 
 
-Density profiles and bilayer thickness
-Include a new group for phosphate beads in the index file: 
+To calculate density profiles and bilayer thickness, include a new group for phosphate beads in the index file: 
 
 .. code-block:: bash
 
@@ -307,7 +310,7 @@ Include a new group for phosphate beads in the index file:
 
 	gmx density -sl 1000 -ng 5 -f DMPC64_cg_md_pbc.xtc -s DMPC64_cg_em.tpr -n DMPC64_cg_ion.ndx -o density_profile.xvg
 
-When prompted, choose "Lipid", "WT4", "NaW", "ClW", and "BFO"
+When prompted, choose *Lipid*, *WT4*, *NaW*, *ClW*, and *BFO*.
 
 Use Grace to plot the results:
 

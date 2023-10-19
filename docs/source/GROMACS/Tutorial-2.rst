@@ -10,7 +10,7 @@ bulk water. The general procedure is extensible to any other solute. The hybrid 
 2.1. PDB to GROMACS format
 __________________________
 
-Use pdb2gmx to convert the PDB file of the solute ``dna.pdb`` into GROMACS format: 
+Use ``pdb2gmx`` to convert the PDB file of the solute ``dna.pdb`` into GROMACS format: 
 
 .. code-block:: bash
 
@@ -82,7 +82,7 @@ Then add an atomistic water shell:
 
 .. note:: 
 
-	Before GROMACS version 5.x, the command *gmx solvate* was called *genbox*.
+	In GROMACS versions prior to 5.x, the command *gmx solvate* was called *genbox*.
 
 Finally add the CG solvent:
 
@@ -139,7 +139,7 @@ Add CG counterions:
 	gmx genion -s dna_sol.tpr -o dna_ion.gro -np 38 -pname NaW
 
 
-When prompted, choose to substitute *WT4* molecules by *NaW ions*.
+When prompted, choose to substitute *WT4* molecules by *NaW* ions.
 
 .. note:: 
 
@@ -235,7 +235,7 @@ Make a new folder for the run:
 
 .. note::
 
-	GPU flags were set for GROMACS 4.6.7, different versions may object to certain specifications.
+	GPU flags have been set for GROMACS 4.6.7; however, different versions may object to certain specifications.
 
 
 2.4. Visualizing the simulation
