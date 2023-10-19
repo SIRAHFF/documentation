@@ -43,7 +43,7 @@ From now on it is just normal GROMACS stuff!
 1.2. PDB to GROMACS format
 __________________________
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
+Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
 
 .. code-block:: bash
 

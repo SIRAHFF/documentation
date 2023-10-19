@@ -4,22 +4,24 @@ We strongly advise you to read these articles before starting the tutorial.
 
 .. note::
 
-	We strongly advise you to read and complete :ref:`Tutorial 3 <Tutorial 3>` and :ref:`Tutorial 5 <Tutorial 5>` before starting.
+	We strongly advise you to read and complete :ref:`Tutorial 3 <Tutorial 3 G>` and :ref:`Tutorial 5 <Tutorial 5 G>` before starting.
 	
 
 .. important::
 
     Check the :ref:`Setting up SIRAH <download gromacs>` section for download and set up details before starting this tutorial.
-    Since this is **Tutorial 6**, remember to replace ``X.X`` and the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/6/``
+    Since this is **Tutorial 6**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/6/``
 	
 6.1. Build CG representations
 ______________________________
 
 .. caution::
 
-	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and use the **PDB Reader & Manipulator** to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
-	
-	See :ref:`Tutorial 3 <Tutorial 3>` for cautions while preparing and mapping atomistic proteins to SIRAH.
+  The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and use the **PDB Reader & Manipulator** to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
+  
+  Other option is the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the *PQR* file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.
+
+  See :ref:`Tutorial 3 <Tutorial 3 G>` for cautions while preparing and mapping atomistic proteins to SIRAH.
 	
 Map the atomistic structure of protein `2KYV <https://www.rcsb.org/structure/2KYV>`__ to its CG representation:  
 
@@ -31,7 +33,7 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
 
 .. important::
 
-	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder sirah.ff/PDB/, which agree with the mapping scheme ``sirah.ff/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
+	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder ``sirah.ff/PDB/``, which agree with the mapping scheme ``sirah.ff/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
 
 .. tip::
 
@@ -67,7 +69,7 @@ Luckily, we already oriented the protein inside the membrane. For setting up you
 
 We need to use VMD to to delete lipid molecules in close contact with the protein. For a proper treatment and visualization of the system in VMD you must first generate the molecular topology and initial coordinate files.
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
+Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
 
 .. code-block:: bash
 
@@ -80,7 +82,7 @@ When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
   In GROMACS versions prior to 5.x, the "gmx" command should not be used.
 
 CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script *g_top2psf.pl*:
+generate a PSF file of the system using the script ``g_top2psf.pl``:
 
 .. code-block:: bash
 
@@ -89,7 +91,10 @@ generate a PSF file of the system using the script *g_top2psf.pl*:
 .. note::
 
   This is the basic usage of the script ``g_top2psf.pl``, you can learn other capabilities from its help:
-  ``./sirah.ff/tools/g_top2psf.pl -h``
+  
+  .. code-block:: bash
+
+    ./sirah.ff/tools/g_top2psf.pl -h
 
 
 Use VMD to check how the CG system looks like:
@@ -118,7 +123,7 @@ From now on it is just normal GROMACS stuff!
 6.3. PDB to GROMACS format
 __________________________
 
-Use pdb2gmx to convert your PDB file into GROMACS format: 
+Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
 
 .. code-block:: bash
 
@@ -130,10 +135,13 @@ When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
   By default charged terminal are used but it is possible to set them neutral with option ``-ter``
 
+.. note::
+
+  Warning messages about long, triangular or square bonds are fine and expected due to the CG topology of some residues.
+
 .. caution::
 
-  Getting warning messages of long bonds is fine and expected due to the CG nature of the
-  residue topologies. However missing atom messages are errors which probably trace back to the
+  However, missing atom messages are errors which probably trace back to the
   mapping step. In that case, check your atomistic and mapped structures and do not carry on the
   simulation until the problem is solved.
 
@@ -175,6 +183,7 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
        | Protein_chain_D    1
        | Protein_chain_E    1
        | Lipid_chain_F      1
+       | 
     
      - | [ molecules ] 
        | ; Compound #mols
@@ -196,10 +205,9 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
 
 .. caution::
   
-  The number of added WT4 molecules **3875** may change according to the software version.
+  The number of added WT4 molecules, **3875**, may change according to the software version.
 
-Remove misplaced WT4 molecules inside the bilayer (read sirah.ff/0ISSUES and `FAQs <../FAQ>` for
-comments on known solvation problems):
+Remove misplaced WT4 molecules inside the bilayer:
 
 .. code-block:: bash
   
@@ -219,7 +227,11 @@ comments on known solvation problems):
 
 .. caution::
   
-  New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow a warning message by adding the following keyword to the grompp command line: -maxwarn 1
+  New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow a warning message by adding the following keyword to the grompp command line: ``-maxwarn 1``
+
+.. note::
+  
+  Consult ``sirah.ff/0ISSUES`` and :doc:`FAQs <../FAQ>` for information on known solvation issues.
 
 Edit the [ molecules ] section in ``topol.top`` to correct the number of WT4 molecules:
 
@@ -242,18 +254,16 @@ Add CG counterions and 0.15M NaCl:
   gmx genion -s 2kyv_DMPC_cg_solv2.tpr -o 2kyv_DMPC_cg_ion.gro -np 95 -pname NaW -nn 110 -nname ClW
 
 
-When prompted, choose to substitute **WT4** molecules by **ions**.
+When prompted, choose to substitute *WT4* molecules by *ions*.
 
 .. note:: 
 
-  The available ionic species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW). One
-  ion pair (e.g. NaW-ClW) each 34 WT4 molecules renders a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). 
-  Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
+  The available electrolyte species in SIRAH force field are: ``Na⁺`` (NaW), ``K⁺`` (KW) and ``Cl⁻`` (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see :ref:`Appendix <Appendix>` for details). Counterions were added according to `Machado et al. <https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953>`_.
 
 Edit the [ molecules ] section in ``topol.top`` to include the CG ions and the correct number of WT4.
 
 Before running the simulation it may be a good idea to visualize your molecular system. CG molecules are not recognized by molecular visualizers and will not display correctly. To fix this problem you may
-generate a PSF file of the system using the script *g_top2psf.pl*:
+generate a PSF file of the system using the script ``g_top2psf.pl``:
 
 .. code-block:: bash
 
@@ -262,7 +272,10 @@ generate a PSF file of the system using the script *g_top2psf.pl*:
 .. note::
 
   This is the basic usage of the script ``g_top2psf.pl``, you can learn other capabilities from its help:
-  ``./sirah.ff/tools/g_top2psf.pl -h``
+  
+  .. code-block:: bash
+
+    ./sirah.ff/tools/g_top2psf.pl -h
 
 
 Use VMD to check how the CG system looks like:
@@ -273,9 +286,8 @@ Use VMD to check how the CG system looks like:
 
 .. tip::
 
-    VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right
-    ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-    Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
+  VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
+  Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 6.5. Generate position restraint files
 _______________________________________
@@ -290,7 +302,7 @@ Crate an index file of the system with a group for PLN monomer, then generate th
 
 .. note::
 
-  WT4 and CG ions (NaW, ClW) are automatically set to the group “SIRAH-Solvent” while DMPC (named CMM at CG level) is assigned to group “Lipid”.
+  WT4 and CG ions (NaW, ClW) are automatically set to the group *SIRAH-Solvent* while DMPC (named CMM at CG level) is assigned to group *Lipid*.
 
 .. code-block:: bash
   
@@ -300,9 +312,9 @@ Crate an index file of the system with a group for PLN monomer, then generate th
   
   gmx editconf -f 2kyv_DMPC_cg_ion.gro -n 2kyv_DMPC_cg_ion.ndx -o 2kyv_DMPC_cg_monomer.gro
 
-When prompted, choose “r_1-52”.
+When prompted, choose *r_1-52*.
 
-Create an index file for the monomer and add a group for the backbone “GO” and “GN” beads.
+Create an index file for the monomer and add a group for the backbone *GO* and *GN* beads.
 
 .. code-block:: bash
   
@@ -314,7 +326,7 @@ Create a position restraint file for the monomer backbone.
   
   gmx genrestr -f 2kyv_DMPC_cg_monomer.gro -n 2kyv_DMPC_cg_monomer.ndx -fc 100 100 100 -o posre_BB.itp
 
-When prompted, choose “GO_GN”.
+When prompted, choose *GO_GN*.
 
 Edit each ``topol_Protein_chain_*.itp`` (A to E) to include the new position restraints:
 
@@ -329,6 +341,10 @@ Edit each ``topol_Protein_chain_*.itp`` (A to E) to include the new position res
        | #ifdef POSRES    
        | #include "posre_Protein.itp" 
        | #endif
+       |   
+       |    
+       |   
+       |   
       
      - | ; Include Position restraint file 
        | #ifdef POSRES    
@@ -345,7 +361,7 @@ Use a similar procedure to set the positional restraints on lipid's phosphates.
   
   gmx editconf -f 2kyv_DMPC_cg_ion.gro -n 2kyv_DMPC_cg_ion.ndx -o DMPC_cg.gro
 
-When prompted, choose “Lipid”.
+When prompted, choose *Lipid*.
 
 Create an index file of the membrane and add a group for phosphates (BFO beads).
 
@@ -359,9 +375,9 @@ Create a position restraint file for phosphate groups in z coordinate.
   
   gmx genrestr -f DMPC_cg.gro -n DMPC_cg.ndx -fc 0 0 100 -o posre_Pz.itp
 
-When prompted, choose “BFO”.
+When prompted, choose *BFO*.
 
-Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and define the flags POSREZ to switch on these restraints in the input file (.mdp).
+Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and define the flags *POSREZ* to switch on these restraints in the input file (.mdp).
 
 .. list-table::
    :align: center
@@ -374,6 +390,10 @@ Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and defi
        | #ifdef POSRES    
        | #include "posre_Lipid_chain_F.itp" 
        | #endif
+       | 
+       | 
+       | 
+       | 
               
      - | ; Include Position restraint file 
        | #ifdef POSRES    
@@ -401,7 +421,7 @@ Make a new folder for the run:
 
   mkdir run; cd run
 
-Energy Minimization of side chains by restraining the backbone:
+**Energy Minimization of side chains by restraining the backbone**:
 
 .. code-block:: bash
 
@@ -411,7 +431,7 @@ Energy Minimization of side chains by restraining the backbone:
 
   gmx mdrun -deffnm 2kyv_DMPC_cg_em1 &> EM1.log &  
 
-Energy Minimization of the whole system:
+**Energy Minimization of the whole system**:
 
 .. code-block:: bash
 
@@ -421,8 +441,9 @@ Energy Minimization of the whole system:
 
   gmx mdrun -deffnm 2kyv_DMPC_cg_em2 &> EM2.log & 
 
-Equilibration 1:
-Position restraints are defined in “eq_CGLIPROT.mdp” file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords -DPOSREBB and -DPOSREZ, respectively.
+**Equilibration 1**:
+
+Position restraints are defined in ``eq_CGLIPROT.mdp`` file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords ``-DPOSREBB`` and ``-DPOSREZ``, respectively.
 
 .. code-block:: bash
 
@@ -432,7 +453,7 @@ Position restraints are defined in “eq_CGLIPROT.mdp” file for protein backbo
 
   gmx mdrun -deffnm 2kyv_DMPC_cg_eq1 &> EQ1.log & 
 
-Equilibration 2:
+**Equilibration 2**:
 
 .. code-block:: bash
 
@@ -442,7 +463,7 @@ Equilibration 2:
 
   gmx mdrun -deffnm 2kyv_DMPC_cg_eq2 &> EQ2.log & 
 
-Production (1us):
+**Production (1000ns)**:
 
 .. code-block:: bash
 
@@ -472,5 +493,5 @@ Now you can check the simulation using VMD:
   vmd ../2kyv_DMPC_cg_ion.psf ../2kyv_DMPC_cg_ion.gro 2kyv_DMPC_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
 
 .. note::
-
+    
     The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
