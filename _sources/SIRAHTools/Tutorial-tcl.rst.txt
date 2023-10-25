@@ -3,12 +3,12 @@ for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics
 
 .. warning::
 
-    This tutorial requires the use of **VMD** and **AmberTools**. Please install these applications if you do not already have them. If you need to install any of these applications, please visit the following websites for installation instructions and additional information: `Install AmberTools <https://ambermd.org/GetAmber.php#ambertools>`_ and `Installation VMD guide <https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html>`_.
+    This tutorial requires the use of **VMD** and **AmberTools**. Install these applications if you do not already have them. If you need to install any of these applications, visit the following websites for installation instructions and additional information: `Install AmberTools <https://ambermd.org/GetAmber.php#ambertools>`_ and `VMD installation guide <https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html>`_.
 
 
 .. important::
 
-    In this tutorial, we will focus on the **sirah_vmdtk.tcl** plugin. The utilization of the SIRAH Tools scripts ``cgconv.pl`` to map AA to CG, and ``g_top2psf.pl`` to convert GROMACS' topologies to PSF files, is covered elsewhere in the documentation. We recommend that you review the other tutorial sections.
+    In this tutorial, we will focus on the ``sirah_vmdtk.tcl`` plugin. The utilization of the SIRAH Tools scripts ``cgconv.pl`` to map AA to CG, and ``g_top2psf.pl`` to convert GROMACS' topologies to PSF files, is covered elsewhere in the documentation. We recommend that you review the other tutorial sections.
 
 
 

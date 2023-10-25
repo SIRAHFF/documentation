@@ -40,3 +40,4 @@ Contents
    Tutorials gromacs
    Tutorials namd
    Tutorials sirahtools
+   Tutorials analysis
