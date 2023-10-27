@@ -9,11 +9,54 @@ The current version, **SIRAH 2.2**, includes:
 
 * Compatibility for mapping various force field atom types and experimental structures;      
 
-* The ability to leverage GPU acceleration in AMBER and GROMACS codes;     
+* The ability to leverage GPU acceleration in Amber and GROMACS codes;     
 
 * A collection of scripts, known as **SIRAH Tools**, that facilitate the process of mapping all-atom files to CG representations, backmapping, visualizing, and analyzing SIRAH trajectories directly on the popular VMD program for molecular visualization.     
 
+Pros and cons
+--------------
 
+The SIRAH force field offers several advantages compared to atomistic models in simulating biomolecular systems:
+
+.. image:: ../images/pros.png
+  :width: 30
+  :align: left
+
+**Speed and Efficiency**: Coarse-grained (CG) models, such as SIRAH, provide a significant speedup in simulations compared to atomistic models. This allows for the study of larger and more complex biological systems over longer time scales.
+
+.. image:: ../images/pros.png
+  :width: 30
+  :align: left
+
+**Multiscale Capabilities**: SIRAH offers a multiscale approach, allowing for the combination of different levels of resolution within the same simulation setup. This includes the ability to covalently link all-atom and CG models in nucleic acid chains and the incorporation of a multi-resolution model for the solvent.
+
+.. image:: ../images/pros.png
+  :width: 30
+  :align: left
+
+**Self-Consistent Force Field**: SIRAH aims to provide a self-consistent force field that describes the intra and intermolecular interactions among moieties of diverse chemical nature in a holistic view of biological ensembles' structural and dynamic features. This ensures that the force field is capable of accurately representing the interactions within biomolecular systems.
+
+However, it is important to note that the SIRAH force field also has limitations compared to atomistic models:
+
+.. image:: ../images/cons.png
+  :width: 30
+  :align: left
+
+**Atomic-Level Precision**: CG models, including SIRAH, sacrifice atomic-level precision in order to achieve computational efficiency. This means that certain details, such as the explicit representation of individual water molecules or specific side chain conformations, may not be accurately captured.
+
+.. image:: ../images/cons.png
+  :width: 30
+  :align: left
+
+**Limited Molecular Diversity**: While SIRAH incorporates parameters for the most prevalent biological molecules, the molecular diversity within biological systems is extensive, making it challenging to encompass all relevant biomolecules. Creating arbitrary molecular topologies may require additional data from experimental databases and physicochemical intuition.
+
+.. image:: ../images/cons.png
+  :width: 30
+  :align: left
+
+**Protein Folding Simulations**: Although SIRAH has been successful in reproducing spontaneous aggregation, folding of small peptides, and specific recognition of proteins, the unbiased formation of large helical segments is still challenging for the force field.
+
+In summary, the SIRAH force field offers speed, efficiency, and multiscale capabilities for simulating biomolecular systems. However, it sacrifices atomic-level precision and may have limitations in handling molecular diversity and protein folding simulations compared to atomistic models.
 
 License 
 -------
@@ -31,7 +74,7 @@ The SIRAH force field is developed by the `Biomolecular Simulations Group <https
 Follow us  
 ---------------
 
-Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-sirah| 
+Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-sirah| |github-sirah| 
  
 
 .. |google-sirah| raw:: html
@@ -45,3 +88,7 @@ Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-
 .. |twitter-sirah| raw:: html
 
    <a href="https://twitter.com/SIRAHForcefield" class="author-social" target="_blank"><i class="fa fa-twitter" style="font-size:30px;"></i></a>
+
+.. |github-sirah| raw:: html
+
+   <a href="https://github.com/SIRAHFF" class="author-social" target="_blank"><i class="fa fa-github" style="font-size:30px;"></i></a>  
