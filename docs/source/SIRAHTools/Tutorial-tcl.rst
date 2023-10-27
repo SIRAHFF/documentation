@@ -1,4 +1,4 @@
-This tutorial shows how to visualize and analize trajectory files using the **SIRAH Tools Plugin** for VMD. The main reference
+This tutorial shows how to visualize and analize trajectory files using the **SIRAH Tools** plugin for VMD. The main reference
 for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: `5YWS <https://www.rcsb.org/structure/5YWS>`_) and its simulation was previously dicussed by `Klein et al. <https://doi.org/10.1021/acs.jcim.0c00160>`_. We strongly advise you to read these articles before starting the tutorial.
 
 .. warning::
@@ -13,7 +13,7 @@ for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics
 
 
 Visualization of CG systems
-____________________________
+----------------------------
 
 One of the features of the SIRAH Tools plugin for VMD, ``sirah_vmdtk.tcl``, is that it improves the visualization and analysis of SIRAH's CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.
 
@@ -25,21 +25,22 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 .. tip::
 	
-	You can also load ``sirah_vmdtk.tcl`` inside VMD. Go to *Extensions* > *Tk Console* and enter:
-	
-	.. code-block:: bash
+   You can also load ``sirah_vmdtk.tcl`` inside VMD. Go to *Extensions* > *Tk Console* and enter:
+   
+   **For AMBER**
 
-		source ../sirah.amber/tools/sirah_vmdtk.tcl
-	
-	or
-	
-	.. code-block:: bash
+   .. code-block:: bash
 
-		source ../sirah.ff/tools/sirah_vmdtk.tcl
-	
-	depending on the program being used.
+      source ../sirah.amber/tools/sirah_vmdtk.tcl
+   
+   **For GROMACS**
+   
+   .. code-block:: bash
 
-With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
+      source ../sirah.ff/tools/sirah_vmdtk.tcl
+
+
+With the ``sirah_vmdtk.tcl`` file loaded, you can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
 .. code-block:: console
 
@@ -80,7 +81,7 @@ If ``sirah_vmdtk.tcl`` is not loaded in VMD, the trajectory will still be loaded
 	
 
 SIRAH macros
-~~~~~~~~~~~~~~~~
+_____________
 
 In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, ``sirah_vmdtk.tcl``, 10 macros are available:
 
@@ -106,7 +107,7 @@ To use any SIRAH macro, go to *Graphics* > *Representations* (See **Figure 2**) 
 .. tip::
 	 To see all available VMD's *Singlewords*, click on the *Selections* tab in the *Graphics* > *Representations* window and look through the *Singlewords* panel. You can also double-click on a singleword, and then, click on the *Apply* button to use a VMD Macro.
 	
-Since our system is a protein−DNA complex with coordinating magnesium ions, we can use four macros: ``sirah_protein`` (see **Figure 3A**), ``sirah_nucleic`` (see **Figure 3B**), ``sirah_water`` (see **Figure 3C**), and ``sirah_ions`` (see **Figure 3D**).
+Since our system is a protein−DNA complex with coordinating magnesium ions, you can use four macros: ``sirah_protein`` (see **Figure 3A**), ``sirah_nucleic`` (see **Figure 3B**), ``sirah_water`` (see **Figure 3C**), and ``sirah_ions`` (see **Figure 3D**).
 
 .. figure:: /../images/sirah_tools_3.png
    :align: center
@@ -129,23 +130,23 @@ To use all representations together, just create different representations for e
 
 
 Structural analysis of CG systems
-__________________________________
+-----------------------------------
 
 Besides the features that enhance the visualization of SIRAH CG simulations, two additional SIRAH Tools features can be used to analyze the trajectory: ``sirah_ss`` and ``sirah_backmap``. They will be discussed below.
 
 
 Secondary structure analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+_____________________________
 
 The utility ``sirah_ss`` assigns secondary structures to CG proteins in SIRAH, classifying residues into *α-helix (H)*, *extended β-sheet (E)* or, otherwise, *coil (C)* conformations, based on the instantaneous values of the backbone’s torsional angles and Hydrogen bond-like (HB) interactions (see `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_ for more information). The ``sirah_ss`` feature produces ASCII files of average and by-frame results, which can be visualized as color plots using the python script ``plot_ss.py``.
 
-With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
+With the ``sirah_vmdtk.tcl`` file loaded, you can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
 .. code-block:: console
 
    sirah_help 
 
-to see all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_ss`` feature by typing
+to see all the SIRAH tools available options. Or, you can go straight to the help for the ``sirah_ss`` feature by typing
 
 .. code-block:: console
 
@@ -224,7 +225,7 @@ The output will be the following:
 
 All the available options for ``sirah_ss`` are documented in this help. By default, four outputs are created by ``sirah_ss``: ``ss_by_frame.xvg``, ``ss_by_res.xvg``, ``ss_global.xvg`` and ``ss.mtx``. The ``ss_by_frame.xvg`` file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The ``ss_by_res.xvg`` file gives the secondary structure percentages of H, E, and C by each residue. The ``ss_global.xvg`` file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the ``ss.mtx`` file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.
 
-We can also choose which molecule and which frames to analyze. To calculate the secondary structure for the protein (loaded on *top*) on all frames, for instance, we must modify the default ``sirah_ss`` selection from *all* to *sirah_protein*. To achieve this, we can enter: 
+You can also choose which molecule and which frames to analyze. To calculate the secondary structure for the protein (loaded on *top*) on all frames, for instance, you must modify the default ``sirah_ss`` selection from *all* to *sirah_protein*. To achieve this, you can enter: 
 
 .. code-block:: console
 
@@ -254,7 +255,7 @@ Furthermore, we have prepared a python script ``plot_ss.py`` that can be used to
 
       python --version
 
-Once we know we are using the right version of Python, we can use the ``plot_ss.py`` script by typing:
+Once you know you are using the right version of Python, you can use the ``plot_ss.py`` script by typing:
 
 .. code-block:: python
 
@@ -266,7 +267,7 @@ or
 
    python ../sirah.amber/tools/plot_ss.py -h
 
-This will show us the options we have within the script, most of the flags are for changing the appearance of the graph (colors, font size, label size, etc). 
+This will show us the options you have within the script, most of the flags are for changing the appearance of the graph (colors, font size, label size, etc). 
 
 .. code-block:: console
 
@@ -312,7 +313,7 @@ In the case of the ``ss.mtx`` matrix it may take some time (no more than a coupl
 
 .. tip::
 
-   To use the flags that modify the colors, any of the following entries is valid. For example, if we would like to use red as the color for the α-helix, we can type:
+   To use the flags that modify the colors, any of the following entries is valid. For example, if you would like to use red as the color for the α-helix, you can type:
 
    ``-H red``
    ``-H r``
@@ -337,7 +338,7 @@ The script generates the plots shown in **Figure 5**, remember that you must plo
 
 
 Backmapping analysis
-~~~~~~~~~~~~~~~~~~~~~
+_____________________
 
 .. important::
 	
@@ -348,13 +349,13 @@ Backmapping analysis
 
 The utility ``sirah_backmap`` retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.
 
-With the ``sirah_vmdtk.tcl`` file loaded, we can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
+With the ``sirah_vmdtk.tcl`` file loaded, you can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
 .. code-block:: console
 
    sirah_help 
 
-to see all the SIRAH tools available options. Or, we can go straight to the help for the ``sirah_backmap`` feature by typing
+to see all the SIRAH tools available options. Or, you can go straight to the help for the ``sirah_backmap`` feature by typing
 
 .. code-block:: console
 
@@ -431,7 +432,7 @@ The output will be the following:
 	Currently, backmapping libraries contain instructions for solute (proteins, DNA, and metal ions).
 	
 
-All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the ``each`` option. To do that we type:
+All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the ``each`` option. To do that you type:
 
 .. code-block:: console
 
@@ -450,7 +451,7 @@ The output is a 300-frame file named ``backmap.pdb``. This file is displayed as 
 	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
 	
 	
-The original atomistic PDB file reveals that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, we can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
+The original atomistic PDB file reveals that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
 
 .. figure:: /../images/CG.gif
    :align: center
@@ -458,7 +459,7 @@ The original atomistic PDB file reveals that a few nucleotides at the DNA molecu
    
    **Figure 7.** The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unreal behavior at the DNA extremities.
 
-In most cases, the default parameters of 100 steps of steepest descent (``ncyc``) and 50 steps of conjugate gradient (total of 150 ``maxcyc`` steps) in vacuum conditions are sufficient to produce a correct result. However, in this instance, they produced artifactual conformations that were absent in the CG simulation. To solve this, we modified the total minimization steps to 50 for ``maxcyc`` and to 25 for ``ncyc`` as follows:
+In most cases, the default parameters of 100 steps of steepest descent (``ncyc``) and 50 steps of conjugate gradient (total of 150 ``maxcyc`` steps) in vacuum conditions are sufficient to produce a correct result. However, in this instance, they produced artifactual conformations that were absent in the CG simulation. To solve this, you can modify the total minimization steps to 50 for ``maxcyc`` and to 25 for ``ncyc`` as follows:
 
 .. caution::
 	
@@ -485,8 +486,8 @@ It is important to try different combinations of settings to find the one that w
 		sirah_backmap each 1000 maxcyc 50 ncyc 25 outname backmap_less_min.pdb 
 
 
-VMD Command-Line options
-____________________________
+VMD in text mode
+------------------
 
 If you need to perform non-interactive analysis on large trajectories or if a graphical user interface is not available, you can also execute the SIRAH Tools plugin using VMD text mode. When in text mode, VMD does not provide a window for graphical output, but many of its features are available. To launch VMD in text mode, the ``-dispdev text`` and ``-f`` flags are appended to the command line used before to load the trajectory, as shown below: 
 
@@ -530,13 +531,13 @@ The output will be similar to the following:
 	SIRAH Tool kit for VMD was loaded. Use sirah_help to access the User Manual pages
 	vmd >
 
-The final lines indicate that SIRAH Tools were loaded correctly. Thus, in the `vmd >` prompt, for instance, we can type ``sirah_help``:
+The final lines indicate that SIRAH Tools were loaded correctly. Thus, in the `vmd >` prompt, for instance, you can type ``sirah_help``:
 
 .. code-block:: console
 	
 	vmd > sirah_help
 	
-In this mode, the ``sirah_ss`` and ``sirah_backmap`` features can also be utilized. For example, if we want to calculate the secondary structure for the protein (loaded on *top*) on all frames, we type:
+In this mode, the ``sirah_ss`` and ``sirah_backmap`` features can also be utilized. For example, if you want to calculate the secondary structure for the protein (loaded on *top*) on all frames, you type:
 
 .. code-block:: console
 	
@@ -546,7 +547,7 @@ In this mode, the ``sirah_ss`` and ``sirah_backmap`` features can also be utiliz
 	Starting sscache... Done!
 	SUMMARY: <H> 36.8% <E> 16.2% <C> 47.1%
 
-Additionally, you can construct customized scripts, that contain vmd commands, to load and process your trajectories with SIRAH Tools in VMD text mode. For example, we created a ``sirah_dispdev.tcl`` file:
+Additionally, you can construct customized scripts, that contain vmd commands, to load and process your trajectories with SIRAH Tools in VMD text mode. For example, you can create a ``sirah_dispdev.tcl`` file:
 
 .. code-block:: console
 	
@@ -558,7 +559,7 @@ Additionally, you can construct customized scripts, that contain vmd commands, t
 	sirah_backmap now nomin outname last_frame_backmap
 	quit
 	
-This script will load the topology ``5YWS_cg.psf``, the trajectory ``5YWS_cg_md_pbc.xtc``, and ``sirah_vmdtk.tcl`` files. Then, process secondary structure with ``sirah_ss`` and create a backmapped pdb of the last frame with ``sirah_backmap`` with the name ``last_frame_backmap.pdb``. With the ``quit`` command, VMD is closed. To read the script, we type:
+This script will load the topology ``5YWS_cg.psf``, the trajectory ``5YWS_cg_md_pbc.xtc``, and ``sirah_vmdtk.tcl`` files. Then, process secondary structure with ``sirah_ss`` and create a backmapped pdb of the last frame with ``sirah_backmap`` with the name ``last_frame_backmap.pdb``. With the ``quit`` command, VMD is closed. To read the script, you type:
 
 .. code-block:: bash
 
