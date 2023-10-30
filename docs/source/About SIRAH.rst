@@ -13,7 +13,7 @@ The current version, **SIRAH 2.2**, includes:
 
 * A collection of scripts, known as **SIRAH Tools**, that facilitate the process of mapping all-atom files to CG representations, backmapping, visualizing, and analyzing SIRAH trajectories directly on the popular VMD program for molecular visualization.     
 
-Pros and cons
+Advantages
 --------------
 
 The SIRAH force field offers several advantages compared to atomistic models in simulating biomolecular systems:
@@ -35,6 +35,9 @@ The SIRAH force field offers several advantages compared to atomistic models in 
   :align: left
 
 **Self-Consistent Force Field**: SIRAH aims to provide a self-consistent force field that describes the intra and intermolecular interactions among moieties of diverse chemical nature in a holistic view of biological ensembles' structural and dynamic features. This ensures that the force field is capable of accurately representing the interactions within biomolecular systems.
+
+Limitations
+--------------
 
 However, it is important to note that the SIRAH force field also has limitations compared to atomistic models:
 
