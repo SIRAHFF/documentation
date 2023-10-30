@@ -10,7 +10,7 @@ Welcome to SIRAH FF documentation
 
    **This website is currently undergoing construction, which means that some of its components are constantly being updated and expanded upon.**
 
-.. image:: ../images/pagina_principal.gif
+.. image:: ../images/pagina_principal_720p.gif
   :width: 100%
 
 

@@ -52,7 +52,8 @@
               <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">About SIRAH</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pros-and-cons">Pros and cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#advantages">Advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#follow-us">Follow us</a></li>
@@ -106,8 +107,8 @@
 <li><p>The ability to leverage GPU acceleration in Amber and GROMACS codes;</p></li>
 <li><p>A collection of scripts, known as <strong>SIRAH Tools</strong>, that facilitate the process of mapping all-atom files to CG representations, backmapping, visualizing, and analyzing SIRAH trajectories directly on the popular VMD program for molecular visualization.</p></li>
 </ul>
-<section id="pros-and-cons">
-<h2>Pros and cons<a class="headerlink" href="#pros-and-cons" title="Link to this heading"></a></h2>
+<section id="advantages">
+<h2>Advantages<a class="headerlink" href="#advantages" title="Link to this heading"></a></h2>
 <p>The SIRAH force field offers several advantages compared to atomistic models in simulating biomolecular systems:</p>
 <a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" /></a>
 <p><strong>Speed and Efficiency</strong>: Coarse-grained (CG) models, such as SIRAH, provide a significant speedup in simulations compared to atomistic models. This allows for the study of larger and more complex biological systems over longer time scales.</p>
@@ -115,6 +116,9 @@
 <p><strong>Multiscale Capabilities</strong>: SIRAH offers a multiscale approach, allowing for the combination of different levels of resolution within the same simulation setup. This includes the ability to covalently link all-atom and CG models in nucleic acid chains and the incorporation of a multi-resolution model for the solvent.</p>
 <a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" /></a>
 <p><strong>Self-Consistent Force Field</strong>: SIRAH aims to provide a self-consistent force field that describes the intra and intermolecular interactions among moieties of diverse chemical nature in a holistic view of biological ensembles’ structural and dynamic features. This ensures that the force field is capable of accurately representing the interactions within biomolecular systems.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>However, it is important to note that the SIRAH force field also has limitations compared to atomistic models:</p>
 <a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" /></a>
 <p><strong>Atomic-Level Precision</strong>: CG models, including SIRAH, sacrifice atomic-level precision in order to achieve computational efficiency. This means that certain details, such as the explicit representation of individual water molecules or specific side chain conformations, may not be accurately captured.</p>
