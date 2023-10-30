@@ -565,6 +565,6 @@ This script will load the topology ``5YWS_cg.psf``, the trajectory ``5YWS_cg_md_
 
     vmd -dispdev text -e sirah_dispdev.tcl	
 	
-.. tip::
+.. seealso::
 
-	You can find additional information on VMD command-line options `here <https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html>`__ and available text mode features `here <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html>`__.
+   You can find additional information on VMD command-line options `here <https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html>`__ and available text mode features `here <https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html>`__.
