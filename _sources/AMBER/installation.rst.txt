@@ -36,11 +36,11 @@ VMD.
 Download and Setting up SIRAH
 _______________________________
 
-Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tgz>`_ and uncompress it into your working directory.
+Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tar.gz>`_ and uncompress it into your working directory.
 
 .. code-block:: bash
 
-    tar -xzvf sirah_x2.2_20-08.amber.tgz
+    tar -xzvf sirah_x2.2_20-08.amber.tar.gz
 
 If you are using a different version of SIRAH, type:
 

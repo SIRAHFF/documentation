@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIRAH tools &mdash; SIRAH Force Field v_1.0 documentation</title>
+  <title>SIRAH tools &mdash; SIRAH Force Field  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=3060a628"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -38,9 +38,6 @@
           <a href="index.html" class="icon icon-home">
             SIRAH Force Field
           </a>
-              <div class="version">
-                v_1.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -384,12 +381,12 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </section>
 <section id="backmapping-analysis">
 <h3>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h3>
+<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structure acquired in the initial stage is subjected to protonation and subsequent minimization with the atomistic force field ff14SB within the tleap module of AmberTools.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> minimizes the structures after the backmapping procedure. <a class="reference external" href="http://ambermd.org/AmberTools.php">AmberTools</a> is used to accomplish the minimization task. Make sure AmberTools and the $AMBERHOME environment are set up properly. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD.</p>
-<p>However, the <code class="docutils literal notranslate"><span class="pre">nomin</span></code> option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD.</p>
+<p>However, the <code class="docutils literal notranslate"><span class="pre">nomin</span></code> option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD. Keep in mind that hydrogen atoms won’t be added to the structures if the minimization step is skipped.</p>
 </div>
-<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.</p>
 <p>With the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file loaded, you can access the <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> feature by going to <em>Extensions</em> &gt; <em>Tk Console</em> and entering</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_help</span>
 </pre></div>
@@ -466,7 +463,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p class="admonition-title">Note</p>
 <p>Currently, backmapping libraries contain instructions for solute (proteins, DNA, and metal ions).</p>
 </div>
-<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the <code class="docutils literal notranslate"><span class="pre">each</span></code> option. To do that you type:</p>
+<p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame every 1,000 frames with the <code class="docutils literal notranslate"><span class="pre">each</span></code> option. To do that you type:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap each 1000</span>
 </pre></div>
 </div>
@@ -479,9 +476,13 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </figure>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.</p>
+<blockquote>
+<div><p>Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.</p>
+</div></blockquote>
+<p>Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms and number of cycles, cutoffs, etc.</p>
+<p>An example of this behavior is explained below.</p>
 </div>
-<p>The original atomistic PDB file reveals that a few nucleotides at the DNA molecule’s extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in <strong>Figure 7</strong>.</p>
+<p>The original atomistic PDB file shows that a few nucleotides at the DNA molecule’s extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in <strong>Figure 7</strong>.</p>
 <figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="_images/CG.gif"><img alt="_images/CG.gif" src="_images/CG.gif" style="width: 100%;" /></a>
 <figcaption>
@@ -503,7 +504,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p><span class="caption-text"><strong>Figure 8.</strong> The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> and <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files you already have, you can always change the name of the result with the <code class="docutils literal notranslate"><span class="pre">outname</span></code> option:</p>
+<p>It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files, you can always change the output name with the <code class="docutils literal notranslate"><span class="pre">outname</span></code> option:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap each 1000 maxcyc 50 ncyc 25 outname backmap_less_min.pdb</span>
 </pre></div>
 </div>
