@@ -340,14 +340,13 @@ The script generates the plots shown in **Figure 5**, remember that you must plo
 Backmapping analysis
 _____________________
 
-.. important::
-	
-	By default, ``sirah_backmap`` minimizes the structures after the backmapping procedure. `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to accomplish the minimization task. Make sure AmberTools and the $AMBERHOME environment are set up properly. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD. 
-	
-	However, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD.	
-	
+The utility ``sirah_backmap`` initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structure acquired in the initial stage is subjected to protonation and subsequent minimization with the atomistic force field ff14SB within the tleap module of AmberTools.  
 
-The utility ``sirah_backmap`` retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries.
+.. important::
+   
+   By default, ``sirah_backmap`` minimizes the structures after the backmapping procedure. `AmberTools <http://ambermd.org/AmberTools.php>`_ is used to accomplish the minimization task. Make sure AmberTools and the $AMBERHOME environment are set up properly. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD. 
+   
+   However, the ``nomin`` option can be used to disable the minimization step. Consequently, you can minimize backmapped outputs by utilizing other software/force fields outside of VMD. Keep in mind that hydrogen atoms won't be added to the structures if the minimization step is skipped.
 
 With the ``sirah_vmdtk.tcl`` file loaded, you can access the ``sirah_help`` feature by going to *Extensions* > *Tk Console* and entering 
 
@@ -432,7 +431,7 @@ The output will be the following:
 	Currently, backmapping libraries contain instructions for solute (proteins, DNA, and metal ions).
 	
 
-All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame for every 1,000 frames with the ``each`` option. To do that you type:
+All the available options for ``sirah_backmap`` are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame every 1,000 frames with the ``each`` option. To do that you type:
 
 .. code-block:: console
 
@@ -448,10 +447,14 @@ The output is a 300-frame file named ``backmap.pdb``. This file is displayed as 
 
 .. warning::
 	
-	Always review both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.
+	Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly. 
+
+   Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms and number of cycles, cutoffs, etc. 
+
+   An example of this behavior is explained below.
 	
 	
-The original atomistic PDB file reveals that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
+The original atomistic PDB file shows that a few nucleotides at the DNA molecule's extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in **Figure 7**. 
 
 .. figure:: /../images/CG.gif
    :align: center
@@ -479,7 +482,7 @@ The output is a new 300-frame file named ``backmap.pdb``, displayed as an animat
    **Figure 8.** The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the ``maxcyc`` and ``ncyc`` arguments of ``sirah_backmap``.
 
 
-It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files you already have, you can always change the name of the result with the ``outname`` option:
+It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files, you can always change the output name with the ``outname`` option:
 
 .. code-block:: console
 
