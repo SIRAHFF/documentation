@@ -23,8 +23,8 @@ author = 'BA, SL, SM'
 
 # The full version, including alpha/beta/rc tags
 
-version = 'v_1.0'
-release = 'v_1.0'
+version = ''
+release = ''
 
 
 # -- General configuration ---------------------------------------------------
