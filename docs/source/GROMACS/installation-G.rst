@@ -37,6 +37,10 @@ VMD.
 Download and setting SIRAH
 ___________________________
 
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 Download `SIRAH for GROMACS <https://github.com/SIRAHFF/documentation/releases/download/GROMACS/sirah_x2.2_20-07.ff.tar.gz>`_ and uncompress it into your working directory. 
 
 .. code-block:: bash
