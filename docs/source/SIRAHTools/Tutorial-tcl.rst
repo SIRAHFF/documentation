@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+
 This tutorial shows how to visualize and analize trajectory files using the **SIRAH Tools** plugin for VMD. The main reference
 for this tutorial is `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: `5YWS <https://www.rcsb.org/structure/5YWS>`_) and its simulation was previously dicussed by `Klein et al. <https://doi.org/10.1021/acs.jcim.0c00160>`_. We strongly advise you to read these articles before starting the tutorial.
 
@@ -340,7 +344,7 @@ The script generates the plots shown in **Figure 5**, remember that you must plo
 Backmapping analysis
 _____________________
 
-The utility ``sirah_backmap`` initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structure acquired in the initial stage is subjected to protonation and subsequent minimization with the atomistic force field ff14SB within the tleap module of AmberTools.  
+The utility ``sirah_backmap`` initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by `Parsons et al. <https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237>`_. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structures from the initial stage are protonated and minimized with the atomistic force field ff14SB within the tleap module of AmberTools.  
 
 .. important::
    
@@ -446,10 +450,10 @@ The output is a 300-frame file named ``backmap.pdb``. This file is displayed as 
    **Figure 6.** The 300-frame backmapped all-atom output from the 3.0 μs MD simulation using the default minimization arguments of ``sirah_backmap``. 
 
 .. warning::
-	
-	Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly. 
 
-   Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms and number of cycles, cutoffs, etc. 
+   Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly. 
+
+   Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms, number of cycles, cutoffs, etc.
 
    An example of this behavior is explained below.
 	

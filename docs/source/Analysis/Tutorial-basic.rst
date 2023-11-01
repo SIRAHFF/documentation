@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+
 This tutorial shows how to perform *Root Mean Square Deviation* (RMSD), *Root Mean Square Fluctuation* (RMSF), *Radius of gyration* (Rg), and *Solvent-Accessible Surface Area* (SASA) analyses on a SIRAH CG simulation trajectory file using VMD. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: `5YWS <https://www.rcsb.org/structure/5YWS>`_) and its simulation was previously dicussed by `Klein et al. <https://doi.org/10.1021/acs.jcim.0c00160>`__ (check the :ref:`SIRAH Tools tutorial <SIRAH tools>` for additional analyses on this system). We strongly advise you to read the article before starting the tutorial.
 
 
