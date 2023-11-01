@@ -44,7 +44,7 @@ After processing the output trajectory to account for the Periodic Boundary Cond
 
 .. attention::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the :ref:`SIRAH Tools tutorial <SIRAH tools>` to learn more about the macros.
+    The file ``sirah_vmdtk.tcl`` is a **Tcl script** that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the :ref:`SIRAH Tools tutorial <SIRAH tools>` to learn more about the macros.
 
 
 That’s it! Now you can analyze the trajectory.
@@ -474,9 +474,9 @@ The output will be similar to the following:
 
 .. attention::
 
-    The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the :ref:`SIRAH Tools tutorial <SIRAH tools>` to learn more about the macros.
+    The file ``sirah_vmdtk.tcl`` is a **Tcl script** that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the :ref:`SIRAH Tools tutorial <SIRAH tools>` to learn more about the macros.
 
-Thus, in the `vmd >` prompt, you can import any of the previously displayed Tcl scripts, for instance:
+Thus, in the `vmd >` prompt, you can import any of the previously displayed **Tcl scripts**, for instance:
 
 .. code-block:: console
    
