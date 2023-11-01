@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 closed circular DNA using the Generalized Born model (GB) for implicit solvent.
 

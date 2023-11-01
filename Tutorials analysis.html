@@ -100,6 +100,10 @@
              
   <section id="basic-analyses-vmd">
 <span id="basic-analysis"></span><h1>Basic analyses VMD<a class="headerlink" href="#basic-analyses-vmd" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
+</div>
 <p>This tutorial shows how to perform <em>Root Mean Square Deviation</em> (RMSD), <em>Root Mean Square Fluctuation</em> (RMSF), <em>Radius of gyration</em> (Rg), and <em>Solvent-Accessible Surface Area</em> (SASA) analyses on a SIRAH CG simulation trajectory file using VMD. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: <a class="reference external" href="https://www.rcsb.org/structure/5YWS">5YWS</a>) and its simulation was previously dicussed by <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c00160">Klein et al.</a> (check the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a> for additional analyses on this system). We strongly advise you to read the article before starting the tutorial.</p>
 <p>Since VMD is a powerful molecular visualization software, you may find it convenient and familiar to perform trajectory analysis directly in VMD. In the following sections, we will concentrate on the practical side of these analyses in VMD and will not delve into the theory.</p>
 <div class="admonition warning">
@@ -130,7 +134,7 @@
 </div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a <strong>Tcl script</strong> that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
 </div>
 <p>That’s it! Now you can analyze the trajectory.</p>
 </section>
@@ -503,9 +507,9 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 </div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a <strong>Tcl script</strong> that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
 </div>
-<p>Thus, in the <cite>vmd &gt;</cite> prompt, you can import any of the previously displayed Tcl scripts, for instance:</p>
+<p>Thus, in the <cite>vmd &gt;</cite> prompt, you can import any of the previously displayed <strong>Tcl scripts</strong>, for instance:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; source rmsd_protein.tcl</span>
 </pre></div>
 </div>

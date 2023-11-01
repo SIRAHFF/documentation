@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
 double stranded DNA in explicit solvent (called WatFour, WT4). The main references for
 this tutorial are: `Dans et al. <https://pubs.acs.org/doi/abs/10.1021/ct900653p>`_ (latest parameters are those reported `here <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_), `Darré et al. <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_.

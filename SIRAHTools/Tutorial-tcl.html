@@ -85,7 +85,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>This tutorial shows how to visualize and analize trajectory files using the <strong>SIRAH Tools</strong> plugin for VMD. The main reference
+  <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
+</div>
+<p>This tutorial shows how to visualize and analize trajectory files using the <strong>SIRAH Tools</strong> plugin for VMD. The main reference
 for this tutorial is <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: <a class="reference external" href="https://www.rcsb.org/structure/5YWS">5YWS</a>) and its simulation was previously dicussed by <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c00160">Klein et al.</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -365,7 +369,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </section>
 <section id="backmapping-analysis">
 <h2>Backmapping analysis<a class="headerlink" href="#backmapping-analysis" title="Link to this heading"></a></h2>
-<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structure acquired in the initial stage is subjected to protonation and subsequent minimization with the atomistic force field ff14SB within the tleap module of AmberTools.</p>
+<p>The utility <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> initially retrieves pseudo-atomistic information from the CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) proposed by <a class="reference external" href="https://onlinelibrary.wiley.com/doi/10.1002/jcc.20237">Parsons et al.</a>. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structures from the initial stage are protonated and minimized with the atomistic force field ff14SB within the tleap module of AmberTools.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> minimizes the structures after the backmapping procedure. <a class="reference external" href="http://ambermd.org/AmberTools.php">AmberTools</a> is used to accomplish the minimization task. Make sure AmberTools and the $AMBERHOME environment are set up properly. If you are using AmberTools via conda, AmberTools environment should be activated before opening VMD.</p>
@@ -460,10 +464,8 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </figure>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<blockquote>
-<div><p>Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.</p>
-</div></blockquote>
-<p>Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms and number of cycles, cutoffs, etc.</p>
+<p>Always check both the original CG trajectory and the backmapping output to identify out-of-the-ordinary behavior and adjust arguments accordingly.</p>
+<p>Keep in mind that the minimized structures sometimes may differ from the CG trajectory due to the combination of all-atom minimization algorithms, number of cycles, cutoffs, etc.</p>
 <p>An example of this behavior is explained below.</p>
 </div>
 <p>The original atomistic PDB file shows that a few nucleotides at the DNA molecule’s extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in <strong>Figure 7</strong>.</p>

@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 This tutorial shows how to apply the hybrid solvation approach of SIRAH force field to speed up the simulation of an atomistic solute. The example system contains a DNA fiber surrounded by a shell of atomistic waters, which are embedded in coarse-grained (CG) molecules, called WT4, to represent
 bulk water. The general procedure is extensible to any other solute. The hybrid solvation methodology is well tested for SPC, SPC/E, TIP3P atomistic water models. The main references for this tutorial are: `Darré et al. <https://pubs.acs.org/doi/abs/10.1021/ct100379f>`_, `Machado et al. <https://pubs.rsc.org/en/Content/ArticleLanding/2011/CP/c1cp21248f>`__, `Gonzalez et al. <https://pubs.acs.org/doi/abs/10.1021/jp4079579>`_, and `Machado & Pantano  <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. We strongly advise you to read these articles before starting the tutorial.
 

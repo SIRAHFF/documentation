@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 This tutorial shows how to apply a multiscale representation of DNA, which is available in the SIRAH
 force field, to study protein-DNA interactions. In this approach, the protein and its binding region are
 treated with an atomistic force field, while the contextual DNA is represented at coarse-grained (CG)
