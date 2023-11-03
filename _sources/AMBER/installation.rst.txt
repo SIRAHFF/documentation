@@ -1,6 +1,6 @@
 .. note:: 
 
-    SIRAH Force Field is distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ lastest releases.
+    SIRAH Force Field is distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ offical releases.
 
 Required Software
 __________________
@@ -78,7 +78,7 @@ Create the following symbolic link in the folder tutorialX.X:
 
 .. note:: 
 
-    SIRAH Force Field is also distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ lastest releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:
+    SIRAH Force Field is also distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ official releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:
 
     ln -s $AMBERHOME/dat/SIRAH sirah.amber
 
