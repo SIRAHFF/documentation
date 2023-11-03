@@ -85,7 +85,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="required-software">
+  <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SIRAH Force Field is distributed with <a class="reference external" href="https://ambermd.org/index.php">AMBER</a> and <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> lastest releases.</p>
+</div>
+<section id="required-software">
 <h1>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h1>
 <p><strong>AMBER</strong></p>
 <p>Amber and AmberTools (version 16 or later) versions properly installed and running in your computer.</p>
@@ -135,6 +139,13 @@ VMD.</p>
 <p>Create the following symbolic link in the folder tutorialX.X:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_x2.2_20-08.amber<span class="w"> </span>sirah.amber
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SIRAH Force Field is also distributed with <a class="reference external" href="https://ambermd.org/index.php">AMBER</a> and <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> lastest releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:</p>
+<p>ln -s $AMBERHOME/dat/SIRAH sirah.amber</p>
+<p>Check the <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">AMBER Manual</a> section <strong>3.11.2</strong> for more details.</p>
+<p>However, if you want the lastest parameters and implementations strongly advise you to use the developers version of SIRAH from GitHub.</p>
 </div>
 </section>
 
