@@ -66,6 +66,14 @@ Setting up SIRAH
 .. include:: /AMBER/Tutorial-7.rst
 
 
+.. _Tutorial 8:
+
+8. Glycoprotein in explicit solvent
+----------------------------------------------------------------
+
+.. include:: /AMBER/Tutorial-8.rst
+
+
 .. _Appendix:
 
 Appendix
