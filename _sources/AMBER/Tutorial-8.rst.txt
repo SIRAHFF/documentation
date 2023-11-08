@@ -19,13 +19,13 @@ _____________________________
 
 	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ with the **Glycan Reader & Modeler** to prepare your system, choosing the output naming scheme of AMBER for best compatibility. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
 
-This example use the structure of glycoprotein `1GYA <https://www.rcsb.org/structure/1GYA>`_, using CHARMM-GUI server are obtained the files parm7 and rst7, this files are converted to pdb format with naming scheme of AMBER/GLYCAM using AmberTool as follow:
+This example use the structure of glycoprotein `1GYA <https://www.rcsb.org/structure/1GYA>`_, using CHARMM-GUI server are obtained the files parm7 and rst7, these files are converted to pdb format with the naming scheme of AMBER/GLYCAM using AmberTool as follow:
 
 .. code-block:: bash
 
   ambpdb -p ./sirah.amber/tutorial/8/step3_input.parm7 -c ./sirah.amber/tutorial/8/step3_input.rst7 > 1GYA_glycam.pdb
 
-From the file 1GYA_glycam.pdb generated delete the solvent, rename to 1GYA_glycam_NoW.pdb and then map the protonated atomistic to its CG representation:   
+From the file 1GYA_glycam.pdb generated delete the solvent, rename to 1GYA_glycam_NoW.pdb and then map the protonated atomistic structure to its CG representation:   
 
 .. code-block:: bash
 
@@ -48,7 +48,7 @@ The input file ``-i`` 1GYA_glycam_NoW.pdb contains the atomistic representation 
   
 .. important::
 
-	By default charged termini are used, but it is possible to set them neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
+	By default, charged termini are used. However, it is possible to set them neutral by renaming the residues from **s**\[code\] to **a**\[code\] (Nt-acetylated) or **m**\[code\] (Ct-amidated) after mapping to CG, where \[code\] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (:math:`N_{\epsilon}`) rename it from “sHe” to “aHe”.
 
 
 Please check both PDBs structures using VMD:	
@@ -159,7 +159,7 @@ Make a new folder for the run:
     mkdir -p run; cd run
 
 The folder ``sirah.amber/tutorial/8/`` contains typical input files for energy minimization
-(``em1_WT4.in`` and ``em2_WT4.in``), equilibration (``eq1_WT4.in`` and ``eq2_WT4.in``) and production (``md_WT4.in``) runs. Please check carefully the
+(``em1_WT4.in`` and ``em2_WT4.in``), relaxation (or equilibration) (``eq1_WT4.in`` and ``eq2_WT4.in``) and production (``md_WT4.in``) runs. Please check carefully the
 input flags therein, in particular the definition of flag *chngmask=0* at *&ewald* section is **mandatory**.
 
 .. tip::
@@ -195,7 +195,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 	pmemd.cuda -O -i ../sirah.amber/tutorial/8/em2_WT4.in -p ../1GYA_cg.prmtop -c ../1GYA_cg_em1.ncrst -o 1GYA_cg_em2.out -r 1GYA_cg_em2.ncrst &
 
-**Solvent Equilibration (NPT):**
+**Solvent Relaxation (or equlibration) in NPT:**
 
 .. code-block:: bash
 
@@ -205,7 +205,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 	Option **restraintmask=:'1-114'** in input file ``eq1_WT4.in`` must be set specifically for each system to embrace all glycoprotein’s residues.
 
-**Soft equilibration to improve side chain and glycan solvation (NPT):**
+**Soft Relaxation to improve side chain and glycan solvation (NPT):**
 
 .. code-block:: bash
 
