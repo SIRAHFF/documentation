@@ -1703,7 +1703,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Option <strong>restraintmask=:’1-114’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to embrace all glycoprotein’s residues.</p>
+<p>Option <strong>restraintmask=:’1-114’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to restrain all glycoprotein’s residues.</p>
 </div>
 <p><strong>Soft Relaxation to improve side chain and glycan solvation (NPT):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1GYA_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1GYA_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
