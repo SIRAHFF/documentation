@@ -203,7 +203,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
   
 .. caution::
 
-	Option **restraintmask=:'1-114'** in input file ``eq1_WT4.in`` must be set specifically for each system to embrace all glycoprotein’s residues.
+	Option **restraintmask=:'1-114'** in input file ``eq1_WT4.in`` must be set specifically for each system to restrain all glycoprotein’s residues.
 
 **Soft Relaxation to improve side chain and glycan solvation (NPT):**
 
