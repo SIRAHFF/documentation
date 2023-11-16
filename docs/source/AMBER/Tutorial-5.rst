@@ -19,7 +19,7 @@ _____________________________
 
 	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and use the **PDB Reader & Manipulator** to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
 	
-	Other option is the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the *PQR* file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.
+	Other option is the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the *PQR* file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated TYR), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.
 
 Map the protonated atomistic structure of protein `1CRN <https://www.rcsb.org/structure/1CRN>`_ to its CG representation:   
 
@@ -177,7 +177,7 @@ input flags therein, in particular the definition of flag *chngmask=0* at *&ewal
 
 .. code-block:: bash
 
-	pmemd.cuda -O -i ../sirah.amber/tutorial/5/em2_WT4.in -p ../1CRN_cg.prmtop -c ../1CRN_cg_em1.ncrst -o 1CRN_cg_em2.out -r 1CRN_cg_em2.ncrst &
+	pmemd.cuda -O -i ../sirah.amber/tutorial/5/em2_WT4.in -p ../1CRN_cg.prmtop -c 1CRN_cg_em1.ncrst -o 1CRN_cg_em2.out -r 1CRN_cg_em2.ncrst &
 
 **Solvent Equilibration (NPT):**
 

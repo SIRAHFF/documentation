@@ -62,7 +62,7 @@ You will get the folder ``sirah_[version].amber/`` containing the force field de
 
 .. caution::
 
-  Remember to change **X.X** to the number that corresponds to the tutorial you are going to do.
+	Remember to change **X.X** to the number that corresponds to the tutorial you are going to do.
 
 Make a new folder for this tutorial in your working directory:
 
@@ -80,7 +80,9 @@ Create the following symbolic link in the folder tutorialX.X:
 
     SIRAH Force Field is also distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ official releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:
 
-    ln -s $AMBERHOME/dat/SIRAH sirah.amber
+    .. code-block:: bash
+	
+		ln -s $AMBERHOME/dat/SIRAH sirah.amber
 
     Check the `AMBER Manual <https://ambermd.org/doc12/Amber23.pdf>`_ section **3.11.2** for more details. 
 
