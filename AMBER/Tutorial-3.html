@@ -211,7 +211,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>However, this simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of Amber is advised.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition important">
@@ -223,17 +223,17 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 <p class="admonition-title">Warning</p>
 <p>If you are using <code class="docutils literal notranslate"><span class="pre">sander</span></code>, to avoid the helix fraying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
 contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/dna_cg.RST
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_hyb.RST
 </pre></div>
 </div>
 <p>The file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code> can only be read by <code class="docutils literal notranslate"><span class="pre">sander</span></code>, <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> reads a different restrain format.</p>
 </div>
 <p><strong>Equilibration:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Production (10ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </section>

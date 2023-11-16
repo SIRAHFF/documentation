@@ -178,6 +178,9 @@ Since this is <strong>Tutorial 8</strong>, remember to replace <code class="docu
 <p class="admonition-title">Caution</p>
 <p>Each glycosidic bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.beadi unit.rj.beadj</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. And <em>beadi</em> and <em>beadj</em> are the names of the beads involved in the glycosidic bond of the corresponding residues.</p>
 <p>The above also applies to each disulfide bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away (in this case result in an empty file):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb4amber<span class="w"> </span>-i<span class="w"> </span>sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb<span class="w"> </span>-o<span class="w"> </span>1GYA_aa.pdb<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>1GYA_aa_sslink
+</pre></div>
+</div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

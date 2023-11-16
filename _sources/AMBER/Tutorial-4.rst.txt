@@ -20,7 +20,7 @@ Map the atomistic structure of the closed circular DNA to its CG representation:
 
 .. code-block:: bash
    
-   ./sirah.amber/tools/CGCONV/cgconv.pl -i ./sirah.amber/tutorial/4/ccdna.pdb | sed -e 's/DCX A 1/CW5 A 1/'  -e 's/DCX B 1/CW5 B 1/' -e 's/DGX A 100/GW3 A 100/' -e 's/DGX B 100/GW3 B 100/' > ccdna_cg.pdb
+   ./sirah.amber/tools/CGCONV/cgconv.pl -i ./sirah.amber/tutorial/4/ccdna.pdb | sed -e 's/DCX A   1/CW5 A   1/'  -e 's/DCX B   1/CW5 B   1/' -e 's/DGX A 100/GW3 A 100/' -e 's/DGX B 100/GW3 B 100/' > ccdna_cg.pdb
 
 .. note::
 

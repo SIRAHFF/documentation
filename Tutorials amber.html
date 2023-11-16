@@ -233,7 +233,9 @@ VMD.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>SIRAH Force Field is also distributed with <a class="reference external" href="https://ambermd.org/index.php">AMBER</a> and <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> official releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:</p>
-<p>ln -s $AMBERHOME/dat/SIRAH sirah.amber</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$AMBERHOME</span>/dat/SIRAH<span class="w"> </span>sirah.amber
+</pre></div>
+</div>
 <p>Check the <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">AMBER Manual</a> section <strong>3.11.2</strong> for more details.</p>
 <p>However, if you want the lastest parameters and implementations strongly advise you to use the developers version of SIRAH from GitHub.</p>
 </div>
@@ -678,7 +680,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>However, this simulation is time consuming owing to the system’s size. A parallel or CUDA implementation of Amber is advised.</p>
 </div>
 <p><strong>Energy Minimization:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/em_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>../dna_hyb.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_em.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition important">
@@ -690,17 +692,17 @@ called helix fraying. To avoid such behavior is necessary to set Watson-Crick re
 <p class="admonition-title">Warning</p>
 <p>If you are using <code class="docutils literal notranslate"><span class="pre">sander</span></code>, to avoid the helix fraying, you must create a symbolic link to the file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code>, which
 contains the definition of Watson-Crick restraints for the capping base pairs of this CG DNA:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/1/SANDER/dna_cg.RST
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/dna_hyb.RST
 </pre></div>
 </div>
 <p>The file <code class="docutils literal notranslate"><span class="pre">dna_cg.RST</span></code> can only be read by <code class="docutils literal notranslate"><span class="pre">sander</span></code>, <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> reads a different restrain format.</p>
 </div>
 <p><strong>Equilibration:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/eq_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_em.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_eq.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_eq.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Production (10ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/SANDER/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/3/PMEMD.GPU/md_HYB.in<span class="w"> </span>-p<span class="w"> </span>../dna_hyb.prmtop<span class="w"> </span>-c<span class="w"> </span>dna_hyb_eq.ncrst<span class="w"> </span>-o<span class="w"> </span>dna_hyb_md.out<span class="w"> </span>-r<span class="w"> </span>dna_hyb_md.ncrst<span class="w"> </span>-x<span class="w"> </span>dna_hyb_md.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </section>
@@ -733,7 +735,7 @@ Since this is <strong>Tutorial 4</strong>, remember to replace <code class="docu
 <section id="id29">
 <h3>4.1. Build CG representations<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A 1/CW5 A 1/&#39;</span><span class="w">  </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B 1/CW5 B 1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX A 100/GW3 A 100/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX B 100/GW3 B 100/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A   1/CW5 A   1/&#39;</span><span class="w">  </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B   1/CW5 B   1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX A 100/GW3 A 100/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DGX B 100/GW3 B 100/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
 </div>
 <div class="admonition note">
@@ -872,7 +874,7 @@ Since this is <strong>Tutorial 5</strong>, remember to replace <code class="docu
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> and use the <strong>PDB Reader &amp; Manipulator</strong> to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.</p>
-<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated TYR), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
 </div>
 <p>Map the protonated atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
@@ -1001,7 +1003,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 </pre></div>
 </div>
 <p><strong>Energy Minimization of whole system:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Solvent Equilibration (NPT):</strong></p>
@@ -1629,6 +1631,9 @@ Since this is <strong>Tutorial 8</strong>, remember to replace <code class="docu
 <p class="admonition-title">Caution</p>
 <p>Each glycosidic bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.beadi unit.rj.beadj</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. And <em>beadi</em> and <em>beadj</em> are the names of the beads involved in the glycosidic bond of the corresponding residues.</p>
 <p>The above also applies to each disulfide bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away (in this case result in an empty file):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb4amber<span class="w"> </span>-i<span class="w"> </span>sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb<span class="w"> </span>-o<span class="w"> </span>1GYA_aa.pdb<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>1GYA_aa_sslink
+</pre></div>
+</div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

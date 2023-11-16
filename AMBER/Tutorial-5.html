@@ -103,7 +103,7 @@ Since this is <strong>Tutorial 5</strong>, remember to replace <code class="docu
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> and use the <strong>PDB Reader &amp; Manipulator</strong> to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.</p>
-<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
+<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated TYR), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
 </div>
 <p>Map the protonated atomistic structure of protein <a class="reference external" href="https://www.rcsb.org/structure/1CRN">1CRN</a> to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/5/1CRN.pqr<span class="w"> </span>-o<span class="w"> </span>1CRN_cg.pdb
@@ -232,7 +232,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 </pre></div>
 </div>
 <p><strong>Energy Minimization of whole system:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/5/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1CRN_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Solvent Equilibration (NPT):</strong></p>
