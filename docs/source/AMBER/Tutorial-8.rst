@@ -23,13 +23,13 @@ This example use the structure of glycoprotein `1GYA <https://www.rcsb.org/struc
 
 .. code-block:: bash
 
-  ambpdb -p ./sirah.amber/tutorial/8/step3_input.parm7 -c ./sirah.amber/tutorial/8/step3_input.rst7 > 1GYA_glycam.pdb
+	ambpdb -p ./sirah.amber/tutorial/8/step3_input.parm7 -c ./sirah.amber/tutorial/8/step3_input.rst7 > 1GYA_glycam.pdb
 
 From the file 1GYA_glycam.pdb generated delete the solvent, rename to 1GYA_glycam_NoW.pdb and then map the protonated atomistic structure to its CG representation:   
 
 .. code-block:: bash
 
-  ./sirah.amber/tools/CGCONV/cgconv.pl -i ./sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb -o 1GYA_cg.pdb  
+	./sirah.amber/tools/CGCONV/cgconv.pl -i ./sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb -o 1GYA_cg.pdb  
   
 The input file ``-i`` 1GYA_glycam_NoW.pdb contains the atomistic representation of `1GYA <https://www.rcsb.org/structure/1GYA>`_ structure at pH **7.0**, while the output ``-o`` 1GYA_cg.pdb is its SIRAH CG representation.
 
@@ -111,7 +111,8 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     The above also applies to each disulfide bond, e.g.: “*bond unit.ri.BSG unit.rj.BSG*”. You can try the command *pdb4amber* to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away (in this case result in an empty file):
 
     .. code-block:: bash
-	   pdb4amber -i sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb -o 1GYA_aa.pdb && cat 1GYA_aa_sslink
+
+		pdb4amber -i sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb -o 1GYA_aa.pdb && cat 1GYA_aa_sslink
 
 
 	
