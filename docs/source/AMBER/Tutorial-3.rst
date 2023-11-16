@@ -152,7 +152,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. code-block:: bash
 
-   pmemd.cuda -O -i ../sirah.amber/tutorial/3/SANDER/em_HYB.in -p ../dna_hyb.prmtop -c ../dna_hyb.ncrst -o dna_hyb_em.out -r dna_hyb_em.ncrst &
+   pmemd.cuda -O -i ../sirah.amber/tutorial/3/PMEMD.GPU/em_HYB.in -p ../dna_hyb.prmtop -c ../dna_hyb.ncrst -o dna_hyb_em.out -r dna_hyb_em.ncrst &
 
 .. important::
 
@@ -167,7 +167,7 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
     .. code-block:: bash
 
-        ln -s ../sirah.amber/tutorial/1/SANDER/dna_cg.RST
+        ln -s ../sirah.amber/tutorial/3/SANDER/dna_hyb.RST
     
     The file ``dna_cg.RST`` can only be read by ``sander``, ``pmemd`` reads a different restrain format.
 
@@ -177,13 +177,13 @@ The folder ``sirah.amber/tutorial/3/PMEMD.GPU/`` contains typical input files fo
 
 .. code-block:: bash
 
-   pmemd.cuda -O -i ../sirah.amber/tutorial/3/SANDER/eq_HYB.in -p ../dna_hyb.prmtop -c dna_hyb_em.ncrst -o dna_hyb_eq.out -r dna_hyb_eq.ncrst -x dna_hyb_eq.nc &
+   pmemd.cuda -O -i ../sirah.amber/tutorial/3/PMEMD.GPU/eq_HYB.in -p ../dna_hyb.prmtop -c dna_hyb_em.ncrst -o dna_hyb_eq.out -r dna_hyb_eq.ncrst -x dna_hyb_eq.nc &
 
 **Production (10ns):**
 
 .. code-block:: bash
 
-   pmemd.cuda -O -i ../sirah.amber/tutorial/3/SANDER/md_HYB.in -p ../dna_hyb.prmtop -c dna_hyb_eq.ncrst -o dna_hyb_md.out -r dna_hyb_md.ncrst -x dna_hyb_md.nc &
+   pmemd.cuda -O -i ../sirah.amber/tutorial/3/PMEMD.GPU/md_HYB.in -p ../dna_hyb.prmtop -c dna_hyb_eq.ncrst -o dna_hyb_md.out -r dna_hyb_md.ncrst -x dna_hyb_md.nc &
 
 
 
