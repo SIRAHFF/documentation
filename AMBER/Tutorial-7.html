@@ -195,20 +195,26 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="go">source leaprc.sirah</span>
 
 <span class="gp"># </span>Load<span class="w"> </span>model
-<span class="go">Lipid = loadpdb DMPC64_cg.pdb</span>
+<span class="go">ProtMem = loadpdb 2kyv_DMPC_cg.pdb</span>
+
+<span class="gp"># </span>Info<span class="w"> </span>on<span class="w"> </span>system<span class="w"> </span>charge
+<span class="go">charge ProtMem</span>
+
+<span class="gp"># </span>Prevent<span class="w"> </span>adding<span class="w"> </span>solvent<span class="w"> </span>molecules<span class="w"> </span>beyond<span class="w"> </span>the<span class="w"> </span>membrane<span class="w"> </span>boundaries
+<span class="go">setbox ProtMem centers 0</span>
 
 <span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
 <span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
-<span class="go">solvateBox Lipid WT4BOX {0 0 40} 0.7</span>
-<span class="go">addIonsRand Lipid NaW 33 ClW 33</span>
+<span class="go">solvateBox ProtMem WT4BOX {0,0,27} 0.7</span>
+<span class="go">addIonsRand ProtMem NaW 109 ClW 124</span>
 
 <span class="gp"># </span>Save<span class="w"> </span>Parms
-<span class="go">saveAmberParmNetcdf protein DMPC64_cg.prmtop DMPC64_cg.ncrst</span>
+<span class="go">saveAmberParmNetcdf ProtMem 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst</span>
 
 <span class="gp"># </span>EXIT
-<span class="go">quit</span>
 </pre></div>
 </div>
+<p>quit</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
