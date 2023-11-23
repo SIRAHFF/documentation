@@ -135,20 +135,26 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     # Load SIRAH force field
     addPath ./sirah.amber
     source leaprc.sirah
-
+    
     # Load model
-    Lipid = loadpdb DMPC64_cg.pdb
+    ProtMem = loadpdb 2kyv_DMPC_cg.pdb
+
+    # Info on system charge
+    charge ProtMem
+
+    # Prevent adding solvent molecules beyond the membrane boundaries
+    setbox ProtMem centers 0
 
     # Add solvent, counterions and 0.15M NaCl
     # Tuned solute-solvent closeness for best hydration
-    solvateBox Lipid WT4BOX {0 0 40} 0.7
-    addIonsRand Lipid NaW 33 ClW 33
+    solvateBox ProtMem WT4BOX {0,0,27} 0.7
+    addIonsRand ProtMem NaW 109 ClW 124
 
     # Save Parms
-    saveAmberParmNetcdf protein DMPC64_cg.prmtop DMPC64_cg.ncrst
-
+    saveAmberParmNetcdf ProtMem 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst
+    
     # EXIT
-    quit
+quit
 
 .. seealso::
 

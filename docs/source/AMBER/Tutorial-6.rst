@@ -69,7 +69,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     addIonsRand Lipid NaW 33 ClW 33
 
     # Save Parms
-    saveAmberParmNetcdf protein DMPC64_cg.prmtop DMPC64_cg.ncrst
+    saveAmberParmNetcdf Lipid DMPC64_cg.prmtop DMPC64_cg.ncrst
 
     # EXIT
     quit
