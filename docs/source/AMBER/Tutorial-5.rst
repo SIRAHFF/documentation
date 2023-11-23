@@ -210,7 +210,7 @@ ________________________________
 That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):
 
-  .. code-block:: bash
+.. code-block:: bash
 
       echo -e "autoimage\ngo\nquit\n" | cpptraj -p ../1CRN_cg.prmtop -y 1CRN_cg_md.nc -x 1CRN_cg_md_pbc.nc --interactive
 
