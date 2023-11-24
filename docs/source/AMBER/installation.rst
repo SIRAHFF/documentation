@@ -44,11 +44,11 @@ _______________________________
 
    Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/documentation/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
 
-Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.2_20-08.amber.tar.gz>`_ and uncompress it into your working directory.
+Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/download/AMBER/sirah_x2.3_23-11.amber.tar.gz>`_ and uncompress it into your working directory.
 
 .. code-block:: bash
 
-    tar -xzvf sirah_x2.2_20-08.amber.tar.gz
+    tar -xzvf sirah_x2.3_23-11.amber.tar.gz
 
 If you are using a different version of SIRAH, type:
 
@@ -74,7 +74,7 @@ Create the following symbolic link in the folder tutorialX.X:
 
 .. code-block:: bash
 
-    ln -s ../sirah_x2.2_20-08.amber sirah.amber
+    ln -s ../sirah_x2.3_23-11.amber sirah.amber
 
 .. note:: 
 
