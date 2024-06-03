@@ -1,6 +1,6 @@
 .. note:: 
 
-    SIRAH Force Field is distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ offical releases.
+    SIRAH Force Field is distributed with `AMBER <https://ambermd.org/index.php>`_ and `AmberTools <https://ambermd.org/AmberTools.php>`_ official releases.
 
 Required Software
 __________________

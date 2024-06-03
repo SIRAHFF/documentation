@@ -223,7 +223,7 @@ Generate restraint files for the backbone *GN* and *GO* beads:
 
 When prompted, choose the group *GN_GO*
 
-Add restraints to ``topol.top``
+Add the restraints to ``topol.top``:
 
 .. list-table:: 
    :align: center
@@ -305,7 +305,7 @@ Make a new folder for the run:
 
 .. code-block:: bash 
 
-	gmx grompp -f ../sirah.ff/tutorial/3/GPU/eq1_CGPROT.mdp -p ../topol.top -po eq1.mdp -n ./1CRN_cg_ion.ndx -c 1CRN_cg_em2.gro -r 1CRN_cg_em2.gro -o 1CRN_cg_eq1.tpr
+	gmx grompp -f ../sirah.ff/tutorial/3/GPU/eq1_CGPROT.mdp -p ../topol.top -po eq1.mdp -n ../1CRN_cg_ion.ndx -c 1CRN_cg_em2.gro -r 1CRN_cg_em2.gro -o 1CRN_cg_eq1.tpr
 
 .. code-block:: bash 
 
@@ -388,8 +388,10 @@ When prompted, choose *Protein* as both the group for calculation and the output
 	 gmx sasa -surface 'group "A"' -output '"Hydrophobic" group "A" and charge {-0.2 to 0.2}; "Hydrophilic" group "B" and not charge {-0.2 to 0.2}; "Total" group "B"'
 
 
-Use Grace to plot the results::
-	
+Use Xmgrace to plot the results:
+
+.. code-block:: bash
+
 	xmgrace -nxy area.xvg
 
 ..

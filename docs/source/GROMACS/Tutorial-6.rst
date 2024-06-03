@@ -48,7 +48,7 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
     ./sirah.ff/tools/CGCONV/cgconv.pl -h
 	
 
-6.2. Embed the protein in a lipid bilayer
+6.1.1. Embed the protein in a lipid bilayer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We will show one possible way to do it by starting from a pre-equilibrated CG membrane patch.
@@ -68,7 +68,7 @@ Luckily, we already oriented the protein inside the membrane. For setting up you
    **Figure 1.** Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.
    
 
-6.2.1. Delete close contact lipid molecules
+6.1.2. Delete close contact lipid molecules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We need to use VMD to to delete lipid molecules in close contact with the protein. For a proper treatment and visualization of the system in VMD you must first generate the molecular topology and initial coordinate files.
@@ -124,7 +124,7 @@ To save the refined protein-membrane system, in the VMD main window click on ``2
 	
 From now on it is just normal GROMACS stuff!
 
-6.3. PDB to GROMACS format
+6.2. PDB to GROMACS format
 __________________________
 
 Use ``pdb2gmx`` to convert your PDB file into GROMACS format: 
@@ -149,7 +149,7 @@ When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
   mapping step. In that case, check your atomistic and mapped structures and do not carry on the
   simulation until the problem is solved.
 
-6.4. Solvate the system
+6.3. Solvate the system
 _______________________
 
 
@@ -293,7 +293,7 @@ Use VMD to check how the CG system looks like:
   VMD assigns default radius to unknown atom types, the script ``sirah_vmdtk.tcl`` sets the right ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
   Use the command ``sirah_help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
-6.5. Generate position restraint files
+6.4. Generate position restraint files
 _______________________________________
 
 To achive a proper interaction between the protein and bilayer, we will perform a equilibration step applying restraints over the protein backbone and lipids' phosphate groups.
@@ -408,7 +408,7 @@ Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and defi
        | #include "posre_Pz.itp" 
        | #endif
 
-6.6. Run the simulation
+6.5. Run the simulation
 ________________________
 
 .. important:: 
@@ -416,7 +416,7 @@ ________________________
   By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/6/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/6/CPU``.
 
 The folder ``sirah.ff/tutorial/6/GPU/`` contains typical input files for energy minimization
-(``em_CGLIPROT.mdp``), equilibration (``eq_CGLIPROT.mdp``) and production (``md_CGLIPROT.mdp``) runs. Please
+(``em1_CGLIPROT.mdp`` and ``em2_CGLIPROT.mdp``), equilibration (``eq1_CGLIPROT.mdp`` and ``eq2_CGLIPROT.mdp``) and production (``md_CGLIPROT.mdp``) runs. Please
 check carefully the input flags therein.
 
 Make a new folder for the run:
@@ -447,7 +447,7 @@ Make a new folder for the run:
 
 **Equilibration 1**:
 
-Position restraints are defined in ``eq_CGLIPROT.mdp`` file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords ``-DPOSREBB`` and ``-DPOSREZ``, respectively.
+Position restraints are defined in ``eq1_CGLIPROT.mdp`` file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords ``-DPOSREBB`` and ``-DPOSREZ``, respectively.
 
 .. code-block:: bash
 
@@ -477,7 +477,7 @@ Position restraints are defined in ``eq_CGLIPROT.mdp`` file for protein backbone
 
   gmx mdrun -deffnm 2kyv_DMPC_cg_md &> MD.log & 
 
-6.7. Visualizing the simulation
+6.6. Visualizing the simulation
 ________________________________
 
 That’s it! Now you can analyze the trajectory.
