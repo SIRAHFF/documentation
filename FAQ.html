@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FAQs &mdash; SIRAH Force Field  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,7 +18,7 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
@@ -49,6 +51,7 @@
               <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Background%20SIRAH.html">Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Citation.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Further%20reading.html">Further Reading</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">FAQs</a><ul>
@@ -239,7 +242,7 @@
 </li>
 </ul>
 <ul id="g21">
-<li><p><strong>sirah_ss assign some residues as coil, does it means they are unfold or randomly moving?</strong> .. _g21:</p>
+<li><p><strong>sirah_ss assign some residues as coil, does it means they are unfold or randomly moving?</strong></p>
 <blockquote>
 <div><p>Not necessarily, the strict definition of coil used by <em>sirah_ss</em> is <em>“not helix nor extended sheet”</em>, which means a residue that can not satisfy either condition. Importantly, the secondary structure is assigned according to the Ramachandran and the hydrogen bond network. Particularly, the later is very sensitive to small fluctuation around the distance criteria used to define the interaction. Hence, transient coil states may be more likely to point the lost of hydrogen bonds in well folded proteins, rather that shifts in the conformational space.</p>
 </div></blockquote>

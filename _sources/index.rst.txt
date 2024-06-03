@@ -69,6 +69,7 @@ Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-
    :caption: Manual
 
    About SIRAH
+   Background SIRAH
    Citation
    Further reading
    FAQ

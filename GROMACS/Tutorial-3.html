@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3.1. Build CG representations &mdash; SIRAH Force Field  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3437f865" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,7 +18,7 @@
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -48,6 +50,7 @@
               <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Background%20SIRAH.html">Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
@@ -169,8 +172,8 @@ simulation until the problem is solved.</p>
 <p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the number of added WT4 molecules:</p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
@@ -278,11 +281,11 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 <p>When prompted, choose the group <em>GN_GO</em></p>
-<p>Add restraints to <code class="docutils literal notranslate"><span class="pre">topol.top</span></code></p>
+<p>Add the restraints to <code class="docutils literal notranslate"><span class="pre">topol.top</span></code>:</p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
@@ -360,7 +363,7 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 </pre></div>
 </div>
 <p><strong>Solvent equilibration</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/3/GPU/eq1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq1.mdp<span class="w"> </span>-n<span class="w"> </span>./1CRN_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/3/GPU/eq1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq1.mdp<span class="w"> </span>-n<span class="w"> </span>../1CRN_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>1CRN_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_eq1.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>1CRN_cg_eq1<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ1.log<span class="w"> </span><span class="p">&amp;</span>
@@ -425,8 +428,8 @@ hydrophobic bead. The file <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 </div>
-<p>Use Grace to plot the results:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xmgrace</span> <span class="o">-</span><span class="n">nxy</span> <span class="n">area</span><span class="o">.</span><span class="n">xvg</span>
+<p>Use Xmgrace to plot the results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>-nxy<span class="w"> </span>area.xvg
 </pre></div>
 </div>
 </section>

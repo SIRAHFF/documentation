@@ -139,7 +139,7 @@ General questions
 
 .. _g21:    
 
-- **sirah_ss assign some residues as coil, does it means they are unfold or randomly moving?** .. _g21:   
+- **sirah_ss assign some residues as coil, does it means they are unfold or randomly moving?**   
 
 	Not necessarily, the strict definition of coil used by *sirah_ss* is *“not helix nor extended sheet”*, which means a residue that can not satisfy either condition. Importantly, the secondary structure is assigned according to the Ramachandran and the hydrogen bond network. Particularly, the later is very sensitive to small fluctuation around the distance criteria used to define the interaction. Hence, transient coil states may be more likely to point the lost of hydrogen bonds in well folded proteins, rather that shifts in the conformational space.
 

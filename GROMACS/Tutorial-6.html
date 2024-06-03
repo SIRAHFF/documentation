@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6.1. Build CG representations &mdash; SIRAH Force Field  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3437f865" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,7 +18,7 @@
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -47,6 +49,7 @@
               <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Background%20SIRAH.html">Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
@@ -126,7 +129,7 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 </div>
 </div>
 <section id="embed-the-protein-in-a-lipid-bilayer">
-<h2>6.2. Embed the protein in a lipid bilayer<a class="headerlink" href="#embed-the-protein-in-a-lipid-bilayer" title="Link to this heading"></a></h2>
+<h2>6.1.1. Embed the protein in a lipid bilayer<a class="headerlink" href="#embed-the-protein-in-a-lipid-bilayer" title="Link to this heading"></a></h2>
 <p>We will show one possible way to do it by starting from a pre-equilibrated CG membrane patch.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tutorial/6/</span></code> you will find a pre-stabilized CG DMPC bilayer patch, concatenate it with the previously generated CG representation of the phospholamban (PLN) pentamer (PDB code: <a class="reference external" href="https://www.rcsb.org/structure/2KYV">2KYV</a>):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>head<span class="w"> </span>-qn<span class="w"> </span>-1<span class="w"> </span>2kyv_cg.pdb<span class="w"> </span>./sirah.ff/tutorial/6/DMPC_cg.pdb<span class="w"> </span>&gt;<span class="w"> </span>2kyv_DMPC_cg_init.pdb
@@ -141,7 +144,7 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 </figure>
 </section>
 <section id="delete-close-contact-lipid-molecules">
-<h2>6.2.1. Delete close contact lipid molecules<a class="headerlink" href="#delete-close-contact-lipid-molecules" title="Link to this heading"></a></h2>
+<h2>6.1.2. Delete close contact lipid molecules<a class="headerlink" href="#delete-close-contact-lipid-molecules" title="Link to this heading"></a></h2>
 <p>We need to use VMD to to delete lipid molecules in close contact with the protein. For a proper treatment and visualization of the system in VMD you must first generate the molecular topology and initial coordinate files.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_init.pdb<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_init.gro<span class="w"> </span>-p<span class="w"> </span>init_topol<span class="w"> </span>-i<span class="w"> </span>init_posre
@@ -183,7 +186,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 </section>
 <section id="pdb-to-gromacs-format">
-<h1>6.3. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
+<h1>6.2. PDB to GROMACS format<a class="headerlink" href="#pdb-to-gromacs-format" title="Link to this heading"></a></h1>
 <p>Use <code class="docutils literal notranslate"><span class="pre">pdb2gmx</span></code> to convert your PDB file into GROMACS format:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg.pdb<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg.gro
 </pre></div>
@@ -205,7 +208,7 @@ simulation until the problem is solved.</p>
 </div>
 </section>
 <section id="solvate-the-system">
-<h1>6.4. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h1>
+<h1>6.3. Solvate the system<a class="headerlink" href="#solvate-the-system" title="Link to this heading"></a></h1>
 <p>Define the simulation box of the system</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_box.gro<span class="w"> </span>-box<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="m">12</span><span class="w"> </span>-c
 </pre></div>
@@ -221,8 +224,8 @@ simulation until the problem is solved.</p>
 <p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to include the number of added WT4 molecules:</p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
@@ -333,7 +336,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="generate-position-restraint-files">
-<h1>6.5. Generate position restraint files<a class="headerlink" href="#generate-position-restraint-files" title="Link to this heading"></a></h1>
+<h1>6.4. Generate position restraint files<a class="headerlink" href="#generate-position-restraint-files" title="Link to this heading"></a></h1>
 <p>To achive a proper interaction between the protein and bilayer, we will perform a equilibration step applying restraints over the protein backbone and lipids’ phosphate groups.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -363,8 +366,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>Edit each <code class="docutils literal notranslate"><span class="pre">topol_Protein_chain_*.itp</span></code> (A to E) to include the new position restraints:</p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
@@ -414,8 +417,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p>Edit <code class="docutils literal notranslate"><span class="pre">topol_Lipid_chain_F.itp</span></code> to include the new position restraints and define the flags <em>POSREZ</em> to switch on these restraints in the input file (.mdp).</p>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Topology before editing</p></th>
@@ -450,13 +453,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </table>
 </section>
 <section id="run-the-simulation">
-<h1>6.6. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
+<h1>6.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/6/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/6/CPU</span></code>.</p>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/6/GPU/</span></code> contains typical input files for energy minimization
-(<code class="docutils literal notranslate"><span class="pre">em_CGLIPROT.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGLIPROT.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGLIPROT.mdp</span></code>) runs. Please
+(<code class="docutils literal notranslate"><span class="pre">em1_CGLIPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">em2_CGLIPROT.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_CGLIPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_CGLIPROT.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGLIPROT.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
@@ -477,7 +480,7 @@ check carefully the input flags therein.</p>
 </pre></div>
 </div>
 <p><strong>Equilibration 1</strong>:</p>
-<p>Position restraints are defined in <code class="docutils literal notranslate"><span class="pre">eq_CGLIPROT.mdp</span></code> file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords <code class="docutils literal notranslate"><span class="pre">-DPOSREBB</span></code> and <code class="docutils literal notranslate"><span class="pre">-DPOSREZ</span></code>, respectively.</p>
+<p>Position restraints are defined in <code class="docutils literal notranslate"><span class="pre">eq1_CGLIPROT.mdp</span></code> file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords <code class="docutils literal notranslate"><span class="pre">-DPOSREBB</span></code> and <code class="docutils literal notranslate"><span class="pre">-DPOSREZ</span></code>, respectively.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/eq1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_eq1.tpr
 </pre></div>
 </div>
@@ -500,7 +503,7 @@ check carefully the input flags therein.</p>
 </div>
 </section>
 <section id="visualizing-the-simulation">
-<h1>6.7. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
+<h1>6.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory at folder <code class="docutils literal notranslate"><span class="pre">run/</span></code> to account for the Periodic Boundary Conditions (PBC):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-s<span class="w"> </span>2kyv_DMPC_cg_em1.tpr<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_md.xtc<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-pbc<span class="w"> </span>mol

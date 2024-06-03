@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Background &mdash; SIRAH Force Field  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SIRAH Force Field
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Background%20SIRAH.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Citation.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Further%20reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Developers.html">Developers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials%20amber.html">AMBER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials%20gromacs.html">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials%20namd.html">NAMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials%20sirahtools.html">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorials%20analysis.html">Basic analyses VMD</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SIRAH Force Field</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Background</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Background SIRAH_complete.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="background">
+<h1>Background<a class="headerlink" href="#background" title="Link to this heading"></a></h1>
+<p>In recent decades, the field of molecular dynamics (MD) simulations has undergone significant progress and development, allowing for the investigation of biological systems at nanoseconds to microsecond scales. However, complex systems involving millions of atoms or large-size protein assemblies are still too computationally expensive to be studied in atomistic detail without the aid of specialized supercomputers. Thus, the computational cost associated with MD simulations has driven the development of cost-effective approximations, particularly Coarse-Grained (CG) models, which attempt to increase system complexity and spatiotemporal sampling. The resolution of CG models has become essential for investigating molecular processes at the nano and meso dimensions and addressing mechanisms that have been previously inaccessible to traditional modeling methods. CG models consist of effective particles, referred to as beads, that represent groups of corresponding atoms. CG models can vary in resolution, ranging from supra-CG levels where a single bead represents an entire protein, to near-atomistic models that preserve most of the chemical characteristics [<a class="reference internal" href="#ref1"><span class="std std-ref">1</span></a>].</p>
+<p>Currently, one of the most prominent CG models is the <a class="reference external" href="http://www.sirahff.com/">SIRAH</a> (Southamerican Initiative for a Rapid and Accurate Hamiltonian) force field, which was developed by the <a class="reference external" href="https://pasteur.uy/laboratorios/simulaciones-biomoleculares/)">Biomolecular Simulations Group</a> <a class="reference external" href="https://pasteur.uy/">Institut Pasteur de Montevideo</a>.  It covers parameters and topologies for aqueous solvent, phospholipids, DNA, metal ions, and proteins. A recent update introduced modifications to bonded and non-bonded parameters, protonation states, post-translational modifications, and compatibility improvements for different force fields [<a class="reference internal" href="#ref2"><span class="std std-ref">2</span></a>].</p>
+<section id="the-sirah-force-field-for-cg-simulations">
+<h2>The SIRAH force field for CG simulations<a class="headerlink" href="#the-sirah-force-field-for-cg-simulations" title="Link to this heading"></a></h2>
+<p>The distinguishing features of the SIRAH force field for CG simulations lie in its approach to mapping from atomistic to CG representations and its strategic selection of interaction potentials. The mapping procedure entails strategically placing effective interactive beads at pivotal atoms involved in the structure or at atoms that form crucial intermolecular interactions (<strong>Figure 1</strong>). The distribution of these beads corresponds to intended interactions of functional groups based on size and charge, resulting in a heterogeneous distribution with higher bead density in regions that establish more diverse interactions.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/mousepad-old.png"><img alt="_images/mousepad-old.png" src="_images/mousepad-old.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1.</strong> SIRAH force field CG representation.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>SIRAH employs a classical two-body Hamiltonian, facilitating its use in various MD engines without the need for extensive learning or format changes. This choice enables anyone familiar with standard all-atoms MD simulations in engines like AMBER or GROMACS to run CG simulations using SIRAH seamlessly. The classical Hamiltonian requires the determination of numerous parameters, but SIRAH’s mapping strategy significantly reduces this burden. Equilibrium distances are derived directly from statistical data, quantum-level calculations, or canonical conformations, minimizing the number of parameters to be determined.</p>
+<p>The initial CG model for DNA served as the foundation for SIRAH, with force constants, partial charges, and Lennard-Jones (LJ) parameters derived through trial and error simulations on DNA segments. The approach of transferring and adapting parameters based on similar functional groups ensures analogous interaction parameters for diverse molecular moieties. SIRAH’s versatility is exemplified through its CG models for different biomolecular families. In the following sections, we provide a synopsis of the CG models developed by SIRAH; however, for a more comprehensive material, please refer to [<a class="reference internal" href="#ref3"><span class="std std-ref">3</span></a>].</p>
+</section>
+<section id="the-cg-dna-model">
+<h2>The CG DNA model<a class="headerlink" href="#the-cg-dna-model" title="Link to this heading"></a></h2>
+<p>The SIRAH’s DNA model involves six effective beads representing each of the four CG nucleotides (<strong>Figure 2</strong>) [<a class="reference internal" href="#ref4"><span class="std std-ref">4</span></a>]. The mapping strategy considers the 5’ - 3’ prime polarity and electrostatic complementarity between A-T and G-C base pairs. The backbone is represented by two beads at the phosphate and C5’ Carbon positions, while three beads on the Watson-Crick edge ensure base pair recognition. The five-membered sugar ring is depicted by a single bead situated at the C1’ position, linking the backbone to the Watson-Crick edge.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/mousepad-old-dna.png"><img alt="_images/mousepad-old-dna.png" src="_images/mousepad-old-dna.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 2.</strong> SIRAH force field DNA CG representation.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>By selecting this mapping option, the specific base-pair recognition of the B-form DNA is maintained, and the distortion effects of mismatches are captured precisely. However, it has limitations, since it excludes less frequent inter-nucleotide interactions, such as sugar edge or Hoogsteen base pairs.</p>
+<p>In SIRAH’s DNA model, bead sizes determined by LJ parameters are heterogeneous, maintaining correct stacking distances in a double-stranded configuration. The effective beads representing bases adopt LJ sizes from the Barcelona force field, while those representing the backbone have larger sizes. The partial charges, assigned to ensure electrostatic recognition, are determined to reproduce the electrostatic potential of the force field in the grooves of a double-stranded structure. The initial mass distribution allows MD simulations with a timestep of 5 fs.</p>
+<p>This CG DNA model reproduces the structure and dynamics of double-stranded DNA comparable to atomistic force fields and demonstrates spontaneous formation of large “bubbles” within DNA, fraying, rehybridization, and matches experimentally determined persistence lengths of single-stranded filaments [<a class="reference internal" href="#ref4"><span class="std std-ref">4</span></a>].</p>
+</section>
+<section id="the-watfour-model-for-cg-explicit-solvent">
+<h2>The WatFour model for CG explicit solvent<a class="headerlink" href="#the-watfour-model-for-cg-explicit-solvent" title="Link to this heading"></a></h2>
+<p>In tandem with the DNA model development, a CG aqueous solvent was created, featuring CG water and monovalent electrolytic ions (sodium, potassium, chloride) (<strong>Figure 3</strong>) [<a class="reference internal" href="#ref5"><span class="std std-ref">5</span></a>].</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/mousepad-old-solvent.png"><img alt="_images/mousepad-old-solvent.png" src="_images/mousepad-old-solvent.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 3.</strong> SIRAH force field Solvent CG representation.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Unlike typical CG water, SIRAH’s WatFour (WT4) model aimed to replicate the structure of an elementary water cluster, including a central water surrounded by four identical molecules forming a tetrahedron. Hydrogen atoms were removed, and only the oxygen atoms at the tetrahedron’s vertices were retained, connected by harmonic bonds. This flexible tetrahedral structure generated its own dielectric permittivity and electrostatic screening by adding partial charges to the four beads, creating a quadrupole with two positively and two negatively charged beads. The partial charges were adopted from the SPC water model to ensure compatibility with fully atomistic water models for multiscale simulations [<a class="reference internal" href="#ref5"><span class="std std-ref">5</span></a>].</p>
+<p>Iterative fitting was performed on the LJ energy well depth, which corresponded to the experimental diffusion coefficient of pure water at 300 K, and the bead size, which mirrored the second solvation peak of water. The mass of the beads was set to achieve a density of 1 kg/dl. The WT4 model, which resembled a bulkier “water molecule,” corresponded to the second apex of the radial distribution function for atomistic water.</p>
+<p>Monovalent ions in SIRAH, represented by single beads with a net charge of +/- 1e, were developed based on neutron scattering data, reflecting the chemical identity of sodium, potassium, and chloride ions [<a class="reference internal" href="#ref5"><span class="std std-ref">5</span></a>]. The ions’ depth of the LJ well matched that of the WT4 beads, offering the flexibility to adjust ionic strength by modifying added salt in the simulation box. The incorporation of electrolytic ions and accurate electrostatic description using the Particle Mesh Ewald summation methods contribute to the relevant features of SIRAH.</p>
+</section>
+<section id="the-cg-protein-model">
+<h2>The CG protein model<a class="headerlink" href="#the-cg-protein-model" title="Link to this heading"></a></h2>
+<p>The CG protein model in SIRAH employs varying bead sizes to reflect different amino acid interactions. The latest version [<a class="reference internal" href="#ref2"><span class="std std-ref">2</span></a>], refined in 2019, has significantly improved the ability to reproduce protein structures. The atomistic to CG mapping of protein side chains follows the DNA model philosophy, with effective beads placed at selected atoms along side chains, representing hydrophobic, aromatic, and polar interactions (<strong>Figure 4</strong>).</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/mousepad-old-amino.png"><img alt="_images/mousepad-old-amino.png" src="_images/mousepad-old-amino.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 4.</strong> SIRAH force field amino acids CG representation.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Hydrophobic amino acids are neutral beads at specific positions with an LJ diameter of 0.42 nm. Aromatic amino acids use smaller beads, 0.35 nm, for stacking-like interactions, with partial charges on certain residues to preserve Hydrogen bond possibilities. Polar amino acids retain beads in functional groups, while acidic and basic amino acids have partial charges which add up to a net charge of +/- 1e.</p>
+<p>The aminoacidic backbone is represented with three beads for Nitrogen, Cα Carbon, and carboxylic Oxygen positions, facilitating easy transformation between all-atoms and CG. Bonded parameters for amino acids follow the rules outlined for DNA, with force constants for bond and angular stretching adapted from the same set of parameters. This approach has been found to be effective and time-efficient.</p>
+<p>In version 2.2 [<a class="reference internal" href="#ref2"><span class="std std-ref">2</span></a>], all bead masses are set to 50 a.u., and common post-translational modifications, including phosphorylation and acetylation, and different protonation states are available. In addition, divalent ion parameters for Zinc, Magnesium, and Calcium, derived from statistical analyses and validated through multiple CG simulations, enable SIRAH simulations of a wide range of metal-bound macromolecules.</p>
+</section>
+<section id="cg-models-for-phospholipids">
+<h2>CG models for phospholipids<a class="headerlink" href="#cg-models-for-phospholipids" title="Link to this heading"></a></h2>
+<p>Following the completion of DNA, aqueous solvent, and protein models, the SIRAH force field aimed to incorporate a suitable CG lipid representation for simulating membrane proteins. Focusing on prototypical phospholipids, including phosphatidyl-choline (PC), -ethanolamine (PE), and –serine (PS) heads, along with myristoyl (M), palmitic (P), and oleic (O) acyl chains, SIRAH enabled simulations of diverse eukaryotic membrane components [<a class="reference internal" href="#ref6"><span class="std std-ref">6</span></a>]. Utilizing the existing functional groups in the force field, parameterization of these lipids required minimal modifications, ensuring compatibility and accurate replication of lipid bilayer mechanical properties such as thickness, areas per lipid, order parameter, etc., and their dependence with the temperature.</p>
+<p>During protein simulations embedded in lipid bilayers, spurious insertions of acyclic tails into the protein core were observed. To address this, specific interactions between hydrophobic protein side chains and acyl chains were set outside Lorentz-Berthelot combination rules, yielding accurate representations of the SarcoEndoplasmic Reticulum Calcium (SERCA) pump’s tilted orientation in a DMPC bilayer [<a class="reference internal" href="#ref6"><span class="std std-ref">6</span></a>]. This modification facilitated simulations of electrostatics-driven opening of Connexin 26 channels, demonstrating predictive power in identifying mutations inhibiting channel opening [<a class="reference internal" href="#ref7"><span class="std std-ref">7</span></a>]. The approach was also employed for cost-effective simulations of entire viral capsids and envelopes, allowing construction and simulation of a Zika Virus-Like Particles on a multi-microsecond time scale [<a class="reference internal" href="#ref8"><span class="std std-ref">8</span></a>].</p>
+</section>
+<section id="multiscale-simulations">
+<h2>Multiscale simulations<a class="headerlink" href="#multiscale-simulations" title="Link to this heading"></a></h2>
+<p>The development of the SIRAH force field in a classical two-body Hamiltonian framework has facilitated multiscale simulations, eliminating the need for non-Hamiltonian interaction terms and ensuring efficiency without communication delays between software modules.</p>
+<p>Two multiscale implementations in SIRAH are emphasized: first, an all-atoms/CG model covalently linking both resolutions within a nucleic acid chain [<a class="reference internal" href="#ref9"><span class="std std-ref">9</span></a>]; second, a multiresolution solvent model allowing the mixture of fully atomistic solutes with a shell of atomistic solvent surrounded by CG water, applicable to highly solvated systems like viral capsids [<a class="reference internal" href="#ref10"><span class="std std-ref">10</span></a>].</p>
+<p>A triple solvation scheme, treating water at all-atoms, CG, and supraCG levels, is also available. This is particularly useful for complex cellular systems and has been applied to assemble and simulate VLPs systems in an onion-shaped configuration using CG water (WT4) and supra-CG solvent (WLS) [<a class="reference internal" href="#ref10"><span class="std std-ref">10</span></a>]. MD simulations of entire VLPs, such as those studying Flaviviruses with membranes and proteinaceous envelopes, offer crucial insights into their dynamics and are vital for understanding biological systems at a level accessible only through computer simulations [<a class="reference internal" href="#ref8"><span class="std std-ref">8</span></a>].</p>
+</section>
+<section id="overwriting-combination-rules">
+<h2>Overwriting combination rules<a class="headerlink" href="#overwriting-combination-rules" title="Link to this heading"></a></h2>
+<p>The SIRAH force field introduces a modification in the calculation of LJ interactions to address issues with electrolytic ions in proteins and DNA. Unlike traditional MD packages using Lorentz-Berthelot (LB) combination rules, SIRAH employs an “outside-of-LB trick” that allows specific LJ parameters for certain bead pairs, enabling the fine-tuning of interactions. This approach provides adaptability to regulate interactions applying only to specific bead pairs, in accordance with various physicochemical settings [<a class="reference internal" href="#ref3"><span class="std std-ref">3</span></a>].</p>
+<p>SIRAH comprises 56 different bead types, with 197 interactions defined outside LB combination rules among 1540 possible pair combinations [<a class="reference internal" href="#ref3"><span class="std std-ref">3</span></a>]. The modifications include cation-π interactions between aromatic residues and Lysine, methylated Lysine, and zwitterionic N-terminal beads. The force field corrects the size of backbone beads, crucial for forming α helices and Hydrogen bonds, ensuring compatibility with compact structures. It facilitates the formation of secondary structure elements and enhances interactions with other force field components.</p>
+</section>
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
+<p>The latest version of the SIRAH force field leverages GPU implementations in GROMACS and AMBER, enabling CG simulations on desktop computers at a rate of a few microseconds per day for medium-sized systems. Larger systems of around a million particles can achieve speeds of hundreds of nanoseconds per day [<a class="reference internal" href="#ref2"><span class="std std-ref">2</span></a>].</p>
+<p>Recently, to illustrate SIRAH’s performance, a comparison was made between a SIRAH CG simulation and an atomistic simulation (Amber’s FF14SB) of the SARS-CoV-2 Spike protein’s receptor binding domain (RBD) with human ACE2 and the amino acid transporter B0AT1 (see [<a class="reference internal" href="#ref3"><span class="std std-ref">3</span></a>]). The CG model exhibited a 60-fold speedup, simulating approximately 660 ns per day with a 20 fs time step, compared to the atomistic model’s 11 ns per day with a 2 fs time step, using the same system.</p>
+<p>Nevertheless, it is essential to take into account the constraints of the force field beyond its speed implications, as various force fields may possess distinct capabilities. Thus, exercise caution when making direct comparisons between CG force fields, considering their distinct strengths and drawbacks.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>Although the SIRAH force field offers speed, efficiency, and multiscale capabilities for simulating biomolecular systems, it has some limitations such as:</p>
+<ul class="simple">
+<li><p>It potentially compromises precision in both structural and energetic aspects. SIRAH, similar to other CG force fields, faces limitations in scenarios that demand atomic-level precision, such as interactions mediated by single water molecules or ligands with specific binding sites. Examples like potassium channels or aquaporins, where individual water molecules play a crucial role, may be challenging for CG models that combine multiple water molecules into a single effective bead.</p></li>
+<li><p>Protein folding simulations are not extensively explored. Although SIRAH is successful in reproducing spontaneous aggregation and small peptide folding, the unbiased formation of large helical segments remains challenging.</p></li>
+<li><p>The molecular diversity in biological systems is vast, making it nearly impossible to encompass all relevant biomolecules. Establishing a generally valid methodology for creating arbitrary molecular topologies involves converting new topologies from all-atom to CG, relying on experimental data, organic chemistry knowledge, and physicochemical intuition.</p></li>
+</ul>
+</section>
+<section id="perspectives">
+<h2>Perspectives<a class="headerlink" href="#perspectives" title="Link to this heading"></a></h2>
+<p>The rapid advancement of computer power has established MD as a valuable tool in biomedical sciences for understanding intricate processes and vast biological systems. Developing force fields that are universally applicable to all biological molecular families and enable communication at different levels of molecular resolution is a crucial and complex task. Recently, the SIRAH force field expanded its scope by incorporating glycans to simulate polysaccharide chains and protein glycosylation (see [<a class="reference internal" href="#ref11"><span class="std std-ref">11</span></a>]). In addition, the lipid diversity will be enhanced by including sphingomyelins, ceramides, and cholesterol, crucial components of endoplasmic reticulum membranes and flaviviral envelopes. Additionally, testing parameters for POPG, a lipid found in bacterial membranes, is underway to improve the realism of antibiotic peptide mode of action descriptions. In the medium term, there are plans to introduce a coarse-grained model for RNA, which is crucial for the description of viral particles and a major area of focus for the group’s ongoing research.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p id="ref1">[1] Borges-Araújo, L.; Patmanidis, I.; Singh, A. P.; Santos, L. H. S.; Sieradzan, A. K.; Vanni, S.; Czaplewski, C.; Pantano, S.; Wataru Shinoda, W.; Monticelli, L.; Liwo, A.; Marrink, S. J.; Souza, P. C. T. Pragmatic Coarse-Graining of Proteins: Models and Applications. Journal of Chemical Theory and Computation. 2023. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.3c00733"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.3c00733-blue?color=blue" /></a> <a class="reference external" href="https://scholar.google.com.uy/scholar?cites=14982031192725054357"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.3c00733" /></a></p>
+<p id="ref2">[2] Machado, M. R.; Barrera, E. E.; Klein, F.; Soñora, M.; Silva, S.; Pantano, S. The SIRAH 2.0 Force Field: Altius, Fortius, Citius. Journal of Chemical Theory and Computation 2019, 15, 2719–2733. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.9b00006-blue" /></a>  <a class="reference external" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=es&amp;cites=5136612330374064800"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.9b00006" /></a></p>
+<p id="ref3">[3] Klein, F.; Soñora, M.; Santos, L. H.; Frigini, E. N.; Ballesteros-Casallas, A.; Machado, M. R.; Pantano, S. The SIRAH force field: a suite for simulations of complex biological systems at the coarse-grained and multiscale levels. Journal of Structural Biology 2023, 107985. <a class="reference external" href="https://doi.org/10.1016/j.jsb.2023.107985"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1016%2Fj.jsb.2023.107985-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?cites=11014340861876399425"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1016%2Fj.jsb.2023.107985" /></a></p>
+<p id="ref4">[4] Dans, P. D.; Zeida, A.; Machado, M. R.; Pantano, S. A Coarse Grained Model for Atomic-Detailed DNA Simulations with Explicit Electrostatics. Journal of Chemical Theory and Computation 2010, 6, 1711–1725. <a class="reference external" href="https://doi.org/10.1021/ct900653p"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Fct900653p-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=es&amp;cites=12499613729973955498"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Fct900653p" /></a></p>
+<p id="ref5">[5] Darré, L.; Machado, M. R.; Dans, P. D.; Herrera, F. E.; Pantano, S. Another Coarse Grain Model for Aqueous Solvation: WAT FOUR? Journal of Chemical Theory and Computation 2010, 6, 3793–3807. <a class="reference external" href="https://doi.org/10.1021/ct100379f"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Fct100379f-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=es&amp;cites=11533073503238221292"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Fct100379f" /></a></p>
+<p id="ref6">[6] Barrera, E. E.; Machado, M. R.; Pantano, S. Fat SIRAH: Coarse-Grained Phospholipids To Explore Membrane–Protein Dynamics. Journal of Chemical Theory and Computation 2019, 15, 5674–5688. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00435"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.9b00435-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?oi=bibs&amp;hl=es&amp;cites=13191972720970339574"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.9b00435" /></a></p>
+<p id="ref7">[7] Zonta, F.; Buratto, D.; Crispino, G.; Carrer, A.; Bruno, F.; Yang, G.; Mammano, F.; Pantano, S. Cues to Opening Mechanisms From in Silico Electric Field Excitation of Cx26 Hemichannel and in Vitro Mutagenesis Studies in HeLa Transfectans. Frontiers in Molecular Neuroscience 2018, 11, 170. <a class="reference external" href="https://doi.org/10.3389/fnmol.2018.00170"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.3389%2Ffnmol.2018.00170-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?cites=7027056542531206464&amp;as_sdt=2005&amp;sciodt=0,5&amp;hl"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.3389%2Ffnmol.2018.00170" /></a></p>
+<p id="ref8">[8] Soñora, M.; Martínez, L.; Pantano, S.; Machado, M. R. Wrapping Up Viruses at Multiscale Resolution: Optimizing PACKMOL and SIRAH Execution for Simulating the Zika Virus. Journal of Chemical Information and Modeling 2021, 61, 408–422. <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c01205"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jcim.0c01205-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?cites=8645160591236740149"><img alt="Access the paper" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jcim.0c01205" /></a></p>
+<p id="ref9">[9] Machado, M. R.; Zeida, A.; Darré, L.; Pantano, S. From quantum to subcellular scales: multi-scale simulation approaches and the SIRAH force field. Interface Focus 2019, 9, 20180085. <a class="reference external" href="https://doi.org/10.1098/rsfs.2018.0085"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1098%2Frsfs.2018.0085-blue?label=DOI" /></a>  <a class="reference external" href="https://scholar.google.com/scholar?cites=5473055142318037579"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1098%2Frsfs.2018.0085" /></a></p>
+<p id="ref10">[10] Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. <a class="reference external" href="https://doi.org/10.1021/acs.jctc.7b00659"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.7b00659-blue" /></a> <a class="reference external" href="https://scholar.google.com/scholar?cites=16637391138490147245"><img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.7b00659" /></a></p>
+<p id="ref11">[11] Garay, P. G.; Machado, M. R.; Verli, H.; Pantano, S. SIRAH late harvest: coarse-grained models for protein glycosylation. Journal of Chemical Theory and Computation 2024. <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.3c00783"><img alt="Access the paper" src="https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.3c00783-blue" /></a> <img alt="Citation" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.3c00783" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, BA, SL, SM.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
