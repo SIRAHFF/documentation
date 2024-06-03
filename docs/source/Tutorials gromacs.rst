@@ -51,3 +51,10 @@ Setting up SIRAH
 --------------------------------------------------------------------
 
 .. include:: /GROMACS/Tutorial-6.rst
+
+.. _Tutorial 7 G:
+
+7. SMD with multiscale solvent
+--------------------------------------------------------------------
+
+.. include:: /GROMACS/Tutorial-7.rst

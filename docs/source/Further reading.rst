@@ -26,6 +26,7 @@ SIRAH Applications
    
 .. |Review2-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.3c00733
    :alt: Citation
+   :target: https://scholar.google.com.uy/scholar?cites=14982031192725054357
    
 *    **Protein-DNA complexes** and **Membrane Proteins**:   
 
