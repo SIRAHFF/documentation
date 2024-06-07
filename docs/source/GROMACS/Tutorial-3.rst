@@ -234,7 +234,7 @@ Add the restraints to ``topol.top``:
      - Topology after editing
    * - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
        
        | 
@@ -250,17 +250,17 @@ Add the restraints to ``topol.top``:
                   
      - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
         
        | ; Backbone restraints
        | #ifdef GN_GO
-       | #include "bkbres.itp"
+       | #include \"bkbres.itp\"
        | #endif
 	   
        | ; Backbone soft restrains
        | #ifdef GN_GO_SOFT
-       | #include "bkbres_soft.itp"
+       | #include \"bkbres_soft.itp\"
        | #endif
 
 3.4. Run the simulation
@@ -359,79 +359,3 @@ Now you can check the simulation using VMD:
     The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
 
 
-3.6. Calculate the solvent accessible surface (SAS)
-____________________________________________________
-
-Create the following symbolic link in the folder ``run/``:
-
-.. code-block:: bash 
-
-	ln -s ../sirah.ff/vdwradii.dat
-
-Calculate the SAS of the protein along the trajectory:
-
-.. code-block:: bash 
-
-	g_sas -s 1CRN_cg_md.tpr -f 1CRN_cg_md_pbc.xtc -n ../1CRN_cg_ion.ndx -qmax 0 -probe 0.21 -o area.xvg
-
-When prompted, choose *Protein* as both the group for calculation and the output.
-
-.. note:: 
-
-	The solvent probe radius corresponds to a WT4 bead while a charge of 0e refers to any
-	hydrophobic bead. The file ``vdwradii.dat`` must be placed at the same folder where *gmx sasa* is executed to assure that the correct van der Waals radii of SIRAH beads are used in the calculation.
-
-.. important:: 
-
-	*g_sas* is deprecated, the tool no longer automatically divides the surface into hydrophobic and hydrophilic areas, and there is no ``-f_index`` option. The same effects can be obtained by defining suitable selections for ``-output``. If you want output that contains the same numbers as with the old tool for a calculation group A and output group B, you can use `[1] <https://manual.gromacs.org/current/user-guide/cmdline.html>`_. ::
-
-	 gmx sasa -surface 'group "A"' -output '"Hydrophobic" group "A" and charge {-0.2 to 0.2}; "Hydrophilic" group "B" and not charge {-0.2 to 0.2}; "Total" group "B"'
-
-
-Use Xmgrace to plot the results:
-
-.. code-block:: bash
-
-	xmgrace -nxy area.xvg
-
-..
-	3.7. Visualize the secondary structure
-	________________________________________
-
-
-	Load the processed trajectory in VMD::
-
-	vmd ../1CRN_cg_ion.psf ../1CRN_cg_ion.gro 1CRN_cg_md_pbc.xtc -e ../sirah.ff/tools/sirah_vmdtk.tcl
-
-	.. note::
-
-   The file ``sirah_vmdtk.tcl`` is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command ``sirah-help`` in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools' capabilities, you can also go to the :ref:`SIRAH Tools tutorial <SIRAH tools>`.
-
-	At the *Tk/Tcl console* run the command ``sirah_ss`` to get the secondary structure of the CG protein.
-
-	.. note:: 
-	
-	After assigning the secondary structure it is possible to represent a-helices with Bendix in VMD
-	1.9.2 or upper by setting the backbone particle name to GC (do not check the CG box).
-
-	To analyze the output files from ``sirah_ss``, go back at the shell command line and execute::
-
-	xmgrace -nxy ss_by_frame.xvg
-
-	.. code-block:: bash 
-
-	xmgrace -nxy ss_by_res.xvg
-
-	The file ss.mtx can be processed to visualize the time evolution of the secondary structure by residue::
-
-	../sirah.ff/tools/ssmtx2png.R --mtx=ss.mtx
-
-	.. code-block:: bash
-
-	display ssmtx.png
-
-	.. hint::
-
-	The usage of ssmtx2png.R can be accessed through::
-
-	../sirah.ff/tools/ssmtx2png.R --help
