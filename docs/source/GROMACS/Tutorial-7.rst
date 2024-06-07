@@ -8,12 +8,11 @@ This tutorial shows how to apply the multiscale solvation approach of SIRAH forc
 
 	We strongly advise you to read and complete :ref:`Tutorial 2 <Tutorial 2 G>` and :ref:`Tutorial 3 <Tutorial 3 G>` before starting. We also recommend you to perform the `Umbrella Sampling <htthttp://www.mdtutorials.com/gmx/umbrella/index.html>`__ tutorial of GROMACS to get familiar with pulling simulations parameters.
 	
-
 .. important::
 
     Check the :ref:`Setting up SIRAH <download gromacs>` section for download and set up details before starting this tutorial.
     Since this is **Tutorial 7**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/7/``
-	
+
 
 7.1. Setting pulling direction
 ________________________________
@@ -65,7 +64,12 @@ ______________________________
   Other option is the `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_ and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the *PQR* file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.
 
   See :ref:`Tutorial 3 <Tutorial 3 G>` for cautions while preparing and mapping atomistic proteins to SIRAH.
-	
+
+.. important::
+
+    Check the :ref:`Setting up SIRAH <download gromacs>` section for download and set up details before starting this tutorial.
+    Since this is **Tutorial 7**, remember to replace ``X.X``, the files corresponding to this tutorial can be found in: ``sirah.ff/tutorial/7/``
+
 Map the atomistic structure of the I10 domain to its CG representation:  
 
 .. code-block:: bash
@@ -106,7 +110,7 @@ In this specific case, the charge of the system is -5.000 e; this will be addres
 
 .. note:: 
 
-  By default charged terminal are used but it is possible to set them neutral with option ``-ter``
+  By default charged terminal are used but it is possible to set them neutral with option ``-ter``.
 
 .. note::
 
@@ -128,15 +132,15 @@ _______________________
 
   In this system, I10 has 88 amino acids and the maximum extension size of each amino acid is 0.34 nm. Thus, "stretched" protein will be 88 * 0.34 = 29.92 nm (~ 30.0 nm) long. In order to accommodate the pulling, GROMACS stipulates a minimum box size double this value, i.e. 60 nm for the Z-axis. However, for optimal results, it is recommended that the dimensions of the box be 2.5 to 3 times greater than the maximum length of the protein when in its extended conformation. Therefore, for this tutorial the box used is 10 10 90 nm.
 
-  .. figure:: /../images/TutorialSMD2.png
+  .. figure:: /../images/TutorialSMD2_1.png
    :align: center
    :width: 100%
 
    **Figure 2.** Dimensions of the multiscale solvation box used in this tutorial.
 
-In order to have a multiscale solvent approach using WT4 and WLS, two steps are needed to solvate the systems. 
+In order to have a multiscale solvent approach using WT4 (CG solvent) and WLS (Supra-CG solvent), two steps are needed to solvate the systems. 
 
-First, define the simulation region of the system to be enclosed by WT4 (pink in **Figure 2**)
+First, define the simulation region of the system to be enclosed by WT4 (purple in **Figure 2**)
 
 .. code-block:: bash 
   
@@ -178,7 +182,7 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
 
 .. hint::
   
-  If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it 
+  If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it: 
 
   .. code-block:: console
 
@@ -192,30 +196,30 @@ Remove misplaced WT4 molecules within 0.3 nm of protein:
 
 .. code-block:: bash
   
-  echo q | gmx make_ndx -f I10_cg_sol1.gro -o I10_cg_sol1.ndx
+  echo q | gmx make_ndx -f I10_cg_solv1.gro -o I10_cg_solv1.ndx
 
 .. code-block:: bash 
 
-  gmx grompp -f sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp -p topol.top -po delete1.mdp -c I10_cg_sol1.gro -o I10_cg_sol1.tpr -maxwarn 2
+  gmx grompp -f sirah.ff/tutorial/7/em1_CGPROT.mdp -p topol.top -po delete1.mdp -c I10_cg_solv1.gro -o I10_cg_solv1.tpr -maxwarn 2
 
 .. caution::
   
-  New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 2``
+  New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame these issues, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 2``
 
 .. code-block:: bash 
 
-  gmx select -f I10_cg_sol1.gro -s I10_cg_sol1.tpr -n I10_cg_sol1.ndx -on rm_close_wt4.ndx -select 'not (same residue as (resname WT4 and within 0.3 of group Protein))'
+  gmx select -f I10_cg_solv1.gro -s I10_cg_solv1.tpr -n I10_cg_solv1.ndx -on rm_close_wt4.ndx -select 'not (same residue as (resname WT4 and within 0.3 of group Protein))'
 
 .. code-block:: bash 
 
-  gmx editconf -f I10_cg_sol1.gro -o I10_cg_sol2.gro -n rm_close_wt4.ndx
+  gmx editconf -f I10_cg_solv1.gro -o I10_cg_solv2.gro -n rm_close_wt4.ndx
 
 
 Edit the [ molecules ] section in ``topol.top`` to correct the number of WT4 molecules, **6261**.
 
 .. hint::
   
-  If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it 
+  If you forget to read the number of added WT4 molecules from the output of *solvate*, then use the following command line to get it: 
 
   .. code-block:: console
 
@@ -226,7 +230,7 @@ Now, we include the second solvent layer of solvent with WLS molecules (green in
 
 .. code-block:: bash 
   
-  gmx editconf -f I10_cg_sol2.gro -o I10_cg_box2.gro -box 10 10 90 -bt triclinic -c
+  gmx editconf -f I10_cg_solv2.gro -o I10_cg_box2.gro -box 10 10 90 -bt triclinic -c
 
 .. hint::
 
@@ -247,7 +251,7 @@ Add WLS molecules:
 
 .. code-block:: bash 
 
-  gmx solvate -cp I10_cg_box2.gro -cs sirah.ff/wlsbox.gro -o I10_cg_sol3.gro
+  gmx solvate -cp I10_cg_box2.gro -cs sirah.ff/wlsbox.gro -o I10_cg_solv3.gro
 
 .. note:: 
 
@@ -278,7 +282,7 @@ Edit the [ molecules ] section in ``topol.top`` to include the number of added W
 
 .. hint::
   
-  If you forget to read the number of added WLS molecules from the output of *solvate*, then use the following command line to get it 
+  If you forget to read the number of added WLS molecules from the output of *solvate*, then use the following command line to get it: 
 
   .. code-block:: console
 
@@ -292,25 +296,25 @@ Remove misplaced WLS molecules within 7.8 nm of protein:
 
 .. code-block:: bash
   
-  echo q | gmx make_ndx -f I10_cg_sol3.gro -o I10_cg_sol3.ndx
+  echo q | gmx make_ndx -f I10_cg_solv3.gro -o I10_cg_solv3.ndx
 
 .. code-block:: bash 
 
-  gmx grompp -f sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp -p topol.top -po delete3.mdp -c I10_cg_sol3.gro -o I10_cg_sol3.tpr -maxwarn 2
+  gmx grompp -f sirah.ff/tutorial/7/em1_CGPROT.mdp -p topol.top -po delete3.mdp -c I10_cg_solv3.gro -o I10_cg_solv3.tpr -maxwarn 2
 
 .. caution::
   
-  New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 2``
+  New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 2``
 
 .. code-block:: bash 
 
-  gmx select -f I10_cg_sol3.gro -s I10_cg_sol3.tpr -n I10_cg_sol3.ndx -on rm_close_wls.ndx -select 'not (same residue as (resname WLS and within 7.8 of group Protein))'
+  gmx select -f I10_cg_solv3.gro -s I10_cg_solv3.tpr -n I10_cg_solv3.ndx -on rm_close_wls.ndx -select 'not (same residue as (resname WLS and within 7.8 of group Protein))'
 
 .. code-block:: bash 
 
-  gmx editconf -f I10_cg_sol3.gro -o I10_cg_sol4.gro -n rm_close_wls.ndx
+  gmx editconf -f I10_cg_solv3.gro -o I10_cg_solv4.gro -n rm_close_wls.ndx
 
-Edit the [ molecules ] section in ``topol.top`` to correct the number of WLS molecules, **4582**.
+Edit the [ molecules ] section in ``topol.top`` to correct the number of WLS molecules, **4580**.
 
 .. hint::
   
@@ -330,15 +334,15 @@ Add CG counterions and 0.15M NaCl:
 
 .. code-block:: bash
 
-  gmx grompp -f sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp -p topol.top -po delete4.mdp -c I10_cg_sol4.gro -o I10_cg_sol4.tpr -maxwarn 3
+  gmx grompp -f sirah.ff/tutorial/7/em1_CGPROT.mdp -p topol.top -po delete4.mdp -c I10_cg_solv4.gro -o I10_cg_solv4.tpr -maxwarn 2
 
 .. caution::
   
-  New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We are about to neutralize the system, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 3``
+  New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We are about to neutralize the system, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: ``-maxwarn 2``
 
 .. code-block:: bash
 
-  gmx genion -s I10_cg_sol4.tpr -o I10_cg_ion.gro -np 187 -pname NaW -nn 182 -nname ClW
+  gmx genion -s I10_cg_solv4.tpr -o I10_cg_ion.gro -np 189 -pname NaW -nn 184 -nname ClW
 
 When prompted, choose to substitute *WT4* molecules by *ions*.
 
@@ -367,10 +371,10 @@ Edit the [ molecules ] section in ``topol.top`` to include the CG ions and the c
      - | [ molecules ] 
        | ; Compound #mols
        | Protein_chain_A    1    
-       | WT4             5892
-       | NaW              187
-       | ClW              182
-       | WLS             4582
+       | WT4             5888
+       | NaW              189
+       | ClW              184
+       | WLS             4580
 
 .. caution::
 
@@ -422,11 +426,13 @@ Generate restraint files for the backbone *GN* and *GO* beads:
 
  gmx genrestr -f I10_cg.gro -n I10_cg_ion.ndx -o bkbres.itp
 
+When prompted, choose the group *GN_GO*.
+
 .. code-block:: bash
 
   gmx genrestr -f I10_cg.gro -n I10_cg_ion.ndx -o bkbres_soft.itp -fc 100 100 100
 
-When prompted, choose the group *GN_GO*
+Here, choose the group *GN_GO*.
 
 Add the restraints to ``topol.top``:
 
@@ -439,11 +445,11 @@ Add the restraints to ``topol.top``:
      - Topology after editing
    * - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
        
        | ; Include water topology
-       | #include"../sirah.ff/solv.itp" 
+       | #include \"../sirah.ff/solv.itp\" 
        |
        
        | #ifdef POSRES_WATER       
@@ -463,29 +469,24 @@ Add the restraints to ``topol.top``:
        |
        |
 
-       |
-       |
-       |
-       |
-       
-                  
+                
      - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
         
        | ; Backbone restraints
        | #ifdef GN_GO
-       | #include "bkbres.itp"
+       | #include \"bkbres.itp\"
        | #endif
      
        | ; Backbone soft restrains
        | #ifdef GN_GO_SOFT
-       | #include "bkbres_soft.itp"
+       | #include \"bkbres_soft.itp\"
        | #endif
 
        | ; Include water topology
-       | #include"../sirah.ff/solv.itp"
+       | #include \"../sirah.ff/solv.itp\"
 
        | #ifdef POSRES_WATER       
        | ; Position restraint for each water oxygen
@@ -493,12 +494,8 @@ Add the restraints to ``topol.top``:
        | ;  i funct       fcx        fcy        fcz
        |    1    1       1000       1000       1000
        | #endif
+       | 
 
-       | ; Solvent restrains
-       | #ifdef Sirah_solvent
-       | #include "posre_sirah_solvent.itp"
-       | #endif
-       |
 
 
 7.5. Run the simulation
@@ -506,9 +503,9 @@ ________________________
 
 .. important:: 
 
-  By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/7/GPU``). 
+  By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/7/``). 
 
-The folder ``sirah.ff/tutorial/7/GPU/`` contains typical input files for energy minimization (``em1_CGPROT.mdp``, ``em2_CGPROT.mdp``, and ``em3_CGPROT.mdp``), equilibration (``eq1_CGPROT.mdp`` and ``eq2_CGPROT.mdp``), production (``md_CGPROT.mdp``) and SMD (``SMD_Force_CGPROT.mdp`` and ``SMD_Velocity_CGPROT.mdp``) runs. Please check carefully the input flags therein.
+The folder ``sirah.ff/tutorial/7/`` contains typical input files for energy minimization (``em1_CGPROT.mdp``, ``em2_CGPROT.mdp``, and ``em3_CGPROT.mdp``), equilibration (``eq1_CGPROT.mdp`` and ``eq2_CGPROT.mdp``), production (``md_CGPROT.mdp``) and SMD (``SMD_Force_CGPROT.mdp`` and ``SMD_Velocity_CGPROT.mdp``) runs. Please check carefully the input flags therein.
 
 Make a new folder for the run:
 
@@ -516,11 +513,11 @@ Make a new folder for the run:
 
   mkdir run; cd run
 
-**Energy Minimization of side chains by restraining the backbone and Sirah-solvent**:
+**Energy Minimization of side chains and Sirah-solvent by restraining the backbone**:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp -p ../topol.top -po em1.mdp -n ../I10_cg_ion.ndx -c ../I10_cg_ion.gro -r ../I10_cg_ion.gro -o I10_cg_em1.tpr
+  gmx grompp -f ../sirah.ff/tutorial/7/em1_CGPROT.mdp -p ../topol.top -po em1.mdp -n ../I10_cg_ion.ndx -c ../I10_cg_ion.gro -r ../I10_cg_ion.gro -o I10_cg_em1.tpr
 
 .. code-block:: bash
 
@@ -530,7 +527,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/em2_CGPROT.mdp -p ../topol.top -po em2.mdp -n ../I10_cg_ion.ndx -c I10_cg_em1.gro -o I10_cg_em2.tpr 
+  gmx grompp -f ../sirah.ff/tutorial/7/em2_CGPROT.mdp -p ../topol.top -po em2.mdp -n ../I10_cg_ion.ndx -c I10_cg_em1.gro -r I10_cg_em1.gro -o I10_cg_em2.tpr 
 
 .. code-block:: bash
 
@@ -540,7 +537,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/em3_CGPROT.mdp -p ../topol.top -po em3.mdp -n ../I10_cg_ion.ndx -c I10_cg_em2.gro -o I10_cg_em3.tpr 
+  gmx grompp -f ../sirah.ff/tutorial/7/em3_CGPROT.mdp -p ../topol.top -po em3.mdp -n ../I10_cg_ion.ndx -c I10_cg_em2.gro -o I10_cg_em3.tpr 
 
 .. code-block:: bash
 
@@ -550,7 +547,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/eq1_CGPROT.mdp -p ../topol.top -po eq1.mdp -n ./I10_cg_ion.ndx -c I10_cg_em2.gro -r I10_cg_em2.gro -o I10_cg_eq1.tpr 
+  gmx grompp -f ../sirah.ff/tutorial/7/eq1_CGPROT.mdp -p ../topol.top -po eq1.mdp -n ../I10_cg_ion.ndx -c I10_cg_em2.gro -r I10_cg_em2.gro -o I10_cg_eq1.tpr 
 
 .. code-block:: bash
 
@@ -560,7 +557,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/eq2_CGPROT.mdp -p ../topol.top -po eq2.mdp -n ../I10_cg_ion.ndx -c I10_cg_eq1.gro -r I10_cg_eq1.gro -o I10_cg_eq2.tpr
+  gmx grompp -f ../sirah.ff/tutorial/7/eq2_CGPROT.mdp -p ../topol.top -po eq2.mdp -n ../I10_cg_ion.ndx -c I10_cg_eq1.gro -r I10_cg_eq1.gro -o I10_cg_eq2.tpr
 
 .. code-block:: bash
 
@@ -592,7 +589,7 @@ In this tutorial we are going to run only the **SMD Force** simulation:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/SMD_Force_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion_pull.ndx -c I10_cg_eq2.gro -o I10_cg_SMD_F.tpr
+  gmx grompp -f ../sirah.ff/tutorial/7/SMD_Force_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion_pull.ndx -c I10_cg_eq2.gro -o I10_cg_SMD_F.tpr
 
 .. code-block:: bash
   
@@ -602,7 +599,7 @@ However, you can also run a **SMD Velocity** simulation:
 
 .. code-block:: bash
 
-  gmx grompp -f ../sirah.ff/tutorial/7/GPU/SMD_Velocity_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion_pull.ndx -c I10_cg_eq2.gro -o I10_cg_SMD_V.tpr
+  gmx grompp -f ../sirah.ff/tutorial/7/SMD_Velocity_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion_pull.ndx -c I10_cg_eq2.gro -o I10_cg_SMD_V.tpr
 
 .. code-block:: bash
 
@@ -616,7 +613,7 @@ However, you can also run a **SMD Velocity** simulation:
 
   .. code-block:: bash
 
-    gmx grompp -f ../sirah.ff/tutorial/7/GPU/md_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion.ndx -c I10_cg_eq2.gro -o I10_cg_md.tpr
+    gmx grompp -f ../sirah.ff/tutorial/7/md_CGPROT.mdp -p ../topol.top -po md.mdp -n ../I10_cg_ion.ndx -c I10_cg_eq2.gro -o I10_cg_md.tpr
 
   .. code-block:: bash
 
