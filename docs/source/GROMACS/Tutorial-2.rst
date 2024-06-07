@@ -36,14 +36,14 @@ For GROMACS to recognize SIRAH, edit your topology file ``topol.top`` adding the
    * - Topology before editing
      - Topology after editing
    * - | ; Include forcefield parameters 
-       | #include “amber99sb.ff/forcefield.itp” 
+       | #include \"amber99sb.ff/forcefield.itp\"
        |     
        |     
               
      - | ; Include forcefield parameters 
-       | #include “amber99sb.ff/forcefield.itp” 
-       | #include “./sirah.ff/hybsol_comb2.itp” 
-       | #include “./sirah.ff/solv.itp” 
+       | #include \"amber99sb.ff/forcefield.itp\"
+       | #include \"./sirah.ff/hybsol_comb2.itp\" 
+       | #include \"./sirah.ff/solv.itp\"
 
 
 .. important::

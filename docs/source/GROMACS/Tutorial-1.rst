@@ -83,7 +83,7 @@ these restraints edit ``topol.top`` to include the file ``WC_RST.itp`` at the en
      - Topology with WC restraints
    * - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
        | 
        | 
@@ -91,11 +91,11 @@ these restraints edit ``topol.top`` to include the file ``WC_RST.itp`` at the en
        
      - | ; Include Position restraint file
        | #ifdef POSRES
-       | #include "posre.itp"
+       | #include \"posre.itp\"
        | #endif
        |
        | ; Watson-Crick restraints
-       | #include "./sirah.ff/tutorial/1/WC_RST.itp"
+       | #include \"./sirah.ff/tutorial/1/WC_RST.itp\"
 
 
 1.3. Solvate the system

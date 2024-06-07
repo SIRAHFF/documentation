@@ -97,11 +97,11 @@ Available multiscale implementations in SIRAH:
 
 - An all-atoms/CG model covalently linking both resolutions within a nucleic acid chain (see [:ref:`13 <ref13>`]); 
 
-- A multiresolution solvent model allowing the mixture of fully atomistic solutes with a shell of atomistic solvent surrounded by CG water, applicable to highly solvated systems like viral capsids (see [:ref:`14 <ref14>`]).
+- A multiresolution solvent model allowing the mixture of fully atomistic solutes with a shell of atomistic solvent surrounded by CG water, applicable to highly solvated systems like viral capsids (see [:ref:`7 <ref7>`]).
 
-- A triple solvation scheme, treating water at all-atoms, CG, and supraCG levels, is also available (see [:ref:`14 <ref14>`]). 
+- A triple solvation scheme, treating water at all-atoms, CG, and supraCG levels, is also available (see [:ref:`7 <ref7>`]). 
 
-This is particularly useful for complex cellular systems and has been applied to assemble and simulate VLPs systems in an onion-shaped configuration using CG water (WT4) and supra-CG solvent (WLS) (**Figure 6**) (see [:ref:`10 <ref10>`] and [:ref:`14 <ref14>`]). 
+This is particularly useful for complex cellular systems and has been applied to assemble and simulate VLPs systems in an onion-shaped configuration using CG water (WT4) and supra-CG solvent (WLS) (**Figure 6**) (see [:ref:`7 <ref7>`] and [:ref:`10 <ref10>`]). 
 
 
 
@@ -268,15 +268,5 @@ References
    :alt: Citation
    :target: https://scholar.google.com/scholar?cites=5473055142318037579
 
-.. _ref14:
 
-[14] Machado, M. R.; González, H. C.; Pantano, S. MD Simulations of Virus like Particles with Supra CG Solvation Affordable to Desktop Computers. Journal of Chemical Theory and Computation 2017, 13, 5106–5116. |MC1| |MC1-cit|  
-
-.. |MC1| image:: https://img.shields.io/badge/DOI-10.1021%2Facs.jctc.7b00659-blue
-   :alt: Access the paper
-   :target: https://doi.org/10.1021/acs.jctc.7b00659
-
-.. |MC1-cit| image:: https://img.shields.io/endpoint?url=https%3A%2F%2Fapi.juleskreuer.eu%2Fcitation-badge.php%3Fshield%26doi%3D10.1021%2Facs.jctc.7b00659
-   :alt: Citation
-   :target: https://scholar.google.com/scholar?cites=16637391138490147245
 
