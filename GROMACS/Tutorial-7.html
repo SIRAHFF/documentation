@@ -145,6 +145,11 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 <p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated THY), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
 <p>See <a class="reference internal" href="../Tutorials%20gromacs.html#tutorial-3-g"><span class="std std-ref">Tutorial 3</span></a> for cautions while preparing and mapping atomistic proteins to SIRAH.</p>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Check the <a class="reference internal" href="../Tutorials%20gromacs.html#download-gromacs"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
+Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code>, the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code></p>
+</div>
 <p>Map the atomistic structure of the I10 domain to its CG representation:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/7/I10_z.pqr<span class="w"> </span>-o<span class="w"> </span>I10_cg.pdb
 </pre></div>
@@ -173,7 +178,7 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 In this specific case, the charge of the system is -5.000 e; this will be addressed later.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>By default charged terminal are used but it is possible to set them neutral with option <code class="docutils literal notranslate"><span class="pre">-ter</span></code></p>
+<p>By default charged terminal are used but it is possible to set them neutral with option <code class="docutils literal notranslate"><span class="pre">-ter</span></code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -193,14 +198,14 @@ simulation until the problem is solved.</p>
 <p>Since we are doing a SMD simulation, we need to carefully set the box dimensions to provide enough solvent to the “stretched” protein and keep a good separation between the surfaces of periodic images.</p>
 <p>In this system, I10 has 88 amino acids and the maximum extension size of each amino acid is 0.34 nm. Thus, “stretched” protein will be 88 * 0.34 = 29.92 nm (~ 30.0 nm) long. In order to accommodate the pulling, GROMACS stipulates a minimum box size double this value, i.e. 60 nm for the Z-axis. However, for optimal results, it is recommended that the dimensions of the box be 2.5 to 3 times greater than the maximum length of the protein when in its extended conformation. Therefore, for this tutorial the box used is 10 10 90 nm.</p>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/TutorialSMD2.png"><img alt="../_images/TutorialSMD2.png" src="../_images/TutorialSMD2.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="../_images/TutorialSMD2_1.png"><img alt="../_images/TutorialSMD2_1.png" src="../_images/TutorialSMD2_1.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 2.</strong> Dimensions of the multiscale solvation box used in this tutorial.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div>
-<p>In order to have a multiscale solvent approach using WT4 and WLS, two steps are needed to solvate the systems.</p>
-<p>First, define the simulation region of the system to be enclosed by WT4 (pink in <strong>Figure 2</strong>)</p>
+<p>In order to have a multiscale solvent approach using WT4 (CG solvent) and WLS (Supra-CG solvent), two steps are needed to solvate the systems.</p>
+<p>First, define the simulation region of the system to be enclosed by WT4 (purple in <strong>Figure 2</strong>)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_box.gro<span class="w"> </span>-box<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">20</span><span class="w"> </span>-bt<span class="w"> </span>triclinic<span class="w"> </span>-c
 </pre></div>
 </div>
@@ -247,7 +252,7 @@ simulation until the problem is solved.</p>
 </table>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
+<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">grep -c WP1 I10_cg_solv1.gro</span>
 </pre></div>
 </div>
@@ -257,32 +262,32 @@ simulation until the problem is solved.</p>
 <p>The number of added WT4 molecules, <strong>6281</strong>, may change according to the software version.</p>
 </div>
 <p>Remove misplaced WT4 molecules within 0.3 nm of protein:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv1.ndx
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete1.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol1.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">2</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete1.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
+<p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame these issues, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
 </pre></div>
 </div>
 <p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to correct the number of WT4 molecules, <strong>6261</strong>.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
+<p>If you forget to read the number of added WT4 molecules from the output of <em>solvate</em>, then use the following command line to get it:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">grep -c WP1 I10_cg_solv2.gro</span>
 </pre></div>
 </div>
 </div>
 <p>Now, we include the second solvent layer of solvent with WLS molecules (green in <strong>Figure 2</strong>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_sol2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_box2.gro<span class="w"> </span>-box<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">90</span><span class="w"> </span>-bt<span class="w"> </span>triclinic<span class="w"> </span>-c
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_box2.gro<span class="w"> </span>-box<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">90</span><span class="w"> </span>-bt<span class="w"> </span>triclinic<span class="w"> </span>-c
 </pre></div>
 </div>
 <div class="admonition hint">
@@ -297,7 +302,7 @@ simulation until the problem is solved.</p>
 </div>
 </div>
 <p>Add WLS molecules:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>I10_cg_box2.gro<span class="w"> </span>-cs<span class="w"> </span>sirah.ff/wlsbox.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol3.gro
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>I10_cg_box2.gro<span class="w"> </span>-cs<span class="w"> </span>sirah.ff/wlsbox.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv3.gro
 </pre></div>
 </div>
 <div class="admonition note">
@@ -337,7 +342,7 @@ simulation until the problem is solved.</p>
 </table>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>If you forget to read the number of added WLS molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
+<p>If you forget to read the number of added WLS molecules from the output of <em>solvate</em>, then use the following command line to get it:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">grep -c LN1 I10_cg_solv3.gro</span>
 </pre></div>
 </div>
@@ -347,23 +352,23 @@ simulation until the problem is solved.</p>
 <p>The number of added WLS molecules, <strong>4697</strong>, may change according to the software version.</p>
 </div>
 <p>Remove misplaced WLS molecules within 7.8 nm of protein:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_sol3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol3.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>q<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv3.ndx
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete3.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_sol3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol3.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">2</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete3.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
+<p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_sol3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_sol3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_sol3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WLS and within 7.8 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WLS and within 7.8 of group Protein))&#39;</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_sol3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol4.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wls.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv4.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wls.ndx
 </pre></div>
 </div>
-<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to correct the number of WLS molecules, <strong>4582</strong>.</p>
+<p>Edit the [ molecules ] section in <code class="docutils literal notranslate"><span class="pre">topol.top</span></code> to correct the number of WLS molecules, <strong>4580</strong>.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>If you forget to read the number of added WLS molecules from the output of <em>solvate</em>, then use the following command line to get it</p>
@@ -376,14 +381,14 @@ simulation until the problem is solved.</p>
 <p>Consult <code class="docutils literal notranslate"><span class="pre">sirah.ff/0ISSUES</span></code> and <a class="reference internal" href="../FAQ.html"><span class="doc">FAQs</span></a> for information on known solvation issues.</p>
 </div>
 <p>Add CG counterions and 0.15M NaCl:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete4.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_sol4.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_sol4.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">3</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/7/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete4.mdp<span class="w"> </span>-c<span class="w"> </span>I10_cg_solv4.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv4.tpr<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>New GROMACS versions may complain about the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We are about to neutralize the system, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">3</span></code></p>
+<p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We are about to neutralize the system, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>I10_cg_sol4.tpr<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">187</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">182</span><span class="w"> </span>-nname<span class="w"> </span>ClW
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv4.tpr<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-np<span class="w"> </span><span class="m">189</span><span class="w"> </span>-pname<span class="w"> </span>NaW<span class="w"> </span>-nn<span class="w"> </span><span class="m">184</span><span class="w"> </span>-nname<span class="w"> </span>ClW
 </pre></div>
 </div>
 <p>When prompted, choose to substitute <em>WT4</em> molecules by <em>ions</em>.</p>
@@ -417,10 +422,10 @@ simulation until the problem is solved.</p>
 <div class="line">[ molecules ]</div>
 <div class="line">; Compound #mols</div>
 <div class="line">Protein_chain_A    1</div>
-<div class="line">WT4             5892</div>
-<div class="line">NaW              187</div>
-<div class="line">ClW              182</div>
-<div class="line">WLS             4582</div>
+<div class="line">WT4             5888</div>
+<div class="line">NaW              189</div>
+<div class="line">ClW              184</div>
+<div class="line">WLS             4580</div>
 </div>
 </td>
 </tr>
@@ -464,10 +469,11 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>I10_cg.gro<span class="w"> </span>-n<span class="w"> </span>I10_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres.itp
 </pre></div>
 </div>
+<p>When prompted, choose the group <em>GN_GO</em>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genrestr<span class="w"> </span>-f<span class="w"> </span>I10_cg.gro<span class="w"> </span>-n<span class="w"> </span>I10_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>bkbres_soft.itp<span class="w"> </span>-fc<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">100</span>
 </pre></div>
 </div>
-<p>When prompted, choose the group <em>GN_GO</em></p>
+<p>Here, choose the group <em>GN_GO</em>.</p>
 <p>Add the restraints to <code class="docutils literal notranslate"><span class="pre">topol.top</span></code>:</p>
 <table class="docutils align-center">
 <colgroup>
@@ -483,12 +489,12 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <tr class="row-even"><td><div class="line-block">
 <div class="line">; Include Position restraint file</div>
 <div class="line">#ifdef POSRES</div>
-<div class="line">#include “posre.itp”</div>
+<div class="line">#include &quot;posre.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Include water topology</div>
-<div class="line">#include”../sirah.ff/solv.itp”</div>
+<div class="line">#include &quot;../sirah.ff/solv.itp&quot;</div>
 <div class="line"><br /></div>
 </div>
 <div class="line-block">
@@ -508,12 +514,6 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><br /></div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
@@ -523,24 +523,24 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <td><div class="line-block">
 <div class="line">; Include Position restraint file</div>
 <div class="line">#ifdef POSRES</div>
-<div class="line">#include “posre.itp”</div>
+<div class="line">#include &quot;posre.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Backbone restraints</div>
 <div class="line">#ifdef GN_GO</div>
-<div class="line">#include “bkbres.itp”</div>
+<div class="line">#include &quot;bkbres.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Backbone soft restrains</div>
 <div class="line">#ifdef GN_GO_SOFT</div>
-<div class="line">#include “bkbres_soft.itp”</div>
+<div class="line">#include &quot;bkbres_soft.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Include water topology</div>
-<div class="line">#include”../sirah.ff/solv.itp”</div>
+<div class="line">#include &quot;../sirah.ff/solv.itp&quot;</div>
 </div>
 <div class="line-block">
 <div class="line">#ifdef POSRES_WATER</div>
@@ -550,12 +550,6 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="line-block">
 <div class="line">1    1       1000       1000       1000</div>
 </div>
-<div class="line">#endif</div>
-</div>
-<div class="line-block">
-<div class="line">; Solvent restrains</div>
-<div class="line">#ifdef Sirah_solvent</div>
-<div class="line">#include “posre_sirah_solvent.itp”</div>
 <div class="line">#endif</div>
 <div class="line"><br /></div>
 </div>
@@ -568,43 +562,43 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <h1>7.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/GPU</span></code>).</p>
+<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code>).</p>
 </div>
-<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/GPU/</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em1_CGPROT.mdp</span></code>, <code class="docutils literal notranslate"><span class="pre">em2_CGPROT.mdp</span></code>, and <code class="docutils literal notranslate"><span class="pre">em3_CGPROT.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_CGPROT.mdp</span></code>), production (<code class="docutils literal notranslate"><span class="pre">md_CGPROT.mdp</span></code>) and SMD (<code class="docutils literal notranslate"><span class="pre">SMD_Force_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">SMD_Velocity_CGPROT.mdp</span></code>) runs. Please check carefully the input flags therein.</p>
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em1_CGPROT.mdp</span></code>, <code class="docutils literal notranslate"><span class="pre">em2_CGPROT.mdp</span></code>, and <code class="docutils literal notranslate"><span class="pre">em3_CGPROT.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_CGPROT.mdp</span></code>), production (<code class="docutils literal notranslate"><span class="pre">md_CGPROT.mdp</span></code>) and SMD (<code class="docutils literal notranslate"><span class="pre">SMD_Force_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">SMD_Velocity_CGPROT.mdp</span></code>) runs. Please check carefully the input flags therein.</p>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
-<p><strong>Energy Minimization of side chains by restraining the backbone and Sirah-solvent</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em1.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../I10_cg_ion.gro<span class="w"> </span>-r<span class="w"> </span>../I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em1.tpr
+<p><strong>Energy Minimization of side chains and Sirah-solvent by restraining the backbone</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em1.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../I10_cg_ion.gro<span class="w"> </span>-r<span class="w"> </span>../I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em1.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_em1<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM1.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Energy Minimization of side chains by restraining the backbone</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/em2_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em2.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em2.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/em2_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em2.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em1.gro<span class="w"> </span>-r<span class="w"> </span>I10_cg_em1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em2.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_em2<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM2.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Energy Minimization of whole system</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/em3_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em3.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em3.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/em3_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em3.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_em3.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_em3<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM3.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Solvent equilibration</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/eq1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq1.mdp<span class="w"> </span>-n<span class="w"> </span>./I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_eq1.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/eq1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq1.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>I10_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_eq1.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_eq1<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ1.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Soft equilibration to improve side chain solvation</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/eq2_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq2.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq1.gro<span class="w"> </span>-r<span class="w"> </span>I10_cg_eq1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_eq2.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/eq2_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq2.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq1.gro<span class="w"> </span>-r<span class="w"> </span>I10_cg_eq1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_eq2.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_eq2<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ2.log<span class="w"> </span><span class="p">&amp;</span>
@@ -634,14 +628,14 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </tbody>
 </table>
 <p>In this tutorial we are going to run only the <strong>SMD Force</strong> simulation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/SMD_Force_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion_pull.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_SMD_F.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/SMD_Force_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion_pull.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_SMD_F.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_SMD_F<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>SMD_F.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p>However, you can also run a <strong>SMD Velocity</strong> simulation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/SMD_Velocity_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion_pull.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_SMD_V.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/SMD_Velocity_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion_pull.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_SMD_V.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_SMD_V<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>SMD_V.log<span class="w"> </span><span class="p">&amp;</span>
@@ -651,7 +645,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p class="admonition-title">Note</p>
 <p>It is also possible to use the files you made to run a MD simulation of your system:</p>
 <p><strong>Production (1000ns)</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/GPU/md_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_md.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/7/md_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../I10_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>I10_cg_eq2.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_md.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>I10_cg_md<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>MD.log<span class="w"> </span><span class="p">&amp;</span>

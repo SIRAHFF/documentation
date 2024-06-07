@@ -296,7 +296,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <tr class="row-even"><td><div class="line-block">
 <div class="line">; Include Position restraint file</div>
 <div class="line">#ifdef POSRES</div>
-<div class="line">#include “posre.itp”</div>
+<div class="line">#include &quot;posre.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
@@ -315,19 +315,19 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <td><div class="line-block">
 <div class="line">; Include Position restraint file</div>
 <div class="line">#ifdef POSRES</div>
-<div class="line">#include “posre.itp”</div>
+<div class="line">#include &quot;posre.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Backbone restraints</div>
 <div class="line">#ifdef GN_GO</div>
-<div class="line">#include “bkbres.itp”</div>
+<div class="line">#include &quot;bkbres.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 <div class="line-block">
 <div class="line">; Backbone soft restrains</div>
 <div class="line">#ifdef GN_GO_SOFT</div>
-<div class="line">#include “bkbres_soft.itp”</div>
+<div class="line">#include &quot;bkbres_soft.itp&quot;</div>
 <div class="line">#endif</div>
 </div>
 </td>
@@ -403,34 +403,6 @@ and production (<code class="docutils literal notranslate"><span class="pre">md_
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
-</div>
-</section>
-<section id="calculate-the-solvent-accessible-surface-sas">
-<h1>3.6. Calculate the solvent accessible surface (SAS)<a class="headerlink" href="#calculate-the-solvent-accessible-surface-sas" title="Link to this heading"></a></h1>
-<p>Create the following symbolic link in the folder <code class="docutils literal notranslate"><span class="pre">run/</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah.ff/vdwradii.dat
-</pre></div>
-</div>
-<p>Calculate the SAS of the protein along the trajectory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>g_sas<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_md.tpr<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_md_pbc.xtc<span class="w"> </span>-n<span class="w"> </span>../1CRN_cg_ion.ndx<span class="w"> </span>-qmax<span class="w"> </span><span class="m">0</span><span class="w"> </span>-probe<span class="w"> </span><span class="m">0</span>.21<span class="w"> </span>-o<span class="w"> </span>area.xvg
-</pre></div>
-</div>
-<p>When prompted, choose <em>Protein</em> as both the group for calculation and the output.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The solvent probe radius corresponds to a WT4 bead while a charge of 0e refers to any
-hydrophobic bead. The file <code class="docutils literal notranslate"><span class="pre">vdwradii.dat</span></code> must be placed at the same folder where <em>gmx sasa</em> is executed to assure that the correct van der Waals radii of SIRAH beads are used in the calculation.</p>
-</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p><em>g_sas</em> is deprecated, the tool no longer automatically divides the surface into hydrophobic and hydrophilic areas, and there is no <code class="docutils literal notranslate"><span class="pre">-f_index</span></code> option. The same effects can be obtained by defining suitable selections for <code class="docutils literal notranslate"><span class="pre">-output</span></code>. If you want output that contains the same numbers as with the old tool for a calculation group A and output group B, you can use <a class="reference external" href="https://manual.gromacs.org/current/user-guide/cmdline.html">[1]</a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">sasa</span> <span class="o">-</span><span class="n">surface</span> <span class="s1">&#39;group &quot;A&quot;&#39;</span> <span class="o">-</span><span class="n">output</span> <span class="s1">&#39;&quot;Hydrophobic&quot; group &quot;A&quot; and charge {-0.2 to 0.2}; &quot;Hydrophilic&quot; group &quot;B&quot; and not charge {-0.2 to 0.2}; &quot;Total&quot; group &quot;B&quot;&#39;</span>
-</pre></div>
-</div>
-</div>
-<p>Use Xmgrace to plot the results:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>-nxy<span class="w"> </span>area.xvg
-</pre></div>
 </div>
 </section>
 

@@ -343,7 +343,7 @@ Edit each ``topol_Protein_chain_*.itp`` (A to E) to include the new position res
      - Topology after editing
    * - | ; Include Position restraint file 
        | #ifdef POSRES    
-       | #include "posre_Protein.itp" 
+       | #include \"posre_Protein.itp\" 
        | #endif
        |   
        |    
@@ -352,11 +352,11 @@ Edit each ``topol_Protein_chain_*.itp`` (A to E) to include the new position res
       
      - | ; Include Position restraint file 
        | #ifdef POSRES    
-       | #include "posre_Protein.itp" 
+       | #include \"posre_Protein.itp\" 
        | #endif
        |
        | #ifdef POSREBB    
-       | #include "posre_BB.itp" 
+       | #include \"posre_BB.itp\" 
        | #endif
 
 Use a similar procedure to set the positional restraints on lipid's phosphates.
@@ -392,7 +392,7 @@ Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and defi
      - Topology after editing
    * - | ; Include Position restraint file 
        | #ifdef POSRES    
-       | #include "posre_Lipid_chain_F.itp" 
+       | #include \"posre_Lipid_chain_F.itp\" 
        | #endif
        | 
        | 
@@ -401,11 +401,11 @@ Edit ``topol_Lipid_chain_F.itp`` to include the new position restraints and defi
               
      - | ; Include Position restraint file 
        | #ifdef POSRES    
-       | #include "posre_Lipid_chain_F.itp" 
+       | #include \"posre_Lipid_chain_F.itp\" 
        | #endif
        |
        | #ifdef POSREZ    
-       | #include "posre_Pz.itp" 
+       | #include \"posre_Pz.itp\" 
        | #endif
 
 6.5. Run the simulation
