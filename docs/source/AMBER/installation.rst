@@ -48,6 +48,7 @@ Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/tag
 
 .. code-block:: bash
 
+
     tar -xzvf sirah_x2.3_24-07.amber.tar.gz
 
 If you are using a different version of SIRAH, type:
@@ -74,7 +75,11 @@ Create the following symbolic link in the folder tutorialX.X:
 
 .. code-block:: bash
 
+<<<<<<< HEAD
     ln -s ../sirah_x2.3_24-07.amber sirah.amber
+=======
+    ln -s ../sirah_x2.3_24-07.amber  sirah.amber
+>>>>>>> e378610 (Update installation.rst)
 
 .. note:: 
 
