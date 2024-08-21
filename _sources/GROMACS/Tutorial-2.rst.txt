@@ -195,7 +195,7 @@ Create an index files adding a group for WT4 and NaW:
 
 .. code-block:: bash
 
-	echo -e "r WT4 | r NaW\nq\n" | make_ndx -f dna_ion.gro -o dna_ion.ndx
+	echo -e "r WT4 | r NaW\nq\n" | gmx make_ndx -f dna_ion.gro -o dna_ion.ndx
 
 .. note::
 
@@ -215,17 +215,17 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-	mdrun -deffnm dna_em &> EM.log &
+	gmx mdrun -deffnm dna_em &> EM.log &
 
 **Equilibration**:
 
 .. code-block:: bash 
 
-	gmx grompp -f ../sirah.ff/tutorial/2/GPU/eq_HYBSOL.mdp -p ../topol.top -po eq.mdp -n ../dna_ion.ndx -c dna_em.gro -o dna_eq.tpr 
+	gmx grompp -f ../sirah.ff/tutorial/2/GPU/eq_HYBSOL.mdp -p ../topol.top -po eq.mdp -n ../dna_ion.ndx -c dna_em.gro -r dna_em.gro -o dna_eq.tpr 
 
 .. code-block:: bash 
 
-	mdrun -deffnm dna_eq &> EQ.log &
+	gmx mdrun -deffnm dna_eq &> EQ.log &
 
 **Production (100ns)**:
 
@@ -235,7 +235,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-	mdrun -deffnm dna_md &> MD.log &
+	gmx mdrun -deffnm dna_md &> MD.log &
 
 .. note::
 
