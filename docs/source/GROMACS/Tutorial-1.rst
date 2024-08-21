@@ -237,7 +237,7 @@ Make a new folder for the run:
 
 .. code-block:: bash 
 
-	gmx grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -o dna_cg_eq.tpr 
+	gmx grompp -f ../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../dna_cg_ion.ndx -c dna_cg_em.gro -r dna_cg_em.gro -o dna_cg_eq.tpr 
 
 .. code-block:: bash 
 
