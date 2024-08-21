@@ -18,7 +18,7 @@ Map the atomistic structure of the closed circular DNA to its CG representation:
 
 .. code-block:: bash
 
-	./sirah.ff/tools/CGCONV/cgconv.pl -i sirah.ff/tutorial/4/ccdna.pdb | sed -e 's/DCX A 1/CW5 A 1/' -e 's/DCX B 1/CW5 B 1/' > ccdna_cg.pdb
+	./sirah.ff/tools/CGCONV/cgconv.pl -i sirah.ff/tutorial/4/ccdna.pdb | sed -e 's/DCX A   1/CW5 A   1/' -e 's/DCX B   1/CW5 B   1/' > ccdna_cg.pdb
 
 The input file ``-i`` ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output ``-o`` ccdna_cg.pdb preserves a few of them.
 
@@ -207,17 +207,17 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-	mdrun -deffnm ccdna_cg_em &> EM.log &
+	gmx mdrun -deffnm ccdna_cg_em &> EM.log &
 
 **Equilibration**:
 
 .. code-block:: bash 
 
-	gmx grompp -f ../sirah.ff/tutorial/4/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../ccdna_cg_ion.ndx -c ccdna_cg_em.gro -o ccdna_cg_eq.tpr 
+	gmx grompp -f ../sirah.ff/tutorial/4/GPU/eq_CGDNA.mdp -p ../topol.top -po eq.mdp -n ../ccdna_cg_ion.ndx -c ccdna_cg_em.gro -r ccdna_cg_em.gro -o ccdna_cg_eq.tpr 
 
 .. code-block:: bash 
 
-	mdrun -deffnm ccdna_cg_eq &> EQ.log &
+	gmx mdrun -deffnm ccdna_cg_eq &> EQ.log &
 
 **Production (100ns)**:
 
@@ -227,7 +227,7 @@ Make a new folder for the run:
 
 .. code-block:: bash
 
-	mdrun -deffnm ccdna_cg_md &> MD.log &
+	gmx mdrun -deffnm ccdna_cg_md &> MD.log &
 
 .. note::
 
