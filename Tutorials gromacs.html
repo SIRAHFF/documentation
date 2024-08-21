@@ -1086,7 +1086,7 @@ Since this is <strong>Tutorial 4</strong>, remember to replace <code class="docu
 <section id="id29">
 <h3>4.1. Build CG representations<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A 1/CW5 A 1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B 1/CW5 B 1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A   1/CW5 A   1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B   1/CW5 B   1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
 </div>
 <p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> ccdna_cg.pdb preserves a few of them.</p>
@@ -1250,21 +1250,21 @@ check carefully the input flags therein.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/em_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>em.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>../ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_em.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_em<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM.log<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_em<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EM.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Equilibration</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_eq.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_em.gro<span class="w"> </span>-r<span class="w"> </span>ccdna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_eq.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_eq<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ.log<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_eq<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Production (100ns)</strong>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/4/GPU/md_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>md.mdp<span class="w"> </span>-n<span class="w"> </span>../ccdna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>ccdna_cg_eq.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_md.tpr<span class="w"> </span>mdrun
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_md<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>MD.log<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>ccdna_cg_md<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>MD.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <div class="admonition note">
