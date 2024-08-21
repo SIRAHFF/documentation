@@ -41,7 +41,7 @@ Explicit solvent
    
    **Figure 3.** SIRAH force field Solvent CG representation.   
 
-In tandem with the DNA model development, a CG aqueous solvent was created, featuring CG water (WatFour or WT4) and monovalent electrolytic ions (sodium, potassium, chloride) (**Figure 3**) (see [:ref:`6 <ref6>`]). The WT4 model resembles a bulkier "water molecule". The monovalent ions are represented by single beads with a net charge of +/- 1e. Supra-CG solvent (WatElse or WLS) is also available (see [:ref:`7 <ref7>`])
+In tandem with the DNA model development, a CG aqueous solvent was created, featuring CG water (WatFour or WT4) and monovalent electrolytic ions (sodium, potassium, chloride) (**Figure 3**) (see [:ref:`6 <ref6>`]). The WT4 model resembles a bulkier "water molecule". The monovalent ions are represented by single beads with a net charge of +/- 1e. Supra-CG solvent (WatElse or WLS) is also available (see [:ref:`7 <ref7>`]).
 
 
 Protein model
