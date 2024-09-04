@@ -1,33 +1,31 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NAMD &mdash; SIRAH Force Field  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
+  <title>1.1. Build CG representations &mdash; SIRAH Force Field  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3437f865" />
 
   
   <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
+    <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SIRAH tools" href="Tutorials%20sirahtools.html" />
-    <link rel="prev" title="GROMACS" href="Tutorials%20gromacs.html" /> 
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,11 +36,11 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
+          <a href="../index.html" class="icon icon-home">
             SIRAH Force Field
           </a>
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -51,49 +49,20 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Manual</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="About%20SIRAH.html">About SIRAH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Background%20SIRAH.html">Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Citation.html">Citations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Further%20reading.html">Further Reading</a></li>
-<li class="toctree-l1"><a class="reference internal" href="FAQ.html">FAQs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Developers.html">Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../About%20SIRAH.html">About SIRAH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Background%20SIRAH.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Citation.html">Citations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Further%20reading.html">Further Reading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Developers.html">Developers</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Tutorials%20amber.html">AMBER</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tutorials%20gromacs.html">GROMACS</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">NAMD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#setting-up-sirah">Setting up SIRAH</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#required-software">Required Software</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#prior-knowledge">Prior knowledge</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#download-and-setting-up-sirah">Download and Setting up SIRAH</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#proteins-in-explicit-solvent">1. Proteins in explicit solvent</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#build-cg-representations">1.1. Build CG representations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#prepare-with-leap">1.2. Prepare with LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-leap">1.3. Run LEaP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-backbone-and-protein-restraints">1.4. Create Backbone and Protein restraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#run-the-simulation">1.5. Run the simulation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#namd2">1.5.1 NAMD2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#namd3">1.5.2 NAMD3</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#visualizing-the-simulation">1.6. Visualizing the simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#how-to-modify-input-files">1.7 How to modify input files</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#all-files">1.7.1 All files</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#energy-minimization">1.7.2 Energy minimization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#heating">1.7.3 Heating</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#equilibration">1.7.4 Equilibration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#production">1.7.5 Production</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="Tutorials%20sirahtools.html">SIRAH tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tutorials%20analysis.html">Basic analyses VMD</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20amber.html">AMBER</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20gromacs.html">GROMACS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20namd.html">NAMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahtools.html">SIRAH tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20analysis.html">Basic analyses VMD</a></li>
 </ul>
 
         </div>
@@ -102,17 +71,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SIRAH Force Field</a>
+          <a href="../index.html">SIRAH Force Field</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">NAMD</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">1.1. Build CG representations</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/Tutorials namd.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/NAMD/Tutorial-1.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -120,91 +89,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="namd">
-<h1>NAMD<a class="headerlink" href="#namd" title="Link to this heading"></a></h1>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>The tutorials in this section use the inherent capability of NAMD to read AMBER parameters and topology files (e.g. prmtop). For additional information, please refer to the <a class="reference external" href="https://ambermd.org/namd/namd_amber.html">Using the AMBER force field in NAMD documentation</a>.</p>
-</div>
-<section id="setting-up-sirah">
-<span id="id1"></span><h2>Setting up SIRAH<a class="headerlink" href="#setting-up-sirah" title="Link to this heading"></a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>SIRAH Force Field is distributed with <a class="reference external" href="https://ambermd.org/index.php">AMBER</a> and <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> official releases.</p>
-</div>
-<section id="required-software">
-<h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading"></a></h3>
-<p><strong>NAMD</strong></p>
-<p>NAMD (version 2 or later) versions properly installed and running in your computer. In these tutorials, we employ bash aliases to access the NAMD binary executable files.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><a class="reference external" href="https://www.ks.uiuc.edu/Research/namd/">Download</a> the latest version of NAMD2 or NAMD3 and refer to the <em>Download NAMD</em> section for more details on getting NAMD. Binary files of NAMD is provied by <a class="reference external" href="https://www.ks.uiuc.edu/">TCBG Group</a>.</p>
-</div>
-<p><strong>Ambertools</strong></p>
-<p>AmberTools (version 16 or later) versions properly installed and running in your computer.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><a class="reference external" href="https://ambermd.org/GetAmber.php#ambertools">Download</a> the latest version of AmberTools. Go to the <a class="reference external" href="https://ambermd.org/GetAmber.php#ambertools">Install AmberTools</a> page for specific instructions based on your operating system.</p>
-</div>
-<p><strong>VMD</strong></p>
-<p>The molecular visualization program <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/">VMD</a>, version 1.9.3 or later (<a class="reference external" href="https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">freely available download</a>). Check VMD’s <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">Installation guide</a> for more instructions.</p>
-</section>
-<section id="prior-knowledge">
-<h3>Prior knowledge<a class="headerlink" href="#prior-knowledge" title="Link to this heading"></a></h3>
-<p>How to perform a standard atomistic molecular dynamics simulations with NAMD, how to use AmberTools to build systems, and basic usage of VMD.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p><strong>NAMD</strong></p>
-<p>If you are not familiar with atomistic molecular dynamics simulations in NAMD, we strongly recommend you to perform the basic usage tutorials of NAMD: <a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/index.html">NAMD TUTORIAL Unix/MacOSX Version</a>. For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/namd/3.0/ug/">NAMD User’s Guide</a>.</p>
-<p><strong>AmberTools</strong></p>
-<p>We strongly recommend you to perform the basic usage tutorials of AmberTools: <a class="reference external" href="https://ambermd.org/tutorials/BuildingSystems.php">1. Building Systems</a>, <a class="reference external" href="https://ambermd.org/tutorials/Relaxation.php">3. Creating Stable Systems and Running MD</a> and <a class="reference external" href="https://ambermd.org/tutorials/Introductory.php">5. Case Studies</a>. For more details and documentation, check <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">Amber23 Manual</a>.</p>
-<p><strong>VMD</strong></p>
-<p>If you are not familiar with VMD, we strongly recommend you to perform the basic usage tutorial of VMD (<a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html">Using VMD</a>). For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html">VMD User Guide</a> and the official <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials">VMD documentation</a>.</p>
-</div>
-</section>
-<section id="download-and-setting-up-sirah">
-<h3>Download and Setting up SIRAH<a class="headerlink" href="#download-and-setting-up-sirah" title="Link to this heading"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The simulations use the inherent functionality of NAMD to parse AMBER parameters and topology files. Thus, the LEaP module of AmberTools is used to generate the input files.</p>
-<p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
-</div>
-<p>Download <a class="reference external" href="https://github.com/SIRAHFF/documentation/releases/tag/AMBER">SIRAH for Amber</a> and uncompress it into your working directory.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_x2.3_24-07.amber.tar.gz
-</pre></div>
-</div>
-<p>If you are using a different version of SIRAH, type:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>-xzvf<span class="w"> </span>sirah_<span class="o">[</span>version<span class="o">]</span>.amber.tgz
-</pre></div>
-</div>
-<p>You will get the folder <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/</span></code> containing the force field definition, SIRAH Tools in the
-<code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tools/</span></code> folder, molecular structures to build up systems in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/PDB/</span></code> and the required material to perform the tutorials in <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/NAMD/X.X/</span></code></p>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Remember to change <strong>X.X</strong> to the number that corresponds to the tutorial you are going to do.</p>
-</div>
-<p>Make a new folder for this tutorial in your working directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>tutorialX.X<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>tutorialX.X
-</pre></div>
-</div>
-<p>Create the following symbolic link in the folder tutorialX.X:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>../sirah_x2.3_24-07.amber<span class="w"> </span>sirah.amber
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>SIRAH Force Field is also distributed with <a class="reference external" href="https://ambermd.org/index.php">AMBER</a> and <a class="reference external" href="https://ambermd.org/AmberTools.php">AmberTools</a> official releases. To use the native AMBER version of SIRAH, create a symbolic link located in $AMBERHOME:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$AMBERHOME</span>/dat/SIRAH<span class="w"> </span>sirah.amber
-</pre></div>
-</div>
-<p>Check the <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">AMBER Manual</a> section <strong>3.11.2</strong> for more details.</p>
-<p>However, if you want the latest parameters and implementations we strongly advise you to use the developers version of SIRAH from GitHub.</p>
-</div>
-</section>
-</section>
-<section id="proteins-in-explicit-solvent">
-<span id="tutorial-1-n"></span><h2>1. Proteins in explicit solvent<a class="headerlink" href="#proteins-in-explicit-solvent" title="Link to this heading"></a></h2>
-<div class="admonition note">
+  <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
 </div>
@@ -212,11 +97,11 @@
 this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al.</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al.</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Check the <a class="reference internal" href="Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
+<p>Check the <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
 Since this is <strong>Tutorial 1</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/NAMD/1/</span></code></p>
 </div>
 <section id="build-cg-representations">
-<h3>1.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h3>
+<h1>1.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this section, we use the inherent functionality of NAMD to parse AMBER files. The tLEaP module of AmberTools is used to generate parameters and topology information.</p>
@@ -253,7 +138,7 @@ Since this is <strong>Tutorial 1</strong>, remember to replace <code class="docu
 <p>From now on it is just normal Amber stuff!</p>
 </section>
 <section id="prepare-with-leap">
-<h3>1.2. Prepare with LEaP<a class="headerlink" href="#prepare-with-leap" title="Link to this heading"></a></h3>
+<h1>1.2. Prepare with LEaP<a class="headerlink" href="#prepare-with-leap" title="Link to this heading"></a></h1>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
@@ -292,11 +177,11 @@ Since this is <strong>Tutorial 1</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
 </div>
 </section>
 <section id="run-leap">
-<h3>1.3. Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h3>
+<h1>1.3. Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h1>
 <p>Run the tLEaP application to generate the molecular topology and initial coordinate files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
 </pre></div>
@@ -327,11 +212,11 @@ Since this is <strong>Tutorial 1</strong>, remember to replace <code class="docu
 <p class="admonition-title">Tip</p>
 <p>VMD assigns default radius to unknown atom types, the script <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> sets the right
 ones, according to the CG representation. It also provides a kit of useful selection macros, coloring methods and backmapping utilities.
-Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
+Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 <section id="create-backbone-and-protein-restraints">
-<h3>1.4. Create Backbone and Protein restraints<a class="headerlink" href="#create-backbone-and-protein-restraints" title="Link to this heading"></a></h3>
+<h1>1.4. Create Backbone and Protein restraints<a class="headerlink" href="#create-backbone-and-protein-restraints" title="Link to this heading"></a></h1>
 <p>In NAMD, it is necessary to assign a PDB file that contains the system’s restraints. Generally, this is done by assigning values in the last column of the PDB file that corresponds to the B-factor. These files can be generated using a VMD script.</p>
 <p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">restraints.tcl</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>tools
@@ -366,9 +251,9 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-the-simulation">
-<h3>1.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h3>
+<h1>1.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <section id="namd2">
-<h4>1.5.1 NAMD2<a class="headerlink" href="#namd2" title="Link to this heading"></a></h4>
+<h2>1.5.1 NAMD2<a class="headerlink" href="#namd2" title="Link to this heading"></a></h2>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -431,7 +316,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="namd3">
-<h4>1.5.2 NAMD3<a class="headerlink" href="#namd3" title="Link to this heading"></a></h4>
+<h2>1.5.2 NAMD3<a class="headerlink" href="#namd3" title="Link to this heading"></a></h2>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
@@ -505,7 +390,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 </section>
 <section id="visualizing-the-simulation">
-<h3>1.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h3>
+<h1>1.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Load the processed trajectory in VMD:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">CRN_cg_ionized</span><span class="o">.</span><span class="n">prmtop</span> <span class="n">MD</span><span class="o">.</span><span class="n">dcd</span> <span class="o">-</span><span class="n">e</span> <span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
@@ -513,14 +398,14 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a Tcl script that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. Use the command <code class="docutils literal notranslate"><span class="pre">sirah-help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#sirah-tools"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 </section>
 <section id="how-to-modify-input-files">
-<h3>1.7 How to modify input files<a class="headerlink" href="#how-to-modify-input-files" title="Link to this heading"></a></h3>
+<h1>1.7 How to modify input files<a class="headerlink" href="#how-to-modify-input-files" title="Link to this heading"></a></h1>
 <p>The provided NAMD input files were created using the information from this tutorial; for other systems, check and carefully adjust the inputs in accordance with the tips bellow.</p>
 <section id="all-files">
-<h4>1.7.1 All files<a class="headerlink" href="#all-files" title="Link to this heading"></a></h4>
+<h2>1.7.1 All files<a class="headerlink" href="#all-files" title="Link to this heading"></a></h2>
 <p>For all NAMD input (<code class="docutils literal notranslate"><span class="pre">*.conf</span></code>) files:</p>
 <ol class="arabic simple">
 <li><p>Change input file names:</p></li>
@@ -538,7 +423,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="energy-minimization">
-<h4>1.7.2 Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading"></a></h4>
+<h2>1.7.2 Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading"></a></h2>
 <p>For <code class="docutils literal notranslate"><span class="pre">em1.conf</span></code>:</p>
 <ol class="arabic simple">
 <li><p>Assign the file name of the restriction file in consref and conskfile line:</p></li>
@@ -595,7 +480,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </ol>
 </section>
 <section id="heating">
-<h4>1.7.3 Heating<a class="headerlink" href="#heating" title="Link to this heading"></a></h4>
+<h2>1.7.3 Heating<a class="headerlink" href="#heating" title="Link to this heading"></a></h2>
 <p>For <code class="docutils literal notranslate"><span class="pre">heat.conf</span></code>, we will gradually bring the system up to the target temperature while maintaining control of the thermostat and barostat. This stage is performed with restraints on the backbone <code class="docutils literal notranslate"><span class="pre">bb_restraints.pdb</span></code>.</p>
 <ol class="arabic simple">
 <li><p>In the <strong>simulation parameters</strong> section, the temperature and pressure control blocks are enabled (if {1}). Particularly the langevin and langevinPiston options, which control the thermostat and barostat, respectively. Change it as needed.</p></li>
@@ -633,7 +518,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="equilibration">
-<h4>1.7.4 Equilibration<a class="headerlink" href="#equilibration" title="Link to this heading"></a></h4>
+<h2>1.7.4 Equilibration<a class="headerlink" href="#equilibration" title="Link to this heading"></a></h2>
 <p>For <code class="docutils literal notranslate"><span class="pre">eq1.conf</span></code>:</p>
 <ol class="arabic simple">
 <li><p>Enable the <strong>additional parameters</strong> section (if {1}) so that the equilibration is carried out with restraints to the whole protein. In order to accomplish this, the restriction file <code class="docutils literal notranslate"><span class="pre">prot_restraints.pdb</span></code> should be assigned to the consref and conskfile lines:</p></li>
@@ -666,23 +551,18 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="production">
-<h4>1.7.5 Production<a class="headerlink" href="#production" title="Link to this heading"></a></h4>
+<h2>1.7.5 Production<a class="headerlink" href="#production" title="Link to this heading"></a></h2>
 <p>For <code class="docutils literal notranslate"><span class="pre">md.conf</span></code>:</p>
 <ol class="arabic simple">
 <li><p>At this stage, the restraint block in the <strong>additional parameters</strong> section is disabled (if {0}) so that the production stage is carried out without any restraints.</p></li>
 </ol>
 </section>
 </section>
-</section>
-</section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Tutorials%20gromacs.html" class="btn btn-neutral float-left" title="GROMACS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Tutorials%20sirahtools.html" class="btn btn-neutral float-right" title="SIRAH tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

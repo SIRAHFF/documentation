@@ -278,7 +278,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <h1>1.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/CPU</span></code>.</p>
+<p>By default, in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/GPU</span></code>). Example input files for using GROMACS on CPU can be found at: <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/CPU</span></code>.</p>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/1/GPU/</span></code> contains typical input files for energy minimization
 (<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
@@ -303,7 +303,7 @@ check carefully the input flags therein.</p>
 </pre></div>
 </div>
 <p><strong>Equilibration</strong>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>dna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_eq.tpr
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/1/GPU/eq_CGDNA.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../dna_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>dna_cg_em.gro<span class="w"> </span>-r<span class="w"> </span>dna_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_eq.tpr
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>dna_cg_eq<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>EQ.log<span class="w"> </span><span class="p">&amp;</span>
