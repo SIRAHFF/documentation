@@ -35,7 +35,7 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
 
 .. important::
 
-	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step 2, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
+	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step 2, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder ``sirah.amber/PDB/``, which agree with the mapping scheme ``sirah.amber/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
 
 .. tip::
 
@@ -154,7 +154,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     saveAmberParmNetcdf ProtMem 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst
     
     # EXIT
-quit
+    quit
 
 .. seealso::
 

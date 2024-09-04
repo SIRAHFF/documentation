@@ -110,7 +110,7 @@ In this specific case, the charge of the system is -5.000 e; this will be addres
 
 .. note:: 
 
-  By default charged terminal are used but it is possible to set them neutral with option ``-ter``.
+  By default, charged terminal are used but it is possible to set them neutral with option ``-ter``.
 
 .. note::
 
@@ -503,7 +503,7 @@ ________________________
 
 .. important:: 
 
-  By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/7/``). 
+  By default, in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/7/``). 
 
 The folder ``sirah.ff/tutorial/7/`` contains typical input files for energy minimization (``em1_CGPROT.mdp``, ``em2_CGPROT.mdp``, and ``em3_CGPROT.mdp``), equilibration (``eq1_CGPROT.mdp`` and ``eq2_CGPROT.mdp``), production (``md_CGPROT.mdp``) and SMD (``SMD_Force_CGPROT.mdp`` and ``SMD_Velocity_CGPROT.mdp``) runs. Please check carefully the input flags therein.
 
