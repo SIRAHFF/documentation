@@ -37,7 +37,7 @@ The input file ``-i`` 2kyv.pqr contains the atomistic representation of `2KYV <h
 
 .. important::
 
-	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder ``sirah.ff/PDB/``, which agree with the mapping scheme ``sirah.ff/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
+	If you already have an atomistic protein within a membrane, then you can simply map the entire system to SIRAH (this is highly recommended) and skip the step of embedding the protein into a lipid bilayer, however clipping the membrane patch may be required to set a correct solvation box (see bellow). By default, no mapping is applied to lipids, as there is no standard naming convention for them. So users are requested to append a MAP file from the list in :ref:`Table 1 <table>`, by setting the flag ``-a`` in ``cgconv.pl``. We recommend using `PACKMOL <https://m3g.github.io/packmol/>`__ for building the system. Reference building-block structures are provided at folder ``sirah.ff/PDB/``, which agree with the mapping scheme ``sirah.ff/tools/CGCONV/maps/tieleman_lipid.map``. See :doc:`FAQs <../FAQ>` for cautions on mapping lipids to SIRAH and tips on using fragment-based topologies.  
 
 .. tip::
 
@@ -137,7 +137,7 @@ When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
 .. note:: 
 
-  By default charged terminal are used but it is possible to set them neutral with option ``-ter``
+  By default, charged terminal are used but it is possible to set them neutral with option ``-ter``
 
 .. note::
 
@@ -413,7 +413,7 @@ ________________________
 
 .. important:: 
 
-  By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/6/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/6/CPU``.
+  By default, in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/6/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/6/CPU``.
 
 The folder ``sirah.ff/tutorial/6/GPU/`` contains typical input files for energy minimization
 (``em1_CGLIPROT.mdp`` and ``em2_CGLIPROT.mdp``), equilibration (``eq1_CGLIPROT.mdp`` and ``eq2_CGLIPROT.mdp``) and production (``md_CGLIPROT.mdp``) runs. Please

@@ -210,7 +210,7 @@ ________________________
 
 .. important:: 
 
-	By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/5/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/5/CPU``.
+	By default, in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/5/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/5/CPU``.
 
 The folder ``sirah.ff/tutorial/5/GPU/`` contains typical input files for energy minimization
 (``em_CGLIP.mdp``), equilibration (``eq_CGLIP.mdp``) and production (``md_CGLIP.mdp``) runs. Please

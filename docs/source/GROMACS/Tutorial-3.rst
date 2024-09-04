@@ -65,7 +65,7 @@ When prompted, choose *SIRAH force field* and then *SIRAH solvent models*.
 
 .. note:: 
 
-	By default charged terminal are used, but it is possible to set them neutral with option ``-ter``.
+	By default, charged terminal are used, but it is possible to set them neutral with option ``-ter``.
 
 .. note::
 
@@ -268,7 +268,7 @@ ________________________
 
 .. important:: 
 
-	By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/3/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/3/CPU``.
+	By default, in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/3/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/3/CPU``.
 
 The folder ``sirah.ff/tutorial/3/GPU/`` contains typical input files for energy minimization
 (``em1_CGPROT.mdp``, ``em2_CGPROT.mdp``), equilibration (``eq1_CGPROT.mdp``, ``eq2_CGPROT.mdp``)

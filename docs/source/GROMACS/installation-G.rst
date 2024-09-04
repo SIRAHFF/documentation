@@ -7,7 +7,7 @@ __________________
 
 .. tip::
 
-	`Download <https://www.gromacs.org/Downloads>`_ the lastest version of GROMACS and check its `Installation Guide <https://manual.gromacs.org/documentation/current/install-guide/index.html>`_. 
+	`Download <https://www.gromacs.org/Downloads>`_ the latest version of GROMACS and check its `Installation Guide <https://manual.gromacs.org/documentation/current/install-guide/index.html>`_. 
 
 
 **VMD**
