@@ -12,6 +12,8 @@ Developers
 
 *    Andres Ballesteros
 
+*    Antonella Alba
+
 *    Ezequiel N. Frigini  
 
 *    Matias Machado  
