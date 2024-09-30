@@ -94,7 +94,7 @@
 <p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
 </div>
 <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a protein in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al.</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al.</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+this tutorial are: <a class="reference external" href="https://doi.org/10.1021/acs.jpcb.4c03278">Cantero et al.</a>, <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al.</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al.</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Check the <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
@@ -302,6 +302,10 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p class="admonition-title">Note</p>
 <p>In this stage, the restriction file <code class="docutils literal notranslate"><span class="pre">prot_restraints.pdb</span></code> is assigned to the consref and conskfile flags.</p>
 </div>
+<p><strong>Solvent equilibration (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>namd2<span class="w"> </span>+p8<span class="w"> </span>eq1.conf<span class="w"> </span>&gt;<span class="w"> </span>eq1.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
 <p><strong>Soft equilibration to improve side chain solvation (NPT):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>namd2<span class="w"> </span>+p8<span class="w"> </span>eq2.conf<span class="w"> </span>&gt;<span class="w"> </span>eq2.log<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
@@ -374,6 +378,10 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this stage, the restriction file <code class="docutils literal notranslate"><span class="pre">prot_restraints.pdb</span></code> is assigned to the consref and conskfile flags.</p>
+</div>
+<p><strong>Solvent equilibration (NPT):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>namd3<span class="w"> </span>+p4<span class="w"> </span>eq1.conf<span class="w"> </span>&gt;<span class="w"> </span>eq1.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
 </div>
 <p><strong>Soft equilibration to improve side chain solvation (NPT):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>namd3<span class="w"> </span>+p4<span class="w"> </span>eq2.conf<span class="w"> </span>&gt;<span class="w"> </span>eq2.log<span class="w"> </span><span class="p">&amp;</span>
