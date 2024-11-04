@@ -76,7 +76,7 @@ Setting up SIRAH
 
 .. _Tutorial 9:
 
-9. Viral-Like Particle
+9. Non-enveloped Viral-Like Particle
 ----------------------------------------------------------------
 
 .. include:: /AMBER/Tutorial-9.rst
