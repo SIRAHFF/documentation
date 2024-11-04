@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -6,23 +8,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GROMACS &mdash; SIRAH Force Field  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -1616,7 +1614,8 @@ Since this is <strong>Tutorial 6</strong>, remember to replace <code class="docu
 </div>
 <p>Luckily, we already oriented the protein inside the membrane. For setting up your own system you can go to <a class="reference external" href="https://opm.phar.umich.edu/">Orientations of Proteins in Membranes (OPM) database</a> and (if your structure is available) use the dummy atoms provided there to make them match with your membrane model (see <strong>Figure 1</strong>).</p>
 <figure class="align-center" id="id67">
-<a class="reference internal image-reference" href="_images/Tuto7.png"><img alt="_images/Tuto7.png" src="_images/Tuto7.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/Tuto7.png"><img alt="_images/Tuto7.png" src="_images/Tuto7.png" style="width: 100%;" />
+</a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 1.</strong> Protein oriented inside the membrane from the OPM database with dummy atoms represented as orange spheres.</span><a class="headerlink" href="#id67" title="Link to this image"></a></p>
 </figcaption>
@@ -2023,7 +2022,8 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">sirah_[version].ff/tutorial/7/</span></code> you will find the I10 domain (PDB code: <a class="reference external" href="https://www.rcsb.org/structure/4QEG">4QEG</a>) already aligned along the Z-axis, <code class="docutils literal notranslate"><span class="pre">I10_z.pdb</span></code> file.</p>
 <figure class="align-center" id="id68">
-<a class="reference internal image-reference" href="_images/TutorialSMD1.png"><img alt="_images/TutorialSMD1.png" src="_images/TutorialSMD1.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/TutorialSMD1.png"><img alt="_images/TutorialSMD1.png" src="_images/TutorialSMD1.png" style="width: 100%;" />
+</a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 1.</strong> I10 domain N-terminal (blue) and C-terminal (red) aligned to the Z-axis from <code class="docutils literal notranslate"><span class="pre">I10_z.pdb</span></code>.</span><a class="headerlink" href="#id68" title="Link to this image"></a></p>
 </figcaption>
@@ -2111,7 +2111,8 @@ simulation until the problem is solved.</p>
 <p>Since we are doing a SMD simulation, we need to carefully set the box dimensions to provide enough solvent to the “stretched” protein and keep a good separation between the surfaces of periodic images.</p>
 <p>In this system, I10 has 88 amino acids and the maximum extension size of each amino acid is 0.34 nm. Thus, “stretched” protein will be 88 * 0.34 = 29.92 nm (~ 30.0 nm) long. In order to accommodate the pulling, GROMACS stipulates a minimum box size double this value, i.e. 60 nm for the Z-axis. However, for optimal results, it is recommended that the dimensions of the box be 2.5 to 3 times greater than the maximum length of the protein when in its extended conformation. Therefore, for this tutorial the box used is 10 10 90 nm.</p>
 <figure class="align-center" id="id69">
-<a class="reference internal image-reference" href="_images/TutorialSMD2_1.png"><img alt="_images/TutorialSMD2_1.png" src="_images/TutorialSMD2_1.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/TutorialSMD2_1.png"><img alt="_images/TutorialSMD2_1.png" src="_images/TutorialSMD2_1.png" style="width: 100%;" />
+</a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 2.</strong> Dimensions of the multiscale solvation box used in this tutorial.</span><a class="headerlink" href="#id69" title="Link to this image"></a></p>
 </figcaption>
@@ -2576,7 +2577,8 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>For <code class="docutils literal notranslate"><span class="pre">I10_cg_md_pullx.xvg</span></code>, a plot similar to <strong>Figure 3</strong> will appear:</p>
 <figure class="align-center" id="id70">
-<a class="reference internal image-reference" href="_images/Fuerza_100pN.png"><img alt="_images/Fuerza_100pN.png" src="_images/Fuerza_100pN.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/Fuerza_100pN.png"><img alt="_images/Fuerza_100pN.png" src="_images/Fuerza_100pN.png" style="width: 100%;" />
+</a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 3.</strong> Position vs Time plot created by GROMACS from the SMD simulation.</span><a class="headerlink" href="#id70" title="Link to this image"></a></p>
 </figcaption>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -6,22 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About SIRAH &mdash; SIRAH Force Field  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -110,21 +108,27 @@
 <section id="advantages">
 <h2>Advantages<a class="headerlink" href="#advantages" title="Link to this heading"></a></h2>
 <p>The SIRAH force field offers several advantages compared to atomistic models in simulating biomolecular systems:</p>
-<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" />
+</a>
 <p><strong>Speed and Efficiency</strong>: Coarse-grained (CG) models, such as SIRAH, provide a significant speedup in simulations compared to atomistic models. This allows for the study of larger and more complex biological systems over longer time scales.</p>
-<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" />
+</a>
 <p><strong>Multiscale Capabilities</strong>: SIRAH offers a multiscale approach, allowing for the combination of different levels of resolution within the same simulation setup. This includes the ability to covalently link all-atom and CG models in nucleic acid chains and the incorporation of a multi-resolution model for the solvent.</p>
-<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/pros.png"><img alt="_images/pros.png" class="align-left" src="_images/pros.png" style="width: 30px;" />
+</a>
 <p><strong>Self-Consistent Force Field</strong>: SIRAH aims to provide a self-consistent force field that describes the intra and intermolecular interactions among moieties of diverse chemical nature in a holistic view of biological ensembles’ structural and dynamic features. This ensures that the force field is capable of accurately representing the interactions within biomolecular systems.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>However, it is important to note that the SIRAH force field also has limitations compared to atomistic models:</p>
-<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" />
+</a>
 <p><strong>Atomic-Level Precision</strong>: CG models, including SIRAH, sacrifice atomic-level precision in order to achieve computational efficiency. This means that certain details, such as the explicit representation of individual water molecules or specific side chain conformations, may not be accurately captured.</p>
-<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" />
+</a>
 <p><strong>Limited Molecular Diversity</strong>: While SIRAH incorporates parameters for the most prevalent biological molecules, the molecular diversity within biological systems is extensive, making it challenging to encompass all relevant biomolecules. Creating arbitrary molecular topologies may require additional data from experimental databases and physicochemical intuition.</p>
-<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" /></a>
+<a class="reference internal image-reference" href="_images/cons.png"><img alt="_images/cons.png" class="align-left" src="_images/cons.png" style="width: 30px;" />
+</a>
 <p><strong>Protein Folding Simulations</strong>: Although SIRAH has been successful in reproducing spontaneous aggregation, folding of small peptides, and specific recognition of proteins, the unbiased formation of large helical segments is still challenging for the force field.</p>
 <p>In summary, the SIRAH force field offers speed, efficiency, and multiscale capabilities for simulating biomolecular systems. However, it sacrifices atomic-level precision and may have limitations in handling molecular diversity and protein folding simulations compared to atomistic models.</p>
 </section>
