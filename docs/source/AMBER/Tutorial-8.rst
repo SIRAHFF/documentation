@@ -19,7 +19,7 @@ _____________________________
 
 	The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ with the **Glycan Reader & Modeler** to prepare your system, choosing the output naming scheme of AMBER for best compatibility. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one. 
 
-This example use the structure of glycoprotein `1GYA <https://www.rcsb.org/structure/1GYA>`_, using CHARMM-GUI server are obtained the files parm7 and rst7, these files are converted to pdb format with the naming scheme of AMBER/GLYCAM using AmberTool as follow:
+This example uses the structure of glycoprotein `1GYA <https://www.rcsb.org/structure/1GYA>`_, using CHARMM-GUI server are obtained the files parm7 and rst7, these files are converted to pdb format with the naming scheme of AMBER/GLYCAM using AmberTool as follow:
 
 .. code-block:: bash
 
