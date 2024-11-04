@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>8.1. Build CG representations &mdash; SIRAH Force Field  documentation</title>
+  <title>9.1. Structure preprocessing &mdash; SIRAH Force Field  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -77,7 +77,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">8.1. Build CG representations</li>
+      <li class="breadcrumb-item active">9.1. Structure preprocessing</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/AMBER/Tutorial-9.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,33 +87,213 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/documentation/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
+  <div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This tutorial was developed for the <a class="reference external" href="https://www.sirahff.com/events.html#Curso_virologia">Workshop and Course on Molecular, Physical, and Computational Virology</a>. Please be aware that the scripts and commands given here might not work right on your system due to software versions diferences.</p>
 </div>
 <p>This tutorial shows how to use the SIRAH force field to perform a coarse grained (CG) simulation of a
-Viral-like Particle in explicit solvent (called WatFour, WT4). The main references for
-this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al.</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al.</a> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. We strongly advise you to read these articles before starting the tutorial.</p>
+non-enveloped Virus-like Particle (VLP) in explicit solvent (called WatFour, WT4). The main references for
+this tutorial are: <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/ct100379f">Darré et al.</a>, <a class="reference external" href="https://doi.org/10.1021/acs.jctc.9b00006">Machado et al.</a>, <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/acs.jctc.7b00659">Machado et al.</a> and <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.0c01205">Soñora et al.</a>. We strongly advise you to read these articles before starting the tutorial.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Check the <a class="reference internal" href="../Tutorials%20amber.html#download-amber"><span class="std std-ref">Setting up SIRAH</span></a> section for download and set up details before starting this tutorial.
-Since this is <strong>Tutorial 8</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/8/</span></code></p>
+Since this is <strong>Tutorial 9</strong>, remember to replace <code class="docutils literal notranslate"><span class="pre">X.X</span></code> and the files corresponding to this tutorial can be found in: <code class="docutils literal notranslate"><span class="pre">sirah_[version].amber/tutorial/9/</span></code></p>
 </div>
-<section id="build-cg-representations">
-<h1>8.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This tutorial uses tools like Packmol and PDB2PQR that are not part of the AmberTools suite. You can find the latest version of Packmol <a class="reference external" href="https://m3g.github.io/packmol/">here</a>. You can install PDB2PQR locally by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>conda-forge::pdb2pqr
+</pre></div>
+</div>
+</div>
+<section id="structure-preprocessing">
+<h1>9.1. Structure preprocessing<a class="headerlink" href="#structure-preprocessing" title="Link to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial provides the necessary steps to assemble viral particles for SIRAH CG simulation. However, it is crucial to address any potential errors in the PDB files before proceeding. These preprocessing steps can prevent issues related to incorrect atom labeling, missing residues, clashes, or other common artifacts that are present in raw PDB data. View Prof. Jodi Hadden-Perilla’s fantastic video on <a class="reference external" href="https://www.youtube.com/watch?v=OHf1FqOLxTI">Tips and Tricks for MD Simulation of Viruses</a> for more details.</p>
+</div>
+<section id="working-with-the-biological-assembly-of-an-entire-vlp">
+<h2>9.1.1 Working with the Biological Assembly of an entire VLP<a class="headerlink" href="#working-with-the-biological-assembly-of-an-entire-vlp" title="Link to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In this tutorial, we will use a Biological Assembly from the PDB to work with an already-assembled Porcine Circovirus 2 (PCV2) VLP. <strong>In</strong> <a class="reference internal" href="../Tutorials%20amber.html#assalt"><span class="std std-ref">9.1.3</span></a>, <strong>we demonstrate how to generate a VLP of a non-enveloped virus from its asymmetric unit if your system is not already assembled</strong>.</p>
+</div>
+<p>The PCV2 <a class="reference external" href="https://www.rcsb.org/structure/6OLA">6OLA</a> structure, which includes the VLP and genomic DNA fragments in its inner core, is used in this tutorial. Download the Biological Assembly from the PDB, making sure you are in the <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/</span></code> folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://files.rcsb.org/download/6OLA-assembly1.cif.gz
+</pre></div>
+</div>
+<p>Decompress the Biological Assembly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gzip<span class="w"> </span>-d<span class="w"> </span>6OLA-assembly1.cif.gz
+</pre></div>
+</div>
+<p>Open the cif file with VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>6OLA-assembly1.cif
+</pre></div>
+</div>
+<p>After loading the structure, we must saved it in PDB format by going to <strong>File</strong> &gt; <strong>Save Coordinates</strong> &gt; <strong>Selected Atoms</strong> &gt; <strong>all</strong> option. Enter <strong>File type</strong> as pdb and hit <strong>Save</strong>. Assign filename as <code class="docutils literal notranslate"><span class="pre">6ola_assembly.pdb</span></code> and click <strong>OK</strong>.</p>
+<p>You can close VMD now.</p>
+<p>Some structures may have structural <strong>issues</strong> or <strong>artifacts</strong> that affect their preparation or simulation. Thus, it is crucial to check the details of the structure and its integrity prior to any step.</p>
+<p>Regarding the <strong>6OLA</strong> structure, there are three critical issues that require correction:</p>
+<ul class="simple">
+<li><p><strong>Issue 1</strong>. The structure contains 60 DNA fragments and each DNA fragment includes a phosphate atom from the subsequent nucleotide. However, this nucleotide was not modeled; only the phosphate was included. Thus, when we attempt to generate the topology using LEaP, the process is stopped since it fails to reconstruct a nucleotide that is absent. This should be corrected by removing the extra phosphate and oxigen atoms. We can correct this using the following command:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">&#39;/\(P[[:space:]]\+1DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP11DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP21DC[[:space:]]\+[A-Z][[:space:]]\+1\)/d&#39;</span><span class="w"> </span>6ola_assembly.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modificated_1.pdb
+</pre></div>
+</div>
+<p>This line of code creates a new PDB file by removing the lines containing the <strong>P</strong>, <strong>OP1</strong>, and <strong>OP2</strong> atoms from the original structure.</p>
+<ul class="simple">
+<li><p><strong>Issue 2</strong>. Another issue is the incorrect assignment of residue names according to their protonation state. Following AMBER force field rules, histidine residue name can vary depending on whether the protonation occurs at the delta nitrogen (HID), epsilon nitrogen (HIE), or if the residue is doubly protonated (HIP). Different residue names can also be given to ASP (ASH), GLU (GLH), and CYS (CYM or CYX if they are part of a disulfide bond).</p></li>
+</ul>
+<p>In order to comply with AMBER force field rules, the PDB file must be edited to update residues protonations. To achieve this, we will first inspect the PDB structure in VMD to identify the relevant protonations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this part of the tutorial, we established the protonation states using the proton locations as provided in the original Biological Assembly of <a class="reference external" href="https://www.rcsb.org/structure/6OLA">6OLA</a> structure.</p>
+</div>
+<p>Open VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>6ola_modificated_1.pdb
+</pre></div>
+</div>
+<p>Once in VMD, let’s examine one of the fragments (or protomers) of the PCV2 capsid. To do this, go to the <strong>Graphics</strong> tab and select <strong>Representations</strong>. In the <strong>Graphics Representations</strong> menu, go to <strong>Selected Atoms</strong> and make the selection of histidines from fragment 0 using the following selection command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>resname<span class="w"> </span>HIS<span class="w"> </span>and<span class="w"> </span>fragment<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>You should run this command again and check the protons position for all the other protonable residues, such as ASP, GLU, and CYS.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The only residues in this structure that appear to have distinct protonation states are the three histidines. Use your mouse to navigate and identify which nitrogens are protonated to correctly adjust their residue’s names. Following proton location, HIS 113 is protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>), HIS 122 is protonated at the delta nitrogen (<span class="math notranslate nohighlight">\(N_{\delta}\)</span>), and HIS 160 is protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>).</p>
+</div>
+<p>Close VMD. Use the command below to modify the names of the histidine’s residues:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]113/s/HIS/HIE/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]122/s/HIS/HID/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]160/s/HIS/HIE/&#39;</span><span class="w"> </span>6ola_modificated_1.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modificated_2.pdb
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Issue 3</strong>. Another important step for this structure is to correct the atom index numbers, ensuring they range from 0 to 99999. Additionally, a <cite>TER</cite> record should be added at the end of each chain, and an <cite>END</cite> record should be included at the end of the structure.</p></li>
+</ul>
+<p>To do this, we can use the <code class="docutils literal notranslate"><span class="pre">fixpdb.tcl</span></code> VMD script found in the <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/</span></code> folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>6ola_modificated_2.pdb<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tutorial/9/fixpdb.tcl
+</pre></div>
+</div>
+<p>Then</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mv<span class="w"> </span>6ola_modificated_2_final.pdb<span class="w"> </span>6ola_modificated_final.pdb
+</pre></div>
+</div>
+<p>If all stages were completed successfully, the final PDB file <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pdb</span></code> is generated.</p>
+<ul class="simple">
+<li><p><strong>Issue 4 (Issue 2 - Alternative)</strong>. Instead of assigning protonation states by hand, you can use tools that take into account the surrounding residues and the pH conditions to do it automatically. You can use servers, like the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> and <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a>. The <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pdb</span></code> should work without any issues, though it may take a while to execute.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An additional approach to circumvent potential server execution issues is to submit a minimal fragment of your symmetrized VLP that includes all of the interfaces between subunits as input.</p>
+</div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> with the <strong>Glycan Reader &amp; Modeler</strong> to prepare your system, choosing the output naming scheme of AMBER for best compatibility. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.</p>
+<p>The mapping to CG requires the correct protonation state of each residue at a given pH. We recommend using the <a class="reference external" href="https://www.charmm-gui.org/">CHARMM-GUI server</a> and use the <strong>PDB Reader &amp; Manipulator</strong> to prepare your system. An account is required to access any of the CHARMM-GUI Input Generator modules, and it can take up to 24 hours to obtain one.</p>
+<p>Other option is the <a class="reference external" href="https://server.poissonboltzmann.org/pdb2pqr">PDB2PQR server</a> and choosing the output naming scheme of AMBER for best compatibility. This server was utilized to generate the <em>PQR</em> file featured in this tutorial. Be aware that modified residues lacking parameters such as: MSE (seleno MET), TPO (phosphorylated TYR), SEP (phosphorylated SER) or others are deleted from the PQR file by the server. In that case, mutate the residues to their unmodified form before submitting the structure to the server.</p>
 </div>
-<p>This example use the structure of glycoprotein <a class="reference external" href="https://www.rcsb.org/structure/1GYA">1GYA</a>, using CHARMM-GUI server are obtained the files parm7 and rst7, these files are converted to pdb format with the naming scheme of AMBER/GLYCAM using AmberTool as follow:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ambpdb<span class="w"> </span>-p<span class="w"> </span>./sirah.amber/tutorial/8/step3_input.parm7<span class="w"> </span>-c<span class="w"> </span>./sirah.amber/tutorial/8/step3_input.rst7<span class="w"> </span>&gt;<span class="w"> </span>1GYA_glycam.pdb
+<p>Given the scale and complexity of the system, using the <code class="docutils literal notranslate"><span class="pre">pdb2pqr</span></code> script to perform the calculations locally is one method to get around potential server problems. Therefore, we can assign protonation states using pH ~ 7.0 with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb2pqr<span class="w"> </span>--ff<span class="o">=</span>AMBER<span class="w"> </span>--keep-chain<span class="w"> </span>--ffout<span class="o">=</span>AMBER<span class="w"> </span>--titration-state-method<span class="o">=</span>propka<span class="w"> </span>--with-ph<span class="o">=</span><span class="m">7</span>.0<span class="w"> </span>--include-header<span class="w"> </span>./6ola_modificated_final.pdb<span class="w"> </span>./6ola_modificated_final.pqr
 </pre></div>
 </div>
-<p>From the file 1GYA_glycam.pdb generated delete the solvent, rename to 1GYA_glycam_NoW.pdb and then map the protonated atomistic structure to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>./sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb<span class="w"> </span>-o<span class="w"> </span>1GYA_cg.pdb
+<p>A PQR file <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pqr</span></code> is generated containing protonation state of each residue at the given pH.</p>
+</section>
+<section id="calculate-system-charge">
+<h2>9.1.2 Calculate system charge<a class="headerlink" href="#calculate-system-charge" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As a result of the system’s size and the various methods available for assigning hydrogen atoms, the most straightforward method of verifying the current charge of the VLP is to calculate the number of charged amino acids and phosphate atoms within the system.</p>
+</div>
+<p>To do this, we can use the <code class="docutils literal notranslate"><span class="pre">CountCharge.sh</span></code> script found in the <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/</span></code> folder by:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tutorial/9/CountCharge.sh<span class="w"> </span>6ola_modificated_final.pdb
 </pre></div>
 </div>
-<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 1GYA_glycam_NoW.pdb contains the atomistic representation of <a class="reference external" href="https://www.rcsb.org/structure/1GYA">1GYA</a> structure at pH <strong>7.0</strong>, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 1GYA_cg.pdb is its SIRAH CG representation.</p>
+<p>This script evaluates the number of positively and negatively charged residues in the system and provides the net charge that can be used in later steps of preparing the VLP for simulations.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">CountCharge.sh</span></code> was made for this system, we suggest that you inspect the  file to gain a more comprehensive understanding of the script and then change it to work with your own system.</p>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">+--------------------+----------+</span>
+<span class="go">|      Molecule      | Count    |</span>
+<span class="go">+====================+==========+</span>
+<span class="go">| LYS (CA)           |  540     |</span>
+<span class="go">| ARG (CA)           | 1020     |</span>
+<span class="go">| GLU (CA)           |  240     |</span>
+<span class="go">| ASP (CA)           |  720     |</span>
+<span class="go">| Phosphate (P)      |  180     |</span>
+<span class="go">|--------------------|----------|</span>
+<span class="go">|Total Positv Charge | 1560     |</span>
+<span class="go">|Total Negatv Charge | 1140     |</span>
+<span class="go">|Net Charge          |  420     |</span>
+<span class="go">+--------------------|----------+</span>
+</pre></div>
+</div>
+</section>
+<section id="packing-the-assimetric-unit-to-build-an-entire-vlp-alternative">
+<span id="assalt"></span><h2>9.1.3 Packing the assimetric unit to build an entire VLP (Alternative)<a class="headerlink" href="#packing-the-assimetric-unit-to-build-an-entire-vlp-alternative" title="Link to this heading"></a></h2>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This step should be performed only when the input file (.pdb or .cif) is the asymmetric unit. For more details about asymetric unit and biological assemblies, check the <a class="reference external" href="https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/biological-assemblies">RCSB PDB website</a>.</p>
+</div>
+<p>In complex systems like viruses, some biological assemblies are constructed from the asymmetric unit, which in virology may be represented by a single protein or a small number of them, referred to as a capsomer or protomer. In these cases, it is essential to assemble the whole VLP by employing symmetry operations (rotations and translations) with the symmetry matrices included in the original PDB file. Thus, based on the available structure, it may be necessary to initially assemble the entire VLP.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/example_3JCI</span></code> you will find the asymmetric unit of the capsid protein of the PCV2 (PDB code: <a class="reference external" href="https://www.rcsb.org/structure/3JCI">3JCI</a>) along with the necessary files to assemble its VLP.</p>
+<p>The first step to assemble a VLP is to minimize the protomer. To do this, we need to create a <code class="docutils literal notranslate"><span class="pre">3JCI.leap</span></code> file to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>AMBER<span class="w"> </span>force<span class="w"> </span>field
+<span class="go">source leaprc.protein.ff14SB</span>
+
+<span class="gp"># </span>Load<span class="w"> </span>model
+<span class="go">pcv2 = loadPdb 3jci.pdb</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveamberparm pcv2 3JCI_aa.prmtop 3JCI_aa.inpcrd</span>
+
+<span class="gp"># </span>EXIT
+<span class="go">quit</span>
+</pre></div>
+</div>
+<p>Run the LEaP application with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>3JCI.leap
+</pre></div>
+</div>
+<p>Make a new folder to run the minimization:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>Run the minimization with sander:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>sander.MPI<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../em_cpu.in<span class="w"> </span>-p<span class="w"> </span>../3JCI_aa.prmtop<span class="w"> </span>-c<span class="w"> </span>../3JCI_aa.inpcrd<span class="w"> </span>-ref<span class="w"> </span>../3JCI_aa.inpcrd<span class="w"> </span>-inf<span class="w"> </span>mdinfo<span class="w"> </span>-o<span class="w"> </span>3JCI_aa_em.out<span class="w"> </span>-r<span class="w"> </span>3JCI_aa_em.rst7<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The same input file can be used to run on CPU with the modules <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, <code class="docutils literal notranslate"><span class="pre">sander</span></code> or <code class="docutils literal notranslate"><span class="pre">sander.MPI</span></code>. Or the GPU implementation, <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>.</p>
+</div>
+<p>Once the protomer has been minimized, return to the original folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+<p>And build the VLP using the <code class="docutils literal notranslate"><span class="pre">capsid.tcl</span></code> VMD script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tutorial/9/capsid.tcl
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to its complexity, we suggest that you inspect the <code class="docutils literal notranslate"><span class="pre">capsid.tcl</span></code> file to gain a more comprehensive understanding of the procedure.</p>
+</div>
+<p>That’s it! You can now use VMD to see what the VLP looks like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>PCV2_capsid_OK.pdb
+</pre></div>
+</div>
+</section>
+</section>
+<section id="build-cg-representations">
+<h1>9.2. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>We are using the <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pdb</span></code> file for this section of the tutorial, which makes use of the assigned protonation states and hydrogen atoms as given in the original Biological Assembly VLP. But you may also use the automatically calculated protonation states file <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pqr</span></code>.</p>
+</div>
+<p>Map the atomistic structure of VLP that was prepared in the previous step to its CG representation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.amber/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>6ola_modificated_final.pdb<span class="w"> </span>-o<span class="w"> </span>6ola_modificated_final_cg.pdb
+</pre></div>
+</div>
+<p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> 6ola_modificated_final.pdb has the atomistic model of the VLP that has had its structure issues fixed,, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> 6ola_modificated_final_cg.pdb is its SIRAH CG representation.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>This is the basic usage of the script <strong>cgconv.pl</strong>, you can learn other capabilities from its help by typing:</p>
@@ -123,53 +303,117 @@ Since this is <strong>Tutorial 8</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there might always be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH levels. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_glycans.map</span></code>.</p>
+<p><strong>Pay attention to residue names when mapping structures from other atomistic force fields or experimental structures.</strong> Although we provide compatibility for naming schemes in PDB, GMX, GROMOS, CHARMM and OPLS, there might always be some ambiguity in the residue naming, specially regarding protonation states, that may lead to a wrong mapping. For example, SIRAH Tools always maps the residue name “HIS” to a Histidine protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) regardless the actual proton placement. Similarly, protonated Glutamic and Aspartic acid residues must be named “GLH” and “ASH”, otherwise they will be treated as negative charged residues. In addition, protonated and disulfide bonded Cysteines must be named “CYS” and “CYX” respectively. These kind of situations need to be carefully checked by the users. In all cases the residues preserve their identity when mapping and back-mapping the structures. Hence, the total charge of the protein should be the same at atomistic and SIRAH levels. You can check the following mapping file to be sure of the compatibility: <code class="docutils literal notranslate"><span class="pre">sirah.amber/tools/CGCONV/maps/sirah_prot.map</span></code>.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default, charged termini are used. However, it is possible to set them neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) rename it from “sHe” to “aHe”.</p>
+<p>By default, charged termini are used, but it is possible to set them neutral by renaming the residues from <strong>s</strong>[code] to <strong>a</strong>[code] (Nt-acetylated) or <strong>m</strong>[code] (Ct-amidated) after mapping to CG, where [code] is the root residue name in SIRAH. For example, to set a neutral N-terminal Histidine protonated at epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>) rename it from “sHe” to “aHe”.</p>
 </div>
-<p>Please check both PDBs structures using VMD:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb<span class="w"> </span>1GYA_cg.pdb
+<p>Please check both structures using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-m<span class="w"> </span>6ola_modificated_final.pdb<span class="w"> </span>6ola_modificated_final_cg.pdb
 </pre></div>
 </div>
+</section>
+<section id="wrapping-up-vlp-system-with-packmol">
+<h1>9.3. Wrapping up VLP system with Packmol<a class="headerlink" href="#wrapping-up-vlp-system-with-packmol" title="Link to this heading"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before packing the VLP system, it is necessary to estimate the number of coarse-grained water molecules (WT4) per layer (see <strong>Figure 1</strong>), i.e., the inner-virus and outer-virus regions. In this tutorial, we will use the following radius to pack the system with Packmol (left) and LEaP (right).</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../images/water_box_virus.png"><img alt="../images/water_box_virus.png" src="../images/water_box_virus.png" style="width: 100%;" />
+</a>
+</figure>
+<p><strong>Figure 1.</strong> Dimensions of the solvation box used in this tutorial.</p>
+</div>
+<p>To calculate the approximate number of solvent molecules in each layer, you can use a function in the <code class="docutils literal notranslate"><span class="pre">calc_n.awk</span></code> file that estimates the number of molecules in a given volume.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>awk<span class="w"> </span>-f<span class="w"> </span>./sirah.amber/tutorial/9/calc_n.awk<span class="w"> </span>./sirah.amber/tutorial/9/layers_radius.dat
+</pre></div>
+</div>
+<p>The two lines in the <code class="docutils literal notranslate"><span class="pre">layers_radius.dat</span></code> are read by this code. One line calculates the number of WT4 outside the VLP, and the other line calculates the number of WT4 inside the VLP (see <strong>Figure 1</strong>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each line of the <code class="docutils literal notranslate"><span class="pre">layers_radius.dat</span></code> has five parameters. The first and second ones are WT4’s molecular weight and density, respectively. The third and fourth parameters are the starting and end point of the compartment and defines its radius in Angstroms (Å). The fourth value needs to be greater than the third. The fifth and final parameter gives a label to each compartment. Depending on your system, you may need to adjust the radius values in the <code class="docutils literal notranslate"><span class="pre">layers_radius.dat</span></code> file.</p>
+</div>
+<p>The output of this command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">WT4_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18235</span>
+<span class="nv">WT4_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6393</span>
+</pre></div>
+</div>
+<p>The next step is to use the program Packmol to put together the system’s parts: VLP, solvent (both inside and outside), and ions (inside) (see <strong>Figure 1</strong>).</p>
+<p>To accurately add the right number of solvent and ion molecules using Packmol, it is important to consider the charge of the VLP. As previously determined, the net charge of the VLP is <strong>+420</strong>.</p>
+<p>To balance this, we need to introduce at least <strong>420</strong> negative ions (Cl⁻) into the inner core of the VLP. However, previous simulations conducted by us and other researchers demonstrated through trial and error that the inner core of the virion must have a minimum of <strong>620 Cl⁻</strong> ions to not only neutralize the VLP’s charge but also compensate for the lack of a complete genome within the particle. As a result, the inner solvent layer contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>620 Cl⁻ beads (ClW in its CG naming).
+
+6393 - 620 = 5773 WT4 molecules at the inner layer.
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>It is important to be aware that the charges may vary when using the <code class="docutils literal notranslate"><span class="pre">6ola_modificated_final.pqr</span></code>, and as a result, the number of ions necessary to neutralize the charge imbalance may differ.</p>
+</div>
+<p>This information is provided to the <code class="docutils literal notranslate"><span class="pre">PCV2.pkm</span></code> file, which is then utilized by Packmol to pack the system. Use the following command to execute Packmol:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>packmol<span class="w"> </span>&lt;<span class="w"> </span>./sirah.amber/tutorial/9/PCV2.pkm<span class="w"> </span>&gt;&gt;<span class="w"> </span>PCV2_packmol.log<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">PCV2.pkm</span></code> file to fix the number of solvent and ions according to your system.</p>
+</div>
+<p>In order for LEaP to recognize proteins and DNA as distinct molecules, we also need to add <cite>TER</cite> records at the end of each chain and a <cite>END</cite> record at the end of the PDB file.</p>
+<p>Thus, we can use the <code class="docutils literal notranslate"><span class="pre">fixpdb.tcl</span></code> VMD script found in the <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/</span></code> folder again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>PCV2_6OLA_CG_solv.pdb<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tutorial/9/fixpdb.tcl
+</pre></div>
+</div>
+<p>A PDB file <code class="docutils literal notranslate"><span class="pre">PCV2_6OLA_CG_solv_final.pdb</span></code> is generated and ready for LEaP.</p>
 <p>From now on it is just normal Amber stuff!</p>
 </section>
 <section id="prepare-leap-input">
-<h1>8.2. Prepare LEaP input<a class="headerlink" href="#prepare-leap-input" title="Link to this heading"></a></h1>
-<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">gensystem.leap</span></code> including the following lines:</p>
+<h1>9.4 Prepare LEaP input<a class="headerlink" href="#prepare-leap-input" title="Link to this heading"></a></h1>
+<p>In this step, we will set the truncated octahedral box and the salt concentration to 150 mM with LEaP. There are 35,720 WT4 molecules in the system after LEaP (an increase of 11,712 WT4). To reach 150 mM NaCl concentration on the outer layer of WT4, we need to add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">35720</span><span class="o">/</span><span class="mi">34</span> <span class="o">=</span> <span class="mi">1050</span> <span class="n">ionic</span> <span class="n">pairs</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+<p>However, keep in mind that the VLP currently has a 200 negative charge:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">420</span> <span class="o">-</span> <span class="mi">620</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200</span>
+</pre></div>
+</div>
+<p>So, in order to achieve a more balanced system, we can split this charge. In this case, the number of counterions to add is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">,</span><span class="mi">050</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">150</span> <span class="n">NaW</span>
+
+<span class="mi">1</span><span class="p">,</span><span class="mi">050</span> <span class="o">-</span> <span class="mi">100</span> <span class="o">=</span> <span class="mi">950</span> <span class="n">ClW</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
+</div>
+<p>Use a text editor to create the file <code class="docutils literal notranslate"><span class="pre">6OLA_gensystem.leap</span></code> including the following lines:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Load<span class="w"> </span>SIRAH<span class="w"> </span>force<span class="w"> </span>field
 <span class="go">addPath ./sirah.amber</span>
 <span class="go">source leaprc.sirah</span>
 
 <span class="gp"># </span>Load<span class="w"> </span>model
-<span class="go">glycoprot = loadpdb 1GYA_cg.pdb</span>
+<span class="go">pcv2 = loadpdb PCV2_6OLA_CG_solv_final.pdb</span>
 
-<span class="go">charge glycoprot</span>
+<span class="gp"># </span>Info<span class="w"> </span>on<span class="w"> </span>system<span class="w"> </span>charge
+<span class="go">charge pcv2</span>
 
-<span class="gp"># </span>N-Glycosilation
-<span class="go">bond glycoprot.111.GO2  glycoprot.110.GO2</span>
-<span class="go">bond glycoprot.110.GO2  glycoprot.109.GO6</span>
-
-<span class="go">bond glycoprot.112.GO2  glycoprot.109.GO3</span>
-<span class="go">bond glycoprot.109.GO2  glycoprot.108.GO6</span>
-
-<span class="go">bond glycoprot.114.GO2 glycoprot.113.GO2</span>
-<span class="go">bond glycoprot.113.GO2 glycoprot.108.GO3</span>
-
-<span class="go">bond glycoprot.108.GO2  glycoprot.107.GO4</span>
-<span class="go">bond glycoprot.107.GNac glycoprot.106.GO4</span>
-<span class="gp"># </span>ASN<span class="w"> </span><span class="m">65</span>
-<span class="go">bond glycoprot.106.GNac glycoprot.65.BND</span>
-
-
-<span class="gp"># </span>Add<span class="w"> </span>solvent,<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="gp"># </span>Add<span class="w"> </span>solvent<span class="w"> </span>and<span class="w"> </span>build<span class="w"> </span>a<span class="w"> </span>truncated<span class="w"> </span>octahedral<span class="w"> </span>box
 <span class="gp"># </span>Tuned<span class="w"> </span>solute-solvent<span class="w"> </span>closeness<span class="w"> </span><span class="k">for</span><span class="w"> </span>best<span class="w"> </span>hydration
-<span class="go">solvateOct glycoprot WT4BOX 20 0.7</span>
-<span class="go">addIonsRand glycoprot NaW 40 ClW 41</span>
+<span class="go">solvateOct pcv2 WT4BOX 17 0.9</span>
 
-<span class="gp"># </span>Save<span class="w"> </span>topology
-<span class="go">saveAmberParmNetcdf glycoprot 1GYA_cg.prmtop 1GYA_cg.ncrst</span>
+<span class="gp"># </span>Add<span class="w"> </span>counterions<span class="w"> </span>and<span class="w"> </span><span class="m">0</span>.15M<span class="w"> </span>NaCl
+<span class="go">addIonsRand pcv2 NaW 1150 ClW 950</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>Parms
+<span class="go">saveAmberParmNetcdf pcv2 PCV2_6OLA_CG.prmtop PCV2_6OLA_CG.ncrst</span>
+
+<span class="gp"># </span>Save<span class="w"> </span>pdb<span class="w"> </span>file
+<span class="go">savepdb pcv2 PCV2_6OLA_CG.pdb</span>
 
 <span class="gp"># </span>EXIT
 <span class="go">quit</span>
@@ -177,30 +421,26 @@ Since this is <strong>Tutorial 8</strong>, remember to replace <code class="docu
 </div>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>Each glycosidic bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.beadi unit.rj.beadj</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. And <em>beadi</em> and <em>beadj</em> are the names of the beads involved in the glycosidic bond of the corresponding residues.</p>
-<p>The above also applies to each disulfide bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away (in this case result in an empty file):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb4amber<span class="w"> </span>-i<span class="w"> </span>sirah.amber/tutorial/8/1GYA_glycam_NoW.pdb<span class="w"> </span>-o<span class="w"> </span>1GYA_aa.pdb<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>1GYA_aa_sslink
+<p>There is only one CYS in this VLP, and there are no disulfide bridges in it. However, if you are working with a system that includes these bonds, please take note of the following:</p>
+<p>Each disulfide bond must be defined explicitly in LEaP using the command bond, e.g.: “<em>bond unit.ri.BSG unit.rj.BSG</em>”. Where <em>ri</em> and <em>rj</em> correspond to the residue index in the topology file starting from 1, which may differ from the biological sequence in the PDB file. You can try the command <em>pdb4amber</em> to get those indexes from the atomistic structure, but be aware that it may not work if the Cysteine residues are too far away:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pdb4amber<span class="w"> </span>-i<span class="w"> </span>YOUR_VLP.pqr<span class="w"> </span>-o<span class="w"> </span>YOUR_VLP_aa.pdb<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>YOUR_VLP_aa_sslink
 </pre></div>
 </div>
 </div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>The available electrolyte species in SIRAH force field are: <code class="docutils literal notranslate"><span class="pre">Na⁺</span></code> (NaW), <code class="docutils literal notranslate"><span class="pre">K⁺</span></code> (KW) and <code class="docutils literal notranslate"><span class="pre">Cl⁻</span></code> (ClW) which represent solvated ions in solution. One ion pair (e.g., NaW-ClW) each 34 WT4 molecules results in a salt concentration of ~0.15M (see <a class="reference internal" href="../Tutorials%20amber.html#appendix"><span class="std std-ref">Appendix</span></a> for details). Counterions were added according to <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.9b00953">Machado et al.</a>.</p>
-</div>
 </section>
 <section id="run-leap">
-<h1>8.3. Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h1>
-<p>Run the LEaP application to generate the molecular topology and initial coordinate files:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>gensystem.leap
+<h1>9.5 Run LEaP<a class="headerlink" href="#run-leap" title="Link to this heading"></a></h1>
+<p>Run LEaP to generate the molecular topology and initial coordinate files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tleap<span class="w"> </span>-f<span class="w"> </span>6OLA_gensystem.leap
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Warning messages about long, triangular or square bonds in <code class="docutils literal notranslate"><span class="pre">leap.log</span></code> file are fine and expected due to the CG topology of some residues.</p>
 </div>
-<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">1GYA_cg.prmtop</span></code> and a coordinate file <code class="docutils literal notranslate"><span class="pre">1GYA_cg.ncrst</span></code>.</p>
-<p>Use VMD to check how the CG model looks like and particularly the presence of glycosidic bonds:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>1GYA_cg.prmtop<span class="w"> </span>1GYA_cg.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
+<p>This should create a topology file <code class="docutils literal notranslate"><span class="pre">PCV2_6OLA_CG.prmtop</span></code>, a coordinate file <code class="docutils literal notranslate"><span class="pre">PCV2_6OLA_CG.ncrst</span></code> and a pdb file <code class="docutils literal notranslate"><span class="pre">PCV2_6OLA_CG.pdb</span></code>.</p>
+<p>Use VMD to check how the CG model looks like and particularly the presence of disulfide bonds whether your system has them:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>PCV2_6OLA_CG.ncrst<span class="w"> </span>-e<span class="w"> </span>./sirah.amber/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
 <div class="admonition tip">
@@ -211,13 +451,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 </section>
 <section id="run-the-simulation">
-<h1>8.4. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
+<h1>9.6. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
-<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/8/</span></code> contains typical input files for energy minimization
-(<code class="docutils literal notranslate"><span class="pre">em1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">em2_WT4.in</span></code>), relaxation (or equilibration) (<code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_WT4.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_WT4.in</span></code>) runs. Please check carefully the
+<p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/9/</span></code> contains typical input files for energy minimization
+(<code class="docutils literal notranslate"><span class="pre">VLP_cg_em1.in</span></code> to <code class="docutils literal notranslate"><span class="pre">VLP_cg_em5.in</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">VLP_cg_eq1.in</span></code> to <code class="docutils literal notranslate"><span class="pre">VLP_cg_eq4.in</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">VLP_cg_md1.in</span></code>) runs. Please check carefully the
 input flags therein, in particular the definition of flag <em>chngmask=0</em> at <em>&amp;ewald</em> section is <strong>mandatory</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -238,46 +478,56 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <p class="admonition-title">Caution</p>
 <p>These input files are executed by the <strong>GPU</strong> implementation of <code class="docutils literal notranslate"><span class="pre">pmemd.cuda</span></code>. Other available modules are <code class="docutils literal notranslate"><span class="pre">sander</span></code> or <code class="docutils literal notranslate"><span class="pre">pmemd</span></code>, which are both <strong>CPU</strong> implementations of Amber.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The same input files can be used to run on CPU with the modules <code class="docutils literal notranslate"><span class="pre">pmemd</span></code> or <code class="docutils literal notranslate"><span class="pre">sander</span></code>.</p>
+<p><strong>Energy Minimization of solvent and ions by restraining the whole protein and DNA fragments:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_em1.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_em1.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
 </div>
-<p><strong>Energy Minimization of side chains and solvent by restraining the protein backbone and glycan rings:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/em1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1GYA_cg.ncrst<span class="w"> </span>-ref<span class="w"> </span>../1GYA_cg.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_em1.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_em1.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<p><strong>Energy Minimization of side chains and solvent by restraining the backbone of proteins and DNA:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_em2.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_em1.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_em2.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Energy Minimization of whole system:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/em2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>../1GYA_cg_em1.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_em2.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_em2.ncrst<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_em3.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_em3.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_em3.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<p><strong>Solvent Relaxation (or equlibration) in NPT:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/eq1_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1GYA_cg_em2.ncrst<span class="w"> </span>-ref<span class="w"> </span>1GYA_cg_em2.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_eq1.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
+<p><strong>Energy Minimization of side chains and solvent by restraining the backbone:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_em4.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_em3.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_em3.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_em4.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_em4.ncrst<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
-<div class="admonition caution">
-<p class="admonition-title">Caution</p>
-<p>Option <strong>restraintmask=:’1-114’</strong> in input file <code class="docutils literal notranslate"><span class="pre">eq1_WT4.in</span></code> must be set specifically for each system to restrain all glycoprotein’s residues.</p>
+<p><strong>Energy Minimization of whole system:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_em5.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_em4.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_em4.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_em5.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_em5.ncrst<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
 </div>
-<p><strong>Soft Relaxation to improve side chain and glycan solvation (NPT):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/eq2_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1GYA_cg_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>1GYA_cg_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_eq2.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
+<p><strong>Solvent Equilibration (NPT) by restraining the whole protein and DNA fragments:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_eq1.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_em5.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_em5.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_eq1.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_eq1.ncrst<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_eq1.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Soft equilibration to improve side chain solvation (NPT) by restraining the backbone of proteins and DNA:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_eq2.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_eq1.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_eq1.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_eq2.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_eq2.ncrst<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_eq2.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Soft solvent Equilibration (NPT) by restraining the proteins’ backbone:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_eq3.in<span class="w"> </span>-p<span class="w"> </span>PPCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_eq2.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_eq3.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_eq3.ncrst<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_eq3.nc<span class="w"> </span><span class="p">&amp;</span>
+</pre></div>
+</div>
+<p><strong>Whole System Equilibration (NPT) without restraints:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_eq4.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_eq3.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_eq3.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_eq4.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_eq4.ncrst<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_eq4.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p><strong>Production (1000ns):</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/8/md_WT4.in<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-c<span class="w"> </span>1GYA_cg_eq2.ncrst<span class="w"> </span>-o<span class="w"> </span>1GYA_cg_md.out<span class="w"> </span>-r<span class="w"> </span>1GYA_cg_md.ncrst<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_md.nc<span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span>-i<span class="w"> </span>../sirah.amber/tutorial/9/VLP_cg_md1.in<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-c<span class="w"> </span>PCV2_6OLA_CG_eq4.ncrst<span class="w"> </span>-ref<span class="w"> </span>PCV2_6OLA_CG_eq4.ncrst<span class="w"> </span>-o<span class="w"> </span>PCV2_6OLA_CG_md1.out<span class="w"> </span>-r<span class="w"> </span>PCV2_6OLA_CG_md1.ncrst<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_md1.nc<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 </section>
 <section id="visualizing-the-simulation">
-<h1>8.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
+<h1>9.7. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>1GYA_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_md_pbc.nc<span class="w"> </span>--interactive
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;center (@GN,GC,GO)\n image familiar\n go\n quit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-y<span class="w"> </span>PCV2_6OLA_CG_md1.nc<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_md1_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
-</div></blockquote>
 <p>Load the processed trajectory in VMD:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="o">../</span><span class="mi">1</span><span class="n">GYA_cg</span><span class="o">.</span><span class="n">prmtop</span> <span class="o">../</span><span class="mi">1</span><span class="n">GYA_cg</span><span class="o">.</span><span class="n">ncrst</span> <span class="mi">1</span><span class="n">GYA_cg_md</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmd</span> <span class="n">PCV2_6OLA_CG</span><span class="o">.</span><span class="n">prmtop</span> <span class="n">PCV2_6OLA_CG</span><span class="o">.</span><span class="n">ncrst</span> <span class="n">PCV2_6OLA_CG_md1_pbc</span><span class="o">.</span><span class="n">nc</span> <span class="o">-</span><span class="n">e</span> <span class="o">../</span><span class="n">sirah</span><span class="o">.</span><span class="n">amber</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">sirah_vmdtk</span><span class="o">.</span><span class="n">tcl</span>
 </pre></div>
 </div>
 <div class="admonition note">
