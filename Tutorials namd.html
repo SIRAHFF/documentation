@@ -359,7 +359,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 <p>Run the VMD script to generate the pdb restriction file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>–e<span class="w"> </span>restraints.tcl
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-e<span class="w"> </span>restraints.tcl
 </pre></div>
 </div>
 </section>
@@ -372,7 +372,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </pre></div>
 </div>
 <p>Copy the input files to the folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>sirah.amber/tutorial/NAMD/1/NAMD2/*.conf<span class="w"> </span>.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>../sirah.amber/tutorial/NAMD/1/NAMD2/*.conf<span class="w"> </span>.
 </pre></div>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/NAMD/1/NAMD2</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em1.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">em2.conf</span></code>), heating (<code class="docutils literal notranslate"><span class="pre">heat.conf</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2.conf</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md.conf</span></code>) runs.  Please carefully review the input files, paying especially attention to the cell dimension values, names, and restrictions.</p>
@@ -434,12 +434,16 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </section>
 <section id="namd3">
 <h4>1.5.2 NAMD3<a class="headerlink" href="#namd3" title="Link to this heading"></a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Point release 3.0.1 fixes potentially impactful bugs in 3.0. All users are strongly encouraged to upgrade to this version.</p>
+</div>
 <p>Make a new folder for the run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>run<span class="p">;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>run
 </pre></div>
 </div>
 <p>Copy the input files to the folder:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>sirah.amber/tutorial/NAMD/1/NAMD3/*.conf<span class="w"> </span>.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>../sirah.amber/tutorial/NAMD/1/NAMD3/*.conf<span class="w"> </span>.
 </pre></div>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.amber/tutorial/NAMD/1/NAMD3</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em1.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">em2.conf</span></code>), heating (<code class="docutils literal notranslate"><span class="pre">heat.conf</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1.conf</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2.conf</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md.conf</span></code>) runs.  Please carefully review the input files, paying especially attention to the cell dimension values, names, and restrictions.</p>
@@ -647,7 +651,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Constraints<span class="w"> </span>of<span class="w"> </span>protein
 <span class="go">if {1} {                                   ;# If 1 read the block</span>
 <span class="go">constraints           on                   ;# Turns on constraints</span>
-<span class="go">consref               your_restraints.pdb  ;# Reference PDB file for constraint positions</span>
+<span class="go">consref               your_restraints.coor  ;# Reference PDB file for the last position (last_step.coor)</span>
 <span class="go">conskfile             your_restraints.pdb  ;# File containing constraint force constants</span>
 <span class="go">constraintScaling     1                    ;# Scaling factor for constraint forces</span>
 <span class="go">consexp               2                    ;# Exponent for constraint potential</span>
@@ -662,7 +666,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Constraints<span class="w"> </span>of<span class="w"> </span>protein
 <span class="go">if {1} {                                   ;# If 1 read the block</span>
 <span class="go">constraints           on                   ;# Turns on constraints</span>
-<span class="go">consref               your_restraints.pdb  ;# Reference PDB file for constraint positions</span>
+<span class="go">consref               your_restraints.coor  ;# Reference PDB file for the last position (last_step.coor)</span>
 <span class="go">conskfile             your_restraints.pdb  ;# File containing constraint force constants</span>
 <span class="go">constraintScaling     0.1                  ;# Scaling factor for constraint forces</span>
 <span class="go">consexp               2                    ;# Exponent for constraint potential</span>
