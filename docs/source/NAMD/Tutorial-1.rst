@@ -199,7 +199,7 @@ Run the VMD script to generate the pdb restriction file:
 
 .. code-block:: bash
 
-    vmd -dispdev text –e restraints.tcl 
+    vmd -dispdev text -e restraints.tcl 
 
 
 1.5. Run the simulation
@@ -218,7 +218,7 @@ Copy the input files to the folder:
 
 .. code-block:: bash
 
-    cp sirah.amber/tutorial/NAMD/1/NAMD2/*.conf .
+    cp ../sirah.amber/tutorial/NAMD/1/NAMD2/*.conf .
 
 The folder ``sirah.amber/tutorial/NAMD/1/NAMD2`` contains typical input files for energy minimization (``em1.conf`` and ``em2.conf``), heating (``heat.conf``), equilibration (``eq1.conf`` and ``eq2.conf``) and production (``md.conf``) runs.  Please carefully review the input files, paying especially attention to the cell dimension values, names, and restrictions.
 
@@ -300,6 +300,10 @@ The folder ``sirah.amber/tutorial/NAMD/1/NAMD2`` contains typical input files fo
 1.5.2 NAMD3
 ~~~~~~~~~~~~~
 
+.. warning::
+
+    Point release 3.0.1 fixes potentially impactful bugs in 3.0. All users are strongly encouraged to upgrade to this version.
+
 Make a new folder for the run:
 
 .. code-block:: bash
@@ -310,7 +314,7 @@ Copy the input files to the folder:
 
 .. code-block:: bash
 
-    cp sirah.amber/tutorial/NAMD/1/NAMD3/*.conf .
+    cp ../sirah.amber/tutorial/NAMD/1/NAMD3/*.conf .
 
 The folder ``sirah.amber/tutorial/NAMD/1/NAMD3`` contains typical input files for energy minimization (``em1.conf`` and ``em2.conf``), heating (``heat.conf``), equilibration (``eq1.conf`` and ``eq2.conf``) and production (``md.conf``) runs.  Please carefully review the input files, paying especially attention to the cell dimension values, names, and restrictions.
 
@@ -559,7 +563,7 @@ For ``eq1.conf``:
     # Constraints of protein 
     if {1} {                                   ;# If 1 read the block 
     constraints           on                   ;# Turns on constraints 
-    consref               your_restraints.pdb  ;# Reference PDB file for constraint positions 
+    consref               your_restraints.coor  ;# Reference PDB file for the last position (last_step.coor) 
     conskfile             your_restraints.pdb  ;# File containing constraint force constants 
     constraintScaling     1                    ;# Scaling factor for constraint forces 
     consexp               2                    ;# Exponent for constraint potential 
@@ -577,7 +581,7 @@ For ``eq2.conf``:
     # Constraints of protein 
     if {1} {                                   ;# If 1 read the block 
     constraints           on                   ;# Turns on constraints 
-    consref               your_restraints.pdb  ;# Reference PDB file for constraint positions 
+    consref               your_restraints.coor  ;# Reference PDB file for the last position (last_step.coor)
     conskfile             your_restraints.pdb  ;# File containing constraint force constants 
     constraintScaling     0.1                  ;# Scaling factor for constraint forces 
     consexp               2                    ;# Exponent for constraint potential 
