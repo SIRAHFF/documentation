@@ -244,6 +244,11 @@ Make a new folder for the run:
 
 **Equilibration**:
 
+.. warning::
+
+	Some large systems may turn unstable. In this case set fourierspacing to 0.12 in the mdp files. 
+
+
 .. code-block:: bash 
 
 	gmx grompp -f ../sirah.ff/tutorial/5/GPU/eq_CGLIP.mdp -p ../topol.top -po eq.mdp -n ../DMPC64_cg_ion.ndx -c DMPC64_cg_em.gro -o DMPC64_cg_eq.tpr
