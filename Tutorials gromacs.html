@@ -7,7 +7,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GROMACS &mdash; SIRAH Force Field  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3437f865" />
@@ -1498,6 +1498,10 @@ check carefully the input flags therein.</p>
 </pre></div>
 </div>
 <p><strong>Equilibration</strong>:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some large systems may turn unstable. In this case set fourierspacing to 0.12 in the mdp files.</p>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/5/GPU/eq_CGLIP.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-po<span class="w"> </span>eq.mdp<span class="w"> </span>-n<span class="w"> </span>../DMPC64_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_em.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_eq.tpr
 </pre></div>
 </div>
