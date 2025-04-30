@@ -479,6 +479,10 @@ check carefully the input flags therein.</p>
 </pre></div>
 </div>
 <p><strong>Equilibration 1</strong>:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some large systems may turn unstable. In this case set fourierspacing to 0.12 in the mdp files.</p>
+</div>
 <p>Position restraints are defined in <code class="docutils literal notranslate"><span class="pre">eq1_CGLIPROT.mdp</span></code> file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords <code class="docutils literal notranslate"><span class="pre">-DPOSREBB</span></code> and <code class="docutils literal notranslate"><span class="pre">-DPOSREZ</span></code>, respectively.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>../sirah.ff/tutorial/6/GPU/eq1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>../topol.top<span class="w"> </span>-n<span class="w"> </span>../2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-r<span class="w"> </span>2kyv_DMPC_cg_em2.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_eq1.tpr
 </pre></div>

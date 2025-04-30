@@ -447,6 +447,10 @@ Make a new folder for the run:
 
 **Equilibration 1**:
 
+.. warning::
+
+	Some large systems may turn unstable. In this case set fourierspacing to 0.12 in the mdp files. 
+
 Position restraints are defined in ``eq1_CGLIPROT.mdp`` file for protein backbone in xyz and phosphate groups (BFO beads) in z coordinate by setting keywords ``-DPOSREBB`` and ``-DPOSREZ``, respectively.
 
 .. code-block:: bash
