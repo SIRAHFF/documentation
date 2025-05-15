@@ -154,7 +154,7 @@ Use a text editor to create the file ``gensystem.leap`` including the following 
     saveAmberParmNetcdf ProtMem 2kyv_DMPC_cg.prmtop 2kyv_DMPC_cg.ncrst
     
     # EXIT
-    quit
+quit
 
 .. seealso::
 

@@ -86,4 +86,4 @@ Create the following symbolic link in the folder tutorialX.X:
 
     Check the `AMBER Manual <https://ambermd.org/doc12/Amber23.pdf>`_ section **3.11.2** for more details. 
 
-    However, if you want the latest parameters and implementations strongly advise you to use the developers version of SIRAH from GitHub. 
+    However, if you want the lastest parameters and implementations strongly advise you to use the developers version of SIRAH from GitHub. 
