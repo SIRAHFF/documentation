@@ -159,7 +159,7 @@ This will also enable the “New Directory” button (Figure 3A).
 
 .. figure:: /../images/SirahGUIFigs/Figure_3_SirahGui.png
    :align: center
-   :width: 90%
+   :width: 80%
 
    **Figure 3.** The *Load Files* tab will appear like this after the topology and trajectory files have been set up and loaded. A) The first step to successfully use SIRAH Tools GUI is to set the working directory. B) The system must be loaded using the "Load System" button after the working directory has been set and the topology and trajectory files have been selected. C) No reference structure was imported, and the options "Time step" and "Step between frames" were set to the default values. D) The “View in VMD” button launches VMD with the loaded system. E) The “Reset” button will erase all data loaded.
 
@@ -205,7 +205,7 @@ For the **Basic Analysis** section, write "name GC or name PX" at the Selection 
 
 .. figure:: /../images/SirahGUIFigs/Figure_5_SirahGui.png
    :align: center
-   :width: 90%
+   :width: 80%
 
    **Figure 5.** Analysis tab settings for analyses using "name GC or name PX" beads. A) Basic Analysis selection for the NCP system. B) Advanced Analysis selection for the NCP system. C) Selected options in the “Generate Report” section. D) No reference structure was imported, and the options "Time step" and "Step between frames" were set to the default values. However, a 10 frame skip was used. E) The "Analyze" button will perform all the selected actions. F) Only when an analysis is underway is the "Stop" button activated, and pressing it will halt the analysis's progress.
 
@@ -288,7 +288,7 @@ For the NCP trajectory, let's designate Selection1 "name GC", which gives us the
 
 .. figure:: /../images/SirahGUIFigs/Figure_7_SirahGui.png
    :align: center
-   :width: 90%
+   :width: 80%
 
    **Figure 7.** “Contacts” tab settings for intermolecular contacts analyses for the two selections "name GC” and “name PX" beads of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, we are using selections from different molecules. The default numbers were set to speed up the calculation. B) Run contacts calculation. A distance matrix can also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.
 
@@ -334,7 +334,7 @@ For the NCP trajectory, let's designate identical “name GC” selections on bo
 
 .. figure:: /../images/SirahGUIFigs/Figure_9_SirahGui.png
    :align: center
-   :width: 90%
+   :width: 80%
 
    **Figure 9.** **Contacts** tab settings for intramolecular contacts analyses for the selections "name GC” of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, both selections are identical and in the same molecule. The default numbers were set to speed up the calculation. B) Run contacts calculation. Since it was selected, a distance matrix will also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.
 
@@ -378,11 +378,11 @@ By clicking on the *Distance Map by Frame* button, the 'Heat Map Viewer' window 
 
 Additionally, a *Create GIF* button (Figure 11) is provided to generate an animated GIF depicting the distance evolution throughout the experiment (Figure 12). Clicking "Create GIF" will generate a new folder titled "GIF" within the "Contacts" folder in the working directory.
 
-.. figure:: /../images/SirahGUIFigs/Figure_12_SirahGui.gif
+.. figure:: /../images/SirahGUIFigs/Figure_12_SirahGui_half.gif
    :align: center
-   :width: 80%
+   :width: 70%
 
-   **Figure 12.** Animated GIF of 100 frames depicting one of the histones from the NCP simulation.
+   **Figure 12.** Animated GIF of 50 frames depicting one of the histones from the NCP simulation.
 
 For further information on these plots and the .dat files, please see the Developers notes' information about the “Contacts” :ref:`tab <contacts-devnotes>`.
 
@@ -400,7 +400,7 @@ For the NCP trajectory, let's retain the default values for the "First" and "Las
 
 .. figure:: /../images/SirahGUIFigs/Figure_13_SirahGui.png
    :align: center
-   :width: 90%
+   :width: 80%
 
    **Figure 13.** **SS Analysis** tab settings for secondary structure of the proteins in the NCP system. A) Settings to SS analysis. Here, the SS classification was calculated for the entire simulation using the default values and the sirah_protein macro. The *Calculate Psi/Phi* was also selected. B) The VMD output shows the progress of the calculation and the summary of SS the run. C) The names of the files created during the run. D) When the calculations are done, buttons to make the plots will become active.
 
@@ -532,23 +532,41 @@ ____________________
 This section offers information that is identical or analogous to all SIRAH Tools GUI tabs:
 
 * The SIRAH Tools GUI works with VMD in text mode; therefore, it can be used on any system that can be loaded in VMD.
-
+.. |br| raw:: html
+    <br />
+	
 * The GUI automatically detects if VMD is set in the system path, this is essential for the correct operation of SIRAH Tools GUI. If VMD is not set up correctly, a warning will be displayed and the tabs will be disabled.
-
+.. |br| raw:: html
+    <br />
+	
 * SIRAH Tools GUI uses VMD syntax selections (e.g. name, resname, resid, etc.) or VMD/SIRAH macros in all selection boxes. Check out the `SIRAH Tools tutorial <https://sirahff.github.io/documentation/Tutorials%20sirahtools.html>`_ to learn more about VMD and SIRAH macros and how to use them.
-
+.. |br| raw:: html
+    <br />
+	
 * Use caution regarding excessively big or heavy trajectories. To minimize computer memory usage, SIRAH Tools GUI terminates VMD after completing an analysis on a tab. This indicates that if the analysis requires repetition or the user navigates to a different tab, the trajectory file will be reloaded in both scenarios. Therefore, we advise utilizing the skip frame options in the tabs (when available) or reducing the system size (for example, by eliminating solvent molecules) to decrease the loading time.
-
+.. |br| raw:: html
+    <br />
+	
 * The VMD output area presents details regarding the VMD execution alongside the terminal window in which the SIRAH Tools GUI was initiated. Consequently, any issue or malfunction within SIRAH Tools GUI will show up in these locations.
-
+.. |br| raw:: html
+    <br />
+	
 * Any external plotting software or script should be able to use the files in text format generated from the conducted analysis.
-
+.. |br| raw:: html
+    <br />
+	
 * The plots produced by the SIRAH Tools GUI, which feature simulation time as an axis, are on the microsecond timeframe to align with the expected simulation duration of microseconds for the SIRAH force field.
-
+.. |br| raw:: html
+    <br />
+	
 * Complex systems that contain an excessive number of components might lead to plots that are densely packed.
-
+.. |br| raw:: html
+    <br />
+	
 * Depending on your screen's resolution, the GUI window may appear truncated; merely resize it to the appropriate dimensions.
-
+.. |br| raw:: html
+    <br />
+	
 * The **SS Analysis** and **Backmapping** tabs use the SIRAH Tools approach, hence it is **exclusively compatible with SIRAH MD simulations**.
 
 .. _loadfiles-devnotes:
@@ -605,9 +623,13 @@ The number of selection entries that the user must provide is where basic and ad
 The following information is used to calculate Basic Analysis options in SIRAH Tools GUI:
 
 * **RMSD:** the VMD measure command is used to calculate RMSD (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_ ). Prior to RMSD calculation, each frame of the trajectory will be superimposed to the first frame or the reference structure based on the selected syntax. Thus, all beads or atoms of the selection will be rotated and translated to fit a structure (first or reference) to minimize RMSD. There isn't currently a nofit option.
-
+.. |br| raw:: html
+    <br />
+	
 * **RMSF:** the VMD measure command is used to calculate RMSF (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_ ). This command returns the root mean square position fluctuation for each selected bead or atom in the selected frames. Prior to RMSF calculation, each frame of the trajectory will be superimposed to the first frame or the reference structure based on the selected syntax. Thus, all beads or atoms of the selection will be rotated and translated to fit a structure (first or reference). There isn't currently a nofit option. The output file is provided based on bead or atom numbers.
-
+.. |br| raw:: html
+    <br />
+	
 * **RGYR:** the VMD measure command is used to calculate RGYR (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_ ). This command returns the radius of gyration of atoms in the selection. The calculation is done for all frames.
 
 .. important::
@@ -616,9 +638,13 @@ The following information is used to calculate Basic Analysis options in SIRAH T
 The following information is used to calculate *Advanced Analysis* options in SIRAH Tools GUI:
 
 * **SASA:** the VMD measure command is used to calculate SASA (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_). So, a selection in VMD syntax (e.g. name, resname, resid, etc.) or VMD/SIRAH macro is needed to calculate SASA (Selection2). There is, however, a restrictedsel flag in the command as well, implemented here as the second selection (Selection3). This flag limits the calculation to the solvent-accessible points close to this restricted region. This keeps protein voids or pockets inside the protein from affecting the surface area values. For the SIRAH Tools GUI, the restrictedsel flag is not used if Selection2 and Selection3 are the same. If they are different, however, Selection3 will be used as the restrictedsel flag. Refer to the `Basic Analyses VMD tutorials SASA section <https://sirahff.github.io/documentation/Tutorials%20analysis.html#sasa>`_ .
-
+.. |br| raw:: html
+    <br />
+	
 * **RDF:** the VMD measure command is used to calculate Radial Distribution Function (RDF) (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_). Given that typical RDF is calculated between two items, both Selection2 and Selection3 must be defined and have to reference the same molecule. However, Selections 2 and 3 may be the same or dissimilar. Very complex distribution functions can be calculated thanks to the strength of VMD's selection language syntax. In addition, here, the maximum radius to calculate RDF is set to 12 Å.
-
+.. |br| raw:: html
+    <br />
+	
 * **Distance:** to determine the distance between the selections, SIRAH Tools GUI computes their center of mass using the VMD measure command (`see VMD measure <http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html>`_). Therefore, only two distinct selections—for example, two distinct atoms or beads, two distinct residues, two distinct molecules, etc.—can be used to calculate the "Distance" option. If they are identical molecules, residues, beads, or atoms, meaning using the same selection in both selection boxes, will result in a zero value to all frames.
 
 The "Generate Report" section also offers two options: if the "Generate PDF report" option is chosen, a PDF with all plots of the chosen analyses will be created. If the “rmsf into pdb bfactor” is checked, a PDB file with the RMSF values in the Beta factor column is created using the first frame coordinates. 
@@ -678,7 +704,7 @@ The “Analysis” section will be enabled once the calculation is finished. Thr
 
 2. *Contact Map* that plots a heatmap with the total interaction time, in simulation time percentage, between the residues of the selections during the simulation. 
 
-The contact map heatmap utilizes data from all contacts within the specified cutoff to compute an average residue-by-residue persistence duration of the contacts in the trajectory. Based on the selection, several beads or atoms of a single residue may interact with numerous beads or atoms of another residue; therefore, to eliminate repetition, only the interacting pair with the highest frame count is utilized in the plot. However, a file with the information of all the interacting pairs is created to be used by the user. In addition, a standard Matplotlib navigation (pan/zoom) is presented, showcasing various accessible color combinations.
+* The contact map heatmap utilizes data from all contacts within the specified cutoff to compute an average residue-by-residue persistence duration of the contacts in the trajectory. Based on the selection, several beads or atoms of a single residue may interact with numerous beads or atoms of another residue; therefore, to eliminate repetition, only the interacting pair with the highest frame count is utilized in the plot. However, a file with the information of all the interacting pairs is created to be used by the user. In addition, a standard Matplotlib navigation (pan/zoom) is presented, showcasing various accessible color combinations.
 
 3. *Distance Map by Frame* that plots the distance between the selections as a heatmap for each frame, independent of the cutoff distance. In this analysis, users can move through the frames, save the plot, and make a gif in the pop-up window that appears.
 
@@ -691,13 +717,21 @@ The contact map heatmap utilizes data from all contacts within the specified cut
 Once the calculation is complete a new folder “Contacts” is generated in the working directory. To aid in the creation of the contact plots, the "contact length", "distance length", “distbyframe”, "contacts", “timeline’, and "percentage" ``.dat`` files will be created. A description of the content of each file is provided below:
 
 * The ``contact length`` and ``distance length`` files contain the dimensions of the matrix and the information on the selections for the contact and distance heatmaps.
-
+.. |br| raw:: html
+    <br />
+	
 * The ``contacts`` file contains a general summary of the native contact conservation, accuracy, and total number of contacts from the simulation. 
-
+.. |br| raw:: html
+    <br />
+	
 * The ``timeline`` file summarizes the conservation of native contacts, accuracy, and the total number of contacts for each frame, categorizing them as either native or non-native within the specified cutoff for each frame. 
-
+.. |br| raw:: html
+    <br />
+	
 * The ``distbyframe`` file contains a distance matrix for each analyzed frame with the distance between every pair of selections.
-
+.. |br| raw:: html
+    <br />
+	
 * The ``percentage`` file contains the information on the percentage of duration of all contacts within the defined cutoff from the simulation. To ensure that all contacts are recorded in the file, the information is provided utilizing the residues and the beads (atoms) for each contacting pair.
 
 .. tip::
@@ -739,9 +773,13 @@ The VMD output area will display the progress of the calculation. Upon completio
 The “Analysis” section buttons will be enabled once the files are created. Four buttons will be available: 
 
 1. **Plot matrix** that plots the ``ss.mtx``. The ``ss.mtx`` file encompasses a matrix that illustrates the variation in the SS of each residue throughout the simulation. This plot displays three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
-
+.. |br| raw:: html
+    <br />
+	
 2. **Plot by frame** that plots the ``by_frame.mtx``. The ``by_frame.mtx`` file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
-
+.. |br| raw:: html
+    <br />
+	
 3. **Plot by Res** that plots the ``ss_by_res.mtx```. The ``ss_by_res.mtx`` file encompasses the percentage of each SS classification that each residue adopted throughout the simulation. This plot will display three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
 
 “Analyze Psi/Phi” launches the “Ramachandran Plot Visualization Tool” interface (Figure 22). This interface allows for the loading of the ``psi.mtx`` and ``phi.mtx`` files via the “Load PSI” and “Load PHI” buttons, respectively. A Ramachandran plot is automatically generated to all chosen frames and can be iterated by using the “Frame” slider or “Go to frame” option.
