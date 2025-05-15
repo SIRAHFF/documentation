@@ -87,7 +87,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="overview">
+  <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please report bugs, errors or enhancement requests through <a class="reference external" href="https://github.com/SIRAHFF/SIRAH-Tools-GUI/issues">Issue Tracker</a> or if you have a question about SIRAH open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a>.</p>
+</div>
+<section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
 <p>SIRAH Tools GUI is a user-friendly interface that combines VMD and Python scripts for molecular dynamics (MD) simulation analysis. The main purpose of SIRAH Tools GUI is to aid the analysis of coarse-grained (CG) SIRAH force field MD simulations, providing users with the most widely used trajectory analyses based on VMD syntax and operations without the need of familiarity with its scripting language.</p>
 <div class="admonition note">
@@ -97,7 +101,7 @@
 <p>The GUI should be easy to use for people who are proficient in both VMD and MD. For beginners, SIRAH Tools GUI is an ideal tool, helping them get past the first learning curve that most MD visualization software imposes.</p>
 <p>In addition, it was constructed in a modular manner, combining TCL (<code class="docutils literal notranslate"><span class="pre">.tcl</span></code>) and Python (<code class="docutils literal notranslate"><span class="pre">.py</span></code>) scripts (Figure 1), enabling all users to customize the scripts without changing its code.</p>
 <figure class="align-center" id="id11">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_1_SirahGui.png"><img alt="../_images/Figure_1_SirahGui.png" src="../_images/Figure_1_SirahGui.png" style="width: 70%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 1.</strong> SIRAH Tools GUI organization.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
@@ -168,7 +172,7 @@
 </div>
 <p>If everything went as planned, you should be able to launch the SIRAH Tools GUI interface (Figure 2) and use all of its features.</p>
 <figure class="align-center" id="id12">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_2_SirahGui.png"><img alt="../_images/Figure_2_SirahGui.png" src="../_images/Figure_2_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 2.</strong> SIRAH Tools Graphical User Interface (GUI) screen to perform MD simulation analysis. It contains five tabs that carry out various analyses and tasks.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
@@ -181,7 +185,7 @@
 </section>
 <section id="example-of-how-to-use">
 <h1>Example of how to use<a class="headerlink" href="#example-of-how-to-use" title="Link to this heading"></a></h1>
-<p>This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example is <code class="docutils literal notranslate"><span class="pre">[REF</span> <span class="pre">paper]</span></code>. The Nucleosome Core Particle (NCP) used here was previously discussed by <code class="docutils literal notranslate"><span class="pre">[REF</span> <span class="pre">Astrid]</span></code> and  <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278">Cantero et al</a>. We strongly advise you to read these articles before starting this tutorial.</p>
+<p>This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are <strong>Ballesteros-Casallas et al [Manuscript in Preparation]</strong> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. The Nucleosome Core Particle (NCP) used here was previously discussed by <a class="reference external" href="https://doi.org/10.1016/j.bbrc.2017.09.086">Brandner et al</a> and  <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278">Cantero et al</a>. We strongly advise you to read these articles before starting this tutorial.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Before you can use the SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, look at <a class="reference external" href="https://amberhub.chpc.utah.edu/autoimage/">the Amber</a>, <a class="reference external" href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html">GROMACS</a>, or <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/">NAMD</a> tutorials.</p>
@@ -213,7 +217,7 @@
 </div>
 <p>This will also enable the “New Directory” button (Figure 3A).</p>
 <figure class="align-center" id="id13">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_3_SirahGui.png"><img alt="../_images/Figure_3_SirahGui.png" src="../_images/Figure_3_SirahGui.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 3.</strong> The <em>Load Files</em> tab will appear like this after the topology and trajectory files have been set up and loaded. A) The first step to successfully use SIRAH Tools GUI is to set the working directory. B) The system must be loaded using the “Load System” button after the working directory has been set and the topology and trajectory files have been selected. C) No reference structure was imported, and the options “Time step” and “Step between frames” were set to the default values. D) The “View in VMD” button launches VMD with the loaded system. E) The “Reset” button will erase all data loaded.</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
@@ -239,7 +243,7 @@
 <p>Any data entered in the tab will be erased if the “Reset” button (Figure 3E) is clicked.</p>
 </div>
 <figure class="align-center" id="id14">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_4_SirahGui.png"><img alt="../_images/Figure_4_SirahGui.png" src="../_images/Figure_4_SirahGui.png" style="width: 70%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 4.</strong> System loaded in VMD using the button ‘View in VMD’. Once the files are loaded correctly, we are ready to start the analysis.</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
@@ -260,7 +264,7 @@
 </div>
 <p>For the <strong>Basic Analysis</strong> section, write “name GC or name PX” at the Selection box. Then check the boxes for RMSD, RMSF, and Radius of Gyration (RGYR) (Figure 5A).</p>
 <figure class="align-center" id="id15">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_5_SirahGui.png"><img alt="../_images/Figure_5_SirahGui.png" src="../_images/Figure_5_SirahGui.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 5.</strong> Analysis tab settings for analyses using “name GC or name PX” beads. A) Basic Analysis selection for the NCP system. B) Advanced Analysis selection for the NCP system. C) Selected options in the “Generate Report” section. D) No reference structure was imported, and the options “Time step” and “Step between frames” were set to the default values. However, a 10 frame skip was used. E) The “Analyze” button will perform all the selected actions. F) Only when an analysis is underway is the “Stop” button activated, and pressing it will halt the analysis’s progress.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
@@ -318,7 +322,7 @@
 </div>
 <p>Some of the plots produced by the chosen analyses of the “Analysis” Tab are displayed in Figure 6.</p>
 <figure class="align-center" id="id16">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_6_SirahGui.png"><img alt="../_images/Figure_6_SirahGui.png" src="../_images/Figure_6_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 6.</strong> The “Analysis” tab’s outputs include a PDB file, RMSF, RMSD, SASA, RGYR, and RDF plots.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
@@ -338,7 +342,7 @@
 <p>To calculate intermolecular contacts, the choices must be in different molecules.
 For the NCP trajectory, let’s designate Selection1 “name GC”, which gives us the backbone beads (GC) of the histone octamer, and Selection2 “name PX”, which gives us the DNA phosphate beads (Figure 7A).</p>
 <figure class="align-center" id="id17">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_7_SirahGui.png"><img alt="../_images/Figure_7_SirahGui.png" src="../_images/Figure_7_SirahGui.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 7.</strong> “Contacts” tab settings for intermolecular contacts analyses for the two selections “name GC” and “name PX” beads of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, we are using selections from different molecules. The default numbers were set to speed up the calculation. B) Run contacts calculation. A distance matrix can also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
@@ -363,7 +367,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 </div>
 <p>By clicking on the “Native Contacts Conservation” button, a plot of the conservation of the initial frame contacts between the selections during the simulation can be obtained (Figure 8A).</p>
 <figure class="align-center" id="id18">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_8_SirahGui.png"><img alt="../_images/Figure_8_SirahGui.png" src="../_images/Figure_8_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 8.</strong> Intermolecular contact plots between the GC beads on the histone backbone and PX beads on the DNA phosphates of the NCP simulation. A) The native conservation plot displays the conservation of native contacts (blue), the accuracy of these contacts (orange), and the total number of contacts by frame (green) during the simulation. B) The contact map heatmap shows the average duration of the contacts within contact distance of one another during the simulation.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
@@ -377,7 +381,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 <p>To calculate intramolecular contacts, the choices must be in the same molecule.</p>
 <p>For the NCP trajectory, let’s designate identical “name GC” selections on both boxes (Figure 9A).</p>
 <figure class="align-center" id="id19">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_9_SirahGui.png"><img alt="../_images/Figure_9_SirahGui.png" src="../_images/Figure_9_SirahGui.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 9.</strong> <strong>Contacts</strong> tab settings for intramolecular contacts analyses for the selections “name GC” of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, both selections are identical and in the same molecule. The default numbers were set to speed up the calculation. B) Run contacts calculation. Since it was selected, a distance matrix will also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
@@ -403,7 +407,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 <p>By clicking on the <em>Native Contacts Conservation</em> button, a plot of the conservation of the initial frame contacts between the selections during the simulation can be obtained.</p>
 <p>By clicking on the <em>Contact Map</em> button, a symmetric “name GC” by “name GC” heatmap is shown in an interactive window (Figure 10). In this window, a Colormap selector can be used to alter the color of the heatmap via a drop-down menu. A variety of <a class="reference external" href="https://matplotlib.org/stable/users/explain/colors/colormaps.html">Matplotlib colormaps</a> (such as viridis, plasma, coolwarm, etc.) can be chosen to optimally highlight the contact pattern. Additionally, Matplotlib navigation (pan/zoom) is operable. Lastly, the plot can be exported at any resolution by using the “Save plot” option; just input the needed DPI number before saving.</p>
 <figure class="align-center" id="id20">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_10_SirahGui.png"><img alt="../_images/Figure_10_SirahGui.png" src="../_images/Figure_10_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 10.</strong> Contact Map plot window of the “name GC” by “name GC” matrix.</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
@@ -411,7 +415,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 </figure>
 <p>By clicking on the <em>Distance Map by Frame</em> button, the ‘Heat Map Viewer’ window will appear (Figure 11). A heatmap of the complete distance matrix between beads for every frame will be displayed. You can navigate among the frames or skip straight to a particular frame using a slider that is located over the plot. Similar to the “Contact map” panel, options for Matplotlib navigation and color palettes are accessible.</p>
 <figure class="align-center" id="id21">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_11_SirahGui.png"><img alt="../_images/Figure_11_SirahGui.png" src="../_images/Figure_11_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 11.</strong> Heat map viewer. A) the heatmap for the “name GC” option, meaning the entire histone octamer, from the NCP simulation. B) To enhance visibility, we present an alternative selection utilizing a single histone.</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
@@ -419,10 +423,10 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 </figure>
 <p>Additionally, a <em>Create GIF</em> button (Figure 11) is provided to generate an animated GIF depicting the distance evolution throughout the experiment (Figure 12). Clicking “Create GIF” will generate a new folder titled “GIF” within the “Contacts” folder in the working directory.</p>
 <figure class="align-center" id="id22">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_12_SirahGui.gif"><img alt="../_images/Figure_12_SirahGui.gif" src="../_images/Figure_12_SirahGui.gif" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 12.</strong> Animated GIF of 10 frames depicting one of the histones from the NCP simulation.</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 12.</strong> Animated GIF of 100 frames depicting one of the histones from the NCP simulation.</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>For further information on these plots and the .dat files, please see the Developers notes’ information about the “Contacts” <a class="reference internal" href="../Tutorials%20sirahgui.html#contacts-devnotes"><span class="std std-ref">tab</span></a>.</p>
@@ -437,7 +441,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 <p>Here let’s select the <strong>SS Analysis</strong> tab. This tab allows performing secondary structure analysis throughout a SIRAH MD simulation using the methodology described in <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. <a class="reference internal" href="../Tutorials%20sirahgui.html#ssanalysis-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
 <p>For the NCP trajectory, let’s retain the default values for the “First” and “Last” fields (Figure 13A). The analysis will be conducted from the initial frame (1) to the final frame (-1). However, let’s modify the “Selection” field to the SIRAH macro “sirah_protein” and use a 10-frame skip in the trajectory (Figure 13A). This will speed up the calculations and reduce the number of frames from 10.000 to 1.000.</p>
 <figure class="align-center" id="id23">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_13_SirahGui.png"><img alt="../_images/Figure_13_SirahGui.png" src="../_images/Figure_13_SirahGui.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 13.</strong> <strong>SS Analysis</strong> tab settings for secondary structure of the proteins in the NCP system. A) Settings to SS analysis. Here, the SS classification was calculated for the entire simulation using the default values and the sirah_protein macro. The <em>Calculate Psi/Phi</em> was also selected. B) The VMD output shows the progress of the calculation and the summary of SS the run. C) The names of the files created during the run. D) When the calculations are done, buttons to make the plots will become active.</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
@@ -462,7 +466,7 @@ Buttons <em>Plot Matrix</em>, <em>Plot by Frame</em>, <em>Plot by Res</em>, and 
 </div>
 <p>By clicking on the <em>Plot Matrix</em> button, a plot utilizing the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file, displaying the alterations in secondary structure of each residue throughout the simulation will be generated (Figure 14A).</p>
 <figure class="align-center" id="id24">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_14_SirahGui.png"><img alt="../_images/Figure_14_SirahGui.png" src="../_images/Figure_14_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 14.</strong> Outcomes of “Analysis” section from the <strong>SS Analysis</strong> tab where the secondary structural elements α-helix (H), extended β-sheet (E), and coil (C) are colored purple, yellow, and blue, respectively.</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
@@ -472,7 +476,7 @@ Buttons <em>Plot Matrix</em>, <em>Plot by Frame</em>, <em>Plot by Res</em>, and 
 <p>By clicking on the <em>Plot By Res</em> button, a plot utilizing the <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span> <span class="pre">file</span></code>, displaying the percentage of each secondary structure classification that each residue adopted throughout the simulation will be generated (Figure 14C).</p>
 <p>By clicking on the <em>Analyze Psi/Phi</em> button, the <em>Ramachandran Plot Visualization Tool</em> window will appear (Figure 15). This interface allows for the loading of the <code class="docutils literal notranslate"><span class="pre">psi.mtx</span></code> and <code class="docutils literal notranslate"><span class="pre">phi.mtx</span></code> files via the <em>Load PSI</em> and <em>Load PHI</em> buttons, respectively (Figure 15A). A Ramachandran plot is automatically generated for the first frame (Figure 15B). You can also navigate among the frames using the frame slider or skip straight to a particular frame at the “Go to frame” option (Figure 15B).</p>
 <figure class="align-center" id="id25">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_15_SirahGui.png"><img alt="../_images/Figure_15_SirahGui.png" src="../_images/Figure_15_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 15.</strong> Ramachandran Plot Visualization Tool window. A) The window before loading the <code class="docutils literal notranslate"><span class="pre">.mtx</span></code> matrices. B) After loading the <code class="docutils literal notranslate"><span class="pre">.mtx</span></code> matrices. The Ramachandran plot of the Frame 0 is displayed with each residue as a point (orange). The overall density of the residues, using the position of the residues in the plot from all the frames, is also displayed (green areas).</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
@@ -511,7 +515,7 @@ Buttons <em>Plot Matrix</em>, <em>Plot by Frame</em>, <em>Plot by Res</em>, and 
 </div>
 <p>For the NCP trajectory, let’s retain the default values for the “First” and “Last” fields (Figure 16B). The analysis will be conducted from the initial frame (1) to the final frame (-1), meaning all frames will be used. However, let’s set a 5.000-frame skip in “Each” field to the trajectory (Figure 16B). This will bring the number of frames from 10.000 to 2.</p>
 <figure class="align-center" id="id26">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_16_SirahGui.png"><img alt="../_images/Figure_16_SirahGui.png" src="../_images/Figure_16_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 16.</strong> <strong>Backmapping</strong> tab settings for the NCP system when <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> is set correctly. A) The <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> environment was automatically detected and minimization using sander can be performed. B) In addition to applying a 5000-frame skip, all Basic Options and Advanced Options were retained at their default configurations within the SIRAH Tools. C) The VMD output shows the progress of the calculation. D) The <em>Open Backmap in VMD</em> button launches VMD with the <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code> file. E) VMD windows with the <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code> file.</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
@@ -531,7 +535,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 </div>
 <p>Let us examine a scenario in which the <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> environment is not configured (Figure 17A).</p>
 <figure class="align-center" id="id27">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_17_SirahGui.png"><img alt="../_images/Figure_17_SirahGui.png" src="../_images/Figure_17_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 17.</strong> <strong>Backmapping</strong> tab settings for the NCP system when <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> is not set correctly or not available. A) The <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> environment was not detected and minimization using sander can not be performed. B) Configuration of the Basic Options via the Frames field. Since the “Frames” field has been established, the “First”, “Last”, and “Each” choices will be disregarded in the calculation. C) Configuration of the Advanced Options. Since the “nomin” option was selected, the other options, related to sander parameters will be disregarded in the calculation. D) <em>Run Backmap</em> button. E) The <em>Open Backmap in VMD</em> button launches VMD with the <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code> file.</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
@@ -579,7 +583,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <p>The SIRAH Tools GUI works with VMD in text mode; therefore, it can be used on any system that can be loaded in VMD.</p>
 </div>
 <figure class="align-center" id="id28">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_18_SirahGui.png"><img alt="../_images/Figure_18_SirahGui.png" src="../_images/Figure_18_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 18.</strong> The <strong>Load Files</strong> tab. Setting up any subsequent analysis with the SIRAH Tools GUI begins with the “Load Files” tab.</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
@@ -608,7 +612,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <p>Check out the <a class="reference external" href="https://sirahff.github.io/documentation/Tutorials%20sirahtools.html">SIRAH Tools tutorial</a> to learn more about VMD and SIRAH macros and how to use them.</p>
 </div>
 <figure class="align-center" id="id29">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_19_SirahGui.png"><img alt="../_images/Figure_19_SirahGui.png" src="../_images/Figure_19_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 19.</strong> The “Analysis” tab performs and plots common MD analysis routines.</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
@@ -656,7 +660,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <span id="contacts-devnotes"></span><h2>Contacts<a class="headerlink" href="#contacts" title="Link to this heading"></a></h2>
 <p>The <strong>Contacts</strong> tab allows the analysis of contacts between two selections using a cutoff distance as a criterion (Figure 20). It produces native contact data, contacts and distance maps. Intermolecular or intramolecular contacts can be calculated depending on the selection. In addition, the “Calculate Distance Matrix” option allows to compute a distance matrix of each pair of beads for each frame of the simulation.</p>
 <figure class="align-center" id="id30">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_20_SirahGui.png"><img alt="../_images/Figure_20_SirahGui.png" src="../_images/Figure_20_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 20.</strong>  The “Contacts” tab performs and plots different contact analysis routines.</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
@@ -695,12 +699,16 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">vecdist</span></code> command of VMD is used to calculate the distance for the distance matrix, where the two vectors represent the coordinates of two selections. It is recommended to utilize selections that yield a singular bead or atom per residue for this plot. When dealing with selections that included several beads or atoms per residue, the computation performed for each frame led to prolonged calculations, elevated memory consumption, and huge files. Therefore, if a selection has many beads or atoms per residue (such as in the macro sirah_protein or protein), the TCL script (<code class="docutils literal notranslate"><span class="pre">/TCL/contacts_distance.tcl</span></code>) will automatically select one backbone bead (<code class="docutils literal notranslate"><span class="pre">GC,</span> <span class="pre">PX</span> <span class="pre">or</span> <span class="pre">BFO</span></code>) or atom (<code class="docutils literal notranslate"><span class="pre">CA,</span> <span class="pre">P</span></code>) for the selection. This decision enhances visualization, accelerates computation, and eliminates the necessity for generating large files.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To generate an animated GIF of the distance heatmap, select the “Create GIF” button in the Matplotlib window. You will be required to input the starting and ending frame numbers, the DPI for each frame image, and indicate whether to delete the individual frame images after the GIF has been created. The tool will produce all needed images and compile them into a GIF within the new ‘Contacts/GIF’ folder in your working directory. If you opt to retain the single-frame files, they remain in that directory alongside to the GIF.</p>
+</div>
 <p>Once the calculation is complete a new folder “Contacts” is generated in the working directory. To aid in the creation of the contact plots, the “contact length”, “distance length”, “distbyframe”, “contacts”, “timeline’, and “percentage” <code class="docutils literal notranslate"><span class="pre">.dat</span></code> files will be created. A description of the content of each file is provided below:</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">contact</span> <span class="pre">length</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span> <span class="pre">length</span></code> files contain the dimensions of the matrix and the information on the selections for the contact and distance heatmaps.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">contacts</span></code> file contains a general summary of the native contact conservation, accuracy, and total number of contacts from the simulation.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">timeline</span></code> file summarizes the conservation of native contacts, accuracy, and the total number of contacts for each frame, categorizing them as either native or non-native within the specified cutoff for each frame.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">distbyframe</span></code> file contains a distance matrix for each analyzed frame with the distance between every pair of selections.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">distbyframe</span></code> file contains a distance matrix for each analyzed frame with the distance between every pair of selections.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">percentage</span></code> file contains the information on the percentage of duration of all contacts within the defined cutoff from the simulation. To ensure that all contacts are recorded in the file, the information is provided utilizing the residues and the beads (atoms) for each contacting pair.</p></li>
 </ul>
 <div class="admonition tip">
@@ -716,7 +724,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 </div>
 <p>The <strong>SS Analysis</strong> tab allows the classification and analysis of secondary structure elements using the methodology described in <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a> (Figure 21). It classifies proteins in a SIRAH MD simulation into α-helix (H), extended β-sheet (B), or Coil (C). Additionally, it computes PSI/PHI angles that can be illustrated in a Ramachandran plot.</p>
 <figure class="align-center" id="id31">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_21_SirahGui.png"><img alt="../_images/Figure_21_SirahGui.png" src="../_images/Figure_21_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 21.</strong>  The <strong>SS Analysis</strong> tab performs and plots SS content for SIRAH MD simulations.</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
@@ -749,7 +757,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 </div>
 <p>The “Ramachandran Plot Visualization Tool” allows for the loading of the <code class="docutils literal notranslate"><span class="pre">psi.mtx</span></code> and <code class="docutils literal notranslate"><span class="pre">phi.mtx</span></code> files via the “Load PSI” and “Load PHI” buttons, respectively (Figure 22A). A Ramachandran plot is automatically generated for the first frame (Figure 22B), however plots are created for all frames. The “Frame” slider or the “Go to frame” option can help navigate among the frames. The “Show Density” button displays the density computed for the full matrix, but the “Hide Ramach” option conceals the residue points in the plot. Histogram buttons, “Histogram per Frame” and “Histogram per Residue”, allow the creation of histograms for each frame or for a specific residue, respectively. Additionally, the “Ramachandran per residue’ button displays the angles of a specific residue in the Ramachandran geometrical space.</p>
 <figure class="align-center" id="id32">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_22_SirahGui.png"><img alt="../_images/Figure_22_SirahGui.png" src="../_images/Figure_22_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 22.</strong> Ramachandran Plot Visualization Tool window. A) The window before loading the <code class="docutils literal notranslate"><span class="pre">.mtx</span></code> matrices. B) After loading the .mtx matrices. The Ramachandran plot of the Frame 0 is displayed with each residue as a point (orange). The overall density of the residues, using the position of the residues in the plot from all the frames, is also displayed (green areas).</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
@@ -769,7 +777,7 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 </div>
 <p>The <strong>Backmapping</strong> tab allows retrieving pseudo-atomistic information from the SIRAH CG model (Figure 23). The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structures from the initial stage are protonated and minimized with the atomistic force field ff14SB within the tleap module of AmberTools. A PDB or multi-PDB file entitled backmap.pdb will be created at the end of the calculation.</p>
 <figure class="align-center" id="id33">
-<a class="reference internal image-reference" href="../_images/SIRAHToolsGUI.png"><img alt="../_images/SIRAHToolsGUI.png" src="../_images/SIRAHToolsGUI.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/Figure_23_SirahGui.png"><img alt="../_images/Figure_23_SirahGui.png" src="../_images/Figure_23_SirahGui.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 23.</strong> The “Backmapping” tab performs backmapping for SIRAH MD simulations.</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
