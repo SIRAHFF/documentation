@@ -1,3 +1,7 @@
+.. note::
+
+   Please report bugs, errors or enhancement requests through `Issue Tracker <https://github.com/SIRAHFF/SIRAH-Tools-GUI/issues>`_ or if you have a question about SIRAH open a `New Discussion <https://github.com/SIRAHFF/documentation/discussions>`_.
+   
 Overview
 ----------------------------
 
@@ -12,9 +16,9 @@ The GUI should be easy to use for people who are proficient in both VMD and MD. 
 
 In addition, it was constructed in a modular manner, combining TCL (``.tcl``) and Python (``.py``) scripts (Figure 1), enabling all users to customize the scripts without changing its code.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_1_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 70%
 
    **Figure 1.** SIRAH Tools GUI organization.
 
@@ -109,7 +113,7 @@ After reloading your shell, simply run:
 
 If everything went as planned, you should be able to launch the SIRAH Tools GUI interface (Figure 2) and use all of its features. 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_2_SirahGui.png
    :align: center
    :width: 100%
 
@@ -121,7 +125,7 @@ If everything went as planned, you should be able to launch the SIRAH Tools GUI 
 Example of how to use
 ----------------------
 
-This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example is ``[REF paper]``. The Nucleosome Core Particle (NCP) used here was previously discussed by ``[REF Astrid]`` and  `Cantero et al <https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278>`_. We strongly advise you to read these articles before starting this tutorial.
+This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are **Ballesteros-Casallas et al [Manuscript in Preparation]** and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The Nucleosome Core Particle (NCP) used here was previously discussed by `Brandner et al <https://doi.org/10.1016/j.bbrc.2017.09.086>`_ and  `Cantero et al <https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278>`_. We strongly advise you to read these articles before starting this tutorial.
 
 .. warning::
     Before you can use the SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, look at `the Amber <https://amberhub.chpc.utah.edu/autoimage/>`_, `GROMACS <https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html>`_, or `NAMD <https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/>`_ tutorials.  
@@ -153,9 +157,9 @@ First, set up the working directory. This will turn the button green and the pat
 
 This will also enable the “New Directory” button (Figure 3A). 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_3_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 90%
 
    **Figure 3.** The *Load Files* tab will appear like this after the topology and trajectory files have been set up and loaded. A) The first step to successfully use SIRAH Tools GUI is to set the working directory. B) The system must be loaded using the "Load System" button after the working directory has been set and the topology and trajectory files have been selected. C) No reference structure was imported, and the options "Time step" and "Step between frames" were set to the default values. D) The “View in VMD” button launches VMD with the loaded system. E) The “Reset” button will erase all data loaded.
 
@@ -178,9 +182,9 @@ If all went well, you should be able to click the “View in VMD” button (Figu
 .. note::
     Any data entered in the tab will be erased if the "Reset" button (Figure 3E) is clicked.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_4_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 70%
 
    **Figure 4.** System loaded in VMD using the button ‘View in VMD’. Once the files are loaded correctly, we are ready to start the analysis.
 
@@ -199,9 +203,9 @@ Here let's select the **Analysis tab**. This tab allows several types of MD simu
 
 For the **Basic Analysis** section, write "name GC or name PX" at the Selection box. Then check the boxes for RMSD, RMSF, and Radius of Gyration (RGYR) (Figure 5A).
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_5_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 90%
 
    **Figure 5.** Analysis tab settings for analyses using "name GC or name PX" beads. A) Basic Analysis selection for the NCP system. B) Advanced Analysis selection for the NCP system. C) Selected options in the “Generate Report” section. D) No reference structure was imported, and the options "Time step" and "Step between frames" were set to the default values. However, a 10 frame skip was used. E) The "Analyze" button will perform all the selected actions. F) Only when an analysis is underway is the "Stop" button activated, and pressing it will halt the analysis's progress.
 
@@ -257,7 +261,7 @@ The name of the files consists of a 'root' according to the analysis (e.g. RMSD,
 
 Some of the plots produced by the chosen analyses of the "Analysis" Tab are displayed in Figure 6.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_6_SirahGui.png
    :align: center
    :width: 100%
 
@@ -282,9 +286,9 @@ Intermolecular contacts
 To calculate intermolecular contacts, the choices must be in different molecules.
 For the NCP trajectory, let's designate Selection1 "name GC", which gives us the backbone beads (GC) of the histone octamer, and Selection2 "name PX", which gives us the DNA phosphate beads (Figure 7A).
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_7_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 90%
 
    **Figure 7.** “Contacts” tab settings for intermolecular contacts analyses for the two selections "name GC” and “name PX" beads of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, we are using selections from different molecules. The default numbers were set to speed up the calculation. B) Run contacts calculation. A distance matrix can also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.
 
@@ -308,7 +312,7 @@ Buttons for creating *Native Contacts Conservation* and *Contact Map* plots will
 
 By clicking on the “Native Contacts Conservation” button, a plot of the conservation of the initial frame contacts between the selections during the simulation can be obtained (Figure 8A). 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_8_SirahGui.png
    :align: center
    :width: 100%
 
@@ -328,9 +332,9 @@ To calculate intramolecular contacts, the choices must be in the same molecule.
 
 For the NCP trajectory, let's designate identical “name GC” selections on both boxes (Figure 9A).
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_9_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 90%
 
    **Figure 9.** **Contacts** tab settings for intramolecular contacts analyses for the selections "name GC” of the NCP system. A) Settings to contact analysis. Two selections are needed, these selections can be in the same or different molecules. Here, both selections are identical and in the same molecule. The default numbers were set to speed up the calculation. B) Run contacts calculation. Since it was selected, a distance matrix will also be calculated. Calculation progress will be displayed and can be stopped at any time. C) When the calculations are done, buttons to make the plots will become active.
 
@@ -357,7 +361,7 @@ By clicking on the *Native Contacts Conservation* button, a plot of the conserva
 
 By clicking on the *Contact Map* button, a symmetric "name GC" by "name GC" heatmap is shown in an interactive window (Figure 10). In this window, a Colormap selector can be used to alter the color of the heatmap via a drop-down menu. A variety of `Matplotlib colormaps <https://matplotlib.org/stable/users/explain/colors/colormaps.html>`_ (such as viridis, plasma, coolwarm, etc.) can be chosen to optimally highlight the contact pattern. Additionally, Matplotlib navigation (pan/zoom) is operable. Lastly, the plot can be exported at any resolution by using the “Save plot” option; just input the needed DPI number before saving.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_10_SirahGui.png
    :align: center
    :width: 100%
 
@@ -366,7 +370,7 @@ By clicking on the *Contact Map* button, a symmetric "name GC" by "name GC" heat
 By clicking on the *Distance Map by Frame* button, the 'Heat Map Viewer' window will appear (Figure 11). A heatmap of the complete distance matrix between beads for every frame will be displayed. You can navigate among the frames or skip straight to a particular frame using a slider that is located over the plot. Similar to the "Contact map" panel, options for Matplotlib navigation and color palettes are accessible. 
 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_11_SirahGui.png
    :align: center
    :width: 100%
 
@@ -374,11 +378,11 @@ By clicking on the *Distance Map by Frame* button, the 'Heat Map Viewer' window 
 
 Additionally, a *Create GIF* button (Figure 11) is provided to generate an animated GIF depicting the distance evolution throughout the experiment (Figure 12). Clicking "Create GIF" will generate a new folder titled "GIF" within the "Contacts" folder in the working directory.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_12_SirahGui.gif
    :align: center
-   :width: 100%
+   :width: 80%
 
-   **Figure 12.** Animated GIF of 10 frames depicting one of the histones from the NCP simulation.
+   **Figure 12.** Animated GIF of 100 frames depicting one of the histones from the NCP simulation.
 
 For further information on these plots and the .dat files, please see the Developers notes' information about the “Contacts” :ref:`tab <contacts-devnotes>`.
 
@@ -394,9 +398,9 @@ Here let's select the **SS Analysis** tab. This tab allows performing secondary 
 For the NCP trajectory, let's retain the default values for the "First" and "Last" fields (Figure 13A). The analysis will be conducted from the initial frame (1) to the final frame (-1). However, let’s modify the “Selection” field to the SIRAH macro “sirah_protein” and use a 10-frame skip in the trajectory (Figure 13A). This will speed up the calculations and reduce the number of frames from 10.000 to 1.000.
 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_13_SirahGui.png
    :align: center
-   :width: 100%
+   :width: 90%
 
    **Figure 13.** **SS Analysis** tab settings for secondary structure of the proteins in the NCP system. A) Settings to SS analysis. Here, the SS classification was calculated for the entire simulation using the default values and the sirah_protein macro. The *Calculate Psi/Phi* was also selected. B) The VMD output shows the progress of the calculation and the summary of SS the run. C) The names of the files created during the run. D) When the calculations are done, buttons to make the plots will become active.
 
@@ -417,7 +421,7 @@ Buttons *Plot Matrix*, *Plot by Frame*, *Plot by Res*, and *Analyze Psi/Phi* wil
 
 By clicking on the *Plot Matrix* button, a plot utilizing the ``ss.mtx`` file, displaying the alterations in secondary structure of each residue throughout the simulation will be generated (Figure 14A).
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_14_SirahGui.png
    :align: center
    :width: 100%
 
@@ -429,7 +433,7 @@ By clicking on the *Plot By Res* button, a plot utilizing the ``ss_by_res.xvg fi
 
 By clicking on the *Analyze Psi/Phi* button, the *Ramachandran Plot Visualization Tool* window will appear (Figure 15). This interface allows for the loading of the ``psi.mtx`` and ``phi.mtx`` files via the *Load PSI* and *Load PHI* buttons, respectively (Figure 15A). A Ramachandran plot is automatically generated for the first frame (Figure 15B). You can also navigate among the frames using the frame slider or skip straight to a particular frame at the “Go to frame” option (Figure 15B).
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_15_SirahGui.png
    :align: center
    :width: 100%
 
@@ -473,7 +477,7 @@ Here let's select the **Backmapping** tab. This tab allows retrieving pseudo-ato
 
 For the NCP trajectory, let's retain the default values for the "First" and "Last" fields (Figure 16B). The analysis will be conducted from the initial frame (1) to the final frame (-1), meaning all frames will be used. However, let’s set a 5.000-frame skip in “Each” field to the trajectory (Figure 16B). This will bring the number of frames from 10.000 to 2. 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_16_SirahGui.png
    :align: center
    :width: 100%
 
@@ -494,7 +498,7 @@ A *Open Backmap in VMD* will become activated (Figure 16D). This will open the g
 
 Let us examine a scenario in which the ``$AMBERHOME`` environment is not configured (Figure 17A). 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_17_SirahGui.png
    :align: center
    :width: 100%
 
@@ -559,7 +563,7 @@ The **Load Files** tab allows loading AMBER, GROMACS, and NAMD simulation topolo
 
 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_18_SirahGui.png
    :align: center
    :width: 100%
 
@@ -589,7 +593,7 @@ The number of selection entries that the user must provide is where basic and ad
 .. tip::
     Check out the `SIRAH Tools tutorial <https://sirahff.github.io/documentation/Tutorials%20sirahtools.html>`_ to learn more about VMD and SIRAH macros and how to use them.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_19_SirahGui.png
    :align: center
    :width: 100%
 
@@ -644,7 +648,7 @@ __________
 
 The **Contacts** tab allows the analysis of contacts between two selections using a cutoff distance as a criterion (Figure 20). It produces native contact data, contacts and distance maps. Intermolecular or intramolecular contacts can be calculated depending on the selection. In addition, the “Calculate Distance Matrix” option allows to compute a distance matrix of each pair of beads for each frame of the simulation.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_20_SirahGui.png
    :align: center
    :width: 100%
 
@@ -680,6 +684,10 @@ The contact map heatmap utilizes data from all contacts within the specified cut
 
 * The ``vecdist`` command of VMD is used to calculate the distance for the distance matrix, where the two vectors represent the coordinates of two selections. It is recommended to utilize selections that yield a singular bead or atom per residue for this plot. When dealing with selections that included several beads or atoms per residue, the computation performed for each frame led to prolonged calculations, elevated memory consumption, and huge files. Therefore, if a selection has many beads or atoms per residue (such as in the macro sirah_protein or protein), the TCL script (``/TCL/contacts_distance.tcl``) will automatically select one backbone bead (``GC, PX or BFO``) or atom (``CA, P``) for the selection. This decision enhances visualization, accelerates computation, and eliminates the necessity for generating large files. 
 
+.. note::
+	To generate an animated GIF of the distance heatmap, select the "Create GIF" button in the Matplotlib window. You will be required to input the starting and ending frame numbers, the DPI for each frame image, and indicate whether to delete the individual frame images after the GIF has been created. The tool will produce all needed images and compile them into a GIF within the new 'Contacts/GIF' folder in your working directory. If you opt to retain the single-frame files, they remain in that directory alongside to the GIF.
+
+	
 Once the calculation is complete a new folder “Contacts” is generated in the working directory. To aid in the creation of the contact plots, the "contact length", "distance length", “distbyframe”, "contacts", “timeline’, and "percentage" ``.dat`` files will be created. A description of the content of each file is provided below:
 
 * The ``contact length`` and ``distance length`` files contain the dimensions of the matrix and the information on the selections for the contact and distance heatmaps.
@@ -688,7 +696,7 @@ Once the calculation is complete a new folder “Contacts” is generated in the
 
 * The ``timeline`` file summarizes the conservation of native contacts, accuracy, and the total number of contacts for each frame, categorizing them as either native or non-native within the specified cutoff for each frame. 
 
-* ``The distbyframe`` file contains a distance matrix for each analyzed frame with the distance between every pair of selections.
+* The ``distbyframe`` file contains a distance matrix for each analyzed frame with the distance between every pair of selections.
 
 * The ``percentage`` file contains the information on the percentage of duration of all contacts within the defined cutoff from the simulation. To ensure that all contacts are recorded in the file, the information is provided utilizing the residues and the beads (atoms) for each contacting pair.
 
@@ -707,7 +715,7 @@ ______________
 
 The **SS Analysis** tab allows the classification and analysis of secondary structure elements using the methodology described in `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_ (Figure 21). It classifies proteins in a SIRAH MD simulation into α-helix (H), extended β-sheet (B), or Coil (C). Additionally, it computes PSI/PHI angles that can be illustrated in a Ramachandran plot.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_21_SirahGui.png
    :align: center
    :width: 100%
 
@@ -745,7 +753,7 @@ The “Analysis” section buttons will be enabled once the files are created. F
 The “Ramachandran Plot Visualization Tool” allows for the loading of the ``psi.mtx`` and ``phi.mtx`` files via the “Load PSI” and “Load PHI” buttons, respectively (Figure 22A). A Ramachandran plot is automatically generated for the first frame (Figure 22B), however plots are created for all frames. The “Frame” slider or the “Go to frame” option can help navigate among the frames. The “Show Density” button displays the density computed for the full matrix, but the “Hide Ramach” option conceals the residue points in the plot. Histogram buttons, “Histogram per Frame” and “Histogram per Residue”, allow the creation of histograms for each frame or for a specific residue, respectively. Additionally, the “Ramachandran per residue’ button displays the angles of a specific residue in the Ramachandran geometrical space.
 
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_22_SirahGui.png
    :align: center
    :width: 100%
 
@@ -767,7 +775,7 @@ ______________
 
 The **Backmapping** tab allows retrieving pseudo-atomistic information from the SIRAH CG model (Figure 23). The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. Bond distances and angles are derived from rough organic chemistry considerations stored in backmapping libraries. Next, the structures from the initial stage are protonated and minimized with the atomistic force field ff14SB within the tleap module of AmberTools. A PDB or multi-PDB file entitled backmap.pdb will be created at the end of the calculation.
 
-.. figure:: /../images/SIRAHToolsGUI.png
+.. figure:: /../images/SirahGUIFigs/Figure_23_SirahGui.png
    :align: center
    :width: 100%
 
