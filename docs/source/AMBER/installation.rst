@@ -11,7 +11,7 @@ Amber and AmberTools (version 16 or later) versions properly installed and runni
 
 .. tip::
 
-    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ the lastest version of Amber and AmberTools and refer to the *How to obtain Amber23* section for more details on getting Amber23. In addition, go to the `Install Amber <https://ambermd.org/Installation.php>`_ page for specific instructions based on your operating system. If you have Amber already installed, it is unnecessary to install AmberTools separately.
+    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ the latest version of Amber and AmberTools and refer to the *How to obtain Amber23* section for more details on getting Amber23. In addition, go to the `Install Amber <https://ambermd.org/Installation.php>`_ page for specific instructions based on your operating system. If you have Amber already installed, it is unnecessary to install AmberTools separately.
 
 
 **VMD**
@@ -48,7 +48,6 @@ Download `SIRAH for Amber <https://github.com/SIRAHFF/documentation/releases/tag
 
 .. code-block:: bash
 
-
     tar -xzvf sirah_x2.3_24-07.amber.tar.gz
 
 If you are using a different version of SIRAH, type:
@@ -75,11 +74,7 @@ Create the following symbolic link in the folder tutorialX.X:
 
 .. code-block:: bash
 
-<<<<<<< HEAD
     ln -s ../sirah_x2.3_24-07.amber sirah.amber
-=======
-    ln -s ../sirah_x2.3_24-07.amber  sirah.amber
->>>>>>> e378610 (Update installation.rst)
 
 .. note:: 
 

@@ -185,7 +185,7 @@ ________________________
 
 .. important:: 
 
-	By default in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/2/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/2/CPU``.
+	By default, in this tutorial we will use input files for GROMACS on GPU (``sirah.ff/tutorial/2/GPU``). Example input files for using GROMACS on CPU can be found at: ``sirah.ff/tutorial/2/CPU``.
 
 The folder ``sirah.ff/tutorial/2/GPU/`` contains typical input files for energy minimization
 (``em_HYBSOL.mdp``), equilibration (``eq_HYBSOL.mdp``) and production (``md_HYBSOL.mdp``) runs. Please

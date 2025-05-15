@@ -169,9 +169,9 @@ The output will be the following:
         Command to calculate the secondary structure of SIRAH proteins.
         
         If mol is omitted then all options are applied to top molecule.
-        By default the secondary structure data is stored in memory
+        By default, the secondary structure data is stored in memory
         as the array sscache_data(mol,frame) and the coloring method
-        'Secondary Structure' will display correctly. By default the
+        'Secondary Structure' will display correctly. By default, the
         script reads the sscache_data if available in memory and does
         not recalculate the conformation, unless flag ramach is set or
         the sscache_data is cleaned. The outname and noprint keywords
@@ -385,7 +385,7 @@ The output will be the following:
         converge in parallel execution due to decomposition problems. Notice, the
         cuda version requires installing the AMBER licensed suite.
         
-        By default the force field ff14SB is used for the atomistic refinement,
+        By default, the force field ff14SB is used for the atomistic refinement,
         any residue or unit not defined within it will generate an execution error.
         The minimization protocol consists on 100+50 steps of steepest descent and
         conjugate gradient in vacuum conditions with a 0.12 nm cut-off for
