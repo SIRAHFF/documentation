@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3437f865" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -60,6 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20namd.html">NAMD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahtools.html">SIRAH tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20analysis.html">Basic analyses VMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahgui.html">SIRAH Tools GUI</a></li>
 </ul>
 
         </div>
@@ -177,7 +178,7 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 In this specific case, the charge of the system is -5.000 e; this will be addressed later.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>By default, charged terminal are used but it is possible to set them neutral with option <code class="docutils literal notranslate"><span class="pre">-ter</span></code>.</p>
+<p>By default charged terminal are used but it is possible to set them neutral with option <code class="docutils literal notranslate"><span class="pre">-ter</span></code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -562,7 +563,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <h1>7.5. Run the simulation<a class="headerlink" href="#run-the-simulation" title="Link to this heading"></a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>By default, in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code>).</p>
+<p>By default in this tutorial we will use input files for GROMACS on GPU (<code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code>).</p>
 </div>
 <p>The folder <code class="docutils literal notranslate"><span class="pre">sirah.ff/tutorial/7/</span></code> contains typical input files for energy minimization (<code class="docutils literal notranslate"><span class="pre">em1_CGPROT.mdp</span></code>, <code class="docutils literal notranslate"><span class="pre">em2_CGPROT.mdp</span></code>, and <code class="docutils literal notranslate"><span class="pre">em3_CGPROT.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq1_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">eq2_CGPROT.mdp</span></code>), production (<code class="docutils literal notranslate"><span class="pre">md_CGPROT.mdp</span></code>) and SMD (<code class="docutils literal notranslate"><span class="pre">SMD_Force_CGPROT.mdp</span></code> and <code class="docutils literal notranslate"><span class="pre">SMD_Velocity_CGPROT.mdp</span></code>) runs. Please check carefully the input flags therein.</p>
 <p>Make a new folder for the run:</p>
