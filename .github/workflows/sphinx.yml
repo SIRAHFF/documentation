@@ -15,9 +15,8 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme
-          pip install sphinx-copybutton
-	  pip install sphinxcontrib.googleanalytics
+          python -m pip install --upgrade pip
+          pip install sphinx sphinx_rtd_theme sphinx-copybutton sphinxcontrib-googleanalytics
       - name: Build docs
         run: |
           cd docs
