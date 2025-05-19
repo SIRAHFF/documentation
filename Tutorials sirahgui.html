@@ -216,7 +216,7 @@
 <p>This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are <strong>Ballesteros-Casallas et al [Manuscript in Preparation]</strong> and <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">Machado &amp; Pantano</a>. The Nucleosome Core Particle (NCP) used here was previously discussed by <a class="reference external" href="https://doi.org/10.1016/j.bbrc.2017.09.086">Brandner et al</a> and  <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278">Cantero et al</a>. We strongly advise you to read these articles before starting this tutorial.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Before you can use the SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, look at <a class="reference external" href="https://amberhub.chpc.utah.edu/autoimage/">the Amber</a>, <a class="reference external" href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html">GROMACS</a>, or <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/">NAMD</a> tutorials.</p>
+<p>Before you can use SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, see <a class="reference external" href="https://amberhub.chpc.utah.edu/autoimage/">Amber</a>, <a class="reference external" href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html">GROMACS</a>, or <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/">NAMD</a> tutorials.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -224,7 +224,7 @@
 </div>
 <section id="loading-files-tab">
 <h3>Loading Files tab<a class="headerlink" href="#loading-files-tab" title="Link to this heading"></a></h3>
-<p>The <strong>Load Files tab</strong> allows loading AMBER, GROMACS, and NAMD simulation topologies and trajectories compatible with SIRAH force field MD simulations. <a class="reference internal" href="#loadfiles-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
+<p>The <strong>Load Files tab</strong> allows loading AMBER, GROMACS, and NAMD simulation topologies and trajectories compatible with SIRAH force field MD simulations. See more details of the tab <a class="reference internal" href="#loadfiles-devnotes"><span class="std std-ref">here</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The SIRAH Tools GUI works with VMD in text mode; therefore, it can be used on any system that can be loaded in VMD.</p>
@@ -281,7 +281,7 @@
 </section>
 <section id="basic-and-advanced-md-analyses">
 <h3>Basic and Advanced MD Analyses<a class="headerlink" href="#basic-and-advanced-md-analyses" title="Link to this heading"></a></h3>
-<p>Here let’s select the <strong>Analysis tab</strong>. This tab allows several types of MD simulation analysis using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros. <a class="reference internal" href="#analysis-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
+<p>Here let’s select the <strong>Analysis tab</strong>. This tab allows several types of MD simulation analysis using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros. See more details of the tab <a class="reference internal" href="#analysis-devnotes"><span class="std std-ref">here</span></a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Check out the <a class="reference external" href="https://sirahff.github.io/documentation/Tutorials%20sirahtools.html">SIRAH Tools tutorial</a> to learn more about VMD and SIRAH macros and how to use them.</p>
@@ -327,26 +327,10 @@
 <p>The VMD output area displays information about the VMD execution (as in a terminal window). Thus, any problem or error within the VMD will appear here.</p>
 </div>
 <p>Once the calculation is complete a new folder <em>Analysis</em> is generated in the working directory.</p>
-<p>In this example <strong>13</strong> files are generated into this folder. These correspond to the <code class="docutils literal notranslate"><span class="pre">.dat</span></code> files and the plots (<code class="docutils literal notranslate"><span class="pre">.png</span></code> files, plotting with python) of RMSD, RMSF, SASA, RGYR, RDF and its integral. The remaining files include the PDF report containing the plots of all analyses and a PDB file (<code class="docutils literal notranslate"><span class="pre">RMSF_protein.pdb</span></code>) with the RMSF values.</p>
-<p>The name of the files consists of a ‘root’ according to the analysis (e.g. RMSD, RMSF, etc) and concatenated with the selection, in this case ‘name GC or name PX’:</p>
-<ol class="arabic simple">
-<li><p>RMSD_name_GC_or_name_PX.dat</p></li>
-<li><p>RMSF_name_GC_or_name_PX.dat</p></li>
-<li><p>RGYR_name_GC_or_name_PX.dat</p></li>
-<li><p>SASA_name_GC_or_name_PX_name_GC_or_name_PX.dat</p></li>
-<li><p>rdf_name_GC_or_name_PX_name_GC_or_name_PX.dat</p></li>
-<li><p>RMSD_name_GC_or_name_PX.png</p></li>
-<li><p>RMSF_name_GC_or_name_PX.png</p></li>
-<li><p>RGYR_name_GC_or_name_PX.png</p></li>
-<li><p>SASA_name_GC_or_name_PX_name_GC_or_name_PX.png</p></li>
-<li><p>rdf_name_GC_or_name_PX_name_GC_or_name_PX_g.png</p></li>
-<li><p>rdf_name_GC_or_name_PX_name_GC_or_name_PX_integral.png</p></li>
-<li><p>RMSF_protein.pdb</p></li>
-<li><p>Analysis_name_GC_or_name_PX.pdf</p></li>
-</ol>
+<p>In this example <strong>13</strong> files are generated into this folder. These correspond to the <code class="docutils literal notranslate"><span class="pre">.dat</span></code> files and the plots (<code class="docutils literal notranslate"><span class="pre">.png</span></code> files, ploted with python) of RMSD, RMSF, SASA, RGYR, RDF and its integral. The remaining files include the PDF report containing the plots of all analyses and a PDB file (<code class="docutils literal notranslate"><span class="pre">RMSF_protein.pdb</span></code>) with the RMSF values in the Beta factor column.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The way that the files are named facilitates the analysis of various selections in the same folder. New files are created by different selections, whereas files are rewritten over if the same selection is made again. Nevertheless, a pop-up box will question if the user wants to rewrite the files.</p>
+<p>The way that the files are named (<em>Name of the Analysis_selection1_selection2.dat</em> or <em>Name of the Analysis_selection1_selection2.png</em>) facilitates the study of various selections in the same folder. New files are created by different selections, whereas files are rewritten over if the same selection is made again. Nevertheless, a pop-up box will question if the user wants to rewrite the files.</p>
 </div>
 <p>Some of the plots produced by the chosen analyses of the “Analysis” Tab are displayed in Figure 6.</p>
 <figure class="align-center" id="id17">
@@ -363,7 +347,7 @@
 </section>
 <section id="calculating-intermolecular-and-intramolecular-contacts">
 <h3>Calculating Intermolecular and Intramolecular Contacts<a class="headerlink" href="#calculating-intermolecular-and-intramolecular-contacts" title="Link to this heading"></a></h3>
-<p>Here let’s select the <strong>Contacts</strong> tab. This tab allows the analysis of contacts between two selections, using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros, using a cutoff distance as a criterion. <a class="reference internal" href="#contacts-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
+<p>Here let’s select the <strong>Contacts</strong> tab. This tab allows the analysis of contacts between two selections, using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros, using a cutoff distance as a criterion. See more details of the tab <a class="reference internal" href="#contacts-devnotes"><span class="std std-ref">here</span></a>.</p>
 <p>To better understand the contact tab, let’s split the example into two sections: <a class="reference internal" href="#contacts-inter"><span class="std std-ref">Intermolecular contacts</span></a> and <a class="reference internal" href="#contacts-intra"><span class="std std-ref">Intramolecular contacts</span></a>.</p>
 <section id="intermolecular-contacts">
 <span id="contacts-inter"></span><h4>Intermolecular contacts<a class="headerlink" href="#intermolecular-contacts" title="Link to this heading"></a></h4>
@@ -466,7 +450,7 @@ For the NCP trajectory, let’s designate Selection1 “name GC”, which gives 
 <p class="admonition-title">Important</p>
 <p>The SS Analysis tab uses the SIRAH Tools approach to categorize secondary structure elements (Helix, Extended Beta Sheet, or Coil), hence it is exclusively compatible with SIRAH MD simulations.</p>
 </div>
-<p>Here let’s select the <strong>SS Analysis</strong> tab. This tab allows performing secondary structure analysis throughout a SIRAH MD simulation using the methodology described in <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. <a class="reference internal" href="#ssanalysis-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
+<p>Here let’s select the <strong>SS Analysis</strong> tab. This tab allows performing secondary structure analysis throughout a SIRAH MD simulation using the methodology described in <a class="reference external" href="https://academic.oup.com/bioinformatics/article/32/10/1568/1743152">SIRAH Tools</a>. See more details of the tab <a class="reference internal" href="#ssanalysis-devnotes"><span class="std std-ref">here</span></a>.</p>
 <p>For the NCP trajectory, let’s retain the default values for the “First” and “Last” fields (Figure 13A). The analysis will be conducted from the initial frame (1) to the final frame (-1). However, let’s modify the “Selection” field to the SIRAH macro “sirah_protein” and use a 10-frame skip in the trajectory (Figure 13A). This will speed up the calculations and reduce the number of frames from 10.000 to 1.000.</p>
 <figure class="align-center" id="id24">
 <a class="reference internal image-reference" href="_images/Figure_13_SirahGui.png"><img alt="_images/Figure_13_SirahGui.png" src="_images/Figure_13_SirahGui.png" style="width: 80%;" />
@@ -523,7 +507,7 @@ Buttons <em>Plot Matrix</em>, <em>Plot by Frame</em>, <em>Plot by Res</em>, and 
 <p class="admonition-title">Important</p>
 <p>The Backmapping tab uses the SIRAH Tools approach, hence it is exclusively compatible with SIRAH MD simulations. Currently, backmapping libraries contain instructions for solute (proteins, DNA, metal ions, and glycans).</p>
 </div>
-<p>Here let’s select the <strong>Backmapping</strong> tab. This tab allows retrieving pseudo-atomistic information from the SIRAH CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. <a class="reference internal" href="#backmapping-devnotes"><span class="std std-ref">See more details of the tab</span></a>.</p>
+<p>Here let’s select the <strong>Backmapping</strong> tab. This tab allows retrieving pseudo-atomistic information from the SIRAH CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. See more details of the tab <a class="reference internal" href="#backmapping-devnotes"><span class="std std-ref">here</span></a>.</p>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>In the backmapping process, a structure minimization is performed using the <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.3c01153">AmberTools</a> modules, therefore it is necessary to have configured the <code class="docutils literal notranslate"><span class="pre">$AMBERHOME</span></code> environment properly.</p>
@@ -807,6 +791,9 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <p>The “Analysis” section buttons will be enabled once the files are created. Four buttons will be available:</p>
 <ol class="arabic simple">
 <li><p><strong>Plot matrix</strong> that plots the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file encompasses a matrix that illustrates the variation in the SS of each residue throughout the simulation. This plot displays three colors according to the SS classification: purple for H, yellow for B, and cyan for C.</p></li>
+<li><p><strong>Plot by frame</strong> that plots the <code class="docutils literal notranslate"><span class="pre">by_frame.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">by_frame.mtx</span></code> file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.</p></li>
+</ol>
+<ol class="arabic simple" start="2">
 <li><p><strong>Plot by frame</strong> that plots the <code class="docutils literal notranslate"><span class="pre">by_frame.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">by_frame.mtx</span></code> file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.</p></li>
 <li><p><strong>Plot by Res</strong> that plots the <code class="docutils literal notranslate"><span class="pre">ss_by_res.mtx`</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss_by_res.mtx</span></code> file encompasses the percentage of each SS classification that each residue adopted throughout the simulation. This plot will display three colors according to the SS classification: purple for H, yellow for B, and cyan for C.</p></li>
 </ol>
