@@ -128,7 +128,7 @@ Example of how to use
 This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are **Ballesteros-Casallas et al [Manuscript in Preparation]** and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The Nucleosome Core Particle (NCP) used here was previously discussed by `Brandner et al <https://doi.org/10.1016/j.bbrc.2017.09.086>`_ and  `Cantero et al <https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278>`_. We strongly advise you to read these articles before starting this tutorial.
 
 .. warning::
-    Before you can use the SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, look at `the Amber <https://amberhub.chpc.utah.edu/autoimage/>`_, `GROMACS <https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html>`_, or `NAMD <https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/>`_ tutorials.  
+    Before you can use SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, see `Amber <https://amberhub.chpc.utah.edu/autoimage/>`_, `GROMACS <https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html>`_, or `NAMD <https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/>`_ tutorials.  
 
 .. note::
     Apart from the **“Load Files”** tab that needs to be the first tab, the other tabs don't need to follow an order. This means that the user can choose any of the tabs to do analysis without having to go through the others.
@@ -137,7 +137,7 @@ This example shows how to analyze trajectory files using SIRAH Tools GUI. The ma
 Loading Files tab
 __________________
 
-The **Load Files tab** allows loading AMBER, GROMACS, and NAMD simulation topologies and trajectories compatible with SIRAH force field MD simulations. :ref:`See more details of the tab <loadfiles-devnotes>`.
+The **Load Files tab** allows loading AMBER, GROMACS, and NAMD simulation topologies and trajectories compatible with SIRAH force field MD simulations. See more details of the tab :ref:`here <loadfiles-devnotes>`.
 
 .. note::
     The SIRAH Tools GUI works with VMD in text mode; therefore, it can be used on any system that can be loaded in VMD.
@@ -193,7 +193,7 @@ Upon loading the topology and trajectory information, we can start exploring SIR
 Basic and Advanced MD Analyses
 __________________________________
 
-Here let's select the **Analysis tab**. This tab allows several types of MD simulation analysis using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros. :ref:`See more details of the tab <analysis-devnotes>`.
+Here let's select the **Analysis tab**. This tab allows several types of MD simulation analysis using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros. See more details of the tab :ref:`here <analysis-devnotes>`.
 
 .. tip::
     Check out the `SIRAH Tools tutorial <https://sirahff.github.io/documentation/Tutorials%20sirahtools.html>`_ to learn more about VMD and SIRAH macros and how to use them.
@@ -237,27 +237,10 @@ Click on the "Analyze" button now that it's enabled (Figure 5E). A pop-up window
 
 Once the calculation is complete a new folder *Analysis* is generated in the working directory. 
 
-In this example **13** files are generated into this folder. These correspond to the ``.dat`` files and the plots (``.png`` files, plotting with python) of RMSD, RMSF, SASA, RGYR, RDF and its integral. The remaining files include the PDF report containing the plots of all analyses and a PDB file (``RMSF_protein.pdb``) with the RMSF values.
-
-
-The name of the files consists of a 'root' according to the analysis (e.g. RMSD, RMSF, etc) and concatenated with the selection, in this case 'name GC or name PX':
-
-1. RMSD_name_GC_or_name_PX.dat
-2. RMSF_name_GC_or_name_PX.dat
-3. RGYR_name_GC_or_name_PX.dat
-4. SASA_name_GC_or_name_PX_name_GC_or_name_PX.dat
-5. rdf_name_GC_or_name_PX_name_GC_or_name_PX.dat
-6. RMSD_name_GC_or_name_PX.png
-7. RMSF_name_GC_or_name_PX.png
-8. RGYR_name_GC_or_name_PX.png
-9. SASA_name_GC_or_name_PX_name_GC_or_name_PX.png
-10. rdf_name_GC_or_name_PX_name_GC_or_name_PX_g.png
-11. rdf_name_GC_or_name_PX_name_GC_or_name_PX_integral.png
-12. RMSF_protein.pdb
-13. Analysis_name_GC_or_name_PX.pdf
+In this example **13** files are generated into this folder. These correspond to the ``.dat`` files and the plots (``.png`` files, ploted with python) of RMSD, RMSF, SASA, RGYR, RDF and its integral. The remaining files include the PDF report containing the plots of all analyses and a PDB file (``RMSF_protein.pdb``) with the RMSF values in the Beta factor column.
 
 .. note::
-  The way that the files are named facilitates the analysis of various selections in the same folder. New files are created by different selections, whereas files are rewritten over if the same selection is made again. Nevertheless, a pop-up box will question if the user wants to rewrite the files.
+  The way that the files are named (*Name of the Analysis_selection1_selection2.dat* or *Name of the Analysis_selection1_selection2.png*) facilitates the study of various selections in the same folder. New files are created by different selections, whereas files are rewritten over if the same selection is made again. Nevertheless, a pop-up box will question if the user wants to rewrite the files.
 
 Some of the plots produced by the chosen analyses of the "Analysis" Tab are displayed in Figure 6.
 
@@ -274,7 +257,7 @@ Some of the plots produced by the chosen analyses of the "Analysis" Tab are disp
 Calculating Intermolecular and Intramolecular Contacts
 ___________________________________________________________
 
-Here let's select the **Contacts** tab. This tab allows the analysis of contacts between two selections, using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros, using a cutoff distance as a criterion. :ref:`See more details of the tab <contacts-devnotes>`.
+Here let's select the **Contacts** tab. This tab allows the analysis of contacts between two selections, using VMD syntax selections (e.g. name, resname, resid, etc.) or VMD macros, using a cutoff distance as a criterion. See more details of the tab :ref:`here <contacts-devnotes>`.
 
 To better understand the contact tab, let's split the example into two sections: :ref:`Intermolecular contacts <contacts-inter>` and :ref:`Intramolecular contacts <contacts-intra>`.
 
@@ -393,7 +376,7 @@ _____________________________________
 .. important::
     The SS Analysis tab uses the SIRAH Tools approach to categorize secondary structure elements (Helix, Extended Beta Sheet, or Coil), hence it is exclusively compatible with SIRAH MD simulations.
 
-Here let's select the **SS Analysis** tab. This tab allows performing secondary structure analysis throughout a SIRAH MD simulation using the methodology described in `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. :ref:`See more details of the tab <ssanalysis-devnotes>`.
+Here let's select the **SS Analysis** tab. This tab allows performing secondary structure analysis throughout a SIRAH MD simulation using the methodology described in `SIRAH Tools <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. See more details of the tab :ref:`here <ssanalysis-devnotes>`.
 
 For the NCP trajectory, let's retain the default values for the "First" and "Last" fields (Figure 13A). The analysis will be conducted from the initial frame (1) to the final frame (-1). However, let’s modify the “Selection” field to the SIRAH macro “sirah_protein” and use a 10-frame skip in the trajectory (Figure 13A). This will speed up the calculations and reduce the number of frames from 10.000 to 1.000.
 
@@ -453,7 +436,7 @@ ___________________________
 .. important:: 
    The Backmapping tab uses the SIRAH Tools approach, hence it is exclusively compatible with SIRAH MD simulations. Currently, backmapping libraries contain instructions for solute (proteins, DNA, metal ions, and glycans).
 
-Here let's select the **Backmapping** tab. This tab allows retrieving pseudo-atomistic information from the SIRAH CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. :ref:`See more details of the tab <backmapping-devnotes>`.
+Here let's select the **Backmapping** tab. This tab allows retrieving pseudo-atomistic information from the SIRAH CG model. The atomistic positions are built on a by-residue basis following the geometrical reconstruction (internal coordinates) to AA model. See more details of the tab :ref:`here <backmapping-devnotes>`.
 
 .. caution::
    In the backmapping process, a structure minimization is performed using the `AmberTools <https://pubs.acs.org/doi/10.1021/acs.jcim.3c01153>`_ modules, therefore it is necessary to have configured the ``$AMBERHOME`` environment properly.
@@ -773,10 +756,8 @@ The VMD output area will display the progress of the calculation. Upon completio
 The “Analysis” section buttons will be enabled once the files are created. Four buttons will be available: 
 
 1. **Plot matrix** that plots the ``ss.mtx``. The ``ss.mtx`` file encompasses a matrix that illustrates the variation in the SS of each residue throughout the simulation. This plot displays three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
-
-
+	
 2. **Plot by frame** that plots the ``by_frame.mtx``. The ``by_frame.mtx`` file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
-
 
 3. **Plot by Res** that plots the ``ss_by_res.mtx```. The ``ss_by_res.mtx`` file encompasses the percentage of each SS classification that each residue adopted throughout the simulation. This plot will display three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
 
