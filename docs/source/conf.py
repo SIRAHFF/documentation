@@ -34,7 +34,7 @@ release = ''
 # ones.
 extensions = [
 
-    'sphinx_copybutton'
+    'sphinx_copybutton',
     'sphinxcontrib.googleanalytics'
 
 ]
