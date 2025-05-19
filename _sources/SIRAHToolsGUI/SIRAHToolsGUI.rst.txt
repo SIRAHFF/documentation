@@ -759,8 +759,6 @@ The “Analysis” section buttons will be enabled once the files are created. F
 	
 2. **Plot by frame** that plots the ``by_frame.mtx``. The ``by_frame.mtx`` file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
 
-2. **Plot by frame** that plots the ``by_frame.mtx``. The ``by_frame.mtx`` file encompasses the percentage changes of each SS content throughout the simulation. This plot is a line plot, displaying three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
-
 3. **Plot by Res** that plots the ``ss_by_res.mtx```. The ``ss_by_res.mtx`` file encompasses the percentage of each SS classification that each residue adopted throughout the simulation. This plot will display three colors according to the SS classification: purple for H, yellow for B, and cyan for C.
 
 “Analyze Psi/Phi” launches the “Ramachandran Plot Visualization Tool” interface (Figure 22). This interface allows for the loading of the ``psi.mtx`` and ``phi.mtx`` files via the “Load PSI” and “Load PHI” buttons, respectively. A Ramachandran plot is automatically generated to all chosen frames and can be iterated by using the “Frame” slider or “Go to frame” option.
