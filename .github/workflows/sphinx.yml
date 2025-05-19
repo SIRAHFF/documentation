@@ -17,6 +17,7 @@ jobs:
         run: |
           pip install sphinx sphinx_rtd_theme
           pip install sphinx-copybutton
+	  pip install sphinxcontrib.googleanalytics
       - name: Build docs
         run: |
           cd docs
