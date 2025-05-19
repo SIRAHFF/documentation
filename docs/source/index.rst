@@ -63,6 +63,12 @@ Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-
 
    <a href="https://github.com/SIRAHFF" class="author-social" target="_blank"><i class="fa fa-github" style="font-size:30px;"></i></a>  
 
+.. |Visitors| image:: https://hitscounter.dev/api/hit?url=https%3A%2F%2Fsirahff.github.io%2Fdocumentation%2F&label=Visitors&icon=bar-chart-line&color=%233d8bfd
+   :alt: Visitors counter
+   :target: https://sirahff.github.io/documentation/
+
+|Visitors|
+   
 .. toctree::
    :maxdepth: 2
    :hidden:
@@ -86,3 +92,4 @@ Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-
    Tutorials sirahtools
    Tutorials analysis
    Tutorials sirahgui
+
