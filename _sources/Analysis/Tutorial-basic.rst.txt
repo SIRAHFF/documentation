@@ -128,6 +128,7 @@ The same actions can be taken on the scripting level using the *Tk Console*. Thu
    set outfile [open rmsd_prot.dat w];
 
    #set reference as the first frame using protein backbone as selection
+   set all [atomselect top all]
    set reference [atomselect top "sirah_backbone and sirah_protein" frame 0]
    #set trajectory selection also as the protein backbone
    set compare [atomselect top "sirah_backbone and sirah_protein"]
@@ -138,9 +139,10 @@ The same actions can be taken on the scripting level using the *Tk Console*. Thu
    #calculate RMSD for all frames
    for {set i 0} {$i < $N} {incr i} {
       #get the correct frame
-      $compare frame $i
+      $all frame $i
       #do the alignment
-      $compare move [measure fit $compare $reference]
+      set aling_m  [measure fit $compare $reference]
+      $all move $aling_m 
       #compute the RMSD
       set rmsd [measure rmsd $compare $reference]
 
@@ -190,6 +192,7 @@ Thus, you can create a ``rmsf_protein.tcl`` file to calculate *RMSF* of the prot
    set outfile [open rmsf_prot.dat w];
 
    #set reference and selection of protein
+   set all [atomselect top all]
    set reference [atomselect top "sirah_protein and name GC" frame 0]
    set sel [atomselect top "sirah_protein and name GC"]
 
@@ -199,9 +202,10 @@ Thus, you can create a ``rmsf_protein.tcl`` file to calculate *RMSF* of the prot
    #do the alignment
    for {set i 0} {$i < $N} {incr i} {
       #get the correct frame
-      $sel frame $i
+      $all frame $i
       #do the alignment
-      $sel move [measure fit $sel $reference]
+      set align_m [measure fit $sel $reference]
+      $all move $align_m
    }
 
    #calculate rmsf for all trajectory frames
@@ -244,6 +248,7 @@ For the DNA, you can create a ``rmsf_nucleic.tcl`` file to calculate the *RMSF* 
    set outfile_strand2 [open rmsf_DNA_strand2_tcl.dat w];
 
    #set reference and selection the DNA
+   set all [atomselect top all]
    set reference [atomselect top "residue 234 to 253 and name C5X" frame 0]
    set sel [atomselect top "residue 234 to 253 and name C5X"]
 
@@ -253,9 +258,10 @@ For the DNA, you can create a ``rmsf_nucleic.tcl`` file to calculate the *RMSF* 
    #do the alignment
    for {set i 0} {$i < $N} {incr i} {
       # get the correct frame
-      $sel frame $i
+      $all frame $i
       #do the alignment
-      $sel move [measure fit $sel $reference]
+      set align_m [measure fit $sel $reference]
+      $all move $align_m
    }
 
    set strand1 [atomselect top "residue 234 to 243 and name C5X"]

@@ -200,6 +200,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile [open rmsd_prot.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>frame<span class="w"> </span>using<span class="w"> </span>protein<span class="w"> </span>backbone<span class="w"> </span>as<span class="w"> </span>selection
+<span class="go">set all [atomselect top all]</span>
 <span class="go">set reference [atomselect top &quot;sirah_backbone and sirah_protein&quot; frame 0]</span>
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>trajectory<span class="w"> </span>selection<span class="w"> </span>also<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>backbone
 <span class="go">set compare [atomselect top &quot;sirah_backbone and sirah_protein&quot;]</span>
@@ -210,9 +211,10 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="gp">#</span>calculate<span class="w"> </span>RMSD<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>frames
 <span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
 <span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
-<span class="gp">   $</span>compare<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   $</span>all<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
 <span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
-<span class="gp">   $</span>compare<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$compare</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="go">   set aling_m  [measure fit $compare $reference]</span>
+<span class="gp">   $</span>all<span class="w"> </span>move<span class="w"> </span><span class="nv">$aling_m</span>
 <span class="gp">   #</span>compute<span class="w"> </span>the<span class="w"> </span>RMSD
 <span class="go">   set rmsd [measure rmsd $compare $reference]</span>
 
@@ -254,6 +256,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile [open rmsf_prot.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>of<span class="w"> </span>protein
+<span class="go">set all [atomselect top all]</span>
 <span class="go">set reference [atomselect top &quot;sirah_protein and name GC&quot; frame 0]</span>
 <span class="go">set sel [atomselect top &quot;sirah_protein and name GC&quot;]</span>
 
@@ -263,9 +266,10 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="gp">#</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
 <span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
 <span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
-<span class="gp">   $</span>sel<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   $</span>all<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
 <span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
-<span class="gp">   $</span>sel<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$sel</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="go">   set align_m [measure fit $sel $reference]</span>
+<span class="gp">   $</span>all<span class="w"> </span>move<span class="w"> </span><span class="nv">$align_m</span>
 <span class="go">}</span>
 
 <span class="gp">#</span>calculate<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>trajectory<span class="w"> </span>frames
@@ -303,6 +307,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile_strand2 [open rmsf_DNA_strand2_tcl.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>the<span class="w"> </span>DNA
+<span class="go">set all [atomselect top all]</span>
 <span class="go">set reference [atomselect top &quot;residue 234 to 253 and name C5X&quot; frame 0]</span>
 <span class="go">set sel [atomselect top &quot;residue 234 to 253 and name C5X&quot;]</span>
 
@@ -312,9 +317,10 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="gp">#</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
 <span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
 <span class="gp">   # </span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
-<span class="gp">   $</span>sel<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   $</span>all<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
 <span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
-<span class="gp">   $</span>sel<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$sel</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="go">   set align_m [measure fit $sel $reference]</span>
+<span class="gp">   $</span>all<span class="w"> </span>move<span class="w"> </span><span class="nv">$align_m</span>
 <span class="go">}</span>
 
 <span class="go">set strand1 [atomselect top &quot;residue 234 to 243 and name C5X&quot;]</span>
