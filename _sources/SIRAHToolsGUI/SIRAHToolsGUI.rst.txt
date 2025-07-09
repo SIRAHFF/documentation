@@ -86,7 +86,7 @@ check python version:
 The GUI should launch, allowing you to access all the features.
 
 .. tip::
-     Create an Alias**
+     *Create an Alias*
 
      To simplify usage, add an alias in your shell configuration file (e.g., ~/.bashrc or ~/.zshrc):
 	
