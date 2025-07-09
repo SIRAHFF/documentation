@@ -58,16 +58,6 @@ These dependencies guarantee compatibility and stability across all SIRAH Tools 
 
     cd SIRAH-Tools-GUI/
 
-Unzip file:
-
-.. code-block:: bash
-    
-    unzip SIRAH-Tools-GUI_v1.0.zip
-
-.. code-block:: bash
-    
-    cd SIRAH-Tools-GUI_v1.0/
-
 **2. Create the Conda Environment:**
 
 .. code-block:: bash
@@ -95,21 +85,22 @@ check python version:
 
 The GUI should launch, allowing you to access all the features.
 
-**Optional (Advised): Create an Alias**
+.. tip::
+     Create an Alias**
 
-To simplify usage, add an alias in your shell configuration file (e.g., ~/.bashrc or ~/.zshrc):
-
-.. code-block:: bash
-    
-    alias sirah-gui="conda activate sirah-gui && python ``/path/to/SIRAH-Tools-GUI/sirah-tools-gui.py``
-
-Be sure to set ``/path/to/SIRAH-Tools-GUI/sirah-tools-gui.py`` to the right path on your computer.
-
-After reloading your shell, simply run:
-
-.. code-block:: bash
-    
-    sirah-gui
+     To simplify usage, add an alias in your shell configuration file (e.g., ~/.bashrc or ~/.zshrc):
+	
+     .. code-block:: bash
+	    
+	    alias sirah-gui="conda activate sirah-gui && python ``/path/to/SIRAH-Tools-GUI/sirah-tools-gui.py``
+	
+     Be sure to set ``/path/to/SIRAH-Tools-GUI/sirah-tools-gui.py`` to the right path on your computer.
+	
+     After reloading your shell, simply run:
+	
+     .. code-block:: bash
+	    
+	   sirah-gui
 
 If everything went as planned, you should be able to launch the SIRAH Tools GUI interface (Figure 2) and use all of its features. 
 

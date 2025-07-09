@@ -145,13 +145,6 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>SIRAH-Tools-GUI/
 </pre></div>
 </div>
-<p>Unzip file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>SIRAH-Tools-GUI_v1.0.zip
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>SIRAH-Tools-GUI_v1.0/
-</pre></div>
-</div>
 <p><strong>2. Create the Conda Environment:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>env_sirah_tools.yml
 </pre></div>
@@ -169,7 +162,9 @@
 </pre></div>
 </div>
 <p>The GUI should launch, allowing you to access all the features.</p>
-<p><strong>Optional (Advised): Create an Alias</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Create an Alias**</p>
 <p>To simplify usage, add an alias in your shell configuration file (e.g., ~/.bashrc or ~/.zshrc):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span>sirah-gui<span class="o">=</span><span class="s2">&quot;conda activate sirah-gui &amp;&amp; python ``/path/to/SIRAH-Tools-GUI/sirah-tools-gui.py``</span>
 </pre></div>
@@ -178,6 +173,7 @@
 <p>After reloading your shell, simply run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sirah-gui
 </pre></div>
+</div>
 </div>
 <p>If everything went as planned, you should be able to launch the SIRAH Tools GUI interface (Figure 2) and use all of its features.</p>
 <figure class="align-center" id="id12">
