@@ -187,7 +187,7 @@ Upon loading the topology and trajectory information, we can start exploring SIR
 
    A topology file is always required in the SIRAH Tools GUI in order for VMD to identify the connectives between SIRAH beads. However, to utilize the tool with an atomistic system with a pdb or a multipdb file trajectory, you must         first create a topology file before loading files in the SIRAH Tools GUI.
 
-	We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://cgenff.com/>`_.
+   We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If      there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://      cgenff.com/>`_.
 
 Basic and Advanced MD Analyses
 __________________________________
