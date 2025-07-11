@@ -182,7 +182,12 @@ If all went well, you should be able to click the “View in VMD” button (Figu
 Upon loading the topology and trajectory information, we can start exploring SIRAH Tools GUI's available analysis.
 
 .. tip::
-   A topology file is always required in the SIRAH Tools GUI in order for VMD to identify the connectives between SIRAH beads. However, to utilize the tool with an atomistic system with a pdb or a multipdb file trajectory, you must         first create a topology file before loading files in the SIRAH Tools GUI. We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://cgenff.com/>`_.
+
+   **Working with PDB files**
+
+   A topology file is always required in the SIRAH Tools GUI in order for VMD to identify the connectives between SIRAH beads. However, to utilize the tool with an atomistic system with a pdb or a multipdb file trajectory, you must         first create a topology file before loading files in the SIRAH Tools GUI.
+
+	We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://cgenff.com/>`_.
 
 Basic and Advanced MD Analyses
 __________________________________
@@ -576,7 +581,12 @@ Optionally, the user can load a reference structure (pdb or gro format are suppo
     Use caution regarding excessively big or heavy trajectories. To minimize computer memory usage, SIRAH Tools GUI terminates VMD after completing an analysis on a tab. This indicates that if the analysis requires repetition or the user navigates to a different tab, the trajectory file will be reloaded in both scenarios. Therefore, we advise utilizing the skip frame options in the tabs (when available) or reducing the system size (for example, by eliminating solvent molecules) to decrease the loading time.
 
 .. tip::
-   A topology file is always required in the SIRAH Tools GUI in order for VMD to identify the connectives between SIRAH beads. However, to utilize the tool with an atomistic system with a pdb or a multipdb file trajectory, you must         first create a topology file before loading files in the SIRAH Tools GUI. We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://cgenff.com/>`_.
+
+   **Working with PDB files**
+
+   A topology file is always required in the SIRAH Tools GUI in order for VMD to identify the connectives between SIRAH beads. However, to utilize the tool with an atomistic system with a pdb or a multipdb file trajectory, you must         first create a topology file before loading files in the SIRAH Tools GUI.
+
+	We advise you to utilize VMD's AutoPSF tool (Extensions > Modelling > Automatic PSF Builder) to do this.  Be sure to import all of the parameters required by      AutoPSF, such as the parameters for every molecule in the system. If there are ligands or cofactors present, try generating the parameters with the CGENFF server. For further information, visit `AutoPSF doc <https://www.ks.uiuc.edu/Research/vmd/plugins/autopsf/>`_ and `cgenff documentation <https://cgenff.com/>`_.
 
 .. _analysis-devnotes:
 
