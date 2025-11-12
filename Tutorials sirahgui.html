@@ -29,6 +29,7 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=f281be69"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -303,7 +304,7 @@
 </div>
 <p>For the <strong>Basic Analysis</strong> section, write “name GC or name PX” at the Selection box. Then check the boxes for RMSD, RMSF, and Radius of Gyration (RGYR) (Figure 5A).</p>
 <figure class="align-center" id="id18">
-<a class="reference internal image-reference" href="_images/Figure_5_SirahGui.png"><img alt="_images/Figure_5_SirahGui.png" src="_images/Figure_5_SirahGui.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="_images/Figure_5_SirahGui_new.png"><img alt="_images/Figure_5_SirahGui_new.png" src="_images/Figure_5_SirahGui_new.png" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 5.</strong> Analysis tab settings for analyses using “name GC or name PX” beads. A) Basic Analysis selection for the NCP system. B) Advanced Analysis selection for the NCP system. C) Selected options in the “Generate Report” section. D) No reference structure was imported, and the options “Time step” and “Step between frames” were set to the default values. However, a 10 frame skip was used. E) The “Analyze” button will perform all the selected actions. F) Only when an analysis is underway is the “Stop” button activated, and pressing it will halt the analysis’s progress.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
@@ -320,7 +321,8 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All the analyses are selected except “Distance”. This is because “Distance” can only be found between two distinct selections (two distinct beads, two distinct residues, two distinct molecules, etc). Choosing “name GC or name PX” in both boxes will give a zero distance because it is the same group of beads.</p>
+<p>All the analyses are selected except “Distance” and “Contact surface”. This is because “Distance” can only be found between two distinct selections (two distinct beads, two distinct residues, two distinct molecules, etc). Choosing “name GC or name PX” in both boxes will give a zero distance because it is the same group of beads.</p>
+<p>For “Contact surface” area, the analysis calculates the contact surface area between two molecular selections A and B (e.g., protein–protein, protein–DNA, protein–lipid) across a molecular dynamics trajectory. The contact surface area refers to the portion of the solvent-accessible surface that becomes buried upon interaction between the two selections. Please note that selecting “Contact surface” will disable SASA, and vice versa.</p>
 </div>
 <p>For the <strong>Generate Report</strong> section, check both <em>Generate PDF report</em> and <em>rmsf into pdb bfactor</em> (Figure 5C).</p>
 <div class="admonition note">
@@ -654,14 +656,14 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 </section>
 <section id="analysis">
 <span id="analysis-devnotes"></span><h3>Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h3>
-<p>The <strong>Analysis</strong> tab allows several types of MD simulation analysis (Figure 19). Basic (RMSD, RMSF, and Radius of Gyration (RGYR) and advanced analyses (SASA, measuring the distances between two beads, and Radial Distribution Functions (RDF) are available.</p>
+<p>The <strong>Analysis</strong> tab allows several types of MD simulation analysis (Figure 19). Basic (RMSD, RMSF, and Radius of Gyration (RGYR)) and advanced analyses (SASA, measuring the distances between two beads, Radial Distribution Functions (RDF), and Contact surface area) between two selections are available.</p>
 <p>The number of selection entries that the user must provide is where basic and advanced analysis diverge. While up to two entries can be made for advanced analysis, only one selection entry is required for basic analysis. VMD syntax selections (e.g. name, resname, resid, etc.) or VMD/SIRAH macros must be entered in all selection boxes.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Check out the <a class="reference external" href="https://sirahff.github.io/documentation/Tutorials%20sirahtools.html">SIRAH Tools tutorial</a> to learn more about VMD and SIRAH macros and how to use them.</p>
 </div>
 <figure class="align-center" id="id32">
-<a class="reference internal image-reference" href="_images/Figure_19_SirahGui.png"><img alt="_images/Figure_19_SirahGui.png" src="_images/Figure_19_SirahGui.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="_images/Figure_19_SirahGui_new.png"><img alt="_images/Figure_19_SirahGui_new.png" src="_images/Figure_19_SirahGui_new.png" style="width: 100%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><strong>Figure 19.</strong> The “Analysis” tab performs and plots common MD analysis routines.</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
@@ -670,6 +672,10 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The “Analyze” button will only be enabled if one or more options are selected in either the Basic Analysis or Advanced Analysis sections, but you are not required to check every checkbox.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The “Contact surface” area checkbox will only be activated if the SASA checkbox is not selected, and vice versa.  This is due to the fact that the calculation utilizes a standard method involving SASA implemented within VMD, which may affect the outcomes of the conventional SASA computation.</p>
 </div>
 <p>The following information is used to calculate Basic Analysis options in SIRAH Tools GUI:</p>
 <ul class="simple">
@@ -681,20 +687,53 @@ Keep in mind that the minimized structures sometimes may differ from the CG traj
 <ul class="simple">
 <li><p><strong>RGYR:</strong> the VMD measure command is used to calculate RGYR (<a class="reference external" href="http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html">see VMD measure</a> ). This command returns the radius of gyration of atoms in the selection. The calculation is done for all frames.</p></li>
 </ul>
+<p>The following information is used to calculate <em>Advanced Analysis</em> options in SIRAH Tools GUI:</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>It is necessary to fill out both selections in the <em>Advanced Analysis</em>.</p>
 </div>
-<p>The following information is used to calculate <em>Advanced Analysis</em> options in SIRAH Tools GUI:</p>
 <ul class="simple">
 <li><p><strong>SASA:</strong> the VMD measure command is used to calculate SASA (<a class="reference external" href="http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html">see VMD measure</a>). So, a selection in VMD syntax (e.g. name, resname, resid, etc.) or VMD/SIRAH macro is needed to calculate SASA (Selection2). There is, however, a restrictedsel flag in the command as well, implemented here as the second selection (Selection3). This flag limits the calculation to the solvent-accessible points close to this restricted region. This keeps protein voids or pockets inside the protein from affecting the surface area values. For the SIRAH Tools GUI, the restrictedsel flag is not used if Selection2 and Selection3 are the same. If they are different, however, Selection3 will be used as the restrictedsel flag. Refer to the <a class="reference external" href="https://sirahff.github.io/documentation/Tutorials%20analysis.html#sasa">Basic Analyses VMD tutorials SASA section</a> .</p></li>
 </ul>
 <ul class="simple">
-<li><p><strong>RDF:</strong> the VMD measure command is used to calculate Radial Distribution Function (RDF) (<a class="reference external" href="http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html">see VMD measure</a>). Given that typical RDF is calculated between two items, both Selection2 and Selection3 must be defined and have to reference the same molecule. However, Selections 2 and 3 may be the same or dissimilar. Very complex distribution functions can be calculated thanks to the strength of VMD’s selection language syntax. In addition, here, the maximum radius to calculate RDF is set to 12 Å.</p></li>
-</ul>
-<ul class="simple">
 <li><p><strong>Distance:</strong> to determine the distance between the selections, SIRAH Tools GUI computes their center of mass using the VMD measure command (<a class="reference external" href="http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html">see VMD measure</a>). Therefore, only two distinct selections—for example, two distinct atoms or beads, two distinct residues, two distinct molecules, etc.—can be used to calculate the “Distance” option. If they are identical molecules, residues, beads, or atoms, meaning using the same selection in both selection boxes, will result in a zero value to all frames.</p></li>
 </ul>
+<ul class="simple">
+<li><p><strong>RDF:</strong> the VMD measure command is used to calculate Radial Distribution Function (RDF) (<a class="reference external" href="http://www-s.ks.uiuc.edu/Research/vmd/vmd-1.9.1/ug/node136.html">see VMD measure</a>). Given that typical RDF is calculated between two items, both Selection2 and Selection3 must be defined and have to reference the same molecule. However, Selections 2 and 3 may be the same or dissimilar. Very complex distribution functions can be calculated thanks to the strength of VMD’s selection language syntax. In addition, here, the maximum radius to calculate RDF is set to 12 Å.</p></li>
+</ul>
+<ul>
+<li><p><strong>Contact surface area:</strong> this analysis calculates the contact surface area between two molecular selections A and B across a molecular dynamics trajectory. The contact surface area refers to the portion of the solvent-accessible surface that becomes buried upon interaction between two selections (e.g., protein–protein, protein–DNA, protein–lipid). It provides an estimate of the physical interface between the interacting molecular components. The calculation is based on a standard approach that uses solvent-accessible surface area (SASA) implemented in VMD  values as intermediate quantities. Specifically, the contact area is computed as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[Contact Area_{AB} = 0.5 * [SASA_{A} + SASA_{B} - SASA_{AUB}]\]</div>
+</div></blockquote>
+</li>
+</ul>
+<blockquote>
+<div><p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SASA_A\)</span>  is the solvent-accessible surface area of the first selection (Selection A),</p></li>
+<li><p><span class="math notranslate nohighlight">\(SASA_B\)</span> is the solvent-accessible surface area of the second selection (Selection B),</p></li>
+<li><p><span class="math notranslate nohighlight">\(SASA_{AUB}\)</span> is the SASA of the combined selection (Selection A ∪ Selection B).</p></li>
+</ul>
+<p>This formulation captures the surface that becomes occluded (no longer solvent-accessible) when the two regions are brought into contact. The use of SASA in this context does not aim to characterize exposure per se, but to isolate the shared interface area by quantifying the reduction in accessible surface upon complex formation.</p>
+<p>The analysis requires two selections in VMD or SIRAH macros syntax (e.g., <code class="docutils literal notranslate"><span class="pre">resname</span></code>, <code class="docutils literal notranslate"><span class="pre">chain</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code>) and a probe radius, typically 2.1 Å for SIRAH.</p>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The spatial proximity threshold used to define a contact— i.e., whether atoms or beads are close enough to be considered in contact— is defined by a distance cutoff. For SIRAH simulations, this default distance is set to 6.1 Å, which approximates the smallest separation at which water beads (WAT4) can be placed between interacting surfaces.</p>
+<p>For all-atom representations, more stringent values such as 4.0–5.0 Å are commonly used to capture tighter contacts.
+In SIRAH-Tools GUI, this distance can be customized by the user. The default value is found in the TCL script: <code class="docutils literal notranslate"><span class="pre">SIRAH-Tools-GUI/TCL/sirah_analysis.tcl</span></code>, near the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contact distance within A and B</span>
+<span class="nb">set</span> <span class="n">dist</span> <span class="mf">6.1</span>
+</pre></div>
+</div>
+<p>To change the contact definition to a stricter threshold (e.g., 4.5 Å), the user can edit the file and replace the default value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">dist</span> <span class="mf">4.5</span>
+</pre></div>
+</div>
+<p>After saving the file, rerunning the contact surface analysis will use the new threshold value. This gives users full control over how interatomic or interbead proximity is defined, allowing adaptation to different levels of resolution or specific interaction criteria.</p>
+</div>
 <p>The “Generate Report” section also offers two options: if the “Generate PDF report” option is chosen, a PDF with all plots of the chosen analyses will be created. If the “rmsf into pdb bfactor” is checked, a PDB file with the RMSF values in the Beta factor column is created using the first frame coordinates.</p>
 <p>There are further options in the “Parameters” section. While the “Skip” option relates to skipping frames when performing an analysis, the “Time Step” and “Step Between Frames”, which are retrieved from the “Load Files” page, can also be changed here. These parameters should be entered properly since they will have an impact on the plot labels.</p>
 <div class="admonition note">
