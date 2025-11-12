@@ -116,13 +116,13 @@ If everything went as planned, you should be able to launch the SIRAH Tools GUI 
 Example of how to use
 ----------------------
 
-This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are **Ballesteros-Casallas et al [Manuscript in Preparation]** and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The Nucleosome Core Particle (NCP) used here was previously discussed by `Brandner et al <https://doi.org/10.1016/j.bbrc.2017.09.086>`_ and  `Cantero et al <https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278>`_. We strongly advise you to read these articles before starting this tutorial.
+This example shows how to analyze trajectory files using SIRAH Tools GUI. The main reference for this example are `Ballesteros-Casallas et al. <https://pubs.acs.org/doi/10.1021/acs.jcim.5c01226>`_ and `Machado & Pantano <https://academic.oup.com/bioinformatics/article/32/10/1568/1743152>`_. The Nucleosome Core Particle (NCP) used here was previously discussed by `Brandner et al <https://doi.org/10.1016/j.bbrc.2017.09.086>`_ and  `Cantero et al <https://pubs.acs.org/doi/10.1021/acs.jpcb.4c03278>`_. We strongly advise you to read these articles before starting this tutorial.
 
 .. warning::
-    Before you can use SIRAH Tools GUI, trajectory files need to be prepared to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, see `Amber <https://amberhub.chpc.utah.edu/autoimage/>`_, `GROMACS <https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html>`_, or `NAMD <https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/>`_ tutorials.  
+    Before using SIRAH Tools GUI, we suggest that you prepare the trajectory files to take into account Periodic Boundary Conditions (PBC). For examples of how to do this, see `Amber <https://amberhub.chpc.utah.edu/autoimage/>`_, `GROMACS <https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html>`_, or `NAMD <https://www.ks.uiuc.edu/Research/vmd/plugins/pbctools/>`_ tutorials.  
 
 .. note::
-    Apart from the **“Load Files”** tab that needs to be the first tab, the other tabs don't need to follow an order. This means that the user can choose any of the tabs to do analysis without having to go through the others.
+    Apart from the **“Load Files”** tab that needs to be the first tab, the other tabs don't need to follow an order. This means that you can choose any of the tabs to do analysis without having to go through the others.
 
 
 Loading Files tab
