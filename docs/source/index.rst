@@ -90,6 +90,5 @@ Follow us in our social media profiles: |google-sirah| |youtube-sirah| |twitter-
    Tutorials gromacs
    Tutorials namd
    Tutorials sirahtools
-   Tutorials analysis
    Tutorials sirahgui
 

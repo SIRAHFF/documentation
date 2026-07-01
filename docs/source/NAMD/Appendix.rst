@@ -1,4 +1,4 @@
-Recompiling Namd
+Recompiling NAMD
 ________________________________
 
 If careful comparisons of the energies in NAMD and Amber are desired, the NAMD source code must be modified to use the same conversion factors, particularly to convert the electrostatic interactions to kcal/mol. These constants depend on the program:
