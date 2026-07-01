@@ -68,7 +68,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20gromacs.html">GROMACS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20namd.html">NAMD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahtools.html">SIRAH tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Tutorials%20analysis.html">Basic analyses VMD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Tutorials%20sirahgui.html">SIRAH Tools GUI</a></li>
 </ul>
 
@@ -113,7 +112,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <section id="visualization-of-cg-systems">
 <h1>Visualization of CG systems<a class="headerlink" href="#visualization-of-cg-systems" title="Link to this heading"></a></h1>
 <p>One of the features of the SIRAH Tools plugin for VMD, <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code>, is that it improves the visualization and analysis of SIRAH’s CG trajectories. This plugin sets the correct van der Waals radii, sets the correct coloring code by atom and residue types, and has macros for selecting molecular components on SIRAH trajectories.</p>
-<p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <span class="xref std std-ref">Amber</span>, <a class="reference internal" href="../Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="../Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
+<p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <a class="reference internal" href="../Tutorials%20amber.html#amber1"><span class="std std-ref">AMBER</span></a>, <a class="reference internal" href="../Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="../Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
 </pre></div>
 </div>
@@ -136,7 +135,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>The output will be the following:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_help &lt;&lt;&lt;&lt;</span>
 
-<span class="go">Manual version: 1.1 \[Mar 2019\]</span>
+<span class="go">Manual version: 1.2 \[Mar 2026\]</span>
 
 <span class="go">Description:</span>
 
@@ -156,19 +155,20 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is not loaded in VMD, the trajectory will still be loaded, but the correct bead sizes, residue types, charges, etc. will not be generated (see <strong>Figure 1</strong>).</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="../_images/sirah_tools_1.png"><img alt="../_images/sirah_tools_1.png" src="../_images/sirah_tools_1.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 1.</strong> SIRAH CG simulation loaded in VMD. A) The trajectory imported without the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> plugin. B) Trajectory imported using the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> plugin.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 1.</strong> SIRAH CG simulation loaded in VMD. A) The trajectory imported without the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> plugin. B) Trajectory imported using the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> plugin.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="sirah-macros">
 <h2>SIRAH macros<a class="headerlink" href="#sirah-macros" title="Link to this heading"></a></h2>
-<p>In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code>, 10 macros are available:</p>
+<p>In VMD, a macro is a text that represents a selection. Macros are a useful feature of VMD when you use certain selections often. In the SIRAH Tools plugin for VMD, <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code>, 11 macros are available:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_membrane</span></code> - select only lipid residues;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> - select only acid nucleic residues;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sirah_glycan</span></code> - select only glycan residues</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> - select only protein residues;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_basic</span></code> - select only basic amino acid residues;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_acidic</span></code> - select only acidic amino acid residues;</p></li>
@@ -179,11 +179,11 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <li><p><code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> - select all ions available in the force field (KW, NaW, ClW, MgX, CaX, and ZnX).</p></li>
 </ul>
 <p>To use any SIRAH macro, go to <em>Graphics</em> &gt; <em>Representations</em> (See <strong>Figure 2</strong>) and click on the <em>Create Rep</em> button. In the <em>Selected Atoms</em> box, erase the text that appears there and type any of the available macros above.</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="../_images/sirah_tools_2.png"><img alt="../_images/sirah_tools_2.png" src="../_images/sirah_tools_2.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 2.</strong> Our trajectory loaded in VMD with the default representation and without any selection.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 2.</strong> Our trajectory loaded in VMD with the default representation and without any selection.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition tip">
@@ -191,19 +191,19 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>To see all available VMD’s <em>Singlewords</em>, click on the <em>Selections</em> tab in the <em>Graphics</em> &gt; <em>Representations</em> window and look through the <em>Singlewords</em> panel. You can also double-click on a singleword, and then, click on the <em>Apply</em> button to use a VMD Macro.</p>
 </div>
 <p>Since our system is a protein−DNA complex with coordinating magnesium ions, you can use four macros: <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> (see <strong>Figure 3A</strong>), <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> (see <strong>Figure 3B</strong>), <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> (see <strong>Figure 3C</strong>), and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> (see <strong>Figure 3D</strong>).</p>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="../_images/sirah_tools_3.png"><img alt="../_images/sirah_tools_3.png" src="../_images/sirah_tools_3.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 3.</strong> Each of the macros of our systems shown as a single image. A) The <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> macro using <em>Licorice</em> as <em>Drawing Method</em>. The backbone beads of the protein are pink, and the sidechains ones are blue when using the <em>Coloring Method</em> Name. B) The <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> macro using the <em>Licorice</em> as <em>Drawing Method</em>. For the DNA, the backbone beads PX, C5X, and O3’ are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the <em>Coloring Method</em> Name. C) The <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> macro using the <em>CPK</em> as <em>Drawing Method</em>. In this system, only WT4 was used and is colored green by the <em>Coloring Method</em> Name. D) The <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> macro using the <em>VDW</em> as <em>Drawing Method</em>. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the <em>Coloring Method</em> Name.</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 3.</strong> Each of the macros of our systems shown as a single image. A) The <code class="docutils literal notranslate"><span class="pre">sirah_protein</span></code> macro using <em>Licorice</em> as <em>Drawing Method</em>. The backbone beads of the protein are pink, and the sidechains ones are blue when using the <em>Coloring Method</em> Name. B) The <code class="docutils literal notranslate"><span class="pre">sirah_nucleic</span></code> macro using the <em>Licorice</em> as <em>Drawing Method</em>. For the DNA, the backbone beads PX, C5X, and O3’ are colored dark yellow, cyan, and red, respectively, and the sidechain ones are colored red and blue using the <em>Coloring Method</em> Name. C) The <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> macro using the <em>CPK</em> as <em>Drawing Method</em>. In this system, only WT4 was used and is colored green by the <em>Coloring Method</em> Name. D) The <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code> macro using the <em>VDW</em> as <em>Drawing Method</em>. The ClW, NaW, and MgW ions are colored cyan, blue, and purple, respectively, when using the <em>Coloring Method</em> Name.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>To use all representations together, just create different representations for each one (clicking on the <em>Create Rep</em> button in the <em>Graphics</em> &gt; <em>Representations</em> window). Your protein-DNA complex should now look similar to the one in <strong>Figure 4</strong>.</p>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="../_images/sirah_tools_4.png"><img alt="../_images/sirah_tools_4.png" src="../_images/sirah_tools_4.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 4.</strong> Our protein-DNA complex after using the SIRAH macros <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. To improve visualization, we used Licorice as <em>Drawing Method</em> for <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code> and CPK for <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. In addition, the <em>Material</em> of the water beads was changed to Ghost and we hid some elements of the system.</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 4.</strong> Our protein-DNA complex after using the SIRAH macros <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code>, <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. To improve visualization, we used Licorice as <em>Drawing Method</em> for <code class="docutils literal notranslate"><span class="pre">sirah_backbone</span></code> and CPK for <code class="docutils literal notranslate"><span class="pre">sirah_water</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_ions</span></code>. In addition, the <em>Material</em> of the water beads was changed to Ghost and we hid some elements of the system.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition tip">
@@ -371,11 +371,11 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>In the case of HEX code usage, quotation marks are required.</p>
 </div>
 <p>The script generates the plots shown in <strong>Figure 5</strong>, remember that you must plot one by one, selecting the filename according to your interest.</p>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/sirah_tools_5.png"><img alt="../_images/sirah_tools_5.png" src="../_images/sirah_tools_5.png" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 5.</strong> Outcomes of <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> where the secondary structural elements α-helix (H), extended β-sheet (E), and coil (C) are colored purple, yellow, and blue, respectively. A) The <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> matrix plot shows the protein’s secondary structure transitions during the 3.0 μs MD simulation. B)  The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each frame of the 3.0 μs MD simulation. C) The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each residue during the 3.0 μs MD simulation. Here, we put the three plots together and edited the figure to use only one legend. However, the script makes three separate plots, each with its own legend.</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 5.</strong> Outcomes of <code class="docutils literal notranslate"><span class="pre">plot_ss.py</span></code> where the secondary structural elements α-helix (H), extended β-sheet (E), and coil (C) are colored purple, yellow, and blue, respectively. A) The <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> matrix plot shows the protein’s secondary structure transitions during the 3.0 μs MD simulation. B)  The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each frame of the 3.0 μs MD simulation. C) The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> plot shows the three secondary structure elements (H, E, and C) percentages by each residue during the 3.0 μs MD simulation. Here, we put the three plots together and edited the figure to use only one legend. However, the script makes three separate plots, each with its own legend.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -402,29 +402,31 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>The output will be the following:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; sirah_backmap &lt;&lt;&lt;&lt;</span>
 
-<span class="go">version: 1.0 [Nov 2015]</span>
+<span class="go">version: 2.0 \[Mar 2026\]</span>
 
 <span class="go">Description:</span>
 
-<span class="go">  Command to recover atomistic information from coarse-grained or multiscale</span>
-<span class="go">  systems.</span>
+<span class="go">          Command to recover atomistic information from coarse-grained or multiscale</span>
+<span class="go">          systems.</span>
 
-<span class="go">  Geometric operations are applied to reconstruct the atomic coordinates then</span>
-<span class="go">  a minimization is performed to refine the structure of the system.</span>
-<span class="go">  The minimization requires AMBERTOOLS 14 (free at http://ambermd.org/)</span>
-<span class="go">  or later properly installed. MPI option requires mpirun and parallel</span>
-<span class="go">  compilation of AMBER code. Be aware that small systems may fail to run or</span>
-<span class="go">  converge in parallel execution due to decomposition problems. Notice, the</span>
-<span class="go">  cuda version requires installing the AMBER licensed suite.</span>
+<span class="go">          Geometric operations are applied to reconstruct the atomic coordinates then</span>
+<span class="go">          a minimization is performed to refine the structure of the system.</span>
+<span class="go">          The minimization requires AMBERTOOLS 22 (free at http://ambermd.org/)</span>
+<span class="go">          or later properly installed. MPI option requires mpirun and parallel</span>
+<span class="go">          compilation of AMBER code. Be aware that small systems may fail to run or</span>
+<span class="go">          converge in parallel execution due to decomposition problems. Notice, the</span>
+<span class="go">          cuda version requires installing the AMBER licensed suite.</span>
 
-<span class="go">  By default, the force field ff14SB is used for the atomistic refinement,</span>
-<span class="go">  any residue or unit not defined within it will generate an execution error.</span>
-<span class="go">  The minimization protocol consists on 100+50 steps of steepest descent and</span>
-<span class="go">  conjugate gradient in vacuum conditions with a 0.12 nm cut-off for</span>
-<span class="go">  electrostatic.</span>
+<span class="go">          By default the ff14SB force field is used for the atomistic refinement,</span>
+<span class="go">          any residue or unit not defined within it will generate an execution error.</span>
+<span class="go">          However, some non-standard topologies are provided with AMBERTOOLS, in the</span>
+<span class="go">          AAparams folder. Additionally, users can add their own topologies to be</span>
+<span class="go">          read using the flag customdir. The minimization protocol consists on</span>
+<span class="go">          100+50 steps of steepest descent and conjugate gradient in vacuum conditions</span>
+<span class="go">          with a 0.12 nm cut-off for electrostatic.</span>
 
-<span class="go">  The current command version does not support PBC options, so make sure the</span>
-<span class="go">  molecules are whole before running the backmap.</span>
+<span class="go">          The current command version does not support PBC options, so make sure the</span>
+<span class="go">          molecules are whole before running the backmap.</span>
 
 <span class="go">Usage: sirah_backmap [options]</span>
 
@@ -448,6 +450,8 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 
 <span class="go">  nomin     Flag to avoid minimizing the system.</span>
 
+<span class="go">          lipid     Flag to perform lipid backmapping.</span>
+
 <span class="go">  mpi       MPI processes to use during minimization, default 1.</span>
 
 <span class="go">  cuda      Flag to use pmemd.cuda, sets gbsa on, cutoff to 999 and no MPI.</span>
@@ -460,23 +464,45 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 
 <span class="go">  ncyc      Set the initial number of steepest descent steps, default 100.</span>
 
+<span class="go">          customdir Set a custom directory to the AAPetiteSirah non-standard amber topologies.</span>
+
 <span class="go">  help      Display help and exit.</span>
+
+<span class="go">  Examples:</span>
+
+<span class="go">   1.     Backmap one every 100 frames of molecule 2, only solute</span>
+<span class="go">          sirah_backmap each 100 mol 2</span>
+
+<span class="go">   2. Backmap current frame of molecule 3, including lipids and</span>
+<span class="go">          extending minimization steps to improve convergency</span>
+<span class="go">          sirah_backmap now mol 3 lipid maxcyc 250 ncyc 200</span>
+
+<span class="go">   3. Backmap current frame of top molecule, including non-standard</span>
+<span class="go">          amber topologies with a user defined path</span>
+<span class="go">          sirah_backmap now customdir /home/yourpath/sirah.amber/AAparams</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, backmapping libraries contain instructions for solute (proteins, DNA, and metal ions).</p>
+<p>Currently, backmapping libraries contain instructions for solute (proteins, DNA, lipids, metal ions, nucleotides (ATP, ADP, AMP, GDP, GTP, cAMP, and cGMP), and some non-standard Amino Acids available in SIRAH).</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The latest version of <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> (March 2026) introduces two new flags: <code class="docutils literal notranslate"><span class="pre">lipid</span></code> and <code class="docutils literal notranslate"><span class="pre">customdir</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lipid</span></code> flag enables backmapping of lipid molecules. To use it, you’ll need <strong>AMBERTOOLS 22 or later</strong> installed, since the process relies on the Lipid21 force field.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">customdir</span></code> flag was designed to make it easier to include new molecules in the backmapping workflow, following the <strong>Petite SIRAH</strong> implementation. Petite SIRAH is still in its early stages, but starting from <strong>AMBERTOOLS 26</strong>, a few non-standard topologies are already available for backmapping, such as nucleotides and non-standard amino acids. In this case, the file <code class="docutils literal notranslate"><span class="pre">$env(AMBERHOME)/dat/SIRAH/AAparams/leaprc.AApetitesirah</span></code> will be used automatically to handle those topologies.</p>
+<p>If you’ve created your own molecules and added them to <code class="docutils literal notranslate"><span class="pre">leaprc.AApetitesirah</span></code>, you can point to your custom directory (e.g., <code class="docutils literal notranslate"><span class="pre">/home/yourpath/sirah.amber/AAparams</span></code>) using the <code class="docutils literal notranslate"><span class="pre">customdir</span></code> flag, so your new molecules can be included in the backmapping routine without any extra hassle. You need to use the absolute path, meaning the complete and exact location of the directory starting from the root directory (/) to the flag.</p>
 </div>
 <p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> are documented in this help. By default, all trajectory frames are used. Due to the fact that our protein-DNA complex is a 3.0 μs MD simulation with 30,000 frames, processing the entire trajectory could take some time. Thus, we chose to analyze the trajectory by extracting one frame every 1,000 frames with the <code class="docutils literal notranslate"><span class="pre">each</span></code> option. To do that you type:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_backmap each 1000</span>
 </pre></div>
 </div>
 <p>The output is a 300-frame file named <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code>. This file is displayed as an animated GIF in <strong>Figure 6</strong>.</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="../_images/backmapping_bad.gif"><img alt="../_images/backmapping_bad.gif" src="../_images/backmapping_bad.gif" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 6.</strong> The 300-frame backmapped all-atom output from the 3.0 μs MD simulation using the default minimization arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 6.</strong> The 300-frame backmapped all-atom output from the 3.0 μs MD simulation using the default minimization arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition warning">
@@ -486,11 +512,11 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p>An example of this behavior is explained below.</p>
 </div>
 <p>The original atomistic PDB file shows that a few nucleotides at the DNA molecule’s extremities are unpaired, allowing them to interact with neighboring molecules. Since we used this original PDB file to generate our CG representation, we anticipated that the unpaired nucleotides would exhibit a flexible behavior. However, in the backmapped PDB file, you can observe that the DNA extremities undergo unusual deformations and movements. These events are not observed in the CG simulation, as shown in <strong>Figure 7</strong>.</p>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="../_images/CG.gif"><img alt="../_images/CG.gif" src="../_images/CG.gif" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 7.</strong> The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unreal behavior at the DNA extremities.</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 7.</strong> The same 300-frame trajectory from the 3.0 μs MD simulation in CG representation does not show the unreal behavior at the DNA extremities.</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>In most cases, the default parameters of 100 steps of steepest descent (<code class="docutils literal notranslate"><span class="pre">ncyc</span></code>) and 50 steps of conjugate gradient (total of 150 <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> steps) in vacuum conditions are sufficient to produce a correct result. However, in this instance, they produced artifactual conformations that were absent in the CG simulation. To solve this, you can modify the total minimization steps to 50 for <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> and to 25 for <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> as follows:</p>
@@ -502,11 +528,11 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </pre></div>
 </div>
 <p>The output is a new 300-frame file named <code class="docutils literal notranslate"><span class="pre">backmap.pdb</span></code>, displayed as an animated GIF in <strong>Figure 8</strong>, exhibiting a similar behavior to the CG representation simulation.</p>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id12">
 <a class="reference internal image-reference" href="../_images/backmapping_ok.gif"><img alt="../_images/backmapping_ok.gif" src="../_images/backmapping_ok.gif" style="width: 100%;" />
 </a>
 <figcaption>
-<p><span class="caption-text"><strong>Figure 8.</strong> The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> and <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>Figure 8.</strong> The final 300-frame backmapped output from the 3.0 μs MD simulation using less minimization steps by modifying the <code class="docutils literal notranslate"><span class="pre">maxcyc</span></code> and <code class="docutils literal notranslate"><span class="pre">ncyc</span></code> arguments of <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code>.</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>It is important to try different combinations of settings to find the one that works best for your system. To keep the backmapped files, you can always change the output name with the <code class="docutils literal notranslate"><span class="pre">outname</span></code> option:</p>
@@ -585,6 +611,473 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <p class="admonition-title">See also</p>
 <p>You can find additional information on VMD command-line options <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html">here</a> and available text mode features <a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html">here</a>.</p>
 </div>
+</section>
+<section id="basic-analyses">
+<h1>Basic analyses<a class="headerlink" href="#basic-analyses" title="Link to this heading"></a></h1>
+<p>This tutorial shows how to perform <em>Root Mean Square Deviation</em> (RMSD), <em>Root Mean Square Fluctuation</em> (RMSF), <em>Radius of gyration</em> (Rg), and <em>Solvent-Accessible Surface Area</em> (SASA) analyses on a SIRAH CG simulation trajectory file using VMD. The protein−DNA complex used here is the 3′ Repair Exonuclease 1 (TREX 1, PDB id: <a class="reference external" href="https://www.rcsb.org/structure/5YWS">5YWS</a>) and its simulation was previously dicussed by <a class="reference external" href="https://doi.org/10.1021/acs.jcim.0c00160">Klein et al.</a> (check the <a class="reference internal" href="../Tutorials%20sirahtools.html#id1"><span class="std std-ref">SIRAH Tools tutorial</span></a> for additional analyses on this system). We strongly advise you to read the article before starting the tutorial.</p>
+<p>Since VMD is a powerful molecular visualization software, you may find it convenient and familiar to perform trajectory analysis directly in VMD. In the following sections, we will concentrate on the practical side of these analyses in VMD and will not delve into the theory.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This tutorial requires the use of <strong>VMD</strong> and <strong>Xmgrace</strong>. Install these applications if you do not already have them. If you need to install these application, visit the following websites for installation instructions and additional information: <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ig/node6.html">VMD installation  guide</a> and <a class="reference external" href="https://plasma-gate.weizmann.ac.il/Grace/doc/UsersGuide.html#s2">Xmgrace installation guide</a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In this tutorial, we used <strong>VMD version 1.9.4</strong>. A few details may vary depending on the software version and operating system.</p>
+</div>
+<section id="loading-the-trajectory">
+<h2>Loading the Trajectory<a class="headerlink" href="#loading-the-trajectory" title="Link to this heading"></a></h2>
+<p>After processing the output trajectory to account for the Periodic Boundary Conditions (PBC) (see <a class="reference internal" href="../Tutorials%20amber.html#amber1"><span class="std std-ref">AMBER</span></a>, <a class="reference internal" href="../Tutorials%20gromacs.html#id1"><span class="std std-ref">GROMACS</span></a> or <a class="reference internal" href="../Tutorials%20namd.html#id1"><span class="std std-ref">NAMD</span></a> tutorials for examples of how you can do this), load the processed trajectory and the <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> file in VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also load <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> inside VMD. Go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<p><strong>For AMBER</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>../sirah.amber/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<p><strong>For GROMACS</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a <strong>Tcl script</strong> that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#id1"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
+</div>
+<p>That’s it! Now you can analyze the trajectory.</p>
+</section>
+<section id="rmsd">
+<h2>RMSD<a class="headerlink" href="#rmsd" title="Link to this heading"></a></h2>
+<p>The <em>Root Mean Square Deviation</em> (RMSD) is one of the most common analyses performed when analyzing a MD trajectory. Without delving into the theoretical aspects, it can be stated that the <em>RMSD</em> serves as a metric for assessing the degree of structural resemblance across different molecular conformations within a given system along a trajectory.</p>
+<p>To perform this analysis you can take advantage of the <strong>RMSD Visualizer Tool</strong>, a built-in plugin in VMD designed to compute <em>RMSD</em>, or using a <strong>Tcl script</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Similarly to the <strong>RMSD Visualizer Tool</strong>, the <strong>RMSD Trajectory Tool</strong> plugin is also available in VMD. However, their user interfaces vary, so the steps outlined here in this tutorial may not be applicable to the <strong>RMSD Trajectory Tool</strong>.</p>
+</div>
+<section id="rmsd-visualizer-tool">
+<h3>1.1 RMSD Visualizer Tool<a class="headerlink" href="#rmsd-visualizer-tool" title="Link to this heading"></a></h3>
+<p>Once your trajectory is loaded, go to <em>Extensions</em> &gt; <em>Analysis</em> &gt; <em>RMSD Visualizer Tool</em>. It will open the interface dedicated to <em>RMSD</em> analysis.</p>
+<p>In the <em>RMSD Visualizer Tool</em> interface, select <strong>Top</strong> in the <em>Molecule</em> selection. To analyze the protein backbone, enter <strong>sirah_backbone and sirah_protein</strong> in the <em>Atom selection</em> box (see <strong>Figure 1A</strong>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you wish to focus on a specific bead, you can enter their name in the <em>Atom selection</em> box. For example, if you want something similar to a “carbon alpha” <em>RMSD</em>, you can type <strong>name GC</strong>.</p>
+</div>
+<p>Click on the <code class="docutils literal notranslate"><span class="pre">ALIGN</span></code> button.
+This will superimpose each frame of the trajectory to the reference frame (in this case the first frame, frame 0) based on the selected groups of atoms to minimize <em>RMSD</em>. This step is not required but is recommended to display only the differences that arise from structure fluctuations and not from the displacements and rotations of the molecule as a whole.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the VMD default <em>Reference</em> selection (<em>Molecule ID</em>: <strong>self</strong> and <em>Frame</em>: <strong>0</strong>) was used, all the atoms of the selected molecule will be rotated and translated to fit the structure of the trajectory first frame (frame number 0). But you can modify this by setting a reference molecule. It is important to remember, when doing an alignment using another molecule as the reference, the selections for both molecules need to have the exact same number of atoms.</p>
+</div>
+<p>With all the necessary settings in place, click on the <code class="docutils literal notranslate"><span class="pre">RMSD</span></code> button. The tool will perform the analysis, computing the <em>RMSD</em> values for the selected region over the trajectory. After the calculation is complete, click on the <code class="docutils literal notranslate"><span class="pre">Plot</span> <span class="pre">result</span></code> button and a new window will open with a plot showcasing the computed <em>RMSD</em> versus frames (see <strong>Figure 1B</strong>).</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_1.png"><img alt="../_images/sirah_analysis_1.png" src="../_images/sirah_analysis_1.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1.</strong> Protein <em>RMSD</em> of a SIRAH CG simulation using the <em>RMSD Visualizer Tool</em> of VMD. A) <em>RMSD Visualizer Tool</em> options used to perfom <em>RMSD</em>. B) The result <em>RMSD vs Frame</em> of the <strong>sirah_backbone and sirah_protein</strong> selection.</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your trajectory is too big, you can change the <em>Step size</em> parameter in the <em>Trajectory</em> section to skip frames. However, alignment does not accept a <em>Step size</em>.</p>
+</div>
+<p>Now, let’s calculate the <em>RMSD</em> for the DNA molecule. In the <em>Atom selection</em> box, type in <strong>sirah_backbone and sirah_nucleic</strong>. Then, click on the <code class="docutils literal notranslate"><span class="pre">ALIGN</span></code> button and then on the <code class="docutils literal notranslate"><span class="pre">RMSD</span></code> button. A new <em>RMSD</em> line will appear in the results box (see <strong>Figure 2A</strong>). Select it and click on the <code class="docutils literal notranslate"><span class="pre">Plot</span> <span class="pre">result</span></code> button to open the <em>RMSD</em> versus frame plot window (see <strong>Figure 2B</strong>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before calculating RMSD, alignment must be performed if you wish to display only differences resulting from structure fluctuations for your new selection.</p>
+</div>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_2.png"><img alt="../_images/sirah_analysis_2.png" src="../_images/sirah_analysis_2.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 2.</strong> DNA <em>RMSD</em> of a SIRAH CG simulation using the <em>RMSD Visualizer Tool</em> of VMD. A) <em>RMSD Visualizer Tool</em> options used to perfom <em>RMSD</em>. B) The result <em>RMSD vs Frame</em> of the <strong>sirah_backbone and sirah_nucleic</strong> selection.</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>With the <em>RMSD Visualizer Tool</em>, you can also choose to plot the <em>RMSD</em> of both protein and DNA in the same window by selecting both calculations and clicking on the <code class="docutils literal notranslate"><span class="pre">Plot</span> <span class="pre">result</span></code> button (see <strong>Figure 3</strong>).</p>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_3.png"><img alt="../_images/sirah_analysis_3.png" src="../_images/sirah_analysis_3.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 3.</strong> Protein (blue) and DNA (red) <em>RMSD</em> of a SIRAH CG simulation using the <em>RMSD Visualizer Tool</em> of VMD.</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you prefer to use external plotting programs, you can save the data in a text file (on the plot window go to <em>File</em> &gt; <em>Export to Xmgrace</em> or <em>File</em> &gt; <em>Export to ASCII vectors</em>) and then import the data into your preferred plotting software.</p>
+</div>
+</section>
+<section id="tcl-script">
+<h3>1.2. Tcl script<a class="headerlink" href="#tcl-script" title="Link to this heading"></a></h3>
+<p>The same actions can be taken on the scripting level using the <em>Tk Console</em>. Thus, you can create a <code class="docutils literal notranslate"><span class="pre">rmsd_protein.tcl</span></code> file to calculate <em>RMSD</em> of the protein and output a text file <code class="docutils literal notranslate"><span class="pre">rmsd_prot.dat</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set outfile [open rmsd_prot.dat w];</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>frame<span class="w"> </span>using<span class="w"> </span>protein<span class="w"> </span>backbone<span class="w"> </span>as<span class="w"> </span>selection
+<span class="go">set reference [atomselect top &quot;sirah_backbone and sirah_protein&quot; frame 0]</span>
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>trajectory<span class="w"> </span>selection<span class="w"> </span>also<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>backbone
+<span class="go">set compare [atomselect top &quot;sirah_backbone and sirah_protein&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set N [molinfo top get numframes]</span>
+
+<span class="gp">#</span>calculate<span class="w"> </span>RMSD<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>frames
+<span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
+<span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="gp">   $</span>compare<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="gp">   $</span>compare<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$compare</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="gp">   #</span>compute<span class="w"> </span>the<span class="w"> </span>RMSD
+<span class="go">   set rmsd [measure rmsd $compare $reference]</span>
+
+<span class="gp">   #</span>print<span class="w"> </span>the<span class="w"> </span>RMSD<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>file
+<span class="go">   puts $outfile &quot;$i \t $rmsd&quot;</span>
+<span class="go">}</span>
+<span class="go">close $outfile</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">rmsd_protein.tcl</span></code> file in your work directory, go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>rmsd_protein.tcl
+</pre></div>
+</div>
+<p>You can use Xmgrace to plot the result:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>rmsd_prot.dat
+</pre></div>
+</div>
+<p>You can create a <code class="docutils literal notranslate"><span class="pre">rmsd_nucleic.tcl</span></code> file by changing the following lines:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">outfile</span> <span class="pre">[open</span> <span class="pre">rmsd_prot.dat</span> <span class="pre">w]</span></code> to <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">outfile</span> <span class="pre">[open</span> <span class="pre">rmsd_nucl.dat</span> <span class="pre">w]</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">reference</span> <span class="pre">[atomselect</span> <span class="pre">top</span> <span class="pre">&quot;sirah_backbone</span> <span class="pre">and</span> <span class="pre">sirah_protein&quot;</span> <span class="pre">frame</span> <span class="pre">0]</span></code> to <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">reference</span> <span class="pre">[atomselect</span> <span class="pre">top</span> <span class="pre">&quot;sirah_backbone</span> <span class="pre">and</span> <span class="pre">sirah_nucleic&quot;</span> <span class="pre">frame</span> <span class="pre">0]</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">compare</span> <span class="pre">[atomselect</span> <span class="pre">top</span> <span class="pre">&quot;sirah_backbone</span> <span class="pre">and</span> <span class="pre">sirah_protein&quot;]</span></code> to <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">compare</span> <span class="pre">[atomselect</span> <span class="pre">top</span> <span class="pre">&quot;sirah_backbone</span> <span class="pre">and</span> <span class="pre">sirah_nucleic&quot;]</span></code>.</p></li>
+</ul>
+<p>You can use Xmgrace to plot the results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>rmsd_prot.dat<span class="w"> </span>rmsd_nucl.dat
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">rmsd_prot.dat</span></code> and <code class="docutils literal notranslate"><span class="pre">rmsd_nucl.dat</span></code> are compatible with external plotting programs.</p>
+</div>
+</section>
+</section>
+<section id="rmsf">
+<h2>RMSF<a class="headerlink" href="#rmsf" title="Link to this heading"></a></h2>
+<p>The <em>Root Mean Square Fluctuation</em> (RMSF) of a structure is the time average of the <em>RMSD</em> per residue. In contrast to the <em>RMSD</em>, which quantifies how much a structure deviates from a reference over time, the <em>RMSF</em> can disclose which system components are the most mobile. To perform this analysis, you will use a <strong>Tcl script</strong> directly within the <em>Tk Console</em>.</p>
+<p>Thus, you can create a <code class="docutils literal notranslate"><span class="pre">rmsf_protein.tcl</span></code> file to calculate <em>RMSF</em> of the protein and output a text file <code class="docutils literal notranslate"><span class="pre">rmsf_prot.dat</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set outfile [open rmsf_prot.dat w];</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>of<span class="w"> </span>protein
+<span class="go">set reference [atomselect top &quot;sirah_protein and name GC&quot; frame 0]</span>
+<span class="go">set sel [atomselect top &quot;sirah_protein and name GC&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set N [molinfo top get numframes]</span>
+
+<span class="gp">#</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
+<span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="gp">   $</span>sel<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="gp">   $</span>sel<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$sel</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="go">}</span>
+
+<span class="gp">#</span>calculate<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>trajectory<span class="w"> </span>frames
+<span class="go">set rmsf [measure rmsf $sel first 0 last -1 step 1]</span>
+
+<span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span>by<span class="w"> </span>residue
+<span class="go">for {set i 0} {$i &lt; [$sel num]} {incr i} {</span>
+<span class="go">   puts $outfile &quot;[expr {$i+1}] [lindex $rmsf $i]&quot;</span>
+<span class="go">}</span>
+<span class="go">close $outfile</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If your trajectory is too big, you can change the <code class="docutils literal notranslate"><span class="pre">step</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">rmsf</span> <span class="pre">[measure</span> <span class="pre">rmsf</span> <span class="pre">$sel</span> <span class="pre">first</span> <span class="pre">0</span> <span class="pre">last</span> <span class="pre">-1</span> <span class="pre">step</span> <span class="pre">1]</span></code> line to skip frames. You can also change <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> parameters if you have a frame range.</p>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">rmsf_protein.tcl</span></code> file in your work directory, go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>rmsf_protein.tcl
+</pre></div>
+</div>
+<p>You can plot the result using Xmgrace, and a plot similar to <strong>Figure 4</strong> will appear:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>rmsf_prot.dat
+</pre></div>
+</div>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_4.png"><img alt="../_images/sirah_analysis_4.png" src="../_images/sirah_analysis_4.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 4.</strong> <em>RMSF</em> plot of the GC beads of the protein residues from the SIRAH CG simulation using the Xmgrace program.</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>For the DNA, you can create a <code class="docutils literal notranslate"><span class="pre">rmsf_nucleic.tcl</span></code> file to calculate the <em>RMSF</em> per strand:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set outfile_strand1 [open rmsf_DNA_strand1_tcl.dat w];</span>
+<span class="go">set outfile_strand2 [open rmsf_DNA_strand2_tcl.dat w];</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>the<span class="w"> </span>DNA
+<span class="go">set reference [atomselect top &quot;residue 234 to 253 and name C5X&quot; frame 0]</span>
+<span class="go">set sel [atomselect top &quot;residue 234 to 253 and name C5X&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set N [molinfo top get numframes]</span>
+
+<span class="gp">#</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
+<span class="gp">   # </span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="gp">   $</span>sel<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="gp">   $</span>sel<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$sel</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="go">}</span>
+
+<span class="go">set strand1 [atomselect top &quot;residue 234 to 243 and name C5X&quot;]</span>
+<span class="go">set strand2 [atomselect top &quot;residue 244 to 253 and name C5X&quot;]</span>
+
+<span class="gp">#</span>calculate<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>trajectory<span class="w"> </span>frames
+<span class="go">set rmsf_strand1 [measure rmsf $strand1 first 0 last -1 step 1]</span>
+<span class="go">set rmsf_strand2 [measure rmsf $strand2 first 0 last -1 step 1]</span>
+
+<span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>strand<span class="w"> </span><span class="m">1</span>
+<span class="go">for {set i 0} {$i &lt; [$strand1 num]} {incr i} {</span>
+<span class="go">   puts $outfile_strand1 &quot;[expr {$i+1}] [lindex $rmsf_strand1 $i]&quot;</span>
+<span class="go">}</span>
+<span class="go">close $outfile_strand1</span>
+
+<span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>strand<span class="w"> </span><span class="m">2</span>
+<span class="go">for {set i 0} {$i &lt; [$strand2 num]} {incr i} {</span>
+<span class="go">   puts $outfile_strand2 &quot;[expr {$i+1}] [lindex $rmsf_strand2 $i]&quot;</span>
+<span class="go">}</span>
+<span class="go">close $outfile_strand2</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">rmsf_nucleic.tcl</span></code> file in your work directory, go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>rmsf_nucleic.tcl
+</pre></div>
+</div>
+<p>Two files will be created <code class="docutils literal notranslate"><span class="pre">rmsf_nucl_strand1.dat</span></code> and <code class="docutils literal notranslate"><span class="pre">rmsf_nucl_strand2.dat</span></code>. You can plot them using Xmgrace, and a plot similar to <strong>Figure 5</strong> will appear:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>rmsf_nucl_strand1.dat<span class="w"> </span>rmsf_nucl_strand2.dat
+</pre></div>
+</div>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_5.png"><img alt="../_images/sirah_analysis_5.png" src="../_images/sirah_analysis_5.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 5.</strong> <em>RMSF</em> plot of the C5X beads of the two DNA stands from the SIRAH CG simulation using the Xmgrace program.</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>name GC</strong> and <strong>name C5X</strong> would be the bead selection similar to a “carbon alpha” for protein and DNA, respectively.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">rmsf_prot.dat</span></code>, <code class="docutils literal notranslate"><span class="pre">rmsf_nucl_strand1.dat</span></code>, and <code class="docutils literal notranslate"><span class="pre">rmsf_nucl_strand2.dat</span></code> are compatible with external plotting programs.</p>
+</div>
+</section>
+<section id="radius-of-gyration">
+<h2>Radius of gyration<a class="headerlink" href="#radius-of-gyration" title="Link to this heading"></a></h2>
+<p>The <em>Radius of gyration</em> (Rg) is a metric that quantifies the spatial extent of a protein by measuring the distance between its center of mass and its termini. The metric offers an indicator of the degree of compactness in the protein structure. To perform this analysis, you will use a <strong>Tcl script</strong> directly within the <em>Tk Console</em>.</p>
+<p>Thus, you can create a <code class="docutils literal notranslate"><span class="pre">rgyr.tcl</span></code> file to calculate <em>Rg</em> of the protein and output a text file <code class="docutils literal notranslate"><span class="pre">rgyr_protein.dat</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set output [open &quot;rgyr_protein.dat&quot; w]</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>protein<span class="w"> </span>selection
+<span class="go">set sel [atomselect top &quot;sirah_protein&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set n [molinfo top get numframes]</span>
+
+<span class="gp">#</span>rgyr<span class="w"> </span>calculation<span class="w"> </span>loop
+<span class="go">for {set i 0} {$i &lt; $n} {incr i} {</span>
+<span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="go">   molinfo top set frame $i</span>
+<span class="gp">   #</span>calculate<span class="w"> </span>radius<span class="w"> </span>of<span class="w"> </span>gyration<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>frame
+<span class="go">   set rgyr [measure rgyr $sel]</span>
+<span class="go">   puts &quot;\t \t progress: $i/$n&quot;</span>
+<span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rgyr
+<span class="go">   puts $output &quot;$rgyr&quot;</span>
+<span class="go">}</span>
+<span class="go">puts &quot;\t \t progress: $n/$n&quot;</span>
+<span class="go">puts &quot;Done.&quot;</span>
+<span class="go">close $output</span>
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">rgyr.tcl</span></code> file in your work directory, go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>rgyr.tcl
+</pre></div>
+</div>
+<p>You can plot the result using Xmgrace, and a plot similar to <strong>Figure 6</strong> will appear:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>rgyr_protein.dat
+</pre></div>
+</div>
+<figure class="align-center" id="id18">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_6.png"><img alt="../_images/sirah_analysis_6.png" src="../_images/sirah_analysis_6.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 6.</strong> <em>Rg</em> plot of the protein from the SIRAH CG simulation using the Xmgrace program.</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">rgyr_protein.dat</span></code> is compatible with external plotting programs.</p>
+</div>
+</section>
+<section id="sasa">
+<h2>SASA<a class="headerlink" href="#sasa" title="Link to this heading"></a></h2>
+<p>The <em>Solvent-Accessible Surface Area</em> (SASA) refers to the measurement of the surface area of a biomolecular structure that can be reached by solvent molecules. The <em>SASA</em> can be defined as the range to which the atoms on the surface of a protein form contacts with the solvent. Although there are a number of algorithms and computational tools available for estimating the <em>SASA</em>, you can conduct the estimation using a simple <em>Tcl script</em> within the <em>Tk Console</em>.</p>
+<p>Thus, you can create a <code class="docutils literal notranslate"><span class="pre">sasa.tcl</span></code> file to calculate <em>SASA</em> of your protein and output a text file <code class="docutils literal notranslate"><span class="pre">SASA_protein_nobackbone.dat</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set output [open &quot;SASA_protein_nobackbone.dat&quot; w]</span>
+
+<span class="gp">#</span><span class="k">select</span><span class="w"> </span>only<span class="w"> </span>solvent-accessible<span class="w"> </span>points<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span>not<span class="w"> </span>the<span class="w"> </span>backbone
+<span class="go">set sel [atomselect top &quot;not name GN GC GO&quot;]</span>
+<span class="gp">#</span><span class="k">select</span><span class="w"> </span>the<span class="w"> </span>protein
+<span class="go">set protein [atomselect top &quot;sirah_protein&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set n [molinfo top get numframes]</span>
+
+<span class="gp">#</span>sasa<span class="w"> </span>calculation<span class="w"> </span>loop
+<span class="go">for {set i 0} {$i &lt; $n} {incr i} {</span>
+<span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="go">   molinfo top set frame $i</span>
+<span class="gp">   #</span>calculate<span class="w"> </span>sasa<span class="w"> </span>assigning<span class="w"> </span>a<span class="w"> </span>sphere<span class="w"> </span>radius<span class="w"> </span>of<span class="w"> </span><span class="m">2</span>.1<span class="w"> </span>to<span class="w"> </span>not<span class="w"> </span>backbone<span class="w"> </span>atoms
+<span class="go">   set sasa [measure sasa 2.1 $protein -restrict $sel]</span>
+<span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>screen<span class="w"> </span>frame/total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">   puts &quot;\t \t progress: $i/$n&quot;</span>
+<span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>sasa
+<span class="go">   puts $output &quot;$sasa&quot;</span>
+<span class="go">}</span>
+<span class="go">puts &quot;\t \t progress: $n/$n&quot;</span>
+<span class="go">puts &quot;Done.&quot;</span>
+<span class="go">close $output</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The probe radius is set at 2.1 Å as it corresponds to the radius of a WT4 bead.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can restrict your selection to a particular residue or region by modifying the <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">sel</span> <span class="pre">[atomselect</span> <span class="pre">top</span> <span class="pre">&quot;not</span> <span class="pre">name</span> <span class="pre">GN</span> <span class="pre">GC</span> <span class="pre">GO&quot;]</span></code> line.</p>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">sasa.tcl</span></code> file in your work directory, go to <em>Extensions</em> &gt; <em>Tk Console</em> and enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>sasa.tcl
+</pre></div>
+</div>
+<p>You can plot the result using Xmgrace, and a plot similar to <strong>Figure 7</strong> will appear:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>SASA_protein_nobackbone.dat
+</pre></div>
+</div>
+<figure class="align-center" id="id19">
+<a class="reference internal image-reference" href="../_images/sirah_analysis_7.png"><img alt="../_images/sirah_analysis_7.png" src="../_images/sirah_analysis_7.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 7.</strong> <em>SASA</em> plot of the protein without the backbone atoms from the SIRAH CG simulation using the Xmgrace program.</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The files <code class="docutils literal notranslate"><span class="pre">SASA_protein_nobackbone.dat</span></code> is compatible with external plotting programs.</p>
+</div>
+</section>
+<section id="id4">
+<h2>VMD in text mode<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p>If you need to perform non-interactive analysis on large trajectories or if a graphical user interface is not available, you can also execute the scripts described here using VMD text mode. When in text mode, VMD does not provide a window for graphical output, but many of its features are available. To launch VMD in text mode, the <code class="docutils literal notranslate"><span class="pre">-dispdev</span> <span class="pre">text</span></code> and <code class="docutils literal notranslate"><span class="pre">-f</span></code> flags are appended to the command line used before to load the trajectory, as shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-f<span class="w"> </span>../5YWS_cg.psf<span class="w"> </span>5YWS_cg_md_pbc.xtc<span class="w"> </span>-e<span class="w"> </span>../sirah.ff/tools/sirah_vmdtk.tcl
+</pre></div>
+</div>
+<p>The output will be similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Info) VMD for LINUXAMD64, version 1.9.3 (November 30, 2016)</span>
+<span class="go">Info) http://www.ks.uiuc.edu/Research/vmd/</span>
+<span class="go">Info) Email questions and bug reports to vmd@ks.uiuc.edu</span>
+<span class="go">Info) Please include this reference in published work using VMD:</span>
+<span class="go">Info)    Humphrey, W., Dalke, A. and Schulten, K., `VMD - Visual</span>
+<span class="go">Info)    Molecular Dynamics&#39;, J. Molec. Graphics 1996, 14.1, 33-38.</span>
+<span class="go">Info) -------------------------------------------------------------</span>
+<span class="go">Info) Multithreading available, 12 CPUs detected.</span>
+<span class="go">Info)   CPU features: SSE2 AVX AVX2 FMA</span>
+<span class="go">Info) Free system memory: 58GB (93%)</span>
+<span class="go">Info) File loading in progress, please wait.</span>
+<span class="go">Info) Using plugin psf for structure file 5YWS_cg.psf</span>
+<span class="go">psfplugin) WARNING: no impropers defined in PSF file.</span>
+<span class="go">psfplugin) no cross-terms defined in PSF file.</span>
+<span class="go">Info) Analyzing structure ...</span>
+<span class="go">Info)    Atoms: 7270</span>
+<span class="go">Info)    Bonds: 10237</span>
+<span class="go">Info)    Angles: 4791  Dihedrals: 3727  Impropers: 0  Cross-terms: 0</span>
+<span class="go">Info)    Bondtypes: 0  Angletypes: 0  Dihedraltypes: 0  Impropertypes: 0</span>
+<span class="go">Info)    Residues: 1843</span>
+<span class="go">Info)    Waters: 0</span>
+<span class="go">Info)    Segments: 4</span>
+<span class="go">Info)    Fragments: 1592   Protein: 0   Nucleic: 0</span>
+<span class="go">Info) Using plugin xtc for coordinates from file 5YWS_cg_md_pbc.xtc</span>
+<span class="go">Info) Coordinate I/O rate 1564.4 frames/sec, 129 MB/sec, 19.2 sec</span>
+<span class="go">Info) Finished with coordinate file 5YWS_cg_md1_pbc.xtc.</span>
+<span class="go">SIRAH radii were set</span>
+<span class="go">SIRAH selection macros were set</span>
+<span class="go">SIRAH coloring mothods were set</span>
+<span class="go">SIRAH Tool kit for VMD was loaded. Use sirah_help to access the User Manual pages</span>
+<span class="go">vmd &gt;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The file <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> is a <strong>Tcl script</strong> that is part of SIRAH Tools and contains the macros to properly visualize the coarse-grained structures in VMD. These macros will facilite our atom selection within VMD. You can go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#id1"><span class="std std-ref">SIRAH Tools tutorial</span></a> to learn more about the macros.</p>
+</div>
+<p>Thus, in the <cite>vmd &gt;</cite> prompt, you can import any of the previously displayed <strong>Tcl scripts</strong>, for instance:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; source rmsd_protein.tcl</span>
+</pre></div>
+</div>
+<p>Additionally, you can customize the <strong>Tcl scripts</strong> to include VMD commands to load and process your trajectories in conjunction with launching SIRAH Tools in VMD text mode. For example, you can create a <code class="docutils literal notranslate"><span class="pre">rmsd_protein_dispdev.tcl</span></code> file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>Load<span class="w"> </span>parameter<span class="w"> </span>file
+<span class="go">mol new 5YWS_cg.psf</span>
+<span class="gp">#</span>Load<span class="w"> </span>trajectory<span class="w"> </span>file
+<span class="go">mol addfile 5YWS_cg_md_pbc.xtc waitfor all</span>
+<span class="gp">#</span>Load<span class="w"> </span>SIRAH<span class="w"> </span>tools
+<span class="go">source sirah.ff/tools/sirah_vmdtk.tcl</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
+<span class="go">set outfile [open rmsd_prot.dat w];</span>
+
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>frame<span class="w"> </span>using<span class="w"> </span>protein<span class="w"> </span>backbone<span class="w"> </span>as<span class="w"> </span>selection
+<span class="go">set reference [atomselect top &quot;sirah_backbone and sirah_protein&quot; frame 0]</span>
+<span class="gp">#</span><span class="nb">set</span><span class="w"> </span>trajectory<span class="w"> </span>selection<span class="w"> </span>also<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>backbone
+<span class="go">set compare [atomselect top &quot;sirah_backbone and sirah_protein&quot;]</span>
+
+<span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
+<span class="go">set N [molinfo top get numframes]</span>
+
+<span class="gp">#</span>calculate<span class="w"> </span>RMSD<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>frames
+<span class="go">for {set i 0} {$i &lt; $N} {incr i} {</span>
+<span class="gp">   #</span>get<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>frame
+<span class="gp">   $</span>compare<span class="w"> </span>frame<span class="w"> </span><span class="nv">$i</span>
+<span class="gp">   #</span><span class="k">do</span><span class="w"> </span>the<span class="w"> </span>alignment
+<span class="gp">   $</span>compare<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$compare</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
+<span class="gp">   #</span>compute<span class="w"> </span>the<span class="w"> </span>RMSD
+<span class="go">   set rmsd [measure rmsd $compare $reference]</span>
+
+<span class="gp">   #</span>print<span class="w"> </span>the<span class="w"> </span>RMSD<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>file
+<span class="go">   puts $outfile &quot;$i \t $rmsd&quot;</span>
+<span class="go">}</span>
+<span class="go">close $outfile</span>
+<span class="go">quit</span>
+</pre></div>
+</div>
+<p>This script will load the topology <code class="docutils literal notranslate"><span class="pre">5YWS_cg.psf</span></code>, the trajectory <code class="docutils literal notranslate"><span class="pre">5YWS_cg_md_pbc.xtc</span></code>, and <code class="docutils literal notranslate"><span class="pre">sirah_vmdtk.tcl</span></code> files. Then, align the protein according to the first frame of the trajectory, calculate the <em>RMSD</em>, and create an output file with the name <code class="docutils literal notranslate"><span class="pre">rmsd_prot.dat</span></code>. With the <code class="docutils literal notranslate"><span class="pre">quit</span></code> command, VMD is closed. To read the script, you type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>-dispdev<span class="w"> </span>text<span class="w"> </span>-e<span class="w"> </span>rmsd_protein_dispdev.tcl
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You can create multiple selections for <em>RMSD</em>, <em>RMSF</em>, <em>Rg</em>, or <em>SASA</em> within a single <strong>Tcl script</strong> to perform all analyses and output multiple result files.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>You can find additional information on VMD command-line options <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/vmd-1.8.7/ug/node204.html">here</a> and available text mode features <a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/node8.html">here</a>.</p>
+</div>
+</section>
 </section>
 
 

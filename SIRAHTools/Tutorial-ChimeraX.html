@@ -15,7 +15,7 @@
     </script>
     
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recompiling NAMD &mdash; SIRAH Force Field  documentation</title>
+  <title>&lt;no title&gt; &mdash; SIRAH Force Field  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -85,9 +85,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Recompiling NAMD</li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/NAMD/Appendix.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/SIRAHTools/Tutorial-ChimeraX.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -95,18 +95,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="recompiling-namd">
-<h1>Recompiling NAMD<a class="headerlink" href="#recompiling-namd" title="Link to this heading"></a></h1>
-<p>If careful comparisons of the energies in NAMD and Amber are desired, the NAMD source code must be modified to use the same conversion factors, particularly to convert the electrostatic interactions to kcal/mol. These constants depend on the program:</p>
-<p>AMBER = 332.0522173
-CHARMM = 332.054
-NAMD = 332.0636</p>
-<p>To make the change, edit the line of the src/common.h file in the NAMD source code that contain</p>
-<p>#define COULOMB 332.0636</p>
-<p>to</p>
-<p>#define COULOMB 332.0522173</p>
-<p>Once this modification is made, recompile it and the program will be ready to run.</p>
-</section>
+  <div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><strong>This tutorial is currently undergoing construction, which means that its components are not available at the moment. An update will be posted soon.</strong></p>
+<p>If you have a suggestion or want to see a specific type of visualization covered here, feel free to open a <a class="reference external" href="https://github.com/SIRAHFF/documentation/discussions">New Discussion</a> on our GitHub. Your feedback is always welcome.</p>
+</div>
 
 
            </div>

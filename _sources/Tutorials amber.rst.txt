@@ -1,7 +1,7 @@
 AMBER
 ========
 
-.. _AMBER:
+.. _AMBER1:
 
 .. _download amber:
 
