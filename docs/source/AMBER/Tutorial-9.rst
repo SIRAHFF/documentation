@@ -75,7 +75,7 @@ Regarding the **6OLA** structure, there are three critical issues that require c
 
 .. code-block:: bash
 
-    sed '/\(P[[:space:]]\+1DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP11DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP21DC[[:space:]]\+[A-Z][[:space:]]\+1\)/d' 6ola_assembly.pdb > 6ola_modificated_1.pdb
+    sed '/\(P[[:space:]]\+1DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP11DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP21DC[[:space:]]\+[A-Z][[:space:]]\+1\)/d' 6ola_assembly.pdb > 6ola_modified_1.pdb
 
 This line of code creates a new PDB file by removing the lines containing the **P**, **OP1**, and **OP2** atoms from the original structure.
 
@@ -91,7 +91,7 @@ Open VMD:
 
 .. code-block:: bash
 
-    vmd 6ola_modificated_1.pdb  
+    vmd 6ola_modified_1.pdb  
 
 Once in VMD, let's examine one of the fragments (or protomers) of the PCV2 capsid. To do this, go to the **Graphics** tab and select **Representations**. In the **Graphics Representations** menu, go to **Selected Atoms** and make the selection of histidines from fragment 0 using the following selection command:
 
@@ -109,10 +109,10 @@ Close VMD. Use the command below to modify the names of the histidine's residues
 
 .. code-block:: bash
     
-    sed -e '/HIS[[:space:]]\+[A-Z][[:space:]]113/s/HIS/HIE/' -e '/HIS[[:space:]]\+[A-Z][[:space:]]122/s/HIS/HID/' -e '/HIS[[:space:]]\+[A-Z][[:space:]]160/s/HIS/HIE/' 6ola_modificated_1.pdb > 6ola_modificated_2.pdb
+    sed -e '/HIS[[:space:]]\+[A-Z][[:space:]]113/s/HIS/HIE/' -e '/HIS[[:space:]]\+[A-Z][[:space:]]122/s/HIS/HID/' -e '/HIS[[:space:]]\+[A-Z][[:space:]]160/s/HIS/HIE/' 6ola_modified_1.pdb > 6ola_modified_2.pdb
 
 ..
-    _sed -e '/ HIS . 113 /s/HIS/HIE/' -e '/ HIS . 122 /s/HIS/HID/' -e '/ HIS . 160 /s/HIS/HIE/' 6ola_edited.pdb > 6ola_edited_modificated.pdb
+    _sed -e '/ HIS . 113 /s/HIS/HIE/' -e '/ HIS . 122 /s/HIS/HID/' -e '/ HIS . 160 /s/HIS/HIE/' 6ola_edited.pdb > 6ola_edited_modified.pdb
 
 
 * **Issue 3**. Another important step for this structure is to correct the atom index numbers, ensuring they range from 0 to 99999. Additionally, a `TER` record should be added at the end of each chain, and an `END` record should be included at the end of the structure.
@@ -121,17 +121,17 @@ To do this, we can use the ``fixpdb.tcl`` VMD script found in the ``sirah.amber/
 
 .. code-block:: bash
 
-    vmd -dispdev text 6ola_modificated_2.pdb -e ./sirah.amber/tutorial/9/fixpdb.tcl  
+    vmd -dispdev text 6ola_modified_2.pdb -e ./sirah.amber/tutorial/9/fixpdb.tcl  
 
 Then
 
 .. code-block:: bash
 
-    mv 6ola_modificated_2_final.pdb 6ola_modificated_final.pdb 
+    mv 6ola_modified_2_final.pdb 6ola_modified_final.pdb 
 
-If all stages were completed successfully, the final PDB file ``6ola_modificated_final.pdb`` is generated.
+If all stages were completed successfully, the final PDB file ``6ola_modified_final.pdb`` is generated.
 
-* **Issue 4 (Issue 2 - Alternative)**. Instead of assigning protonation states by hand, you can use tools that take into account the surrounding residues and the pH conditions to do it automatically. You can use servers, like the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_. The ``6ola_modificated_final.pdb`` should work without any issues, though it may take a while to execute.
+* **Issue 4 (Issue 2 - Alternative)**. Instead of assigning protonation states by hand, you can use tools that take into account the surrounding residues and the pH conditions to do it automatically. You can use servers, like the `CHARMM-GUI server <https://www.charmm-gui.org/>`_ and `PDB2PQR server <https://server.poissonboltzmann.org/pdb2pqr>`_. The ``6ola_modified_final.pdb`` should work without any issues, though it may take a while to execute.
 
 .. tip::
 
@@ -148,9 +148,9 @@ Given the scale and complexity of the system, using the ``pdb2pqr`` script to pe
  
 .. code-block:: bash
 
-    pdb2pqr --ff=AMBER --keep-chain --ffout=AMBER --titration-state-method=propka --with-ph=7.0 --include-header ./6ola_modificated_final.pdb ./6ola_modificated_final.pqr  
+    pdb2pqr --ff=AMBER --keep-chain --ffout=AMBER --titration-state-method=propka --with-ph=7.0 --include-header ./6ola_modified_final.pdb ./6ola_modified_final.pqr  
 
-A PQR file ``6ola_modificated_final.pqr`` is generated containing protonation state of each residue at the given pH.
+A PQR file ``6ola_modified_final.pqr`` is generated containing protonation state of each residue at the given pH.
 
 9.1.2 Calculate system charge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,7 +163,7 @@ To do this, we can use the ``CountCharge.sh`` script found in the ``sirah.amber/
 
 .. code-block:: bash
 
-    ./sirah.amber/tutorial/9/CountCharge.sh 6ola_modificated_final.pdb   
+    ./sirah.amber/tutorial/9/CountCharge.sh 6ola_modified_final.pdb   
 
 This script evaluates the number of positively and negatively charged residues in the system and provides the net charge that can be used in later steps of preparing the VLP for simulations.
 
@@ -266,16 +266,16 @@ _____________________________
 
 .. caution::
 	
-	We are using the ``6ola_modificated_final.pdb`` file for this section of the tutorial, which makes use of the assigned protonation states and hydrogen atoms as given in the original Biological Assembly VLP. But you may also use the automatically calculated protonation states file ``6ola_modificated_final.pqr``.
+	We are using the ``6ola_modified_final.pdb`` file for this section of the tutorial, which makes use of the assigned protonation states and hydrogen atoms as given in the original Biological Assembly VLP. But you may also use the automatically calculated protonation states file ``6ola_modified_final.pqr``.
 
 Map the atomistic structure of VLP that was prepared in the previous step to its CG representation:   
 
 .. code-block:: bash
 
-  ./sirah.amber/tools/CGCONV/cgconv.pl -i 6ola_modificated_final.pdb -o 6ola_modificated_final_cg.pdb
+  ./sirah.amber/tools/CGCONV/cgconv.pl -i 6ola_modified_final.pdb -o 6ola_modified_final_cg.pdb
   
 
-The input file ``-i`` 6ola_modificated_final.pdb has the atomistic model of the VLP that has had its structure issues fixed,, while the output ``-o`` 6ola_modificated_final_cg.pdb is its SIRAH CG representation.
+The input file ``-i`` 6ola_modified_final.pdb has the atomistic model of the VLP that has had its structure issues fixed,, while the output ``-o`` 6ola_modified_final_cg.pdb is its SIRAH CG representation.
 
 .. tip::
 
@@ -299,7 +299,7 @@ Please check both structures using VMD:
 
 .. code-block:: bash
 
-  vmd -m 6ola_modificated_final.pdb 6ola_modificated_final_cg.pdb
+  vmd -m 6ola_modified_final.pdb 6ola_modified_final_cg.pdb
 
 
 
@@ -350,7 +350,7 @@ To balance this, we need to introduce at least **420** negative ions (Cl⁻) int
 
 .. caution::
 
-     It is important to be aware that the charges may vary when using the ``6ola_modificated_final.pqr``, and as a result, the number of ions necessary to neutralize the charge imbalance may differ.
+     It is important to be aware that the charges may vary when using the ``6ola_modified_final.pqr``, and as a result, the number of ions necessary to neutralize the charge imbalance may differ.
 
 This information is provided to the ``PCV2.pkm`` file, which is then utilized by Packmol to pack the system. Use the following command to execute Packmol: 
 
