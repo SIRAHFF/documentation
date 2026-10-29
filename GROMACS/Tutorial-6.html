@@ -283,7 +283,7 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/6/GPU/em1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>2kyv_DMPC_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-sf<span class="w"> </span>sirah.ff/tutorial/6/rm_close_wt4.dat
@@ -355,7 +355,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p class="admonition-title">Note</p>
 <p>WT4 and CG ions (NaW, ClW) are automatically set to the group <em>SIRAH-Solvent</em> while DMPC (named CMM at CG level) is assigned to group <em>Lipid</em>.</p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ri 1-52\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"ri 1-52\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.gro
@@ -363,7 +363,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>When prompted, choose <em>r_1-52</em>.</p>
 <p>Create an index file for the monomer and add a group for the backbone <em>GO</em> and <em>GN</em> beads.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GO GN \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GO GN \nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx
 </pre></div>
 </div>
 <p>Create a position restraint file for the monomer backbone.</p>
@@ -414,7 +414,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>When prompted, choose <em>Lipid</em>.</p>
 <p>Create an index file of the membrane and add a group for phosphates (BFO beads).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BFO \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BFO \nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.ndx
 </pre></div>
 </div>
 <p>Create a position restraint file for phosphate groups in z coordinate.</p>

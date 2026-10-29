@@ -219,10 +219,10 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/5/CPU/em_CGLIP.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BE* BC1* BC2* BCT*\n name 7 tail\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BE* BC1* BC2* BCT*\n name 7 tail\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.ndx
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s2">&quot;not (same residue as (resname WT4 and within 0.4 of group tail))&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s2">"not (same residue as (resname WT4 and within 0.4 of group tail))"</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -285,7 +285,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_CGLIP.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGLIP.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGLIP.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -356,7 +356,7 @@ check carefully the input flags therein.</p>
 </div></blockquote>
 </div>
 <p>To calculate density profiles and bilayer thickness, include a new group for phosphate beads in the index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BFO\nq\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_em.gro<span class="w"> </span>-n<span class="w"> </span>../DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BFO\nq\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_em.gro<span class="w"> </span>-n<span class="w"> </span>../DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>density<span class="w"> </span>-sl<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-ng<span class="w"> </span><span class="m">5</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_md_pbc.xtc<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_em.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>density_profile.xvg

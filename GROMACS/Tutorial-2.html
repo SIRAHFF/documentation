@@ -306,7 +306,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_HYBSOL.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_HYBSOL.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_HYBSOL.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index files adding a group for WT4 and NaW:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;r WT4 | r NaW\nq\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"r WT4 | r NaW\nq\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">

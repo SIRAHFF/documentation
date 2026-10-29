@@ -238,13 +238,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="gp">$</span>all<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">0</span>
 
 <span class="gp"># </span>Setup<span class="w"> </span>the<span class="w"> </span>backbone<span class="w"> </span>restraints
-<span class="go">set bb [atomselect top &quot;sirah_protein and sirah_backbone&quot;]</span>
+<span class="go">set bb [atomselect top "sirah_protein and sirah_backbone"]</span>
 <span class="gp">$</span>bb<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">2</span>.4
 <span class="gp">$</span>all<span class="w"> </span>writepdb<span class="w"> </span>bb_restraints.pdb
 
 <span class="gp"># </span>Setup<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>restraints
 <span class="gp">$</span>all<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">0</span>
-<span class="go">set prot [atomselect top &quot;sirah_protein&quot;]</span>
+<span class="go">set prot [atomselect top "sirah_protein"]</span>
 <span class="gp">$</span>prot<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">2</span>.4
 <span class="gp">$</span>all<span class="w"> </span>writepdb<span class="w"> </span>prot_restraints.pdb
 
@@ -505,7 +505,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <li><p>In the <strong>simulation parameters</strong> section, the temperature and pressure control blocks are enabled (if {1}). Particularly the langevin and langevinPiston options, which control the thermostat and barostat, respectively. Change it as needed.</p></li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Temperature<span class="w"> </span>control
-<span class="go">if {1} {                     ;# If 0 don&#39;t read the block</span>
+<span class="go">if {1} {                     ;# If 0 don't read the block</span>
 <span class="go">langevin           on        ;# Turns off Langevin thermostat</span>
 <span class="go">langevinDamping    50        ;# Damping coefficient  gamma of 50/ps</span>
 <span class="go">langevinHydrogen   off       ;# Turns off Langevin dynamics for hydrogen atoms (if on)</span>
@@ -513,7 +513,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="go">}</span>
 
 <span class="gp"># </span>Pressure<span class="w">  </span>control
-<span class="go">if {1} {                     ;# If 0 don&#39;t read the block</span>
+<span class="go">if {1} {                     ;# If 0 don't read the block</span>
 <span class="go">useGroupPressure     no      ;# Disables group pressure control</span>
 <span class="go">useFlexibleCell      no      ;# Disables flexible cell (not for water boxes)</span>
 <span class="go">useConstantArea      no      ;# Disables constant area control (not for water boxes)</span>

@@ -125,7 +125,7 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 </figure>
 <p>To get the protein aligned along the Z-axis, we used the following commands in VMD’s <em>Tk Console</em> (<em>Extensions</em> &gt; <em>Tk Console</em>):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>Select<span class="w"> </span>the<span class="w"> </span>protein
-<span class="go">set all [atomselect top &quot;protein&quot;]</span>
+<span class="go">set all [atomselect top "protein"]</span>
 
 <span class="gp">#</span>Change<span class="w"> </span>protein<span class="w"> </span>coordinates<span class="w"> </span>to<span class="w"> </span>align<span class="w"> </span>to<span class="w"> </span>its<span class="w"> </span>center
 <span class="gp">$</span>all<span class="w"> </span>moveby<span class="w">  </span><span class="o">[</span>vecinvert<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>center<span class="w"> </span><span class="nv">$all</span><span class="o">]]</span>
@@ -281,7 +281,7 @@ simulation until the problem is solved.</p>
 <p class="admonition-title">Caution</p>
 <p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame these issues, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WT4 and within 0.3 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -371,7 +371,7 @@ simulation until the problem is solved.</p>
 <p class="admonition-title">Caution</p>
 <p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WLS and within 7.8 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WLS and within 7.8 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv4.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wls.ndx
@@ -467,7 +467,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>To achive a proper interaction between the protein and solvent, we will perform a equilibration step applying restraints over the protein backbone.</p>
 <p>Create an index file including a group for the backbone GN and GO beads:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GN GO\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GN GO\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">

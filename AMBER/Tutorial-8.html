@@ -281,7 +281,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>1GYA_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_md_pbc.nc<span class="w"> </span>--interactive
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"autoimage\ngo\nquit\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../1GYA_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>1GYA_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>1GYA_cg_md_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
 </div></blockquote>

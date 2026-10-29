@@ -242,7 +242,7 @@ contains the definition of Watson-Crick restraints for the capping base pairs of
 <h1>2.5. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.
 First, process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>dna_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>dna_cg_md_pbc.nc<span class="w"> </span>--interactive
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"autoimage\ngo\nquit\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../dna_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>dna_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>dna_cg_md_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
 <p>Then, load the processed trajectory in VMD:</p>

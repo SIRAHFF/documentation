@@ -269,7 +269,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <span class="go">  If mol is omitted then all options are applied to top molecule.</span>
 <span class="go">  By default, the secondary structure data is stored in memory</span>
 <span class="go">  as the array sscache_data(mol,frame) and the coloring method</span>
-<span class="go">  &#39;Secondary Structure&#39; will display correctly. By default, the</span>
+<span class="go">  'Secondary Structure' will display correctly. By default, the</span>
 <span class="go">  script reads the sscache_data if available in memory and does</span>
 <span class="go">  not recalculate the conformation, unless flag ramach is set or</span>
 <span class="go">  the sscache_data is cleaned. The outname and noprint keywords</span>
@@ -287,7 +287,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 
 <span class="go">  last      Last frame to analyze</span>
 
-<span class="go">  sel       &quot;VMD selection&quot;, default &quot;all&quot;</span>
+<span class="go">  sel       "VMD selection", default "all"</span>
 
 <span class="go">  outname   List {} of keywords and names for output files.</span>
 <span class="go">            Keywords and default names:</span>
@@ -327,7 +327,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </div>
 <p>All the available options for <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> are documented in this help. By default, four outputs are created by <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code>: <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code>, <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> and <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code>. The <code class="docutils literal notranslate"><span class="pre">ss_by_frame.xvg</span></code> file gives the secondary structure percentages of the three classifications (H, E, or C) by each frame of the simulations. The <code class="docutils literal notranslate"><span class="pre">ss_by_res.xvg</span></code> file gives the secondary structure percentages of H, E, and C by each residue. The <code class="docutils literal notranslate"><span class="pre">ss_global.xvg</span></code> file shows the overall percentages and standard deviation of H, E, and C of the entire simulation. And the <code class="docutils literal notranslate"><span class="pre">ss.mtx</span></code> file gives a matrix of the secondary structure transitions, between H, E, or C, of the residues versus the simulation time.</p>
 <p>You can also choose which molecule and which frames to analyze. To calculate the secondary structure for the protein (loaded on <em>top</em>) on all frames, for instance, you must modify the default <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> selection from <em>all</em> to <em>sirah_protein</em>. To achieve this, you can enter:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss sel &quot;sirah_protein&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sirah_ss sel "sirah_protein"</span>
 </pre></div>
 </div>
 <p>This will, by default, calculate the secondary structure for all frames of the trajectory of our selection and generate the four files.</p>
@@ -584,7 +584,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 <span class="go">Info) Email questions and bug reports to vmd@ks.uiuc.edu</span>
 <span class="go">Info) Please include this reference in published work using VMD:</span>
 <span class="go">Info)    Humphrey, W., Dalke, A. and Schulten, K., `VMD - Visual</span>
-<span class="go">Info)    Molecular Dynamics&#39;, J. Molec. Graphics 1996, 14.1, 33-38.</span>
+<span class="go">Info)    Molecular Dynamics', J. Molec. Graphics 1996, 14.1, 33-38.</span>
 <span class="go">Info) -------------------------------------------------------------</span>
 <span class="go">Info) Multithreading available, 12 CPUs detected.</span>
 <span class="go">Info)   CPU features: SSE2 AVX AVX2 FMA</span>
@@ -617,7 +617,7 @@ for this tutorial is <a class="reference external" href="https://academic.oup.co
 </pre></div>
 </div>
 <p>In this mode, the <code class="docutils literal notranslate"><span class="pre">sirah_ss</span></code> and <code class="docutils literal notranslate"><span class="pre">sirah_backmap</span></code> features can also be utilized. For example, if you want to calculate the secondary structure for the protein (loaded on <em>top</em>) on all frames, you type:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; sirah_ss sel &quot;sirah_protein&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">vmd &gt; sirah_ss sel "sirah_protein"</span>
 <span class="go"> 0    25   50   75   100 %</span>
 <span class="go">Progress |||||||||||||||||||||</span>
 <span class="go">Starting sscache... Done!</span>
@@ -745,9 +745,9 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile [open rmsd_prot.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>frame<span class="w"> </span>using<span class="w"> </span>protein<span class="w"> </span>backbone<span class="w"> </span>as<span class="w"> </span>selection
-<span class="go">set reference [atomselect top &quot;sirah_backbone and sirah_protein&quot; frame 0]</span>
+<span class="go">set reference [atomselect top "sirah_backbone and sirah_protein" frame 0]</span>
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>trajectory<span class="w"> </span>selection<span class="w"> </span>also<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>backbone
-<span class="go">set compare [atomselect top &quot;sirah_backbone and sirah_protein&quot;]</span>
+<span class="go">set compare [atomselect top "sirah_backbone and sirah_protein"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set N [molinfo top get numframes]</span>
@@ -762,7 +762,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">   set rmsd [measure rmsd $compare $reference]</span>
 
 <span class="gp">   #</span>print<span class="w"> </span>the<span class="w"> </span>RMSD<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>file
-<span class="go">   puts $outfile &quot;$i \t $rmsd&quot;</span>
+<span class="go">   puts $outfile "$i \t $rmsd"</span>
 <span class="go">}</span>
 <span class="go">close $outfile</span>
 </pre></div>
@@ -799,8 +799,8 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile [open rmsf_prot.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>of<span class="w"> </span>protein
-<span class="go">set reference [atomselect top &quot;sirah_protein and name GC&quot; frame 0]</span>
-<span class="go">set sel [atomselect top &quot;sirah_protein and name GC&quot;]</span>
+<span class="go">set reference [atomselect top "sirah_protein and name GC" frame 0]</span>
+<span class="go">set sel [atomselect top "sirah_protein and name GC"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set N [molinfo top get numframes]</span>
@@ -818,7 +818,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 
 <span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span>by<span class="w"> </span>residue
 <span class="go">for {set i 0} {$i &lt; [$sel num]} {incr i} {</span>
-<span class="go">   puts $outfile &quot;[expr {$i+1}] [lindex $rmsf $i]&quot;</span>
+<span class="go">   puts $outfile "[expr {$i+1}] [lindex $rmsf $i]"</span>
 <span class="go">}</span>
 <span class="go">close $outfile</span>
 </pre></div>
@@ -848,8 +848,8 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile_strand2 [open rmsf_DNA_strand2_tcl.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>and<span class="w"> </span>selection<span class="w"> </span>the<span class="w"> </span>DNA
-<span class="go">set reference [atomselect top &quot;residue 234 to 253 and name C5X&quot; frame 0]</span>
-<span class="go">set sel [atomselect top &quot;residue 234 to 253 and name C5X&quot;]</span>
+<span class="go">set reference [atomselect top "residue 234 to 253 and name C5X" frame 0]</span>
+<span class="go">set sel [atomselect top "residue 234 to 253 and name C5X"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set N [molinfo top get numframes]</span>
@@ -862,8 +862,8 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="gp">   $</span>sel<span class="w"> </span>move<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>fit<span class="w"> </span><span class="nv">$sel</span><span class="w"> </span><span class="nv">$reference</span><span class="o">]</span>
 <span class="go">}</span>
 
-<span class="go">set strand1 [atomselect top &quot;residue 234 to 243 and name C5X&quot;]</span>
-<span class="go">set strand2 [atomselect top &quot;residue 244 to 253 and name C5X&quot;]</span>
+<span class="go">set strand1 [atomselect top "residue 234 to 243 and name C5X"]</span>
+<span class="go">set strand2 [atomselect top "residue 244 to 253 and name C5X"]</span>
 
 <span class="gp">#</span>calculate<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>all<span class="w"> </span>trajectory<span class="w"> </span>frames
 <span class="go">set rmsf_strand1 [measure rmsf $strand1 first 0 last -1 step 1]</span>
@@ -871,13 +871,13 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 
 <span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>strand<span class="w"> </span><span class="m">1</span>
 <span class="go">for {set i 0} {$i &lt; [$strand1 num]} {incr i} {</span>
-<span class="go">   puts $outfile_strand1 &quot;[expr {$i+1}] [lindex $rmsf_strand1 $i]&quot;</span>
+<span class="go">   puts $outfile_strand1 "[expr {$i+1}] [lindex $rmsf_strand1 $i]"</span>
 <span class="go">}</span>
 <span class="go">close $outfile_strand1</span>
 
 <span class="gp">#</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rmsf<span class="w"> </span><span class="k">for</span><span class="w"> </span>strand<span class="w"> </span><span class="m">2</span>
 <span class="go">for {set i 0} {$i &lt; [$strand2 num]} {incr i} {</span>
-<span class="go">   puts $outfile_strand2 &quot;[expr {$i+1}] [lindex $rmsf_strand2 $i]&quot;</span>
+<span class="go">   puts $outfile_strand2 "[expr {$i+1}] [lindex $rmsf_strand2 $i]"</span>
 <span class="go">}</span>
 <span class="go">close $outfile_strand2</span>
 </pre></div>
@@ -911,10 +911,10 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <p>The <em>Radius of gyration</em> (Rg) is a metric that quantifies the spatial extent of a protein by measuring the distance between its center of mass and its termini. The metric offers an indicator of the degree of compactness in the protein structure. To perform this analysis, you will use a <strong>Tcl script</strong> directly within the <em>Tk Console</em>.</p>
 <p>Thus, you can create a <code class="docutils literal notranslate"><span class="pre">rgyr.tcl</span></code> file to calculate <em>Rg</em> of the protein and output a text file <code class="docutils literal notranslate"><span class="pre">rgyr_protein.dat</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
-<span class="go">set output [open &quot;rgyr_protein.dat&quot; w]</span>
+<span class="go">set output [open "rgyr_protein.dat" w]</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>protein<span class="w"> </span>selection
-<span class="go">set sel [atomselect top &quot;sirah_protein&quot;]</span>
+<span class="go">set sel [atomselect top "sirah_protein"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set n [molinfo top get numframes]</span>
@@ -925,12 +925,12 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">   molinfo top set frame $i</span>
 <span class="gp">   #</span>calculate<span class="w"> </span>radius<span class="w"> </span>of<span class="w"> </span>gyration<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>frame
 <span class="go">   set rgyr [measure rgyr $sel]</span>
-<span class="go">   puts &quot;\t \t progress: $i/$n&quot;</span>
+<span class="go">   puts "\t \t progress: $i/$n"</span>
 <span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>rgyr
-<span class="go">   puts $output &quot;$rgyr&quot;</span>
+<span class="go">   puts $output "$rgyr"</span>
 <span class="go">}</span>
-<span class="go">puts &quot;\t \t progress: $n/$n&quot;</span>
-<span class="go">puts &quot;Done.&quot;</span>
+<span class="go">puts "\t \t progress: $n/$n"</span>
+<span class="go">puts "Done."</span>
 <span class="go">close $output</span>
 </pre></div>
 </div>
@@ -959,12 +959,12 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <p>The <em>Solvent-Accessible Surface Area</em> (SASA) refers to the measurement of the surface area of a biomolecular structure that can be reached by solvent molecules. The <em>SASA</em> can be defined as the range to which the atoms on the surface of a protein form contacts with the solvent. Although there are a number of algorithms and computational tools available for estimating the <em>SASA</em>, you can conduct the estimation using a simple <em>Tcl script</em> within the <em>Tk Console</em>.</p>
 <p>Thus, you can create a <code class="docutils literal notranslate"><span class="pre">sasa.tcl</span></code> file to calculate <em>SASA</em> of your protein and output a text file <code class="docutils literal notranslate"><span class="pre">SASA_protein_nobackbone.dat</span></code>:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span><span class="nb">set</span><span class="w"> </span>output<span class="w"> </span>file<span class="w"> </span>name
-<span class="go">set output [open &quot;SASA_protein_nobackbone.dat&quot; w]</span>
+<span class="go">set output [open "SASA_protein_nobackbone.dat" w]</span>
 
 <span class="gp">#</span><span class="k">select</span><span class="w"> </span>only<span class="w"> </span>solvent-accessible<span class="w"> </span>points<span class="w"> </span>that<span class="w"> </span>are<span class="w"> </span>not<span class="w"> </span>the<span class="w"> </span>backbone
-<span class="go">set sel [atomselect top &quot;not name GN GC GO&quot;]</span>
+<span class="go">set sel [atomselect top "not name GN GC GO"]</span>
 <span class="gp">#</span><span class="k">select</span><span class="w"> </span>the<span class="w"> </span>protein
-<span class="go">set protein [atomselect top &quot;sirah_protein&quot;]</span>
+<span class="go">set protein [atomselect top "sirah_protein"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set n [molinfo top get numframes]</span>
@@ -976,12 +976,12 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="gp">   #</span>calculate<span class="w"> </span>sasa<span class="w"> </span>assigning<span class="w"> </span>a<span class="w"> </span>sphere<span class="w"> </span>radius<span class="w"> </span>of<span class="w"> </span><span class="m">2</span>.1<span class="w"> </span>to<span class="w"> </span>not<span class="w"> </span>backbone<span class="w"> </span>atoms
 <span class="go">   set sasa [measure sasa 2.1 $protein -restrict $sel]</span>
 <span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>screen<span class="w"> </span>frame/total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
-<span class="go">   puts &quot;\t \t progress: $i/$n&quot;</span>
+<span class="go">   puts "\t \t progress: $i/$n"</span>
 <span class="gp">   #</span>print<span class="w"> </span>to<span class="w"> </span>file<span class="w"> </span>the<span class="w"> </span>sasa
-<span class="go">   puts $output &quot;$sasa&quot;</span>
+<span class="go">   puts $output "$sasa"</span>
 <span class="go">}</span>
-<span class="go">puts &quot;\t \t progress: $n/$n&quot;</span>
-<span class="go">puts &quot;Done.&quot;</span>
+<span class="go">puts "\t \t progress: $n/$n"</span>
+<span class="go">puts "Done."</span>
 <span class="go">close $output</span>
 </pre></div>
 </div>
@@ -1025,7 +1025,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">Info) Email questions and bug reports to vmd@ks.uiuc.edu</span>
 <span class="go">Info) Please include this reference in published work using VMD:</span>
 <span class="go">Info)    Humphrey, W., Dalke, A. and Schulten, K., `VMD - Visual</span>
-<span class="go">Info)    Molecular Dynamics&#39;, J. Molec. Graphics 1996, 14.1, 33-38.</span>
+<span class="go">Info)    Molecular Dynamics', J. Molec. Graphics 1996, 14.1, 33-38.</span>
 <span class="go">Info) -------------------------------------------------------------</span>
 <span class="go">Info) Multithreading available, 12 CPUs detected.</span>
 <span class="go">Info)   CPU features: SSE2 AVX AVX2 FMA</span>
@@ -1073,9 +1073,9 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">set outfile [open rmsd_prot.dat w];</span>
 
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>reference<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>first<span class="w"> </span>frame<span class="w"> </span>using<span class="w"> </span>protein<span class="w"> </span>backbone<span class="w"> </span>as<span class="w"> </span>selection
-<span class="go">set reference [atomselect top &quot;sirah_backbone and sirah_protein&quot; frame 0]</span>
+<span class="go">set reference [atomselect top "sirah_backbone and sirah_protein" frame 0]</span>
 <span class="gp">#</span><span class="nb">set</span><span class="w"> </span>trajectory<span class="w"> </span>selection<span class="w"> </span>also<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>backbone
-<span class="go">set compare [atomselect top &quot;sirah_backbone and sirah_protein&quot;]</span>
+<span class="go">set compare [atomselect top "sirah_backbone and sirah_protein"]</span>
 
 <span class="gp">#</span>get<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>frames
 <span class="go">set N [molinfo top get numframes]</span>
@@ -1090,7 +1090,7 @@ This will superimpose each frame of the trajectory to the reference frame (in th
 <span class="go">   set rmsd [measure rmsd $compare $reference]</span>
 
 <span class="gp">   #</span>print<span class="w"> </span>the<span class="w"> </span>RMSD<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>output<span class="w"> </span>file
-<span class="go">   puts $outfile &quot;$i \t $rmsd&quot;</span>
+<span class="go">   puts $outfile "$i \t $rmsd"</span>
 <span class="go">}</span>
 <span class="go">close $outfile</span>
 <span class="go">quit</span>

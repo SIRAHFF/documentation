@@ -223,7 +223,7 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete1.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WT4 and within 0.3 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -273,7 +273,7 @@ generate a PSF file of the system using the script <code class="docutils literal
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="../Tutorials%20sirahtools.html#id1"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 <p>Create an index file including a group for the backbone GN and GO beads:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GN GO\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GN GO\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">

@@ -435,7 +435,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -703,7 +703,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_HYBSOL.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_HYBSOL.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_HYBSOL.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index files adding a group for WT4 and NaW:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;r WT4 | r NaW\nq\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"r WT4 | r NaW\nq\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>dna_ion.gro<span class="w"> </span>-o<span class="w"> </span>dna_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -887,7 +887,7 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/3/GPU/em1_CGPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-po<span class="w"> </span>delete1.mdp<span class="w"> </span>-c<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>1CRN_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>1CRN_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WT4 and within 0.3 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_sol2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -937,7 +937,7 @@ generate a PSF file of the system using the script <code class="docutils literal
 Use the command <code class="docutils literal notranslate"><span class="pre">sirah_help</span></code> in the Tcl/Tk console of VMD to access the manual pages. To learn about SIRAH Tools’ capabilities, you can also go to the <a class="reference internal" href="Tutorials%20sirahtools.html#id1"><span class="std std-ref">SIRAH Tools tutorial</span></a>.</p>
 </div>
 <p>Create an index file including a group for the backbone GN and GO beads:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GN GO\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GN GO\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>1CRN_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>1CRN_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1093,7 +1093,7 @@ Since this is <strong>Tutorial 4</strong>, remember to replace <code class="docu
 <section id="id29">
 <h3>4.1. Build CG representations<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A   1/CW5 A   1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B   1/CW5 B   1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">'s/DCX A   1/CW5 A   1/'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'s/DCX B   1/CW5 B   1/'</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
 </div>
 <p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> ccdna_cg.pdb preserves a few of them.</p>
@@ -1242,7 +1242,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1422,10 +1422,10 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/5/CPU/em_CGLIP.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BE* BC1* BC2* BCT*\n name 7 tail\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BE* BC1* BC2* BCT*\n name 7 tail\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol1.ndx
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s2">&quot;not (same residue as (resname WT4 and within 0.4 of group tail))&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_sol1.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_sol1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s2">"not (same residue as (resname WT4 and within 0.4 of group tail))"</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_sol1.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_sol2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -1488,7 +1488,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_CGLIP.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGLIP.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGLIP.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1559,7 +1559,7 @@ check carefully the input flags therein.</p>
 </div></blockquote>
 </div>
 <p>To calculate density profiles and bilayer thickness, include a new group for phosphate beads in the index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BFO\nq\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_em.gro<span class="w"> </span>-n<span class="w"> </span>../DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BFO\nq\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_em.gro<span class="w"> </span>-n<span class="w"> </span>../DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>DMPC64_cg_ion.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>density<span class="w"> </span>-sl<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-ng<span class="w"> </span><span class="m">5</span><span class="w"> </span>-f<span class="w"> </span>DMPC64_cg_md_pbc.xtc<span class="w"> </span>-s<span class="w"> </span>DMPC64_cg_em.tpr<span class="w"> </span>-n<span class="w"> </span>DMPC64_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>density_profile.xvg
@@ -1766,7 +1766,7 @@ simulation until the problem is solved.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>sirah.ff/tutorial/6/GPU/em1_CGLIPROT.mdp<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-c<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.tpr
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>2kyv_DMPC_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-sf<span class="w"> </span>sirah.ff/tutorial/6/rm_close_wt4.dat
@@ -1838,7 +1838,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p class="admonition-title">Note</p>
 <p>WT4 and CG ions (NaW, ClW) are automatically set to the group <em>SIRAH-Solvent</em> while DMPC (named CMM at CG level) is assigned to group <em>Lipid</em>.</p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;ri 1-52\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"ri 1-52\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_ion.ndx
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_ion.gro<span class="w"> </span>-n<span class="w"> </span>2kyv_DMPC_cg_ion.ndx<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.gro
@@ -1846,7 +1846,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>When prompted, choose <em>r_1-52</em>.</p>
 <p>Create an index file for the monomer and add a group for the backbone <em>GO</em> and <em>GN</em> beads.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GO GN \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GO GN \nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>2kyv_DMPC_cg_monomer.gro<span class="w"> </span>-o<span class="w"> </span>2kyv_DMPC_cg_monomer.ndx
 </pre></div>
 </div>
 <p>Create a position restraint file for the monomer backbone.</p>
@@ -1897,7 +1897,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>When prompted, choose <em>Lipid</em>.</p>
 <p>Create an index file of the membrane and add a group for phosphates (BFO beads).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a BFO \nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a BFO \nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>DMPC_cg.gro<span class="w"> </span>-o<span class="w"> </span>DMPC_cg.ndx
 </pre></div>
 </div>
 <p>Create a position restraint file for phosphate groups in z coordinate.</p>
@@ -2047,7 +2047,7 @@ Since this is <strong>Tutorial 7</strong>, remember to replace <code class="docu
 </figure>
 <p>To get the protein aligned along the Z-axis, we used the following commands in VMD’s <em>Tk Console</em> (<em>Extensions</em> &gt; <em>Tk Console</em>):</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>Select<span class="w"> </span>the<span class="w"> </span>protein
-<span class="go">set all [atomselect top &quot;protein&quot;]</span>
+<span class="go">set all [atomselect top "protein"]</span>
 
 <span class="gp">#</span>Change<span class="w"> </span>protein<span class="w"> </span>coordinates<span class="w"> </span>to<span class="w"> </span>align<span class="w"> </span>to<span class="w"> </span>its<span class="w"> </span>center
 <span class="gp">$</span>all<span class="w"> </span>moveby<span class="w">  </span><span class="o">[</span>vecinvert<span class="w"> </span><span class="o">[</span>measure<span class="w"> </span>center<span class="w"> </span><span class="nv">$all</span><span class="o">]]</span>
@@ -2203,7 +2203,7 @@ simulation until the problem is solved.</p>
 <p class="admonition-title">Caution</p>
 <p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame these issues, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WT4 and within 0.3 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv1.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv1.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wt4.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WT4 and within 0.3 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv1.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv2.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wt4.ndx
@@ -2293,7 +2293,7 @@ simulation until the problem is solved.</p>
 <p class="admonition-title">Caution</p>
 <p>New GROMACS versions may complain about not used macros and the non-neutral charge of the system, aborting the generation of the TPR file by command grompp. We will neutralize the system later, so to overcame this issue, just allow warning messages by adding the following keyword to the grompp command line: <code class="docutils literal notranslate"><span class="pre">-maxwarn</span> <span class="pre">2</span></code></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">&#39;not (same residue as (resname WLS and within 7.8 of group Protein))&#39;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span><span class="k">select</span><span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-s<span class="w"> </span>I10_cg_solv3.tpr<span class="w"> </span>-n<span class="w"> </span>I10_cg_solv3.ndx<span class="w"> </span>-on<span class="w"> </span>rm_close_wls.ndx<span class="w"> </span>-select<span class="w"> </span><span class="s1">'not (same residue as (resname WLS and within 7.8 of group Protein))'</span>
 </pre></div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>editconf<span class="w"> </span>-f<span class="w"> </span>I10_cg_solv3.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_solv4.gro<span class="w"> </span>-n<span class="w"> </span>rm_close_wls.ndx
@@ -2389,7 +2389,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 </div>
 <p>To achive a proper interaction between the protein and solvent, we will perform a equilibration step applying restraints over the protein backbone.</p>
 <p>Create an index file including a group for the backbone GN and GO beads:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;a GN GO\n\nq&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"a GN GO\n\nq"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>I10_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>I10_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">

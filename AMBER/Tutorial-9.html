@@ -146,7 +146,7 @@ Since this is <strong>Tutorial 9</strong>, remember to replace <code class="docu
 <ul class="simple">
 <li><p><strong>Issue 1</strong>. The structure contains 60 DNA fragments and each DNA fragment includes a phosphate atom from the subsequent nucleotide. However, this nucleotide was not modeled; only the phosphate was included. Thus, when we attempt to generate the topology using LEaP, the process is stopped since it fails to reconstruct a nucleotide that is absent. This should be corrected by removing the extra phosphate and oxigen atoms. We can correct this using the following command:</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">&#39;/\(P[[:space:]]\+1DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP11DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP21DC[[:space:]]\+[A-Z][[:space:]]\+1\)/d&#39;</span><span class="w"> </span>6ola_assembly.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modified_1.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">'/\(P[[:space:]]\+1DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP11DC[[:space:]]\+[A-Z][[:space:]]\+1\|OP21DC[[:space:]]\+[A-Z][[:space:]]\+1\)/d'</span><span class="w"> </span>6ola_assembly.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modified_1.pdb
 </pre></div>
 </div>
 <p>This line of code creates a new PDB file by removing the lines containing the <strong>P</strong>, <strong>OP1</strong>, and <strong>OP2</strong> atoms from the original structure.</p>
@@ -172,7 +172,7 @@ Since this is <strong>Tutorial 9</strong>, remember to replace <code class="docu
 <p>The only residues in this structure that appear to have distinct protonation states are the three histidines. Use your mouse to navigate and identify which nitrogens are protonated to correctly adjust their residue’s names. Following proton location, HIS 113 is protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>), HIS 122 is protonated at the delta nitrogen (<span class="math notranslate nohighlight">\(N_{\delta}\)</span>), and HIS 160 is protonated at the epsilon nitrogen (<span class="math notranslate nohighlight">\(N_{\epsilon}\)</span>).</p>
 </div>
 <p>Close VMD. Use the command below to modify the names of the histidine’s residues:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]113/s/HIS/HIE/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]122/s/HIS/HID/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/HIS[[:space:]]\+[A-Z][[:space:]]160/s/HIS/HIE/&#39;</span><span class="w"> </span>6ola_modified_1.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modified_2.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">'/HIS[[:space:]]\+[A-Z][[:space:]]113/s/HIS/HIE/'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'/HIS[[:space:]]\+[A-Z][[:space:]]122/s/HIS/HID/'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'/HIS[[:space:]]\+[A-Z][[:space:]]160/s/HIS/HIE/'</span><span class="w"> </span>6ola_modified_1.pdb<span class="w"> </span>&gt;<span class="w"> </span>6ola_modified_2.pdb
 </pre></div>
 </div>
 <ul class="simple">
@@ -532,7 +532,7 @@ input flags therein, in particular the definition of flag <em>chngmask=0</em> at
 <h1>9.7. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.
 Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;center (@GN,GC,GO)\n image familiar\n go\n quit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-y<span class="w"> </span>PCV2_6OLA_CG_md1.nc<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_md1_pbc.nc<span class="w"> </span>--interactive
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"center (@GN,GC,GO)\n image familiar\n go\n quit\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>PCV2_6OLA_CG.prmtop<span class="w"> </span>-y<span class="w"> </span>PCV2_6OLA_CG_md1.nc<span class="w"> </span>-x<span class="w"> </span>PCV2_6OLA_CG_md1_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
 <p>Load the processed trajectory in VMD:</p>

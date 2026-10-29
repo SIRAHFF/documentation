@@ -259,7 +259,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <p><strong>Periodic box equilibration in GPU code (500 ps x 9):</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">9</span><span class="k">)</span>
 <span class="k">do</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;running equilibration </span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"running equilibration </span><span class="nv">$i</span><span class="s2">"</span>
 <span class="w">        </span>pmemd.cuda<span class="w"> </span>-O<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>-i<span class="w"> </span>../sirah.amber/tutorial/6/eq_Lipid.in<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span><span class="se">\</span>
@@ -279,7 +279,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <h1>6.6. Visualizing the simulation<a class="headerlink" href="#visualizing-the-simulation" title="Link to this heading"></a></h1>
 <p>That’s it! Now you can analyze the trajectory.</p>
 <p>Process the output trajectory to account for the Periodic Boundary Conditions (PBC):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;autoimage\ngo\nquit\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md_pbc.nc<span class="w"> </span>--interactive
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"autoimage\ngo\nquit\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpptraj<span class="w"> </span>-p<span class="w"> </span>../DMPC64_cg.prmtop<span class="w"> </span>-y<span class="w"> </span>DMPC64_cg_md.nc<span class="w"> </span>-x<span class="w"> </span>DMPC64_cg_md_pbc.nc<span class="w"> </span>--interactive
 </pre></div>
 </div>
 <p>Now you can check the simulation using VMD:</p>

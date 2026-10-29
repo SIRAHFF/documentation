@@ -109,7 +109,7 @@ Since this is <strong>Tutorial 4</strong>, remember to replace <code class="docu
 <section id="build-cg-representations">
 <h1>4.1. Build CG representations<a class="headerlink" href="#build-cg-representations" title="Link to this heading"></a></h1>
 <p>Map the atomistic structure of the closed circular DNA to its CG representation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX A   1/CW5 A   1/&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;s/DCX B   1/CW5 B   1/&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./sirah.ff/tools/CGCONV/cgconv.pl<span class="w"> </span>-i<span class="w"> </span>sirah.ff/tutorial/4/ccdna.pdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">'s/DCX A   1/CW5 A   1/'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'s/DCX B   1/CW5 B   1/'</span><span class="w"> </span>&gt;<span class="w"> </span>ccdna_cg.pdb
 </pre></div>
 </div>
 <p>The input file <code class="docutils literal notranslate"><span class="pre">-i</span></code> ccdna.pdb contains all the heavy atoms composing the DNA molecule, while the output <code class="docutils literal notranslate"><span class="pre">-o</span></code> ccdna_cg.pdb preserves a few of them.</p>
@@ -258,7 +258,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 (<code class="docutils literal notranslate"><span class="pre">em_CGDNA.mdp</span></code>), equilibration (<code class="docutils literal notranslate"><span class="pre">eq_CGDNA.mdp</span></code>) and production (<code class="docutils literal notranslate"><span class="pre">md_CGDNA.mdp</span></code>) runs. Please
 check carefully the input flags therein.</p>
 <p>Create an index file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.ndx
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"q"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>ccdna_cg_ion.gro<span class="w"> </span>-o<span class="w"> </span>ccdna_cg_ion.ndx
 </pre></div>
 </div>
 <div class="admonition note">

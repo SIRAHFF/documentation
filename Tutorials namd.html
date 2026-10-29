@@ -164,7 +164,7 @@
 <p><strong>NAMD</strong></p>
 <p>If you are not familiar with atomistic molecular dynamics simulations in NAMD, we strongly recommend you to perform the basic usage tutorials of NAMD: <a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/namd/namd-tutorial-unix-html/index.html">NAMD TUTORIAL Unix/MacOSX Version</a>. For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/namd/3.0/ug/">NAMD User’s Guide</a>.</p>
 <p><strong>AmberTools</strong></p>
-<p>We strongly recommend you to perform the basic usage tutorials of AmberTools: <a class="reference external" href="https://ambermd.org/tutorials/BuildingSystems.php">1. Building Systems</a>, <a class="reference external" href="https://ambermd.org/tutorials/Relaxation.php">3. Creating Stable Systems and Running MD</a> and <a class="reference external" href="https://ambermd.org/tutorials/Introductory.php">5. Case Studies</a>. For more details and documentation, check <a class="reference external" href="https://ambermd.org/doc12/Amber23.pdf">Amber23 Manual</a>.</p>
+<p>We strongly recommend you to perform the basic usage tutorials of AmberTools: <a class="reference external" href="https://ambermd.org/tutorials/BuildingSystems.php">1. Building Systems</a>, <a class="reference external" href="https://ambermd.org/tutorials/Relaxation.php">3. Creating Stable Systems and Running MD</a> and <a class="reference external" href="https://ambermd.org/tutorials/Introductory.php">5. Case Studies</a>. For more details and documentation, check <a class="reference external" href="https://ambermd.org/doc12/Amber25.pdf">Amber Manual</a>.</p>
 <p><strong>VMD</strong></p>
 <p>If you are not familiar with VMD, we strongly recommend you to perform the basic usage tutorial of VMD (<a class="reference external" href="https://www.ks.uiuc.edu/Training/Tutorials/vmd/tutorial-html/index.html">Using VMD</a>). For more details and documentation, check <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/ug/ug.html">VMD User Guide</a> and the official <a class="reference external" href="https://www.ks.uiuc.edu/Research/vmd/current/docs.html#tutorials">VMD documentation</a>.</p>
 </div>
@@ -353,13 +353,13 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="gp">$</span>all<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">0</span>
 
 <span class="gp"># </span>Setup<span class="w"> </span>the<span class="w"> </span>backbone<span class="w"> </span>restraints
-<span class="go">set bb [atomselect top &quot;sirah_protein and sirah_backbone&quot;]</span>
+<span class="go">set bb [atomselect top "sirah_protein and sirah_backbone"]</span>
 <span class="gp">$</span>bb<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">2</span>.4
 <span class="gp">$</span>all<span class="w"> </span>writepdb<span class="w"> </span>bb_restraints.pdb
 
 <span class="gp"># </span>Setup<span class="w"> </span>the<span class="w"> </span>protein<span class="w"> </span>restraints
 <span class="gp">$</span>all<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">0</span>
-<span class="go">set prot [atomselect top &quot;sirah_protein&quot;]</span>
+<span class="go">set prot [atomselect top "sirah_protein"]</span>
 <span class="gp">$</span>prot<span class="w"> </span><span class="nb">set</span><span class="w"> </span>beta<span class="w"> </span><span class="m">2</span>.4
 <span class="gp">$</span>all<span class="w"> </span>writepdb<span class="w"> </span>prot_restraints.pdb
 
@@ -620,7 +620,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <li><p>In the <strong>simulation parameters</strong> section, the temperature and pressure control blocks are enabled (if {1}). Particularly the langevin and langevinPiston options, which control the thermostat and barostat, respectively. Change it as needed.</p></li>
 </ol>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>Temperature<span class="w"> </span>control
-<span class="go">if {1} {                     ;# If 0 don&#39;t read the block</span>
+<span class="go">if {1} {                     ;# If 0 don't read the block</span>
 <span class="go">langevin           on        ;# Turns off Langevin thermostat</span>
 <span class="go">langevinDamping    50        ;# Damping coefficient  gamma of 50/ps</span>
 <span class="go">langevinHydrogen   off       ;# Turns off Langevin dynamics for hydrogen atoms (if on)</span>
@@ -628,7 +628,7 @@ Use the command <code class="docutils literal notranslate"><span class="pre">sir
 <span class="go">}</span>
 
 <span class="gp"># </span>Pressure<span class="w">  </span>control
-<span class="go">if {1} {                     ;# If 0 don&#39;t read the block</span>
+<span class="go">if {1} {                     ;# If 0 don't read the block</span>
 <span class="go">useGroupPressure     no      ;# Disables group pressure control</span>
 <span class="go">useFlexibleCell      no      ;# Disables flexible cell (not for water boxes)</span>
 <span class="go">useConstantArea      no      ;# Disables constant area control (not for water boxes)</span>
