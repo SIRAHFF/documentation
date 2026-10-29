@@ -11,7 +11,7 @@ Amber and AmberTools (version 16 or later) versions properly installed and runni
 
 .. tip::
 
-    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ the latest version of Amber and AmberTools and refer to the *How to obtain Amber23* section for more details on getting Amber23. In addition, go to the `Install Amber <https://ambermd.org/Installation.php>`_ page for specific instructions based on your operating system. If you have Amber already installed, it is unnecessary to install AmberTools separately.
+    `Download <https://ambermd.org/GetAmber.php#ambertools>`_ the latest version of Amber and AmberTools and refer to the *How to obtain Amber* section for more details on getting Amber. In addition, go to the `Install Amber <https://ambermd.org/Installation.php>`_ page for specific instructions based on your operating system. If you have Amber already installed, it is unnecessary to install AmberTools separately.
 
 
 **VMD**
@@ -30,7 +30,7 @@ VMD.
 
     **AMBER** 
 
-    If you are not familiar with atomistic molecular dynamics simulations, we strongly recommend you to perform the basic usage tutorials of Amber and AmberTools: `1. Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3. Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5. Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber23 Manual <https://ambermd.org/doc12/Amber23.pdf>`_. 
+    If you are not familiar with atomistic molecular dynamics simulations, we strongly recommend you to perform the basic usage tutorials of Amber and AmberTools: `1. Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3. Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5. Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber Manual <https://ambermd.org/doc12/Amber25.pdf>`_. 
 
 
     **VMD**
