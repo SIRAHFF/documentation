@@ -41,7 +41,7 @@ How to perform a standard atomistic molecular dynamics simulations with NAMD, ho
 
     **AmberTools** 
 
-    We strongly recommend you to perform the basic usage tutorials of AmberTools: `1. Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3. Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5. Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber Manual <https://ambermd.org/doc12/Amber25.pdf>`_. 
+    We strongly recommend you to perform the basic usage tutorials of AmberTools: `1. Building Systems <https://ambermd.org/tutorials/BuildingSystems.php>`_, `3. Creating Stable Systems and Running MD <https://ambermd.org/tutorials/Relaxation.php>`_ and `5. Case Studies <https://ambermd.org/tutorials/Introductory.php>`_. For more details and documentation, check `Amber Manual <https://ambermd.org/doc12/Amber26.pdf>`_. 
 
 
     **VMD**
@@ -99,6 +99,6 @@ Create the following symbolic link in the folder tutorialX.X:
 	
 		ln -s $AMBERHOME/dat/SIRAH sirah.amber
 
-    Check the `AMBER Manual <https://ambermd.org/doc12/Amber23.pdf>`_ section **3.11.2** for more details. 
+    Check the `AMBER Manual <https://ambermd.org/doc12/Amber26.pdf>`_ section **3.12** for more details. 
 
     However, if you want the latest parameters and implementations we strongly advise you to use the developers version of SIRAH from GitHub. 
