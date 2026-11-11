@@ -74,7 +74,7 @@ Create the following symbolic link in the folder tutorialX.X:
 
 .. code-block:: bash
 
-    ln -s ../sirah_x2.3_24-07.amber sirah.amber
+    ln -s ../sirah_x2.4_26-03.amber sirah.amber
 
 .. note:: 
 
